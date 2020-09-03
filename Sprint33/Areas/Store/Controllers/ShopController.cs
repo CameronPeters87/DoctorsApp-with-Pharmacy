@@ -15,8 +15,7 @@ namespace Sprint33.Areas.Store.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Store/Shop
-        [ActionName("products")]
-        public async Task<ActionResult> Main(int? page)
+        public async Task<ActionResult> Index(int? page)
         {
             var pageNumber = page ?? 1;
             var model = new MainVM

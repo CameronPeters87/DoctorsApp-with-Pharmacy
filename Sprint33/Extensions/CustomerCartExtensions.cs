@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Sprint33.Extensions
 {
@@ -13,6 +12,18 @@ namespace Sprint33.Extensions
         {
             return dto.Where(c => c.CustomerOrderId == null &&
             c.CustomerId == customerId).ToList();
+        }
+
+        public static float GetTotalPrice(this IEnumerable<CustomerCart> currentCart)
+        {
+            var result = currentCart.Select(c => c.Price).Sum();
+            return result;
+        }
+
+        public static float GetTotalTax(this IEnumerable<CustomerCart> currentCart)
+        {
+            var result = currentCart.Select(c => c.VatAmount).Sum();
+            return result;
         }
     }
 }

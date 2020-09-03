@@ -22,6 +22,7 @@ namespace Sprint33.Areas.Store.Controllers
 
             var model = new CartSummaryVM();
 
+            // Product list
             foreach (var item in currentCart)
             {
                 model.ProductList.Add(new CartItemsSummary
@@ -33,6 +34,10 @@ namespace Sprint33.Areas.Store.Controllers
                     Quantity = item.Quantity
                 });
             }
+
+            model.TotalCost = currentCart.GetTotalPrice();
+            model.VatTotal = currentCart.GetTotalTax();
+            model.SubTotal = model.TotalCost - model.VatTotal;
 
             return View(model);
         }
@@ -77,6 +82,17 @@ namespace Sprint33.Areas.Store.Controllers
             await db.SaveChangesAsync();
 
             return "Success";
+        }
+        [HttpPost]
+        public ActionResult CreateOrder()
+        {
+            return View();
+        }
+
+        public ActionResult Checkout()
+        {
+
+            return View();
         }
     }
 }

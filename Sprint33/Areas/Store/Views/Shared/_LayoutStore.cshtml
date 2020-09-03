@@ -42,7 +42,7 @@
                 {
                     if (Session["Title"] == "Doctor")
                     {
-                        <a href="@Url.Action("Homepage", "Doctors1")"
+                        <a href="@Url.Action("Homepage", "Doctors1", new { area = "" })"
                            class="btn btn-info">
                             <i class="fa fa-tachometer"></i>
                             Dashboard
@@ -52,7 +52,7 @@
                     {
                         { Html.RenderAction("CartItemsPartial", "Shop"); }
 
-                        <a href="@Url.Action("Homepage", "Patients1")"
+                        <a href="@Url.Action("Homepage", "Patients1", new { area = "" })"
                            class="btn btn-info">
                             <i class="fa fa-tachometer"></i>
                             Dashboard
@@ -60,20 +60,20 @@
                     }
                     else
                     {
-                        <a href="@Url.Action("Homepage", "Admins1")"
+                        <a href="@Url.Action("Homepage", "Admins1", new { area = "" })"
                            class="btn btn-info">
                             <i class="fa fa-tachometer"></i>
                             Dashboard
                         </a>
                     }
-                    <a href="@Url.Action("Login", "Home")"
+                    <a href="@Url.Action("Login", "Home", new { area = "" })"
                        class="btn btn-primary">
                         Log Out
                     </a>
                 }
                 else
                 {
-                    <a href="@Url.Action("Login", "Home")" class="btn btn-primary">
+                    <a href="@Url.Action("Login", "Home", new { area = "" })" class="btn btn-primary">
                         Login @Session["UserName"]
                     </a>
                 }
@@ -90,22 +90,22 @@
                         </div>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/Home/FrontPage">
+                        <a class="nav-link" href="/home/frontpage">
                             Home
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/store/shop/products">
+                        <a class="nav-link" href="/store/shop/">
                             Store
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Home/About">
+                        <a class="nav-link" href="home/about">
                             About
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Home/Contact">
+                        <a class="nav-link" href="/home/contact">
                             Contact
                         </a>
                     </li>
