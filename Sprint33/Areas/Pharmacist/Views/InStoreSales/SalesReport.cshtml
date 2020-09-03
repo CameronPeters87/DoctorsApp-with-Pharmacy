@@ -1,0 +1,83 @@
+﻿@model Sprint33.Areas.Pharmacist.Models.InStoreSalesReportVM
+
+@{
+    ViewBag.Title = "SalesReport";
+    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+}
+
+@*List Orders*@
+<div class="card shadow h-100 py-2">
+    <div class="card-body">
+        @if (!Model.InStoreSales.Any())
+        {
+            <h2 class="text-center">You have no sales</h2>
+        }
+        else
+        {
+            <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary" style="display:inline-block">
+                    In-Store Sales
+                </h4>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)">Receipt #</th>
+                            <th onclick="sortTable(1)">Sale Date</th>
+                            <th onclick="sortTable(2)">Total Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.InStoreSales)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.InStoreSaleId)</td>
+                                <td>@Html.DisplayFor(modelItem => item.LongSaleDate) </td>
+                                <td>R @Html.DisplayFor(modelItem => item.TotalCost) </td>
+                                <td>
+                                    <div>
+                                        @*Dropdown - Action*@
+                                        <div class="dropdown no-arrow mb-4" style="display:inline-block">
+                                            <button class="btn btn-warning dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="fa fa-caret-down" style="color:white"></span>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <p class="dropdown-item-text" style="color:#b7b9cc">
+                                                    <strong><u>Action:</u></strong>
+                                                </p>
+                                                <a class="dropdown-item" target="_blank" href="@item.ReceiptLink">
+                                                    <span class="fa fa-file-pdf"></span>
+                                                    Invoice
+                                                </a>
+                                            </div>
+                                        </div>
+                                        @*Dropdown - View Items*@
+                                        <div class="dropdown no-arrow mb-4" style="display:inline-block">
+                                            <button class="btn btn-info dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="fa fa-list" style="color:white"></span>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <p class="dropdown-item-text" style="color:#b7b9cc">
+                                                    <strong><u>Medicine List:</u></strong>
+                                                </p>
+                                                @foreach (var cartItem in item.CartItems)
+                                                {
+                                                    <p class="dropdown-item-text">
+                                                        @cartItem.Product.Name : @cartItem.Quantity
+                                                    </p>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,78 @@
+﻿@model Sprint33.Models.ViewModel.AppointmentVM
+
+@{
+    ViewBag.Title = "ViewMyAppointment";
+}
+
+    <div class="container">
+        @if (Model.AppointmentID == 0)
+        {
+            <h2 class="text-center">
+                You do not have any appointments booked!<br />
+                <a type="button" class="btn btn-primary"
+                   href="@Url.Action("PatientIndex", "Appointments1")">
+                    Book Now!
+                </a>
+            </h2>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100" style="margin-top:20px">
+                        <h4 class="card-header">Appointment Details <i class="fa fa-user-md"></i></h4>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <dl>
+                                    <dt>Patient Name</dt>
+                                    <dd>- @Model.PatientName</dd>
+                                    <dt>Doctor Name</dt>
+                                    <dd>- @Model.DoctorName</dd>
+                                    <dt>Appointment Time</dt>
+                                    <dd>- @Model.AppointmentTime</dd>
+                                    <dt>Paid</dt>
+                                    @if (Model.isPaid)
+                                    {
+                                        <dd style="color:green">- Paid</dd>
+                                    }
+                                    else
+                                    {
+                                        <dd style="color:red">- Not Paid</dd>
+                                    }
+                                    <dt>Status</dt>
+                                    @if (Model.Confirmed)
+                                    {
+                                        <dd style="color:green">- Confirmed</dd>
+                                    }
+                                    else
+                                    {
+                                        <dd style="color:red">- Not Confirmed</dd>
+                                    }
+                                </dl>
+                            </p>
+                        </div>
+
+                        <div class="card-footer">
+                            <a href="@Url.Action("PatientCancel")?id=@Model.AppointmentID"
+                               onclick="return confirm('Are you sure you want to cancel this appointment?');"
+                               class="btn btn-danger">
+                                Cancel
+                            </a>
+                            @if (Model.Confirmed && !Model.isPaid)
+                            {
+                                <a href="@Url.Action("CreateOrder","Orders")?id=@Model.AppointmentID"
+                                   class="btn btn-primary">
+                                    <span class="fa fa-credit-card"></span>
+                                    Pay Now
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <a type="button" class="btn btn-secondary"
+           href="@Url.Action("Homepage", "Patients1")">
+            <span class="fa fa-home"></span>
+        </a>
+    </div>

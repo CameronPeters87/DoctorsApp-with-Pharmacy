@@ -1,0 +1,85 @@
+﻿@model Sprint33.Areas.Pharmacist.Models.ProductListVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+}
+
+<a class="btn btn-primary"
+   href="@Url.Action("AddProduct")">
+    <span class="fa fa-plus" style="color:white"></span>
+    Add Product
+</a>
+
+
+<br />
+<br />
+@if (TempData["SM"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SM"]
+    </div>
+}
+
+<!--List Medicines-->
+<div class="card shadow h-100 py-2">
+    <div class="card-body">
+        @if (!Model.Products.Any())
+        {
+            <h2 class="text-center">You have no products</h2>
+        }
+        else
+        {
+            <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary" style="display:inline-block">
+                    Product List
+                </h4>
+                <span class="pull-right">
+                    <input type="text" id="myInput" class="form-control-custom"
+                           onkeyup="myFunction()" placeholder="Search for names.."
+                           title="Type in a product" />
+                </span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th onclick="sortTable(0)">Name</th>
+                            <th onclick="sortTable(1)">Supplier</th>
+                            <th onclick="sortTable(2)">Buy Price</th>
+                            <th onclick="sortTable(3)">Sell Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Products)
+                        {
+                            <tr>
+                                <td style="text-align: center;">
+                                    <img src="@item.BarcodeUrl" width="50" height="20" />
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("EditProduct")?id=@item.Id">
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                        (@item.PackSize)
+                                    </a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Supplier.Name)
+                                </td>
+                                <td>R @Html.DisplayFor(modelItem => item.SupplierPrice) </td>
+                                <td>R @Html.DisplayFor(modelItem => item.SellingPrice) </td>
+                                <td>
+                                    <a href="@Url.Action("DeleteProduct")?id=@item.Id">
+                                        <span class="fa fa-trash-alt" style="color:red"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

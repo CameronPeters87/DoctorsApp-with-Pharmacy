@@ -1,0 +1,547 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/SharedTemp/_MySharedHome.cshtml";
+}
+<div class="hero-wrap">
+    <div class="home-slider owl-carousel">
+        <div class="slider-item" style="background-image:url(/Content/ThemeTemp/images/bg_1.jpg);">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row no-gutters slider-text align-items-center justify-content-end">
+                    <div class="col-md-6 ftco-animate">
+                        <div class="text w-100">
+                            <h1 class="mb-4">
+                                <span class="fa fa-heartbeat" style="color:red"></span>    
+                                Welcome to Dr J Govender's General Practice
+                            </h1>
+                            <p>Don't have an account! Click the sign up button and book for a consultations</p>
+                            <p><a href="@Url.Action("Register", "Home")" class="btn btn-info">Sign up</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-item" style="background-image:url(/Content/ThemeTemp/images/bg_2.jpg);">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row no-gutters slider-text align-items-center justify-content-end">
+                    <div class="col-md-6 ftco-animate">
+                        <div class="text w-100">
+                            <h1 class="mb-4">
+                                <span class="fa fa-ambulance" style="color:red"></span>
+                                Medical Care you can trust
+                            </h1>
+                            <p>Don't have an account! Click the sign up button and book for a consultations</p>
+                            <p><a href="@Url.Action("Register", "Home")" class="btn btn-info">Sign up</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Log-In  Submission Form-->
+
+@Html.Partial("_LoginTempPartial")
+
+@*<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center pb-5 mb-3">
+            <div class="col-md-7 heading-section text-center ftco-animate">
+                <span class="subheading">We offer Services</span>
+                <h2>Our Benefits</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 services ftco-animate">
+                <div class="d-block d-flex">
+                    <div class="icon d-flex justify-content-center align-items-center">
+                        <span class="flaticon-chiropractic"></span>
+                    </div>
+                    <div class="media-body pl-3">
+                        <h3 class="heading">Spinal Manupulation</h3>
+                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                    </div>
+                </div>
+                <div class="d-block d-flex">
+                    <div class="icon d-flex justify-content-center align-items-center">
+                        <span class="flaticon-acupuncture"></span>
+                    </div>
+                    <div class="media-body pl-3">
+                        <h3 class="heading">Medical Acupuncture</h3>
+                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4 services ftco-animate">
+                <div class="d-block d-flex">
+                    <div class="icon d-flex justify-content-center align-items-center">
+                        <span class="flaticon-electrotherapy"></span>
+                    </div>
+                    <div class="media-body pl-3">
+                        <h3 class="heading">Electrotherapy</h3>
+                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                    </div>
+                </div>
+                <div class="d-block d-flex">
+                    <div class="icon d-flex justify-content-center align-items-center">
+                        <span class="flaticon-examination"></span>
+                    </div>
+                    <div class="media-body pl-3">
+                        <h3 class="heading">Therapeutic Exercise</h3>
+                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 services ftco-animate">
+                <div class="d-block d-flex">
+                    <div class="icon d-flex justify-content-center align-items-center">
+                        <span class="flaticon-lymph-nodes"></span>
+                    </div>
+                    <div class="media-body pl-3">
+                        <h3 class="heading">Manual Lympahtic</h3>
+                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                    </div>
+                </div>
+                <div class="d-block d-flex">
+                    <div class="icon d-flex justify-content-center align-items-center">
+                        <span class="flaticon-bone"></span>
+                    </div>
+                    <div class="media-body pl-3">
+                        <h3 class="heading">Joint Mobilization</h3>
+                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>*@
+
+@*<section class="ftco-section ftco-no-pb ftco-no-pt">
+    <div class="container-fluid px-md-0">
+        <div class="row no-gutters justify-content-center pb-5 mb-3">
+            <div class="col-md-7 heading-section text-center ftco-animate">*@
+                @*<span class="subheading">Team &amp; Staff</span>
+                <h2>Our Experts Chiropractor / Therapist</h2>*@
+            @*</div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-md-4 col-lg ftco-animate d-flex">
+                <div class="staff bg-primary">
+                    <div class="img-wrap d-flex align-items-stretch">
+                        <div class="img align-self-stretch" style="background-image: url(/Content/ThemeTemp/images/staff-1.jpg);"></div>
+                    </div>
+                    <div class="text pt-3 px-3 pb-4 text-center">
+                        <h3>Lloyd Wilson</h3>
+                        <span class="position mb-2">Chief Medical Officer</span>
+                        <div class="faded">
+                             <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p> 
+                            <ul class="ftco-social text-center">
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a></li>
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a></li>
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a></li>
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>*@
+            @*</div>
+            <div class="col-md-4 col-lg ftco-animate d-flex">
+                <div class="staff bg-primary">
+                    <div class="img-wrap d-flex align-items-stretch">
+                        <div class="img align-self-stretch" style="background-image: url(/Content/ThemeTemp/images/staff-2.jpg);"></div>
+                    </div>
+                    <div class="text pt-3 px-3 pb-4 text-center">
+                        <h3>Rachel Parker</h3>
+                        <span class="position mb-2">Chiropractor</span>
+                        <div class="faded">
+                             <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p> 
+                            <ul class="ftco-social text-center">
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a></li>
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a></li>
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a></li>
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>*@
+            @*</div>
+            <div class="col-md-4 col-lg ftco-animate d-flex">
+                <div class="staff bg-primary">
+                    <div class="img-wrap d-flex align-items-stretch">
+                        <div class="img align-self-stretch" style="background-image: url(/Content/ThemeTemp/images/staff-3.jpg);"></div>
+                    </div>
+                    <div class="text pt-3 px-3 pb-4 text-center">
+                        <h3>Ian Smith</h3>
+                        <span class="position mb-2">Clinical Chiropractic Assistant</span>
+                        <div class="faded">
+                             <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p> 
+                            <ul class="ftco-social text-center">
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a></li>
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a></li>
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a></li>
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+            @*<div class="col-md-4 col-lg ftco-animate d-flex">
+                <div class="staff bg-primary">
+                    <div class="img-wrap d-flex align-items-stretch">
+                        <div class="img align-self-stretch" style="background-image: url(/Content/ThemeTemp/images/staff-4.jpg);"></div>
+                    </div>
+                    <div class="text pt-3 px-3 pb-4 text-center">
+                        <h3>Alicia Henderson</h3>
+                        <span class="position mb-2">Licensed Massage Therapist</span>
+                        <div class="faded">
+                             <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p> 
+                            <ul class="ftco-social text-center">
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a></li>
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a></li>
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a></li>
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+            @*<div class="col-md-4 col-lg ftco-animate d-flex">
+                <div class="staff bg-primary">
+                    <div class="img-wrap d-flex align-items-stretch">
+                        <div class="img align-self-stretch" style="background-image: url(/Content/ThemeTemp/images/staff-5.jpg);"></div>
+                    </div>
+                    <div class="text pt-3 px-3 pb-4 text-center">
+                        <h3>Lloyd Wilson</h3>
+                        <span class="position mb-2">Front Desk Coordinator</span>
+                        <div class="faded">
+                             <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p> 
+                            <ul class="ftco-social text-center">
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a></li>
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a></li>
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a></li>
+                                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>*@
+
+<section class="ftco-section ftco-no-pt ftco-no-pb">
+    <div class="container">
+        <div class="row d-flex no-gutters">
+            <div class="col-md-6 d-flex order-md-last">
+                <div class="img img-video d-flex align-self-stretch align-items-center justify-content-center mb-4 mb-sm-0" style="background-image:url(/Content/ThemeTemp/ThemeTemp/images/about.jpg);">
+                    @*<a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
+                        <span class="fa fa-play"></span>
+                    </a>*@
+                </div>
+            </div>
+            <div class="col-md-6 pr-md-5 py-md-5">
+                <div class="row justify-content-start py-5">
+                    <div class="col-md-12 heading-section ftco-animate">
+                        <span class="subheading">Welcome to Doctor</span>
+                        <h2 class="mb-4">About Doctor</h2>
+                        <p>We are a doctors practice located in Shallcross. We aspire to provide our patients with the best medical care, whilst making booking their appointments easy and quick from the comforts of their own home.</p>
+                    </div>
+                </div>
+                <div class="row ftco-counter pb-5" id="section-counter">
+                    <div class="col-md-6 col-lg-4 d-flex justify-content-center counter-wrap ftco-animate">
+                        <div class="block-18">
+                            <div class="text">
+                                <strong class="number" data-number="45">0</strong>
+                            </div>
+                            <div class="text">
+                                <span>Years of <br>Experienced</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 d-flex justify-content-center counter-wrap ftco-animate">
+                        <div class="block-18">
+                            <div class="text">
+                                <strong class="number" data-number="2342">0</strong>
+                            </div>
+                            <div class="text">
+                                <span>Happy <br>Customers</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 d-flex justify-content-center counter-wrap ftco-animate">
+                        <div class="block-18">
+                            <div class="text">
+                                <strong class="number" data-number="30">0</strong>
+                            </div>
+                            <div class="text">
+                                <span>Award <br>Winning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<section class="ftco-section testimony-section bg-dark">
+    <div class="container">
+        <div class="row justify-content-center pb-5 mb-3">
+            <div class="col-md-7 heading-section heading-section-white text-center ftco-animate">
+                <span class="subheading">Testimonies</span>
+                <h2>Happy Clients &amp; Feedbacks</h2>
+            </div>
+        </div>
+        <div class="row ftco-animate">
+            <div class="col-md-12">
+                <div class="carousel-testimony owl-carousel ftco-owl">
+                    <div class="item">
+                        <div class="testimony-wrap py-4">
+                            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
+                            <div class="text">
+                                <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                <div class="d-flex align-items-center">
+                                    <div class="user-img" style="background-image: url(/Content/ThemeTemp/ThemeTemp/images/person_1.jpg)"></div>
+                                    <div class="pl-3">
+                                        <p class="name">Roger Scott</p>
+                                        <span class="position">Marketing Manager</span>*@
+                                    @*</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimony-wrap py-4">
+                            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
+                            <div class="text">
+                                <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                <div class="d-flex align-items-center">
+                                    <div class="user-img" style="background-image: url(/Content/ThemeTemp/images/person_2.jpg)"></div>
+                                    <div class="pl-3">
+                                        <p class="name">Roger Scott</p>
+                                        <span class="position">Marketing Manager</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                    @*<div class="item">
+                        <div class="testimony-wrap py-4">
+                            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
+                            <div class="text">
+                                <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                <div class="d-flex align-items-center">
+                                    <div class="user-img" style="background-image: url(/Content/ThemeTemp/images/person_3.jpg)"></div>
+                                    <div class="pl-3">
+                                        <p class="name">Roger Scott</p>
+                                        <span class="position">Marketing Manager</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                    @*<div class="item">
+                        <div class="testimony-wrap py-4">
+                            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
+                            <div class="text">
+                                <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                <div class="d-flex align-items-center">
+                                    <div class="user-img" style="background-image: url(/Content/ThemeTemp/images/person_1.jpg)"></div>
+                                    <div class="pl-3">
+                                        <p class="name">Roger Scott</p>
+                                        <span class="position">Marketing Manager</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                    @*<div class="item">
+                        <div class="testimony-wrap py-4">
+                            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
+                            <div class="text">
+                                <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                <div class="d-flex align-items-center">
+                                    <div class="user-img" style="background-image: url(/Content/ThemeTemp/images/person_2.jpg)"></div>
+                                    <div class="pl-3">
+                                        <p class="name">Roger Scott</p>
+                                        <span class="position">Marketing Manager</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>*@
+
+@*<section class="ftco-section ftco-no-pt ftco-no-pb">
+    <div class="container-fluid px-md-0">
+        <div class="row no-gutters">
+            <div class="col-md-3 ftco-animate">
+                <div class="work img d-flex align-items-center" style="background-image: url(/Content/ThemeTemp/ThemeTemp/images/work-1.jpg);">
+                    <a href="/Content/images/work-1.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+                        <span class="fa fa-expand"></span>
+                    </a>
+                    <div class="desc w-100 px-4 text-center pt-5 mt-5">
+                        <div class="text w-100 mb-3 mt-4">
+                            <h2><a href="work-single.html">Foot Pain</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ftco-animate">
+                <div class="work img d-flex align-items-center" style="background-image: url(/Content/ThemeTemp/ThemeTemp/images/work-2.jpg);">
+                    <a href="/Content/images/work-2.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+                        <span class="fa fa-expand"></span>
+                    </a>
+                    <div class="desc w-100 px-4 text-center pt-5 mt-5">
+                        <div class="text w-100 mb-3 mt-4">
+                            <h2><a href="work-single.html">Arm Pain</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ftco-animate">
+                <div class="work img d-flex align-items-center" style="background-image: url(/Content/ThemeTemp/images/work-3.jpg);">
+                    <a href="/Content/images/work-3.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+                        <span class="fa fa-expand"></span>
+                    </a>
+                    <div class="desc w-100 px-4 text-center pt-5 mt-5">
+                        <div class="text w-100 mb-3 mt-4">
+                            <h2><a href="work-single.html">Shoulder Pain</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ftco-animate">
+                <div class="work img d-flex align-items-center" style="background-image: url(images/work-4.jpg);">
+                    <a href="/Content/images/work-4.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+                        <span class="fa fa-expand"></span>
+                    </a>
+                    <div class="desc w-100 px-4 text-center pt-5 mt-5">
+                        <div class="text w-100 mb-3 mt-4">
+                            <h2><a href="work-single.html">Back Pain</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 ftco-animate">
+                <div class="work img d-flex align-items-center" style="background-image: url(/Content/ThemeTemp/images/work-5.jpg);">
+                    <a href="/Content/images/work-5.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+                        <span class="fa fa-expand"></span>
+                    </a>
+                    <div class="desc w-100 px-4 text-center pt-5 mt-5">
+                        <div class="text w-100 mb-3 mt-4">
+                            <h2><a href="work-single.html">Head &amp; Migraines</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ftco-animate">
+                <div class="work img d-flex align-items-center" style="background-image: url(/Content/ThemeTemp/images/work-6.jpg);">
+                    <a href="/Content/images/work-6.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+                        <span class="fa fa-expand"></span>
+                    </a>
+                    <div class="desc w-100 px-4 text-center pt-5 mt-5">
+                        <div class="text w-100 mb-3 mt-4">
+                            <h2><a href="work-single.html">Wear &amp; Tear</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ftco-animate">
+                <div class="work img d-flex align-items-center" style="background-image: url(/Content/ThemeTemp/images/work-7.jpg);">
+                    <a href="/Content/images/work-7.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+                        <span class="fa fa-expand"></span>
+                    </a>
+                    <div class="desc w-100 px-4 text-center pt-5 mt-5">
+                        <div class="text w-100 mb-3 mt-4">
+                            <h2><a href="work-single.html">Arm Pain</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ftco-animate">
+                <div class="work img d-flex align-items-center" style="background-image: url(/Content/ThemeTemp/images/work-8.jpg);">
+                    <a href="/Content/images/work-8.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+                        <span class="fa fa-expand"></span>
+                    </a>
+                    <div class="desc w-100 px-4 text-center pt-5 mt-5">
+                        <div class="text w-100 mb-3 mt-4">
+                            <h2><a href="work-single.html">Lower Back Pain</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>*@
+
+@*<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center pb-5 mb-3">
+            <div class="col-md-7 heading-section text-center ftco-animate">
+                <span class="subheading">News &amp; Blog</span>
+                <h2>Latest news from our blog</h2>
+            </div>
+        </div>
+        <div class="row d-flex">
+            <div class="col-md-4 d-flex ftco-animate">
+                <div class="blog-entry align-self-stretch">
+                    <a href="blog-single.html" class="block-20 rounded" style="background-image: url('/Content/images/image_1.jpg');">
+                    </a>
+                    <div class="text mt-3">
+                        <div class="posted mb-3 d-flex">
+                            <div class="img author" style="background-image: url(/Content/ThemeTemp/images/person_2.jpg);"></div>
+                            <div class="desc pl-3">
+                                <span>Posted by John doe</span>
+                                <span>24 February 2020</span>
+                            </div>
+                        </div>
+                        <h3 class="heading"><a href="#">What Every Athlete Needs To Know About Injury Recovery</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex ftco-animate">
+                <div class="blog-entry align-self-stretch">
+                    <a href="blog-single.html" class="block-20 rounded" style="background-image: url(/Content/ThemeTemp/'images/image_2.jpg');">
+                    </a>
+                    <div class="text mt-3">
+                        <div class="posted mb-3 d-flex">
+                            <div class="img author" style="background-image: url(images/person_3.jpg);"></div>
+                            <div class="desc pl-3">
+                                <span>Posted by John doe</span>
+                                <span>24 February 2020</span>
+                            </div>
+                        </div>
+                        <h3 class="heading"><a href="#">What Every Athlete Needs To Know About Injury Recovery</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex ftco-animate">
+                <div class="blog-entry align-self-stretch">
+                    <a href="blog-single.html" class="block-20 rounded" style="background-image: url('/Content/images/image_3.jpg');">
+                    </a>
+                    <div class="text mt-3">
+                        <div class="posted mb-3 d-flex">
+                            <div class="img author" style="background-image: url(/Content/ThemeTemp/images/person_1.jpg);"></div>
+                            <div class="desc pl-3">
+                                <span>Posted by John doe</span>
+                                <span>24 February 2020</span>
+                            </div>
+                        </div>
+                        <h3 class="heading"><a href="#">What Every Athlete Needs To Know About Injury Recovery</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>*@

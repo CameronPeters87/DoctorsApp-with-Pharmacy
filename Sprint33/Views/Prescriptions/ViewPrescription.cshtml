@@ -1,0 +1,77 @@
+﻿@model Sprint33.Models.PrescriptionListViewModel
+
+@{
+    ViewBag.Title = "ViewPrescription";
+}
+
+    
+
+        <div class="container">
+
+            @if (Session["Title"] == "Doctor")
+            {
+                <a type="button" class="btn btn-primary"
+                   href="javascript:window.print()">
+                    <i class="fa fa-print"></i>
+                    Click to Print This Page
+                </a>
+            }
+
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100" style="margin-top:20px">
+                        <h4 class="card-header">Prescription Details <i class="fa fa-medkit"></i></h4>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <dl>
+                                    <dt>Patient Name</dt>
+                                    <dd>- @Model.PatientName</dd>
+                                    <dt>Date Issued</dt>
+                                    <dd>- @Model.DateIssued</dd>
+                                    <dt>Medication</dt>
+                                    <dd>- @Model.InventoryName</dd>
+                                    <dt>Quantity</dt>
+                                    <dd>- @Model.itemQuantity</dd>
+                                    <dt>Expiry Date</dt>
+                                    <dd>- @Model.PrescriptionValid</dd>
+                                    <dt>Notes</dt>
+                                    <dd>@Model.PrescriptionDetails</dd>
+                                </dl>
+                            </p>
+                        </div>
+
+                        <div class="card-footer">
+                            @if (Session["Title"] == "Doctor")
+                            {
+                                <a href="@Url.Action("Index2")" class="btn btn-info">
+                                    <span class="fa fa-list"></span>
+                                    Back to list
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("PrescriptionHistory")" class="btn btn-info">
+                                    <span class="fa fa-list"></span>
+                                    Back to list
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (Session["Title"] == "Doctor")
+            {
+                <br />
+                <h4>Yours Faithfully</h4>
+                <h4>Dr. James Govender</h4>
+
+
+                <br><br /><br />
+
+
+                <br>
+                @Html.TextBox("Date", DateTime.Now, new { @readonly = "readonly" })
+            }
+
+        </div>

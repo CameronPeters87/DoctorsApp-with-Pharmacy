@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Sprint33.Models.ViewModel.OrderVM>
+
+@{
+    ViewBag.Title = "AdminIndex";
+}
+<div class="container">
+
+<h2>Booking Payments</h2>
+
+<table class="table table-striped">
+    <tr class="table-success">
+        <th>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </th>
+        <th>
+            Loyalty Purchase
+        </th>
+        <th>
+            Payment Status
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.OrderID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PatientName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.OrderDate)
+    </td>
+    <td>
+       R @Html.DisplayFor(modelItem => item.TotalPrice)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LoyaltyPurchase)
+    </td>
+    <td>
+        @if (item.isApproved)
+        {
+            <p>Approved</p>
+        }
+        else
+        {
+            <p>Pending</p>
+        }
+    </td>
+</tr>
+}
+
+</table>
+    <a type="button" class="btn btn-secondary" style="margin-top:15px"
+       href="@Url.Action("Homepage", "Admins1")">
+        <span class="fa fa-home"></span>
+    </a>
+</div>

@@ -1,0 +1,116 @@
+﻿@model Sprint33.Models.Referral_v2
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container">
+
+    <h2>Details</h2>
+
+    <a type="button" class="btn btn-primary"
+       href="javascript:window.print()">
+        <i class="fa fa-print"></i>
+        Click to Print This Page
+    </a>
+
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.referral_Doctors_Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.referral_Doctors_Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.referral_doctor_Add)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.referral_doctor_Add)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.referral_doctor_num)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.referral_doctor_num)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.referral_doctor_Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.referral_doctor_Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PatientName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PatientName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.refferal_Date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.refferal_Date)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.referral_ValidDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.referral_ValidDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.refferal_Location)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.refferal_Location)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.referral_Reasoning)
+            </dt>
+
+            <dd>
+                @Html.Raw(Model.referral_Reasoning)
+            </dd>
+        </dl>
+    </div>
+    <br />
+    <h4>Yours Faithfully</h4>
+    <h4>Dr. James Govender</h4>
+
+
+    <br><br />
+
+
+    <br>
+    @Html.TextBox("Date", DateTime.Now, new { @readonly = "readonly" })
+
+<p style="margin-top:10px">
+    <a type="button" href="@Url.Action("Edit")?id=@Model.refferal_ID"
+       class="btn btn-primary">
+        <span class="fa fa-pencil"></span>
+        Edit
+    </a> | 
+    <a type="button" href="@Url.Action("Index")"
+       class="btn btn-primary">
+        <span class="fa fa-list"></span>
+        Back to list
+    </a>
+</p>
+</div>

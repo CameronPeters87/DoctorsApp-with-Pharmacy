@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Sprint33.Models.ViewModel.LoyaltyListVM>
+
+@{
+    ViewBag.Title = "Loyalties";
+}
+
+<div class="container">
+<h2>Loyalties</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@if (!Model.Any())
+{
+    <h2 class="text-center">You don't have any loyal patients</h2>
+}
+else
+{
+    <table class="table table-striped">
+        <tr class="table-success">
+            <th>
+                @Html.DisplayNameFor(model => model.PatientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loyalty_Points)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Registered)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PatientName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Loyalty_Points)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Registered)
+                </td>
+                <td>
+                    <a type="button" class="btn btn-danger"
+                       onclick="return confirm('Are you sure you want to Remove this patient from loyalty list?');"
+                       href="@Url.Action("RemovePatient")?id=@item.Id">
+                        <span class="fa fa-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+    @if(TempData["SM"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["SM"]
+        </div>
+    }
+
+<a type="button" class="btn btn-secondary" style="margin-top:15px"
+   href="@Url.Action("Homepage", "Admins1")">
+    <span class="fa fa-home"></span>
+</a>
+</div>

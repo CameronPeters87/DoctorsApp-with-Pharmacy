@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Sprint33.Models.ViewModel.ConsultationListVM>
+
+@{
+    ViewBag.Title = "Consultations";
+}
+
+    <div class="container">
+
+
+        <h2>Consultations</h2>
+
+        @if (!Model.Any())
+        {
+            <h2 class="text-center">You do not have any consultations</h2>
+        }
+        else
+        {
+            <table class="table table-striped">
+                <tr class="table-success">
+                    <th>
+                        @Html.DisplayNameFor(model => model.PatientName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AppointmentDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Symptoms)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Diagnosis)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Notes)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("PreviewConsultation")?id=@item.Id">
+                                @Html.DisplayFor(modelItem => item.PatientName)
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AppointmentDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Symptoms)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Diagnosis)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Notes)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("AddPrescription", "Prescriptions",
+                        new { patientId = item.PatientId})">
+                                Create Prescription
+                            </a> |
+                            <a href="@Url.Action("AddReferral", "Referral_V2",
+                        new { patientId = item.PatientId})">
+                                Add Referral
+                            </a> |
+                            <a onclick="return confirm('Are you sure you want to Remove Consultation?');"
+                               href="@Url.Action("Remove")?id=@item.Id">
+                                <span class="fa fa-trash" style="color:red"></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        }
+        @if (TempData["SM"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["SM"]
+            </div>
+        }
+
+        <a type="button" class="btn btn-secondary" style="margin-top:15px"
+           href="@Url.Action("Homepage", "Doctors1")">
+            <span class="fa fa-home"></span>
+        </a>
+    </div>

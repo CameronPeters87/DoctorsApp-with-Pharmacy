@@ -1,0 +1,7 @@
+﻿.bag {
+    margin-right:10px;
+}
+
+a.bag:hover {
+    transform: scale(1.5) rotate(5deg);
+}

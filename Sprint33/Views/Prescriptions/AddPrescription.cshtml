@@ -1,0 +1,99 @@
+﻿@model Sprint33.Models.PatientPrescriptionViewModel
+@using Sprint33.Extensions
+@{
+    ViewBag.Title = "AddPrescription";
+}
+
+<div class="pre-form">
+    <h2>Create Prescription</h2>
+
+    <dl class="dl-horizontal">
+        <dt>
+            Patient Name:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PatientName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt>
+            Doctor:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DoctorName)
+        </dd>
+
+        <dt>
+            Date Issued:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateIssued)
+        </dd>
+    </dl>
+</div>
+
+@using (Html.BeginForm())
+{
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.DateIssued)
+        @Html.HiddenFor(model => model.DoctorName)
+        @Html.HiddenFor(model => model.PatientName)
+        @Html.HiddenFor(model => model.PatientId)
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Inventories, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-5">
+            @Html.DropDownListFor(model => model.InventoryId,
+                Model.Inventories.ToSelectListItem(Model.InventoryId),
+                new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Inventories, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.itemQuantity, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.itemQuantity, new { htmlAttributes = new { @Value = "1" } })
+            @Html.ValidationMessageFor(model => model.itemQuantity, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PrescriptionValid, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.PrescriptionValid, new { htmlAttributes = new { @class = "form-control datepicker" } })
+            @Html.ValidationMessageFor(model => model.PrescriptionValid, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.PrescriptionDetails, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.PrescriptionDetails, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PrescriptionDetails, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+    }
+}
+
+@Html.ActionLink("Return Home", "Homepage", "Doctors1")
+@*<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script>CKEDITOR.replace("PrescriptionDetails");</script>*@

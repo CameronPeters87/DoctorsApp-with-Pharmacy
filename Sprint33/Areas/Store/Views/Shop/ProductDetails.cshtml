@@ -1,0 +1,67 @@
+﻿@model Sprint33.Areas.Store.Models.ProductDetailsVM
+
+@{
+    ViewBag.Title = "ProductDetails";
+    Layout = "~/Areas/Store/Views/Shared/_LayoutStore.cshtml";
+}
+
+<div class="site-section" style="padding:5em;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 mr-auto">
+                <div class="border text-center">
+                    @if (Model.IsOnSale)
+                    {
+                        <span class="sale-item">
+                            <img src="~/Content/Store/images/onsale.png" alt="Image" width="150" height="150">
+                        </span>
+                    }
+                    <img src="@Model.ImageUrl" alt="Image" class="img-fluid p-5">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img src="@Model.BarcodeUrl" width="75" height="50" />
+                <h2 class="text-black">@Model.Name, @Model.PackSize</h2>
+                <p>
+                    @Model.Description
+                </p>
+
+                @if (Model.IsOnSale)
+                {
+                    <p><del>R @Model.SellingPrice</del>  <strong class="text-primary h4">R @Model.DiscountedPrice</strong></p>
+                }
+                else
+                {
+                    <p>
+                        <strong class="text-primary h4">
+                            R @Model.SellingPrice
+                        </strong>
+                    </p>
+                }
+
+                <div class="mb-5">
+                    <div class="input-group mb-3" style="max-width: 220px;">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                        </div>
+                        <input type="text" class="form-control text-center quantity" value="1" placeholder=""
+                               aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                        </div>
+                    </div>
+
+                </div>
+                <p>
+                    <a href="#" class="buy-now btn btn-sm height-auto px-4 py-3 btn-primary"
+                       data-session="@Session["Title"]" data-id="@Model.Id">
+                        Add To Cart
+                    </a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_ModalLoginPartial")

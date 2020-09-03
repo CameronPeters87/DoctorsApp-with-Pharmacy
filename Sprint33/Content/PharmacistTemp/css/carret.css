@@ -1,0 +1,35 @@
+﻿.fa-rotate-90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.panel-carret .fa-play.fa-rotate-90 {
+    margin-top: -1px;
+}
+
+.panel-carret span {
+    transition: all 0.3s ease 0s;
+    transform: rotate(0deg);
+}
+
+.panel-carret.pressed span {
+    transform: rotate(90deg);
+}
+
+a.panel-carret { /* targeting the children in thumbnail container*/
+    outline: 0px none !important; /* Remove the line under a tags on hover*/
+    text-decoration: none;
+    color: #01d28e;
+}
+
+.panel-carret a:focus, a:hover, a:active { /* targeting the children in thumbnail container*/
+    color: #009363;
+}
+
+.panel-body {
+    padding:15px; 
+    border:1px solid #e3e6f0
+}

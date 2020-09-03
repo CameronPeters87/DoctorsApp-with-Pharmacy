@@ -1,0 +1,147 @@
+﻿@model Sprint33.Areas.Pharmacist.Models.StockOrderVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+}
+
+@*Dropdown - New Purchase*@
+<div class="dropdown no-arrow mb-4">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="fa fa-plus" style="color:white"></span>
+        New Purchase
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <h6 class="dropdown-item-text" style="color:#b7b9cc">Choose Supplier:</h6>
+        @foreach (var item in Model.Suppliers)
+        {
+            <a class="dropdown-item" href="@Url.Action("NewPurchase")?supplierId=@item.Id">
+                @item.Name
+            </a>
+        }
+    </div>
+</div>
+
+<br />
+
+@*List Orders*@
+<div class="card shadow h-100 py-2">
+    <div class="card-body">
+        @if (!Model.StockOrderListVM.Any())
+        {
+            <h2 class="text-center">You have no orders</h2>
+        }
+        else
+        {
+            <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary" style="display:inline-block">
+                    Orders
+                </h4>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)">Code</th>
+                            <th onclick="sortTable(1)">Supplier</th>
+                            <th onclick="sortTable(2)">Order Date</th>
+                            <th onclick="sortTable(3)">Period</th>
+                            <th onclick="sortTable(4)">Total Cost</th>
+                            <th onclick="sortTable(5)">Order Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.StockOrderListVM)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.StockOrderId)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Supplier) </td>
+                                <td>@Html.DisplayFor(modelItem => item.LongOrderDate) </td>
+                                <td>
+                                    @if (item.PaymentPeriod == null)
+                                    {
+                                        <p>N/A</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@Html.DisplayFor(modelItem => item.PaymentPeriod) days</p>
+                                    }
+                                </td>
+                                <td>R @Html.DisplayFor(modelItem => item.TotalCost) </td>
+                                <td title="@item.OrderStatus.Description" class="table-@item.OrderStatus.Color">
+                                    <span>
+                                        <i class="@item.OrderStatus.Icon"></i>
+                                        @item.OrderStatus.Name
+                                    </span>
+                                </td>
+                                <td>
+                                    <div>
+                                        @*Dropdown - Action*@
+                                        <div class="dropdown no-arrow mb-4" style="display:inline-block">
+                                            <button class="btn btn-warning dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="fa fa-caret-down" style="color:white"></span>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <p class="dropdown-item-text" style="color:#b7b9cc">
+                                                    <strong><u>Action:</u></strong>
+                                                </p>
+                                                @foreach (var statusItem in Model.OrderStatuses)
+                                                {
+                                                    if (item.OrderStatus.Name != "Completed")
+                                                    {
+                                                        if (item.OrderStatus.Name == statusItem.Name)
+                                                        {
+
+                                                        }
+                                                        else
+                                                        {
+                                                            if (statusItem.Name == "Pending Payment")
+                                                            {
+
+                                                            }
+                                                            else
+                                                            {
+                                                                <a class="dropdown-item" title="@statusItem.Description"
+                                                                   href="/Pharmacist/StockOrders/ChangeOrderStatus/@item.StockOrderId/@statusItem.Id">
+                                                                    @statusItem.Name
+                                                                </a>
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                <hr />
+                                                <a class="dropdown-item" target="_blank" href="@item.InvoiceLink">
+                                                    <span class="fa fa-file-pdf"></span>
+                                                    Invoice
+                                                </a>
+                                            </div>
+                                        </div>
+                                        @*Dropdown - View Items*@
+                                        <div class="dropdown no-arrow mb-4" style="display:inline-block">
+                                            <button class="btn btn-info dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="fa fa-list" style="color:white"></span>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <p class="dropdown-item-text" style="color:#b7b9cc">
+                                                    <strong><u>Products Purchased:</u></strong>
+                                                </p>
+                                                @foreach (var cartItem in item.CartItems)
+                                                {
+                                                    <a class="dropdown-item" href="#">
+                                                        @cartItem.Product.Name : @cartItem.Quantity
+                                                    </a>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

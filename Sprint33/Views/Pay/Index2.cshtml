@@ -1,0 +1,152 @@
+﻿@model Sprint33.Models.ViewModel.OrderVM
+
+@{
+    ViewBag.Title = "Pay Now Using PayGate";
+}
+<style>
+
+    .hidden {
+        display: none;
+    }
+
+    li {
+        font-size: 18px;
+        list-style-type: none;
+    }
+
+    #results {
+        display: block;
+        text-align: center;
+    }
+
+    #paygate {
+        display: none;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <hr />
+        <div>
+            <div class="col-md-6" style="box-shadow: 0px 0px 5px 0px grey; margin-bottom: 20px;
+            padding:10px; margin-top:20px;">
+                <h2>Pay Online</h2>
+                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. </p>
+
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OrderID, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-5">
+                            @Html.EditorFor(model => model.OrderID, new { htmlAttributes = new { id = "OrderID", @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.OrderID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PatientName, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-5">
+                            @Html.EditorFor(model => model.PatientName, new { htmlAttributes = new { id = "OrderID", @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.PatientName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OrderDate, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-5">
+                            @Html.EditorFor(model => model.OrderDate, new { htmlAttributes = new { id = "OrderID", @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.OrderDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TotalPrice, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-5">
+                            @Html.EditorFor(model => model.TotalPrice, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.TotalPrice, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @*Payment button*@
+                        <div class="col-md-offset-2 col-md-10">
+
+                            <button class="btn btn-success" id="btn-pay">
+                                PAY NOW
+                                <span class="fa fa-credit-card"></span>
+                            </button>
+                        </div>
+                        @if (Model.LoyaltyPurchase)
+                        {
+                            <div>
+                                <img src="https://img.icons8.com/officexs/16/000000/diakonisches-werk.png" />
+                                <p>*As a loyalty member, points will increase per online purchase</p>
+                            </div>
+                        }
+                    </div>
+                    <br />
+
+                    <p class="text-center">
+                        <ul class="text-info" id="results"></ul>
+                    </p>
+                    <br />
+
+                    @*Next Section*@
+
+                    <div class="hidden">
+                        <form action="https://secure.paygate.co.za/payweb3/process.trans" method="POST">
+                            <input id="PAY_REQUEST_ID" name="PAY_REQUEST_ID" type="hidden" />
+                            <input id="CHECKSUM" name="CHECKSUM" type="hidden" />
+                            <input id="REDIRECT" type="submit" />
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/custom/jquery-3.3.1.min.js"></script>
+@*<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+
+<script type="text/javascript">
+        //This function is called when the buy button has been pressed.
+        $('#btn-pay').on('click', function () {
+            let node = document.createElement("li");
+            node.innerText = "Processing...";
+            //To display the result message under the Pay button
+            document.querySelector("#results").appendChild(node);
+
+            //The Pay button Requests a resource from PayController calling a GetRequest ActionResult Method.
+            $.get(`/pay/getrequest`)
+                .done(data => success(data))
+                .fail(err => error(err));
+
+        });
+
+        function success(data) {
+            let requestNode = document.createElement("li");
+            requestNode.innerText = "Request retrieved";
+            //To display the result message under the Pay button
+            document.querySelector("#results").appendChild(requestNode);
+
+            requestNode.innerText = data.message;
+            if (data.success) {
+                $("#PAY_REQUEST_ID").val(data.results.PAY_REQUEST_ID);
+                $("#CHECKSUM").val(data.results.CHECKSUM);
+
+
+                let redirectNode = document.createElement("li");
+                redirectNode.innerText = "Redirecting...";
+                //To display the result message under the Pay button
+                document.querySelector("#results").appendChild(redirectNode);
+
+                document.querySelector("#REDIRECT").click();
+            }
+        }
+
+        function error(data) {
+            console.log("Error");
+            let node = document.createElement("li");
+            node.innerText = data;
+            //To display the result message under the Pay button
+            document.querySelector("#results").appendChild(node);
+        }
+</script>
+

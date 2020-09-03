@@ -1,0 +1,41 @@
+﻿
+<!-- Login Modal -->
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Login before adding items to cart</h5>
+            </div>
+            <div class="modal-body">
+
+                <ul class="validation d-none text-danger">
+                    <li>Invalid Login Attempt</li>
+                </ul>
+
+                <div class="form-group">
+                    <label class="control-label col-md-5" for="Email" style="color:black">Email Address</label>
+                    <div class="col-md-10">
+                        <input class="form-control text-box single-line"
+                               data-val="true"
+                               data-val-email="The Email Address field is not a valid e-mail address."
+                               data-val-required="The Email Address field is required."
+                               id="Email" name="Email" type="email" value="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" style="color:black" for="Password">Password</label>
+                    <div class="col-md-10">
+                        <input class="form-control email text-box single-line password" data-val="true" data-val-required="The Password field is required." id="Password" name="Password" type="password" value="">
+                    </div>
+                </div>
+
+                <button href="#" class="btn btn-primary">Login</button>
+                
+                <span class="loader d-none">
+                    <img src="~/Content/ajax-loader.gif" />
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

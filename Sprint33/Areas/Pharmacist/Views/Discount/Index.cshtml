@@ -1,0 +1,341 @@
+﻿@model Sprint33.Areas.Pharmacist.Models.DiscountVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger" style="margin-top:20px">
+        @TempData["Error"]
+    </div>
+}
+
+<button id="btndiscount" class="btn btn-primary">
+    <span class="fa fa-plus"></span>
+    Add Discount Product
+</button>
+
+
+<!--List Products without discount-->
+<div id="products" style="display:none">
+    <div class="card shadow h-100 py-2 my-4">
+        <div class="card-body">
+            @if (!Model.AllProductList.Any())
+            {
+                <h2 class="text-center">You have no products</h2>
+            }
+            else
+            {
+                <div class="card-header py-3">
+                    <h4 class="m-0 font-weight-bold text-primary" style="display:inline-block">
+                        Select a Product
+                    </h4>
+                    <span class="pull-right">
+                        <input type="text" id="myInput" class="form-control-custom"
+                               onkeyup="myFunction()" placeholder="Search for names.."
+                               title="Type in a product" />
+                    </span>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" id="myTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th onclick="sortTable(0)">Name</th>
+                                <th onclick="sortTable(1)">Quantity</th>
+                                <th onclick="sortTable(2)">Selling Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.AllProductList)
+                            {
+                                <tr id="id_@item.Id" style="cursor:pointer" class="clickable-row"
+                                    data-id="@item.Id" data-toggle="modal" data-target="#orangeModalSubscription">
+                                    <td style="text-align: center;">
+                                        <img src="@item.ImageUrl" width="50" height="50" alt="ProductImage" />
+                                    </td>
+                                    <td class="product-@item.Id">
+                                        @Html.DisplayFor(modelItem => item.Name) (@item.PackSize)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Quantity)
+                                    </td>
+                                    <td>R @Html.DisplayFor(modelItem => item.SellingPrice) </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="row">
+    <!--Discounted Product List-->
+    <div class="col-md-7">
+        <div class="card shadow h-100 py-2 my-4">
+            <div class="card-body">
+                @if (!Model.DiscountedProducts.Any())
+                {
+                    <div class="card-header py-3">
+                        <h4 class="m-0 font-weight-bold text-primary" style="display:inline-block">
+                            Products on Sale
+                        </h4>
+                    </div>
+                    <h2 class="text-center">You have no products on sale</h2>
+                }
+                else
+                {
+                    <div class="card-header py-3">
+                        <h4 class="m-0 font-weight-bold text-warning" style="display:inline-block">
+                            Discounts
+                        </h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th onclick="sortTable(0)">Name</th>
+                                    <th onclick="sortTable(2)">Discounted Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.DiscountedProducts)
+                                {
+                                    <tr id="id_discount_@item.Id" style="cursor:pointer"
+                                        data-toggle="modal" data-target="#exampleModal">
+                                        <td style="text-align: center;">
+                                            <img src="@item.ImageUrl" width="50" height="50" alt="ProductImage" />
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name) (@item.PackSize)
+                                        </td>
+                                        <td>
+                                            R @Html.DisplayFor(modelItem => item.DiscountedPrice)
+                                        </td>
+                                        <td>
+                                            <a class="RemoveLink" href="#" data-id="@item.Id">
+                                                <span class="fa fa-trash-alt" style="color:red;"></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!--Add Discount via Category-->
+    @*<div class="col-md-5">
+            <div class="card shadow h-100 py-2">
+                <div class="card-body">
+                    @using (Html.BeginForm("ApplyDiscountByCategory", "Discount", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <div class="card-header py-3">
+                                <h4 class="m-0 font-weight-bold text-primary">Apply Discount By Category</h4>
+                            </div>
+                            <br />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.Id)
+                            <div class="form-group">
+                                <label class="control-label" for="CategoryId">Category</label>
+                                <div class="col-md-12">
+                                    @Html.DropDownListFor(model => model.CategoryId,
+                                        Model.Categories, "Select A Category",
+                                        new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                                    @if (TempData["Error"] != null)
+                                    {
+                                        <span class="field-validation-error text-danger">
+                                            @TempData["Error"]
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Apply" class="btn btn-success" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>*@
+</div>
+
+
+<!--Modal-->
+<div class="modal fade" id="orangeModalSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-warning" role="document" style="border-radius: 3px 3px 0 0;">
+        <!--Content-->
+        <div class="modal-content" style=" border-radius: 3px;">
+            <div class="card-body">
+                <div class="form-horizontal">
+                    <div class="card-header py-3">
+                        <h4 class="m-0 font-weight-bold text-primary product-name-modal"></h4>
+                    </div>
+                    <br />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label class="control-label " for="DiscountOption">Discount Option</label>
+                        <div class="col-md-12">
+                            <select class="form-control" id="discount-option">
+                                <option selected disabled hidden>Choose Discount Option</option>
+                                <option value="Percentage">By Percentage</option>
+                                <option value="Price">New Discount Price</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="price box">
+                        <div class="form-group">
+                            <label class="control-label " for="DiscountedPrice">New Discounted Price (R0.00)</label>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.DiscountedPrice,
+                               new { htmlAttributes = new { @class = "form-control price-input" } })
+                                @Html.ValidationMessageFor(model => model.DiscountedPrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="percent box">
+                        <div class="form-group">
+                            <label class="control-label " for="DiscountedPrice">Discount Rate (%)</label>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.DiscountedPercentage,
+                               new { htmlAttributes = new { @class = "form-control percent-input" } })
+                                @Html.ValidationMessageFor(model => model.DiscountedPrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button class="btn btn-success apply-discount">
+                                Apply
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+@section scripts {
+
+    <script>
+
+        $(document).ready(function () {
+
+            var optionValue;
+
+            /* Show specific Input box when discount option is selected */
+            $("select#discount-option").change(function () {
+                $(this).find("option:selected").each(function () {
+                    optionValue = $(this).attr("value");
+                    if (optionValue == "Percentage") {
+                        $(".box").not(".percent").hide();
+                        $(".percent").show();
+                    }
+                    else if (optionValue == "Price") {
+                        $(".box").not(".price").hide();
+                        $(".price").show();
+                    }
+                    else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+
+            //////////////////////////////////////////////////////////////////
+
+            /***************** Remove Discounted Product ********/
+
+            // Document.ready -> link up remove event handler
+
+            $(".RemoveLink").click(function () {
+                // Get the CartId from the link
+                var discountToDelete = $(this).attr("data-id");
+                if (discountToDelete != '') {
+                    // Perform the ajax post
+                    $.post("/Discount/RemoveDiscountProduct", { "discountToDelete": discountToDelete },
+                        function (data) {
+                            //Successful requests get here
+                            //Update the page elements
+                            $('tr#id_discount_' + data).fadeOut('slow');
+                        });
+                }
+            });
+
+            //////////////////////////////////////////////////////////////////////////////
+
+            /***************** Apply Discount from table ********/
+            var productName;
+            var productSelected;
+
+            $(".clickable-row").click(function () {
+                productSelected = $(this).attr("data-id");
+                productName = $("td.product-" + productSelected).html();
+                $("h4.product-name-modal").html(productName);
+            });
+
+            $(".apply-discount").click(function () {
+                var priceValue = $(".price-input").val();
+                var percentValue = $(".percent-input").val();
+                //var discountValue = $(".single-line").val();
+                var discountValue;
+                if (priceValue == 0) {
+                    discountValue = percentValue;
+                } else {
+                    discountValue = priceValue;
+                }
+
+                var url = "/Pharmacist/Discount/ApplyDiscount";
+
+                $.post(url, {
+                    discountValue: discountValue,
+                    productSelected: productSelected,
+                    optionValue: optionValue
+                }, function (data) {
+                    var response = data.trim();
+
+                    if (response == "InvalidPrice") {
+                        location.reload();
+                    } else {
+                        location.reload();
+                    }
+
+
+                });
+            });
+
+            ////////////////////////////////////////////////////
+
+            // Document.ready -> Show all products table
+
+            $("#btndiscount").click(function () {
+                // Get the CartId from the link
+                var table = $("#products").show(700);
+            });
+
+            //////////////////////////////////////////////////////////////////////////////
+
+        });
+
+    </script>
+}

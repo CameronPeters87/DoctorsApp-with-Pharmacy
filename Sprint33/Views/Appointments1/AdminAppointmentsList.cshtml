@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Sprint33.Models.ViewModel.AdminAppointmentsListVM>
+
+@{
+    ViewBag.Title = "AdminAppointmentsList";
+}
+<div class="container">
+<h2>Appointments</h2>
+
+@if (TempData["SM"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["SM"]
+    </div>
+}
+
+<table class="table table-striped">
+    <tr class="table-success">
+        <th>
+            @Html.DisplayNameFor(model => model.PatientName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DoctorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppointmentTime)
+        </th>
+        <th>
+            Confirmation Status
+        </th>
+        <th>
+            Paid Status
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    if (item.PatientName != null)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PatientName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DoctorName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppointmentTime)
+        </td>
+        <td>
+            @if (item.Confirmed)
+            {
+                <p>Booking Confirmed</p>
+            }
+            else
+            {
+                <p>Booking not Confirmed</p>
+            }
+        </td>
+        <td>
+            @if (item.isPaid)
+            {
+                <p>Paid</p>
+            }
+            else
+            {
+                <p>Not Paid</p>
+            }
+        </td>
+        <td>
+            <a
+               onclick="return confirm('Are you sure you want to cancel this appointment?');"
+               href="@Url.Action("AdminCancel")?id=@item.AppointmentID">
+                Cancel
+            </a>
+        </td>
+    </tr>
+    }
+}
+
+</table>
+    <a type="button" class="btn btn-secondary" style="margin-top:15px"
+       href="@Url.Action("Homepage", "Admins1")">
+        <span class="fa fa-home"></span>
+    </a>
+</div>

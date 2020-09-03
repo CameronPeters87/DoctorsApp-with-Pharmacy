@@ -1,0 +1,40 @@
+﻿@model Sprint33.Models.ViewModel.LoyaltySubscribeVM
+
+@{
+    ViewBag.Title = "Subscribe";
+}
+
+<div class="container">
+    <h2>Become a loyalty member <img src="https://img.icons8.com/color/48/000000/diakonisches-werk.png" /></h2>
+    <br />
+    <p>Loyalty Benefits are: </p>
+    <ul>
+        <li>
+            <span class="fa fa-money" style="color:green"></span>
+            Get 10% on consulations when you reach 100 loyalty points
+        </li>
+    </ul>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(model => model.PatientId)
+
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @*<input type="submit" value="Subscribe" class="btn btn-success" />*@
+                    <button type="submit" class="btn btn-success btn-sm">
+                        Become a member
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to Dashboard", "Homepage", "Patients1")
+    </div>
+</div>

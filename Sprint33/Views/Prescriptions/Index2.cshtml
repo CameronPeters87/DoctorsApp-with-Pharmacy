@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Sprint33.Models.PrescriptionListViewModel>
+
+@{
+    ViewBag.Title = "Prescriptions List";
+}
+    
+        <html>
+        <head>
+            <style>
+                body {
+                    /*background-image: url('../../Content/istockphoto-866772230-612x612.jpg');*/
+                    /*background-color: lightblue;*/
+                    /*background-image: url('../../Content/62225351-tablets-isolated-on-a-white-background-reflection-of-pills-on-a-glass-medicine-s-background-pharmacy.jpg');*/
+                    /*background-image: url('../../Content/depositphotos_146926385-stock-photo-stethoscope-on-rx-prescription.jpg');*/
+                    /*background-image: url('../../Content/pink-pills-with-white-tablets-blue-background_23-2147827545.jpg');*/
+                    /*background-image: url('../../Content/carrots.jpg');*/
+                    /*background-image: url('../../Content/white_pills_on_blue-marco_verch.jpg');
+            height:1000px;
+            width:1000px*/
+                    background-image: url('../../Content/close-up-doctor-front-bright-background_53419-4416.jpg');
+                    /*background-image: url('../../Content/doctor-holding-stethoscope-white-background_41471-6399.jpg');*/
+                    /*background-image: url('../../Content/doctor-holding-stethoscope_23-2147822716.jpg');*/
+                    /*background-image: url('../../Content/female-doctor-holding-stethoscope-medical-equipment-tool-white-isolated-background_10307-452.jpg');*/
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
+                    background-attachment: fixed;
+                    /*width: 1000px;
+                    height: 1000px;*/
+                    @*background: red;
+  position: relative;
+  animation: mymove 5s infinite;
+}
+
+@keyframes mymove {
+  from {top: 0px;}
+  to {top: 200px;}
+}*@
+                }
+            </style>
+        </head>
+        <body>
+
+
+
+        </body>
+    </html>
+
+
+    <div class="container">
+        <h2>Prescriptions <i class="fa fa-medkit"></i></h2>
+
+        <p>
+            <div>
+                <br />
+                <div>
+                    @using (Html.BeginForm("Index2", "Prescriptions", FormMethod.Get))
+                    {
+                        @Html.TextBox("Search") <input type="submit" value="Search" />
+                    }
+                </div>
+            </div>
+        </p>
+
+        <table class="table table-striped">
+            <tr class="table-success">
+                <th>
+                    @Html.DisplayNameFor(model => model.PatientName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateIssued)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PrescriptionValid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InventoryName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.itemQuantity)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PatientName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateIssued)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrescriptionValid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InventoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.itemQuantity)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="@Url.Action("ViewPrescription")?id=@item.Id">
+                            <span class="fa fa-eye"></span>
+                            View
+                        </a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+        <a type="button" class="btn btn-secondary" style="margin-top:15px"
+           href="@Url.Action("Homepage", "Doctors1")">
+            <span class="fa fa-home"></span>
+        </a>
+    </div>
+    

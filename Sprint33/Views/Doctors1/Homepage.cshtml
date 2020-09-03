@@ -1,0 +1,105 @@
+﻿
+@{ ViewBag.Title = "Homepage"; }
+
+    <div class="container">
+
+        <h2 style="text-align:center; font-family: 'Merienda One', cursive;">Home Page</h2>
+        <br>
+        <h3 style="text-align:center">Welcome @Session["UserName"] <i class="fa fa-user-md"></i></h3>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-5 mb-5 text-center">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">View List of patients</h2>
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("DoctorIndex", "Patients1")"
+                           class="btn btn-info">
+                            <span class="fa fa-user"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5 mb-5 text-center">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">Create Appointments Slots</h2>
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("CreateSlot", "Appointments1")"
+                           class="btn btn-info">
+                            <span class="fa fa-user-md"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="col-md-4 mb-5 text-center"></div>*@
+
+            <div class="col-md-5 mb-5 text-center">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">View List of Your Current Appointments</h2>
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("DoctorIndex", "Appointments1")"
+                           class="btn btn-info">
+                            <span class="fa fa-stethoscope"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5 mb-5 text-center">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">View List of Consultations</h2>
+                        @*<p class="card-text">Description</p>*@
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("Index", "Consultation_v2")"
+                           class="btn btn-info">
+                            <span class="fa fa-medkit"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5 mb-5 text-center">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">View Prescriptions</h2>
+                        @*<p class="card-text">Description</p>*@
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("Index2", "Prescriptions")"
+                           class="btn btn-info">
+                            <span class="fa fa-medkit"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5 mb-5 text-center">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">View Referrals</h2>
+                        @*<p class="card-text">Description</p>*@
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("Index", "Referral_v2")"
+                           class="btn btn-info">
+                            <span class="fa fa-medkit"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <br /><br />
+
+    </div>

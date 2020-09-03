@@ -1,0 +1,309 @@
+﻿@model Sprint33.Areas.Pharmacist.Models.NewPurchaseVM
+
+@{
+    ViewBag.Title = "NewPurchase";
+    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card shadow h-100 py-2">
+    <div class="card-body">
+        <div class="card-header py-3">
+            <div class="header" style="display:inline-block;">
+                <h4 class="m-0 font-weight-bold text-primary">
+                    Purchase Stock from @Model.Supplier
+                </h4>
+            </div>
+            <div class="reset-button" style="display:inline-block; float:right;">
+                @using (Html.BeginForm("Reset", "StockOrders", FormMethod.Post))
+                {
+                    @Html.HiddenFor(model => model.SupplierId)
+
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <button type="submit" class="btn btn-danger">
+                        <span class="fa fa-refresh"></span>
+                        <span>Reset</span>
+                    </button>
+                }
+            </div>
+        </div>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger" style="margin-top:20px">
+                @TempData["Error"]
+            </div>
+        }
+
+        <div class="row" style="padding:20px">
+            <!--Add Product to Order List-->
+            <div class="col-md-5">
+
+                <div style="border-bottom: 2px solid #d0d0d0; margin-right: 40px">
+                    @using (Html.BeginForm("AddToCart", "StockOrders", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.SupplierId)
+                        <div class="form-horizontal">
+                            <br />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ProductId, htmlAttributes: new { @class = "control-label " })
+                                <div class="col-md-12">
+                                    @Html.DropDownListFor(model => model.ProductId,
+                                        Model.ProductsDropdown, "Select Product",
+                                        new { @class = "form-control search" })
+                                    @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label " })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="display:inline-block">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Add To Cart" class="btn btn-primary" />
+                                </div>
+                            </div>
+                            <div class="form-group" style="display:inline-block;">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+                                    <span class="fa fa-search"></span>
+                                    <span>Search Item</span>
+                                </button>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- Product List -->
+                                            <div class="card shadow mb-4">
+                                                <div class="card-header py-3">
+                                                    <h4 class="m-0 font-weight-bold text-primary" style="display:inline-block">
+                                                        @Model.Supplier Items
+                                                    </h4>
+                                                    <span class="pull-right">
+                                                        <input type="text" id="myInput" class="form-control"
+                                                               onkeyup="myFunction()" placeholder="Search for names.."
+                                                               title="Type in a product" />
+                                                    </span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th onclick="sortTable(0)">Name</th>
+                                                                    <th onclick="sortTable(3)">Supplier Price</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (var item in Model.ProductList)
+                                                                {
+                                                                    <tr class="clickable-row" data-id="@item.Id" style="cursor:pointer;" data-dismiss="modal">
+                                                                        <td>
+                                                                            <img src="@item.ImageUrl" width="50" height="50" />
+                                                                            @item.Name
+                                                                        </td>
+                                                                        <td>R @Html.DisplayFor(modelItem => item.SupplierPrice)</td>
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button id="CloseModal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!--Finishing up order-->
+                <div style="margin-top:20px">
+                    @using (Html.BeginForm("CreateOrder", "StockOrders", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.SupplierId)
+                        @Html.HiddenFor(model => model.TotalPrice)
+                        @Html.HiddenFor(model => model.SubTotal)
+                        @Html.HiddenFor(model => model.TaxTotal)
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <label class="control-label " for="PaymentPeriod">Payment Period(Optional)</label>
+                                <div class="col-md-12">
+                                    @Html.DropDownListFor(model => model.PaymentPeriod,
+                                        new[] { new SelectListItem { Text = "30 days", Value = "30" },
+                                                new SelectListItem { Text = "60 days", Value = "60"},
+                                                new SelectListItem { Text = "90 days", Value = "90"}}, "Select Payment Period",
+                                        new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label " })
+                                <div class="col-md-8">
+                                    @Html.TextAreaFor(model => model.Notes, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Order" class="btn btn-success" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!--Display List of Product For Purchase-->
+            <div class="col-md-7">
+                <div class="table" style="margin-top:20px">
+                    <div class="card-header py-3 bg-primary">
+                        <h4 class="m-0 font-weight-bold text-white" style="display:inline-block">
+                            Cart
+                        </h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Total(excl. vat)</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.StockCart)
+                                {
+                                    <tr id="id_@item.Id">
+                                        <td>@Html.DisplayFor(modelItem => item.Product.Name) </td>
+                                        <td>
+                                            @Html.EditorFor(modelItem => item.Quantity, 
+                                                new
+                                                {
+                                                    htmlAttributes = new
+                                                    {
+                                                        @class = "form-control", 
+                                                        @readonly = "readonly"
+                                                    }
+                                                })
+                                            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>R @Html.DisplayFor(modelItem => item.Product.SupplierPrice) </td>
+                                        <td>R @Html.DisplayFor(modelItem => item.Price) </td>
+                                        <td>
+                                            <a href="@Url.Action("RemoveFromCart")?id=@item.Id">
+                                                <span class="fa fa-trash-alt" style="color:red"></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot style="font-weight:bold">
+                                <tr>
+                                    <td>SUBTOTAL</td>
+                                    <td>R @Model.SubTotal</td>
+                                    <td colspan="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>TAX(15%)</td>
+                                    <td>R @Model.TaxTotal</td>
+                                    <td colspan="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>TOTAL</td>
+                                    <td>R @Model.TotalPrice</td>
+                                    <td colspan="3"></td>
+                                </tr>
+
+                            </tfoot>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+    <script>
+        $(document).ready(function () {
+
+            /*
+             * Get medicine when searching for product in table
+             */
+            $(".clickable-row").click(function () {
+                var medicineSelected = $(this).attr("data-id");
+                $("select.search").val(medicineSelected);
+            });
+            //////////////////////////////////////////////////
+
+            /* Edit Quantity Value*/
+            var originalTextBoxValue;
+            $("table#myTable input.text-box").dblclick(function () {
+                originalTextBoxValue = $(this).val();
+                $(this).attr("readonly", false);
+            });
+
+            $("table#myTable input.text-box").keyup(function (e) {
+                if (e.keyCode == 13) {
+                    $(this).blur();
+                }
+            });
+
+            $("table#myTable input.text-box").blur(function () {
+
+                var $this = $(this);
+                var newQty = $this.val();
+                var id = $this.parent().parent().attr("id").substring(3);
+                var url = "/Pharmacist/StockOrders/EditQuantity";
+
+                $.post(url, { newQty: newQty, id: id }, function (data) {
+                    var response = data.trim();
+
+                    if (response == "InvalidQuantity") {
+                        $this.val(originalTextBoxValue);
+                        location.reload();
+                    } else {
+                        location.reload();
+                    }
+
+                }).done(function () {
+                    $this.attr("readonly", true);
+                });
+            });
+
+            //////////////////////////////////////////////////////////////
+
+        });
+    </script>
+}

@@ -1,0 +1,200 @@
+﻿@model Sprint33.Areas.Pharmacist.Models.AddProductVM
+
+@{
+    ViewBag.Title = "EditProduct";
+    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+}
+
+<!--Add Medicine-->
+<div class="row">
+    <div class="card shadow h-100 py-2 col-md-8" style="margin-left:180px">
+        <div class="card-body">
+            @using (Html.BeginForm("EditProduct", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.BarcodeUrl)
+                @Html.HiddenFor(model => model.SkuCode)
+                @Html.HiddenFor(model => model.Slug)
+
+                <div class="form-horizontal">
+                    <div class="card-header py-3">
+                        <div class="header" style="display:inline-block;">
+                            <h4 class="m-0 font-weight-bold text-primary">
+                                In-Store Sale
+                            </h4>
+                        </div>
+                        <div class="reset-button" style="display:inline-block; float:right;">
+                            <img src="@Model.BarcodeUrl" width="50" height="35" />
+                        </div>
+                    </div>
+                    <br />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label " })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label " })
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <!--General Information-->
+                    <div class="card-body">
+                        <div class="card-header py-3">
+                            <h4 class="m-0 font-weight-bold">
+                                <a data-toggle="collapse" class="panel-carret" href="#collapse3">
+                                    <span class="pull-left fa fa-play fa-rotate-90"></span>
+                                    General
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse3" class="panel-collapse collapse in">
+                            <div class="panel-body" style="padding:20px; border:1px solid #e3e6f0">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SellingPrice, htmlAttributes: new { @class = "control-label " })
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(model => model.SellingPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.SellingPrice, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label " })
+                                    <div class="col-md-12">
+                                        @Html.DropDownListFor(model => model.CategoryId,
+                                            Model.Categories, "Select Category", new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.PackSize, htmlAttributes: new { @class = "control-label " })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.PackSize, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.PackSize, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Product Images-->
+                    <div class="card-body">
+                        <div class="card-header py-3">
+                            <h4 class="m-0 font-weight-bold">
+                                <a data-toggle="collapse" class="panel-carret" href="#collapse2">
+                                    <span class="pull-left fa fa-play fa-rotate-90"></span>
+                                    Product Images
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse in">
+                            <div class="panel-body" style="padding:20px; border:1px solid #e3e6f0">
+                                <div class="form-group">
+                                    <label class="control-label" for="Image">Product Image: </label>
+                                    @Html.TextBoxFor(x => x.Image, "", new
+                                    {
+                                        type = "file",
+                                        accept = "image/gif,image/jpeg,image/png"
+                                    })
+                                    @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                                    <br />
+                                </div>
+                                <img id="imgpreview" src="@Model.ImageUrl"
+                                     width="150" height="150" alt="Product Image" />
+                                <br /> <br />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Supplier-->
+                    <div class="card-body">
+                        <div class="card-header py-3">
+                            <h4 class="m-0 font-weight-bold">
+                                <a data-toggle="collapse" class="panel-carret" href="#collapse1">
+                                    <span class="pull-left fa fa-play fa-rotate-90"></span>
+                                    Supplier
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse in">
+                            <div class="panel-body" style="padding:20px; border:1px solid #e3e6f0">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SupplierId, htmlAttributes: new { @class = "control-label " })
+                                    <div class="col-md-12">
+                                        @Html.DropDownListFor(model => model.SupplierId,
+                                            Model.Suppliers, "Select Supplier", new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.SupplierId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SupplierPrice, htmlAttributes: new { @class = "control-label " })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.SupplierPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.SupplierPrice, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <br /><br />
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Add" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+
+@section scripts {
+
+    <script>
+
+        $(function () {
+
+            /*
+             * Preview Selected Image
+             */
+
+            function readUrl(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $("img#imgpreview")
+                            .attr("src", e.target.result)
+                            .width(150)
+                            .height(150);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#Image").change(function () {
+                readUrl(this);
+            });
+
+            ///////////////////////////////////////////////
+        });
+
+    </script>
+}

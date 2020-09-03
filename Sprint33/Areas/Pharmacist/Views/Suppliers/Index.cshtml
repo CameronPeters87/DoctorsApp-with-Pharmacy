@@ -1,0 +1,72 @@
+﻿@model Sprint33.Areas.Pharmacist.Models.SupplierListVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+}
+
+<a class="btn btn-primary"
+   href="@Url.Action("AddSupplier")">
+    <span class="fa fa-plus" style="color:white"></span>
+    Add Supplier
+</a>
+
+<br />
+@if (TempData["SM"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SM"]
+    </div>
+}
+
+<br />
+
+<!--List Suppliers-->
+<div class="card shadow h-100 py-2">
+    <div class="card-body">
+        @if (!Model.Suppliers.Any())
+        {
+            <h2 class="text-center">You have no suppliers</h2>
+        }
+        else
+        {
+            <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary" style="display:inline-block">
+                    Supplier List
+                </h4>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Contact No.</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.Suppliers)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="@Url.Action("EditSupplier")?id=@item.Id">
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </a>
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.Email) </td>
+                                <td>@Html.DisplayFor(modelItem => item.ContactNumber) </td>
+                                <td>
+                                    <a href="@Url.Action(" DeleteSupplier")?id=@item.Id">
+                                        <span class="fa fa-trash-alt" style="color:red"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Sprint33.Models.Referral_v2>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+
+<h2>Referrals</h2>
+
+<p>
+    <div>
+        @using (Html.BeginForm("Index", "Referral_v2", FormMethod.Get))
+        {
+            @Html.TextBox("Search") <input type="submit" value="Search" />
+        }
+    </div>
+
+</p>
+<table class="table table-striped">
+    <tr class="table-success">
+        <th>
+            @Html.DisplayNameFor(model => model.referral_Doctors_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.referral_doctor_Add)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.referral_doctor_num)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.referral_doctor_Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.refferal_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.referral_ValidDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.refferal_Location)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.referral_Doctors_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.referral_doctor_Add)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.referral_doctor_num)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.referral_doctor_Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientName)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.refferal_Date)*@
+                @Html.FormatValue("yyyy-MM-dd", item.refferal_Date.ToString("yyyy-MM-dd"))
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.referral_ValidDate)*@
+                @Html.FormatValue("yyyy-MM-dd", item.referral_ValidDate.ToString("yyyy-MM-dd"))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.refferal_Location)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.refferal_ID }) |
+                @Html.ActionLink("View Reasons", "Details", new { id = item.refferal_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.refferal_ID })
+            </td>
+        </tr>
+    }
+
+</table>
+<a type="button" class="btn btn-secondary" style="margin-top:15px"
+   href="@Url.Action("Homepage", "Doctors1")">
+    <span class="fa fa-home"></span>
+</a>
+
+</div>

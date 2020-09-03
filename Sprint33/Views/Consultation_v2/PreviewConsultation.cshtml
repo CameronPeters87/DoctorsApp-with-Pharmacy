@@ -1,0 +1,44 @@
+﻿@model Sprint33.Models.Consultation_v2
+
+@{
+    ViewBag.Title = "PreviewConsultation";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100" style="margin-top:20px">
+                <h4 class="card-header">Consultation Details for @Model.PatientName <i class="fa fa-heartbeat"></i></h4>
+                <div class="card-body">
+                    <p class="card-text">
+                        <dl>
+                            <dt>Appointment Date</dt>
+                            <dd>- @Model.AppointmentDate</dd>
+                            <dt>Symptoms</dt>
+                            <dd>- @Model.Symptoms</dd>
+                            <dt>Diagnosis</dt>
+                            <dd>- @Model.Diagnosis</dd>
+                            <dt>Notes</dt>
+                            <dd>- @Model.Notes</dd>
+                        </dl>
+                    </p>
+                </div>
+
+                <div class="card-footer">
+                    <a type="button" href="@Url.Action("Index")"
+                       class="btn btn-primary">
+                        <span class="fa fa-list"></span>
+                        Back to list
+                    </a> <br />
+                    <a type="button" class="btn btn-danger" style="margin-top:10px"
+                       onclick="return confirm('Are you sure you want to Remove Consultation?');"
+                       href="@Url.Action("Remove")?id=@Model.Id">
+                        <span class="fa fa-trash" style="color:red"></span>
+                        Remove Consultation
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

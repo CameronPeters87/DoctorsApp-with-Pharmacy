@@ -1,0 +1,98 @@
+﻿
+@{ ViewBag.Title = "Homepage"; }
+
+<div class="container">
+
+    <div class="headline">
+
+        <h2 style="text-align:center; font-family: 'Merienda One', cursive;">
+            Patient Homepage
+        </h2>
+        <br>
+        <h3 style="text-align:center">
+            Welcome @Session["UserName"]
+            @if ((bool)Session["IsLoyal"] == true)
+            {
+    <img src="https://img.icons8.com/color/48/000000/diakonisches-werk.png" />}
+        </h3>
+        @if ((bool)Session["IsLoyal"] == false)
+        {
+    <a type="button" class="btn btn-primary pull-right"
+       href="@Url.Action("Subscribe", "Loyalties")?patientId=@Session["id"]">
+        <img src="https://img.icons8.com/officexs/16/000000/diakonisches-werk.png" />
+        Become a Loyalty member
+    </a>}
+
+
+        @if (TempData["SM"] != null)
+        {
+    <br /><br /><br>
+                    <div class="alert alert-success">
+                        @TempData["SM"]
+                    </div>}
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-md-5 mb-5 text-center">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Make an Appointment</h2>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("PatientIndex", "Appointments1")"
+                       class="btn btn-info">
+                        <span class="fa fa-plus-square"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 mb-5 text-center">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">View Your current Appointment</h2>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("ViewMyAppointment", "Appointments1")?patientId=@Session["id"]"
+                       class="btn btn-info">
+                        <span class="fa fa-user-md"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="col-md-4 mb-5 text-center"></div>*@
+
+        <div class="col-md-5 mb-5 text-center">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Patient Records</h2>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("PatientHistory", "Consultation_v2")"
+                       class="btn btn-info">
+                        <span class="fa fa-stethoscope"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 mb-5 text-center">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Patient Prescriptions</h2>
+                    @*<p class="card-text">Description</p>*@
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("PrescriptionHistory", "Prescriptions")"
+                       class="btn btn-info">
+                        <span class="fa fa-medkit"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />

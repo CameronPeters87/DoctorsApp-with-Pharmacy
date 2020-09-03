@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Page</title>
+    @RenderSection("head", required: false)
+    <title>Dr J Govender</title>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Merienda+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/Content/Store/css/style.css">
+
+    <link rel="stylesheet" href=@Url.Content("/Content/ThemeTemp/css/animate.css")>
+
+    <link rel="stylesheet" href=@Url.Content("/Content/ThemeTemp/css/owl.carousel.min.css")>
+    <link rel="stylesheet" href=@Url.Content("/Content/ThemeTemp/css/owl.theme.default.min.css")>
+    <link rel="stylesheet" href=@Url.Content("/Content/ThemeTemp/css/magnific-popup.css")>
+
+    <link rel="stylesheet" href=@Url.Content("/Content/ThemeTemp/css/bootstrap-datepicker.css")>
+    <link rel="stylesheet" href=@Url.Content("/Content/ThemeTemp/css/jquery.timepicker.css")>
+
+    <link rel="stylesheet" href=@Url.Content("/Content/ThemeTemp/css/flaticon.css")>
+    <link rel="stylesheet" href=@Url.Content("/Content/ThemeTemp/css/style.css")>
+    <link rel="stylesheet" type="text/css" href="~/Content/Store/css/cart.css">
+
+</head>
+<!--Header Begins-->
+<body>
+<!--Navigation Menu-->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="fa fa-bars"></span> Menu
+            </button>
+
+            <div class="order-lg-last">
+                @if (Session["UserName"] != null && Session["UserName"] != "")
+                {
+                    if (Session["Title"] == "Doctor")
+                    {
+                        <a href="@Url.Action("Homepage", "Doctors1")"
+                           class="btn btn-info">
+                            <i class="fa fa-tachometer"></i>
+
+                            Dashboard
+                        </a>
+                    }
+                    else if (Session["Title"] == "Patient")
+                    {
+                        { Html.RenderAction("CartItemsPartial", "Shop", new { area = "Store" }); }
+
+                        <a href="@Url.Action("Homepage", "Patients1")"
+                           class="btn btn-info">
+                            <i class="fa fa-tachometer"></i>
+                            Dashboard
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Homepage", "Admins1")"
+                           class="btn btn-info">
+                            <i class="fa fa-tachometer"></i>
+                            Dashboard
+                        </a>
+                    }
+                    <a href="@Url.Action("Login", "Home")"
+                       class="btn btn-primary">
+                        Log Out
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Login", "Home")" class="btn btn-primary">
+                        Login @Session["UserName"]
+                    </a>
+                }
+            </div>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <div class="headline">
+                            <a class="navbar-brand" href="@Url.Action("FrontPage", "Home")">
+                                <span class="fa fa-user-md fa-2x"></span>
+                                Dr J Govender
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/Home/FrontPage">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/store/shop/products">
+                            Store
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/About">
+                            About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Contact">
+                            Contact
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End of Navigation Menu -->
+
+    @RenderBody()
+    <!--This seperates the Header from the Footer in a shared layout cshtml View -->
+    <!-- Footer Section -->
+    <footer class="footer ftco-section ftco-no-pt">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-6 col-lg">
+                    <div class="ftco-footer-widget py-4 py-md-5">
+                        <h2 class="logo"><a href="#">General Practioner</a></h2>
+                        <p>We are a doctors practice located in Shallcross. We aspire to provide our patients with the best medical care, whilst booking their appointments easily and quickly from the comforts of their own home.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-4">
+                            <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg">
+                    <div class="ftco-footer-widget ml-md-5 py-5">
+                        <h2 class="ftco-heading-2">Services</h2>
+                        <ul class="list-unstyled">
+                            <li>@*<a href="#" class="py-1 d-block">*@<span class="fa fa-check mr-3"></span>Influenza Vaccination@*</a>*@</li>
+                            <li>@*<a href="#" class="py-1 d-block">*@<span class="fa fa-check mr-3"></span>Blood Test@*</a>*@</li>
+                            <li>@*<a href="#" class="py-1 d-block">*@<span class="fa fa-check mr-3"></span>Manual Lympahtic@*</a>*@</li>
+                            <li>@*<a href="#" class="py-1 d-block">*@<span class="fa fa-check mr-3"></span>Medical Acupuncture@*</a>*@</li>
+                            <li>@*<a href="#" class="py-1 d-block">*@<span class="fa fa-check mr-3"></span>Therapeutic Exercise@*</a>*@</li>
+                            <li>@*<a href="#" class="py-1 d-block">*@<span class="fa fa-check mr-3"></span>Joint Mobilization@*</a>*@</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg">
+                    <div class="ftco-footer-widget py-4 py-md-5">
+                        <h2 class="ftco-heading-2">Contact information</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon fa fa-map-marker"></span><span class="text">37 Magaliesberg Street, Shallcross, Durban< 4079</span></li>
+                                <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">031 409 9088</span></a></li>
+                                <li><a href="mailto:cameronpeters87@gmail.com"><span class="icon fa fa-paper-plane"></span><span class="text">drgovender@medis.co.za</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg">
+                    <div class="ftco-footer-widget bg-primary p-4 py-5">
+                        <h2 class="ftco-heading-2">Business Hours</h2>
+                        <div class="opening-hours">
+                            <h4>Opening Days:</h4>
+                            <p class="pl-3">
+                                <span>Monday – Friday : 9am to 20pm</span>
+                                <span>Saturday - Sunday : 9am to 17pm</span>
+                            </p>
+                            <h4>Vacations:</h4>
+                            <p class="pl-3">
+                               
+                                <span>All Official Holidays</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | Ingen Development <i class="fa fa-heart" aria-hidden="true"></i> by <a href="Ruvern Mikaelin Naidoo" target="_blank">Ingen Development</a>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
+
+
+    <script src=@Url.Content("/Content/ThemeTemp/js/jquery.min.js")></script>
+    <script src=@Url.Content("/Content/ThemeTemp/js/jquery-migrate-3.0.1.min.js")></script>
+    <script src=@Url.Content("/Content/ThemeTemp/js/popper.min.js")></script>
+    <script src=@Url.Content("/Content/ThemeTemp/js/bootstrap.min.js")></script>
+    <script src=@Url.Content("/Content/ThemeTemp/js/jquery.easing.1.3.js")></script>
+    <script src=@Url.Content("/Content/ThemeTemp/js/jquery.waypoints.min.js")></script>
+    <script src=@Url.Content("/Content/ThemeTemp/js/jquery.stellar.min.js")></script>
+    <script src=@Url.Content("/Content/ThemeTemp/js/jquery.animateNumber.min.js")></script>
+    <script src=@Url.Content("/Content/ThemeTemp/js/bootstrap-datepicker.js")></script>
+    <script src=@Url.Content("/Content/ThemeTemp/js/jquery.timepicker.min.js")></script>
+    <script src=@Url.Content("/Content/ThemeTemp/js/owl.carousel.min.js")></script>
+    <script src=@Url.Content("/Content/ThemeTemp/js/jquery.magnific-popup.min.js")></script>
+    <script src=@Url.Content("/Content/ThemeTemp/js/scrollax.min.js")></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src=@Url.Content("/Content/ThemeTemp/js/google-map.js")></script>
+<script src=@Url.Content("/Content/ThemeTemp/js/main.js")></script>
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

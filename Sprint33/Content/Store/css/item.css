@@ -1,0 +1,28 @@
+﻿.item .item-image-container {
+    overflow: hidden;
+}
+.item .item-image {
+    -ms-transition: all 0.8s ease-in-out 0s;
+    -o-transition: all 0.8s ease-in-out 0s;
+    -webkit-transition: all 0.8s ease-in-out 0s;
+    transition: all 0.8s ease-in-out 0s;
+}
+/*
+.item .sale-item-image {
+    -ms-transition: all 0.0s ease-in-out 0s;
+    -o-transition: all 0.0s ease-in-out 0s;
+    -webkit-transition: all 0.0s ease-in-out 0s;
+    transition: all 0.0s ease-in-out 0s;
+}
+*/
+.item:hover a.text-tag {
+    right: 5px;
+}
+
+.item:hover {
+    box-shadow: 0px 0px 8px #555 /* box shadow color grey*/
+}
+
+    .item:hover .item-image {
+        transform: scale(1.2) rotate(5deg);
+    }
