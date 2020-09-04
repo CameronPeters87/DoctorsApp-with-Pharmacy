@@ -171,6 +171,17 @@
         $(function () {
 
             /*
+             * Rotate fa-play in panel on click
+             */
+
+            $(".panel-carret").click(function (e) {
+                $(this).toggleClass("pressed");
+                $(this).children("fa-play").toggleClass("fa-rotate-90");
+                e.preventDefault();
+            });
+
+
+            /*
              * Preview Selected Image
              */
 

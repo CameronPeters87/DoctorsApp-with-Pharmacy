@@ -108,6 +108,7 @@
                                                         <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
                                                             <thead>
                                                                 <tr>
+                                                                    <th></th>
                                                                     <th onclick="sortTable(0)">Name</th>
                                                                     <th onclick="sortTable(3)">Supplier Price</th>
                                                                 </tr>
@@ -116,6 +117,7 @@
                                                                 @foreach (var item in Model.ProductList)
                                                                 {
                                                                     <tr class="clickable-row" data-id="@item.Id" style="cursor:pointer;" data-dismiss="modal">
+                                                                        <td>@item.Id</td>
                                                                         <td>
                                                                             <img src="@item.ImageUrl" width="50" height="50" />
                                                                             @item.Name

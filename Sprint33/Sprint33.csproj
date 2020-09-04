@@ -195,6 +195,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Pharmacist\Controllers\CouponsController.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\CustomersController.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\DiscountController.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Areas\Pharmacist\Controllers\StockOrdersController.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\SuppliersController.cs" />
     <Compile Include="Areas\Pharmacist\Models\CategoryVM.cs" />
+    <Compile Include="Areas\Pharmacist\Models\CouponVM.cs" />
     <Compile Include="Areas\Pharmacist\Models\CustomerVM.cs" />
     <Compile Include="Areas\Pharmacist\Models\DiscountVM.cs" />
     <Compile Include="Areas\Pharmacist\Models\InStoreSaleVM.cs" />
@@ -244,6 +246,7 @@
     <Compile Include="Controllers\ReferralsController.cs" />
     <Compile Include="Controllers\Referral_v2Controller.cs" />
     <Compile Include="Extensions\Calculation.cs" />
+    <Compile Include="Extensions\CouponExtensions.cs" />
     <Compile Include="Extensions\CustomerCartExtensions.cs" />
     <Compile Include="Extensions\ICollectionExtensions.cs" />
     <Compile Include="Extensions\InStoreCartExtension.cs" />
@@ -2412,6 +2415,7 @@
     <Content Include="Areas\Store\Views\Shared\_ModalLoginPartial.cshtml" />
     <Content Include="Areas\Store\Views\Shared\_CartItemsPartial.cshtml" />
     <Content Include="Areas\Store\Views\Cart\Index.cshtml" />
+    <Content Include="Areas\Pharmacist\Views\Coupons\Index.cshtml" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - Web Deploy.pubxml" />
@@ -2934,6 +2938,7 @@
     <Folder Include="Areas\Store\Data\" />
     <Folder Include="Areas\Store\Views\Login\" />
     <Folder Include="Files\Barcodes\" />
+    <Folder Include="Files\Coupons\" />
     <Folder Include="Files\Gallery\" />
     <Folder Include="Files\Invoices\" />
   </ItemGroup>

@@ -1,0 +1,174 @@
+﻿@model Sprint33.Areas.Pharmacist.Models.CouponVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Coupons</h2>
+
+<br />
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+
+<div class="row">
+
+    <!--Add Category-->
+    <div class="col-md-6">
+        <div class="card shadow h-100 py-2">
+            <div class="card-body">
+                @using (Html.BeginForm("AddCoupon", "Coupons", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <div class="card-header py-3">
+                            <h4 class="m-0 font-weight-bold text-primary">Create a Coupon</h4>
+                        </div>
+                        <br />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", @placeholder = "Code" } })
+                                @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = "Description" })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label " for="StartDate">Start Date</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line"
+                                       data-val="true" data-val-date="The field StartDate must be a date."
+                                       data-val-required="The StartDate field is required."
+                                       id="StartDate" name="StartDate"
+                                       type="date">
+                                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label " for="EndDate">End Date</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line" data-val="true"
+                                       data-val-date="The field EndDate must be a date."
+                                       data-val-required="The EndDate field is required."
+                                       id="EndDate" name="EndDate" type="date">
+                                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label " for="DiscountRate">Discount Rate</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.DiscountRate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DiscountRate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(model => model.CategoryId, Model.CategoryDropdown, "Select Category (Optional)", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Add" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+
+    <!--List Categories-->
+    <div class="col-md-6">
+        <div class="card shadow h-100 py-2">
+            <div class="card-body">
+                @if (!Model.Coupons.Any())
+                {
+                    <h2 class="text-center">You have no coupons</h2>
+                }
+                else
+                {
+                    <div class="card-header py-3">
+                        <h4 class="m-0 font-weight-bold text-primary">Categories</h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th onclick="sortTable(0)">Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model.Coupons)
+                                {
+                                    <tr id="row-@item.Id">
+                                        <td>@Html.DisplayFor(modelItem => item.Code) </td>
+                                        <td>
+                                            <a onclick="" href="#" class="RemoveLink"
+                                               data-id="@item.Id">
+                                                <span class="fa fa-trash-alt" style="color:red"></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts {
+    <script>
+
+        $(function () {
+
+            /***************** Remove Category ********/
+
+            // Document.ready -> link up remove event handler
+
+            $(".RemoveLink").click(function () {
+                // Get the CartId from the link
+                var categoryToDelete = $(this).attr("data-id");
+                if (categoryToDelete != '') {
+                    // Perform the ajax post
+                    $.post("/Categories/RemoveCategory", { "categoryId": categoryToDelete },
+                        function (data) {
+                            //Successful requests get here
+                            //Update the page elements
+                            $('#row-' + data).fadeOut('slow');
+                        });
+                }
+            });
+
+            //////////////////////////////////////////////////////////////////////////////
+        });
+    </script>
+}
