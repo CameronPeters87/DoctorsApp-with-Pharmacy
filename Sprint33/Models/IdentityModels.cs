@@ -55,6 +55,7 @@ namespace Sprint33.Models
         public DbSet<CustomerCart> CustomerCarts { get; set; }
         public DbSet<CustomerOrder> CustomerOrders { get; set; }
         public DbSet<Coupon> Coupons { get; set; }
+        public DbSet<Billing> Billings { get; set; }
 
         public static ApplicationDbContext Create()
         {

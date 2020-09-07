@@ -4,6 +4,8 @@ using Sprint33.Extensions;
 using Sprint33.Models;
 using Sprint33.PharmacyEntities;
 using System;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -14,11 +16,9 @@ namespace Sprint33.Areas.Store.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Store/Cart
-        public ActionResult Index()
+        public ActionResult Summary(int id)
         {
-            var patientId = Convert.ToInt32(Session["id"]);
-
-            var currentCart = db.CustomerCarts.GetCurrentCartItems(patientId);
+            var currentCart = db.CustomerCarts.GetCurrentCartItems(id);
 
             var model = new CartSummaryVM();
 
@@ -39,7 +39,7 @@ namespace Sprint33.Areas.Store.Controllers
             model.VatTotal = currentCart.GetTotalTax();
             model.SubTotal = model.TotalCost - model.VatTotal;
 
-            return View(model);
+            return View("Index", model);
         }
 
         [HttpPost]
@@ -84,16 +84,48 @@ namespace Sprint33.Areas.Store.Controllers
             return "Success";
         }
 
-        [HttpPost]
-        public ActionResult CreateOrder()
+        public async Task<ActionResult> CreateOrder()
         {
-            return View();
-        }
+            var patientId = Convert.ToInt32(Session["id"]);
+            var patient = db.Patients.Find(patientId);
 
-        public ActionResult Checkout()
-        {
+            var currentCart = db.CustomerCarts.GetCurrentCartItems(patientId);
+            var defaultStatus = db.OrderStatuses.Where(s => s.Name == "Pending Payment").FirstOrDefault();
 
-            return View();
+            var totalCost = currentCart.GetTotalPrice();
+            var tax = currentCart.GetTotalTax();
+
+            await db.Billings.CreateBilling(db, patient);
+
+            var lastBilling = db.Billings.GetLastBilling();
+
+            db.CustomerOrders.Add(new CustomerOrder
+            {
+                Customer = patient,
+                CustomerId = patientId,
+                OrderStatus = defaultStatus,
+                OrderStatusId = defaultStatus.Id,
+                OrderDate = DateTime.Today,
+                TotalCost = totalCost,
+                TotalTax = tax,
+                SubTotal = totalCost - tax,
+                Billing = lastBilling,
+                BillingId = lastBilling.Id
+            });
+
+            await db.SaveChangesAsync();
+
+            var lastOrder = db.CustomerOrders.GetLastOrder();
+
+            foreach (var item in currentCart)
+            {
+                item.CustomerOrderId = lastOrder.Id;
+                db.Entry(item).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
+
+            return Redirect(string.Format("/store/checkout/index/{0}/{1}",
+                lastOrder.Id, lastOrder.CustomerId));
         }
     }
 }

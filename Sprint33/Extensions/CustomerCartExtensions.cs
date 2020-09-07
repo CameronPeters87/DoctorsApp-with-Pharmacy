@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Sprint33.Extensions
 {
@@ -11,6 +12,13 @@ namespace Sprint33.Extensions
             int customerId)
         {
             return dto.Where(c => c.CustomerOrderId == null &&
+            c.CustomerId == customerId).ToList();
+        }
+
+        public static IEnumerable<CustomerCart> GetCartItemsFromOrder(this IDbSet<CustomerCart> dto,
+            int customerId, int orderId)
+        {
+            return dto.Where(c => c.CustomerOrderId == orderId &&
             c.CustomerId == customerId).ToList();
         }
 
@@ -24,6 +32,11 @@ namespace Sprint33.Extensions
         {
             var result = currentCart.Select(c => c.VatAmount).Sum();
             return result;
+        }
+
+        public static async Task UpdateCurrentCart(this IDbSet<CustomerCart> dto,
+            int orderId, int patientId, IEnumerable<CustomerCart> currentCart)
+        {
         }
     }
 }

@@ -14,6 +14,14 @@ namespace Sprint33.Areas.Store
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+            context.MapRoute("Checkout",
+            "Store/Checkout/{action}/{orderId}/{customerId}",
+            new
+            {
+                controller = "Checkout",
+                action = "Index"
+            });
+
             context.MapRoute("Shop",
             "Store/Shop/{action}/{slug}",
             new
@@ -22,8 +30,6 @@ namespace Sprint33.Areas.Store
                 action = "Index",
                 slug = UrlParameter.Optional
             });
-
-
 
             context.MapRoute(
                 "Store_default",

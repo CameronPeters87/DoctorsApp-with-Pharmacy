@@ -66,18 +66,6 @@ namespace Sprint33.Areas.Store.Controllers
             return View("ProductDetails", model);
         }
 
-        [ActionName("cart")]
-        public ActionResult Cart()
-        {
-            return View("Cart");
-        }
-
-        [ActionName("checkout")]
-        public ActionResult Checkout()
-        {
-            return View("Checkout");
-        }
-
         public ActionResult CartItemsPartial()
         {
             var patientId = Convert.ToInt32(Session["id"]);
@@ -87,7 +75,7 @@ namespace Sprint33.Areas.Store.Controllers
 
             var model = new CartItemsVM
             {
-                LinkToSummary = "/store/cart/",
+                LinkToSummary = "/store/cart/summary/" + patientId.ToString(),
                 NumberOfItemsInCart = currentCart.Count()
             };
 
