@@ -82,5 +82,13 @@ namespace Sprint33.Areas.Store.Controllers
 
             return "Failed";
         }
+
+        [HttpPost]
+        public string Confirm(Confirm model)
+        {
+
+            return "Success";
+        }
+
     }
 }

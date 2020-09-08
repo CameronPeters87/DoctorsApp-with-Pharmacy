@@ -80,7 +80,7 @@
                     <div class="col-md-12">
                         <h2 class="h3 mb-3 text-black">Your Order</h2>
                         <div class="p-3 p-lg-5 border">
-                            <table class="table site-block-order-table mb-5">
+                            <table class="table site-block-order-table mb-3">
                                 <thead>
                                     <th>Product</th>
                                     <th>Total</th>
@@ -111,11 +111,30 @@
                                         </tr>
                                     </tbody>
                             </table>
+                            
+                            <div class="form-group mb-5">
+                                <label class="control-label " for="PaymentMethod">Payment Method</label>
+                                <div class="col-md-12">
+                                    @Html.DropDownListFor(model => model.PaymentMethod,
+                                        new[] { new SelectListItem { Text = "Cash", Value = "Cash" },
+                                                new SelectListItem { Text = "Card", Value = "Card"} },
+                                        "Select Payment Method",
+                                        new { @class = "form-control PaymentMethod" })
+                                    @Html.ValidationMessageFor(model => model.PaymentMethod, "", new { @class = "text-danger" })
+                                    <span class="payment-method-validation text-danger"></span>
+                                </div>
+                            </div>
+                            
                             <div class="form-group">
-                                <button class="btn btn-primary btn-lg btn-block" onclick="window.location='thankyou.html'">
+                                <button class="btn btn-primary btn-lg btn-block btn-order"
+                                        data-orderId="@Model.CustomerOrder.Id" 
+                                        data-billingId="@Model.CustomerOrder.BillingId">
                                     Place
                                     Order
                                 </button>
+                                <span class="loader d-none">
+                                    <img src="~/Content/ajax-loader.gif" />
+                                </span>
                             </div>
 
                         </div>

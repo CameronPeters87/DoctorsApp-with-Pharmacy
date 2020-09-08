@@ -314,6 +314,7 @@
     </Content>
     <Content Include="Areas\Store\Scripts\AddToCart.js" />
     <Content Include="Areas\Store\Scripts\ApplyCoupon.js" />
+    <Content Include="Areas\Store\Scripts\PlaceOrder.js" />
     <Content Include="Content\62225351-tablets-isolated-on-a-white-background-reflection-of-pills-on-a-glass-medicine-s-background-pharmacy.jpg" />
     <Content Include="Content\ajax-loader.gif" />
     <Content Include="Content\bootstrap-lumen.css" />

@@ -21,4 +21,21 @@ namespace Sprint33.Areas.Store.Models
         public string CouponCode { get; set; }
         public float CouponDiscount { get; set; }
     }
+
+    public class Confirm
+    {
+        public int BillingId { get; set; }
+
+        public string FirstName { get; set; }
+        public string Surname { get; set; }
+
+        public string Address { get; set; }
+        public string ZipCode { get; set; }
+        public string Country { get; set; }
+
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+
+        public int OrderId { get; set; }
+    }
 }
