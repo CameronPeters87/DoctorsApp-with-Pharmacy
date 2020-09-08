@@ -10,5 +10,14 @@ namespace Sprint33.Extensions
         {
             return orders.OrderByDescending(o => o.Id).FirstOrDefault();
         }
+
+        public static bool IsCouponNull(this CustomerOrder order)
+        {
+            if (order.CouponId == null)
+                return true;
+            else
+                return false;
+        }
+
     }
 }

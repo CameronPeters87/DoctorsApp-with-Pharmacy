@@ -17,6 +17,8 @@ namespace Sprint33.Areas.Store.Models
         public string PaymentMethod { get; set; }
 
         // Coupon Code
+        public int? CouponId { get; set; }
         public string CouponCode { get; set; }
+        public float CouponDiscount { get; set; }
     }
 }

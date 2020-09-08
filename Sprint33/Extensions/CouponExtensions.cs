@@ -33,10 +33,30 @@ namespace Sprint33.Extensions
         {
             return coupon.OrderByDescending(c => c.Id).FirstOrDefault();
         }
+        public static Coupon GetCouponByCode(this IDbSet<Coupon> coupon, string code)
+        {
+            return coupon.Where(c => c.Code == code).FirstOrDefault();
+        }
 
         public static bool IsCodeUnique(this IDbSet<Coupon> coupon, string code)
         {
             return !(coupon.Any(c => c.Code == code));
+        }
+
+        public static bool IsCouponCodeEnteredValid(this IDbSet<Coupon> coupon,
+            string code)
+        {
+            string actual = code.ToUpper();
+
+            var model = coupon.Where(c => c.Code == actual &&
+                c.EndDate <= DateTime.Today).FirstOrDefault();
+
+            if (model == null)
+            {
+                return false;
+            }
+            else
+                return true;
         }
     }
 }

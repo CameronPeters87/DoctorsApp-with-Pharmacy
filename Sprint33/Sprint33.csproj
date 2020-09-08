@@ -313,6 +313,7 @@
       <DependentUpon>aspnet-Sprint33-20191014084131.mdf</DependentUpon>
     </Content>
     <Content Include="Areas\Store\Scripts\AddToCart.js" />
+    <Content Include="Areas\Store\Scripts\ApplyCoupon.js" />
     <Content Include="Content\62225351-tablets-isolated-on-a-white-background-reflection-of-pills-on-a-glass-medicine-s-background-pharmacy.jpg" />
     <Content Include="Content\ajax-loader.gif" />
     <Content Include="Content\bootstrap-lumen.css" />
@@ -2424,6 +2425,7 @@
     <Content Include="Areas\Pharmacist\Views\Coupons\Index.cshtml" />
     <Content Include="Areas\Store\Views\Test\CheckoutSecond.cshtml" />
     <Content Include="Areas\Store\Views\Checkout\Index.cshtml" />
+    <Content Include="Areas\Store\Views\Shared\_ApplyCouponPartial.cshtml" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - Web Deploy.pubxml" />
