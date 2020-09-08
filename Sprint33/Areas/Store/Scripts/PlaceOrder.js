@@ -1,5 +1,19 @@
 ﻿$(function () {
 
+    $('input').blur(function()
+    {
+          if( !this.value ) {
+              $(this).css("border-color", "red");
+              $('.btn-order').attr("disabled", "disabled");
+              $('.btn-order').addClass("cust-disabled");
+          }
+        else {
+              $(this).css("border-color", "#595959");
+              $('.btn-order').removeAttr("disabled");
+              $('.btn-order').removeClass("cust-disabled");
+          }
+    });
+
     $('.btn-order').click(
         onPlaceOrderClick);
 
@@ -7,6 +21,7 @@
 
         $("span.loader").removeClass("d-none");
 
+        
         var selectedPaymentMethod = $("select.PaymentMethod").children("option:selected").val();
         
         var c_fname = $("#c_fname").val();
@@ -37,10 +52,14 @@
                 ZipCode: c_postal_zip,
                 Email: c_email_address,
                 PhoneNumber: c_phone,
-                OrderId: orderId
-
+                OrderId: orderId,
+                PaymentMethod: selectedPaymentMethod
             }, function(data) {
                 var message = data;
+
+                if(message == "Failed") {
+                    $("input.billing").css("border-color", "red");
+                }
                 alert(message);
                 $("span.loader").addClass("d-none");
 
