@@ -9849,10 +9849,12 @@ th:hover {
 button.btn.btn-primary.btn-lg.btn-block.btn-order.cust-disabled {
     background: rgba(01,210,142,0.3);
     cursor: default;
+    color:white;
 }
 
 
     button.btn.btn-primary.btn-lg.btn-block.btn-order.cust-disabled:hover {
         background: rgba(01,210,142,0.3);
         cursor: default;
+        color:white;
     }

@@ -14,7 +14,7 @@
                     <div class="form-group row">
                         <div class="col-md-6">
                             <label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" 
+                            <input type="text" class="form-control"
                                    id="c_fname" value="@Model.CustomerOrder.Billing.FirstName"
                                    name="@Model.CustomerOrder.Billing.FirstName">
                         </div>
@@ -28,7 +28,7 @@
                     <div class="form-group row">
                         <div class="col-md-12">
                             <label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="c_address" 
+                            <input type="text" class="form-control" id="c_address"
                                    name="c_address" placeholder="Street address"
                                    value="@Model.CustomerOrder.Billing.Street_Number @Model.CustomerOrder.Billing.Route">
                         </div>
@@ -37,13 +37,13 @@
                     <div class="form-group row">
                         <div class="col-md-6">
                             <label for="c_state_country" class="text-black">State / Country <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" 
+                            <input type="text" class="form-control"
                                    id="c_state_country" name="c_state_country"
                                    value="@Model.CustomerOrder.Billing.Country">
                         </div>
                         <div class="col-md-6">
                             <label for="c_postal_zip" class="text-black">Posta / Zip <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="c_postal_zip" 
+                            <input type="text" class="form-control" id="c_postal_zip"
                                    name="c_postal_zip" value="@Model.CustomerOrder.Billing.ZipCode">
                         </div>
                     </div>
@@ -51,21 +51,21 @@
                     <div class="form-group row mb-5">
                         <div class="col-md-6">
                             <label for="c_email_address" class="text-black">Email Address <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" 
+                            <input type="text" class="form-control"
                                    id="c_email_address" name="c_email_address"
                                    value="@Model.CustomerOrder.Billing.Email">
                         </div>
                         <div class="col-md-6">
                             <label for="c_phone" class="text-black">Phone <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" 
-                                   id="c_phone" name="c_phone" value="@Model.CustomerOrder.Billing.PhoneNumber" 
+                            <input type="text" class="form-control"
+                                   id="c_phone" name="c_phone" value="@Model.CustomerOrder.Billing.PhoneNumber"
                                    placeholder="Phone Number">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="c_order_notes" class="text-black">Order Notes</label>
-                        <textarea name="c_order_notes" id="c_order_notes" 
+                        <textarea name="c_order_notes" id="c_order_notes"
                                   cols="30" rows="5" class="form-control"
                                   placeholder="Write your notes here..."></textarea>
                     </div>
@@ -73,7 +73,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                
+
                 @Html.Partial("_ApplyCouponPartial", Model.CustomerOrder)
 
                 <div class="row mb-5">
@@ -82,36 +82,36 @@
                         <div class="p-3 p-lg-5 border">
                             <table class="table site-block-order-table mb-3">
                                 <thead>
-                                    <th>Product</th>
-                                    <th>Total</th>
+                                <th>Product</th>
+                                <th>Total</th>
                                 </thead>
-                                    <tbody>
-                                        @foreach (var item in Model.CartItems)
-                                        {
-                                            <tr>
-                                                <td>@item.Name <strong class="mx-2">x</strong> @item.Quantity</td>
-                                                <td>R@(item.Price)</td>
-                                            </tr>
-                                        }
+                                <tbody>
+                                    @foreach (var item in Model.CartItems)
+                                    {
                                         <tr>
-                                            <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
-                                            <td class="text-black">R@(Model.CustomerOrder.SubTotal)</td>
+                                            <td>@item.Name <strong class="mx-2">x</strong> @item.Quantity</td>
+                                            <td>R@(item.Price)</td>
                                         </tr>
-                                        <tr>
-                                            <td class="text-black font-weight-bold"><strong>Order Tax</strong></td>
-                                            <td class="text-black font-weight-bold"><strong>R@(Model.CustomerOrder.TotalTax)</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-black font-weight-bold"><strong>Coupon</strong></td>
-                                            <td class="text-black font-weight-bold"><strong>@Model.CouponCode</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
-                                            <td class="text-black font-weight-bold"><strong>R@(Model.CustomerOrder.TotalCost)</strong></td>
-                                        </tr>
-                                    </tbody>
+                                    }
+                                    <tr>
+                                        <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
+                                        <td class="text-black">R@(Model.CustomerOrder.SubTotal)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-black font-weight-bold"><strong>Order Tax</strong></td>
+                                        <td class="text-black font-weight-bold"><strong>R@(Model.CustomerOrder.TotalTax)</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-black font-weight-bold"><strong>Coupon</strong></td>
+                                        <td class="text-black font-weight-bold"><strong>@Model.CouponCode</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                                        <td class="text-black font-weight-bold"><strong>R@(Model.CustomerOrder.TotalCost)</strong></td>
+                                    </tr>
+                                </tbody>
                             </table>
-                            
+
                             <div class="form-group mb-5">
                                 <label class="control-label " for="PaymentMethod">Payment Method</label>
                                 <div class="col-md-12">
@@ -124,10 +124,10 @@
                                     <span class="payment-method-validation text-danger"></span>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <button class="btn btn-primary btn-lg btn-block btn-order"
-                                        data-orderId="@Model.CustomerOrder.Id" 
+                                        data-orderId="@Model.CustomerOrder.Id"
                                         data-billingId="@Model.CustomerOrder.BillingId">
                                     Place
                                     Order
@@ -142,6 +142,14 @@
                 </div>
 
             </div>
+        </div>
+
+        <div class="hidden">
+            <form action="https://secure.paygate.co.za/payweb3/process.trans" method="POST">
+                <input id="PAY_REQUEST_ID" name="PAY_REQUEST_ID" type="hidden" />
+                <input id="CHECKSUM" name="CHECKSUM" type="hidden" />
+                <input id="REDIRECT" type="submit" />
+            </form>
         </div>
         <!-- </form> -->
     </div>
