@@ -315,6 +315,7 @@
     <Content Include="Areas\Store\Scripts\AddToCart.js" />
     <Content Include="Areas\Store\Scripts\ApplyCoupon.js" />
     <Content Include="Areas\Store\Scripts\ConfirmOrder.js" />
+    <Content Include="Areas\Store\Scripts\LiveSearch.js" />
     <Content Include="Content\62225351-tablets-isolated-on-a-white-background-reflection-of-pills-on-a-glass-medicine-s-background-pharmacy.jpg" />
     <Content Include="Content\ajax-loader.gif" />
     <Content Include="Content\bootstrap-lumen.css" />
@@ -2007,6 +2008,7 @@
     <Content Include="Content\Store\css\cart.css" />
     <Content Include="Content\Store\css\item.css" />
     <Content Include="Content\Store\css\jquery-ui.css" />
+    <Content Include="Content\Store\css\LiveSearch.css" />
     <Content Include="Content\Store\css\magnific-popup.css" />
     <Content Include="Content\Store\css\owl.carousel.min.css" />
     <Content Include="Content\Store\css\owl.theme.default.min.css" />
@@ -2427,6 +2429,7 @@
     <Content Include="Areas\Store\Views\Test\CheckoutSecond.cshtml" />
     <Content Include="Areas\Store\Views\Checkout\Index.cshtml" />
     <Content Include="Areas\Store\Views\Shared\_ApplyCouponPartial.cshtml" />
+    <Content Include="Areas\Store\Views\Shared\_SearchProductsPartial.cshtml" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - Web Deploy.pubxml" />
@@ -2943,6 +2946,7 @@
     <Content Include="Views\Prescriptions\ViewPrescription.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_CartItemsPartial.cshtml" />
+    <Content Include="Views\Patients1\PharmacyOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Pharmacist\Data\" />

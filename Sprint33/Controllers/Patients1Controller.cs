@@ -253,5 +253,13 @@ namespace Sprint33.Controllers
             return View(patient);
         }
         //End of Admin side//
+
+        public async Task<ActionResult> PharmacyOrders(int patientId)
+        {
+            var model = await db.CustomerOrders.Where(o => o.CustomerId == patientId)
+                .ToListAsync();
+
+            return View(model);
+        }
     }
 }

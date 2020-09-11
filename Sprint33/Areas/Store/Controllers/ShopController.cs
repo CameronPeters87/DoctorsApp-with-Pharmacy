@@ -4,6 +4,7 @@ using Sprint33.Areas.Store.Models;
 using Sprint33.Extensions;
 using Sprint33.Models;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,6 +38,28 @@ namespace Sprint33.Areas.Store.Controllers
             ViewBag.OnePageOfProducts = onePageOfProducts;
 
             return View("Main", model);
+        }
+
+        public JsonResult LiveSearch(string search)
+        {
+
+            List<ProductContentVM> products = new List<ProductContentVM>();
+
+            products = (from p in db.Products
+                        select new ProductContentVM
+                        {
+                            Id = p.Id,
+                            ImageUrl = p.ImageUrl,
+                            Name = p.Name,
+                            Price = p.SellingPrice,
+                            IsOnSale = p.IsOnSale,
+                            DiscountedPrice = p.DiscountedPrice,
+                            ProductLink = "/store/shop/product-details/" + p.Slug
+                        }).ToList();
+
+            var model = products.Where(p => p.Name.Contains(search)).ToList();
+
+            return Json(model);
         }
 
         [ActionName("product-details")]

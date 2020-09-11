@@ -34,20 +34,23 @@
     </a>
 </div>
 
-
 <div class="site-section">
 
     <div class="container">
         <div class="row">
             @*<div class="col-lg-6">
-                    <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
-                    <div id="slider-range" class="border-primary"></div>
-                    <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
-                </div>*@
+            <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
+            <div id="slider-range" class="border-primary"></div>
+            <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
+        </div>*@
+            <div class="col-md-12">
+                @Html.Partial("_SearchProductsPartial")
+            </div>
         </div>
+        
+        
 
         <div class="row">
-
             <!--Sidebar-->
             <div class="col-lg-3">
                 <h1 class="my-4">Filter By</h1>

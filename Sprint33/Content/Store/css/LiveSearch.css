@@ -1,0 +1,46 @@
+﻿
+ul#livesearchul {
+    position: absolute;
+    background: #222;
+    /*    right: -10px;*/
+    /*    top: 60px;*/
+/*    padding:10px;*/
+/*    padding-left: 10px;
+    padding-right: 0;
+    padding-bottom: 10px;
+    padding-top: 10px;*/
+    z-index: 50;
+    width: 20%;
+}
+
+    ul#livesearchul li.close
+    {
+        position: absolute;
+        color: white;
+        opacity: 1 !important;
+        right: 0px;
+        list-style: none;
+        bottom: 0;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    ul#livesearchul span.price {
+        position:absolute;
+        right: 0;
+        margin-right: 5px;
+        margin-top: 30px;
+        opacity: 1 !important;
+        list-style: none;
+        z-index: 10;
+    }
+
+input#searchtext {
+    background-image: url(/Content/PharmacistTemp/img/searchicon.png);
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 5px 0px 6px 40px;
+    border: 1px solid #ddd;
+}
