@@ -1,0 +1,28 @@
+﻿@model Sprint33.Areas.Store.Models.ProductContentVM
+
+<div class="col-sm-6 col-md-6 col-lg-4 text-center item mb-4">
+    @if (Model.IsOnSale)
+    {
+        <span class="sale-item">
+            <img class="sale-item-image" src="~/Content/Store/images/onsale.png" alt="Image" width="85" height="85">
+        </span>
+    }
+    <div class="item-image-container">
+        <a href="@Model.ProductLink">
+            <img class="item-image" src="@Model.ImageUrl" width="200" height="200" alt="Image">
+        </a>
+    </div>
+    <h5 class="text-dark" style="padding:10px">
+        <a href="@Model.ProductLink">@Model.Name</a>
+    </h5>
+
+    Price
+    @if (Model.IsOnSale)
+    {
+        <h6 class="price"><del>R @Model.Price</del> &mdash; R @Model.DiscountedPrice</h6>
+    }
+    else
+    {
+        <h6 class="price">R @Model.Price</h6>
+    }
+</div>

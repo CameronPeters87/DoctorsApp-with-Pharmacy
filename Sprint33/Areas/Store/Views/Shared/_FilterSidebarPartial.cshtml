@@ -1,0 +1,76 @@
+﻿@model Sprint33.Areas.Store.Models.MainVM
+
+<h1 class="my-4 text-center">Filter By</h1>
+
+@*<button type="button" class="btn btn-secondary btn-md dropdown-toggle px-4" id="dropdownMenuReference"
+            data-toggle="dropdown">
+        Reference
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+        <a class="dropdown-item" href="#">Relevance</a>
+        <a class="dropdown-item" href="#">Name, A to Z</a>
+        <a class="dropdown-item" href="#">Name, Z to A</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Price, low to high</a>
+        <a class="dropdown-item" href="#">Price, high to low</a>
+    </div>*@
+
+<div class="card">
+    <article class="card-group-item">
+        <header class="card-header bg-info">
+            <h5 class="title text-center text-white">Category</h5>
+        </header>
+        <div class="filter-content">
+            <div class="card-body">
+                <label class="form-check">
+                    <input class="form-check-input cat-rad" 
+                           id="SelectedCategory" 
+                           name="SelectedCategory" 
+                           type="radio" value="" 
+                           style="border-color: rgb(89, 89, 89);">
+                    <span class="form-check-label">
+                        All
+                    </span>
+                </label>
+                @foreach (var item in Model.Categories)
+                {
+                    <label class="form-check">
+                        @Html.RadioButtonFor(model => model.SelectedCategory,
+                            item.Name, new { @class = "form-check-input cat-rad" })
+                        <span class="form-check-label">
+                            @item.Name
+                        </span>
+                    </label>
+                }
+            </div> <!-- card-body.// -->
+        </div>
+    </article> <!-- card-group-item.// -->
+
+    <article class="card-group-item">
+        <header class="card-header">
+            <h6 class="title">Choose type </h6>
+        </header>
+        <div class="filter-content">
+            <div class="card-body">
+                <label class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadio" value="">
+                    <span class="form-check-label">
+                        First hand items
+                    </span>
+                </label>
+                <label class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadio" value="">
+                    <span class="form-check-label">
+                        Brand new items
+                    </span>
+                </label>
+                <label class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadio" value="">
+                    <span class="form-check-label">
+                        Some other option
+                    </span>
+                </label>
+            </div> <!-- card-body.// -->
+        </div>
+    </article> <!-- card-group-item.// -->
+</div> <!-- card.// -->

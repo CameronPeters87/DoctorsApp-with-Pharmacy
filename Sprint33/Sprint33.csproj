@@ -219,7 +219,6 @@
     <Compile Include="Areas\Store\Controllers\CheckoutController.cs" />
     <Compile Include="Areas\Store\Controllers\LoginController.cs" />
     <Compile Include="Areas\Store\Controllers\ShopController.cs" />
-    <Compile Include="Areas\Store\Controllers\TestController.cs" />
     <Compile Include="Areas\Store\Models\CartItemsVM.cs" />
     <Compile Include="Areas\Store\Models\CartSummaryVM.cs" />
     <Compile Include="Areas\Store\Models\Checkout.cs" />
@@ -315,6 +314,7 @@
     <Content Include="Areas\Store\Scripts\AddToCart.js" />
     <Content Include="Areas\Store\Scripts\ApplyCoupon.js" />
     <Content Include="Areas\Store\Scripts\ConfirmOrder.js" />
+    <Content Include="Areas\Store\Scripts\Filters.js" />
     <Content Include="Areas\Store\Scripts\LiveSearch.js" />
     <Content Include="Content\62225351-tablets-isolated-on-a-white-background-reflection-of-pills-on-a-glass-medicine-s-background-pharmacy.jpg" />
     <Content Include="Content\ajax-loader.gif" />
@@ -2409,7 +2409,7 @@
     <Content Include="Areas\Pharmacist\Views\InStoreSales\Receipt.cshtml" />
     <Content Include="Areas\Pharmacist\Views\Customers\Index.cshtml" />
     <Content Include="Areas\Store\Views\web.config" />
-    <Content Include="Areas\Store\Views\Shop\Main.cshtml" />
+    <Content Include="Areas\Store\Views\Shop\Index.cshtml" />
     <Content Include="Content\Store\css\bootstrap.min.css.map" />
     <Content Include="Content\Store\images\.DS_Store" />
     <Content Include="Areas\Store\Views\Shared\_LayoutStore.cshtml" />
@@ -2419,17 +2419,16 @@
     <Content Include="Content\Store\fonts\icomoon\selection.json" />
     <Content Include="Areas\Pharmacist\Views\Discount\Index.cshtml" />
     <Content Include="Areas\Pharmacist\Views\InStoreSales\SalesReport.cshtml" />
-    <Content Include="Areas\Store\Views\Test\Cart.cshtml" />
-    <Content Include="Areas\Store\Views\Test\Checkout.cshtml" />
     <Content Include="Areas\Store\Views\Shop\ProductDetails.cshtml" />
     <Content Include="Areas\Store\Views\Shared\_ModalLoginPartial.cshtml" />
     <Content Include="Areas\Store\Views\Shared\_CartItemsPartial.cshtml" />
     <Content Include="Areas\Store\Views\Cart\Index.cshtml" />
     <Content Include="Areas\Pharmacist\Views\Coupons\Index.cshtml" />
-    <Content Include="Areas\Store\Views\Test\CheckoutSecond.cshtml" />
     <Content Include="Areas\Store\Views\Checkout\Index.cshtml" />
     <Content Include="Areas\Store\Views\Shared\_ApplyCouponPartial.cshtml" />
     <Content Include="Areas\Store\Views\Shared\_SearchProductsPartial.cshtml" />
+    <Content Include="Areas\Store\Views\Shared\_FilterSidebarPartial.cshtml" />
+    <Content Include="Areas\Store\Views\Shared\_ProductsPartial.cshtml" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - Web Deploy.pubxml" />

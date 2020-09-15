@@ -2,13 +2,6 @@
 ul#livesearchul {
     position: absolute;
     background: #222;
-    /*    right: -10px;*/
-    /*    top: 60px;*/
-/*    padding:10px;*/
-/*    padding-left: 10px;
-    padding-right: 0;
-    padding-bottom: 10px;
-    padding-top: 10px;*/
     z-index: 50;
     width: 20%;
 }

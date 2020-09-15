@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Sprint33.PharmacyEntities;
+using System.Collections.Generic;
 
 namespace Sprint33.Areas.Store.Models
 {
     public class MainVM
     {
         public IEnumerable<ProductContentVM> ProductContents { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
+        public string SelectedCategory { get; set; }
     }
 
     public class ProductContentVM

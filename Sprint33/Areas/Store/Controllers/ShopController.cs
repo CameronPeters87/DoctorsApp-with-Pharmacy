@@ -31,13 +31,14 @@ namespace Sprint33.Areas.Store.Controllers
                                              IsOnSale = p.IsOnSale,
                                              DiscountedPrice = p.DiscountedPrice,
                                              ProductLink = "/store/shop/product-details/" + p.Slug
-                                         }).ToListAsync()
+                                         }).ToListAsync(),
+                Categories = db.Categories.ToList()
             };
 
             var onePageOfProducts = model.ProductContents.ToPagedList(pageNumber, 5);
             ViewBag.OnePageOfProducts = onePageOfProducts;
 
-            return View("Main", model);
+            return View(model);
         }
 
         public JsonResult LiveSearch(string search)
