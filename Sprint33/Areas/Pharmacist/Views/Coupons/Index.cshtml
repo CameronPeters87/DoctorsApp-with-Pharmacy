@@ -81,12 +81,6 @@
                                 @Html.ValidationMessageFor(model => model.DiscountRate, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-8">
-                                @Html.DropDownListFor(model => model.CategoryId, Model.CategoryDropdown, "Select Category (Optional)", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
@@ -118,6 +112,9 @@
                             <thead>
                                 <tr>
                                     <th onclick="sortTable(0)">Name</th>
+                                    <th>Discount</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -127,6 +124,9 @@
                                 {
                                     <tr id="row-@item.Id">
                                         <td>@Html.DisplayFor(modelItem => item.Code) </td>
+                                        <td>@(item.DiscountRate)<span>&#37;</span></td>
+                                        <td>@item.StartDateString</td>
+                                        <td>@item.EndDateString</td>
                                         <td>
                                             <a onclick="" href="#" class="RemoveLink"
                                                data-id="@item.Id">

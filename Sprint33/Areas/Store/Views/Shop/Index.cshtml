@@ -83,11 +83,11 @@
                             <!--Price-->
                             @if (item.IsOnSale)
                             {
-                                <h6 class="price"><del>R @item.Price</del> &mdash; R @item.DiscountedPrice</h6>
+                                <h6 class="price"><del>R@(string.Format("{0:0.00}", item.Price))</del> &mdash; R@(string.Format("{0:0.00}", item.DiscountedPrice))</h6>
                             }
                             else
                             {
-                                <h6 class="price">R @item.Price</h6>
+                                <h6 class="price">R@(string.Format("{0:0.00}", item.Price))</h6>
                             }
                         </div>
                     }

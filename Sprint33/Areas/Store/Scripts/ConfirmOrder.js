@@ -46,7 +46,7 @@
             {
                 BillingId: billingId,
                 FirstName: c_fname,
-                Surname: c_fname,
+                Surname: c_lname,
                 Address: c_address,
                 Country: c_state_country,
                 ZipCode: c_postal_zip,
@@ -88,15 +88,10 @@
                             }
                             else {
                                 if (selectedPaymentMethod == "Cash") {
-
+                                    
                                 }
                                 else {
-
-                                    //The Pay button Requests a resource from CheckoutController calling a GetRequest ActionResult Method.
-                                    //$.get("/store/checkout/getrequest")
-                                    //    .done(data => success(data))
-                                    //    .fail(err => error(err));
-                                    $.get("/store/checkout/getrequest", { orderId: orderId })
+                                    $.get("/store/pay/getrequest", { orderId: orderId })
                                         .done(data => success(data))
                                         .fail(err => error(err));
 

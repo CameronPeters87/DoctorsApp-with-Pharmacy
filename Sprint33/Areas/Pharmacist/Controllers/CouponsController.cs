@@ -27,8 +27,6 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 .Select(c => new CouponItem(c))
                 .ToList();
 
-            model.CategoryDropdown = new SelectList(db.Categories.ToList(), "Id", "Name");
-
             return View(model);
         }
 
@@ -37,7 +35,6 @@ namespace Sprint33.Areas.Pharmacist.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.CategoryDropdown = new SelectList(db.Categories.ToList(), "Id", "Name");
                 TempData["Error"] = "Something happened!";
                 return RedirectToAction("index");
             }
@@ -55,14 +52,6 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             {
                 TempData["Error"] = "Coupon Code already exists";
                 return RedirectToAction("index");
-            }
-
-            var catId_is_null = model.IsCategoryIdEmpty();
-
-            Category category;
-            if (model.CategoryId != null)
-            {
-                category = db.Categories.Find(model.CategoryId);
             }
 
             #region Generating QR
@@ -96,7 +85,6 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 EndDate = model.EndDate,
                 DiscountRate = model.DiscountRate,
                 QRcodeURL = "/Files/Coupons/" + code_upper + ".png",
-                CategoryId = catId_is_null ? null : model.CategoryId
             });
 
             await db.SaveChangesAsync();

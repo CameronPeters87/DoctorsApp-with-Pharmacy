@@ -2,7 +2,6 @@
 using Sprint33.PharmacyEntities;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Sprint33.Extensions
 {
@@ -13,7 +12,7 @@ namespace Sprint33.Extensions
             return billings.OrderByDescending(b => b.Id).FirstOrDefault();
         }
 
-        public static async Task CreateBilling(this IDbSet<Billing> billings,
+        public static void CreateBilling(this IDbSet<Billing> billings,
             ApplicationDbContext db, Patient patient)
         {
             db.Billings.Add(new Billing
@@ -30,7 +29,7 @@ namespace Sprint33.Extensions
                 ZipCode = patient.Address.ZipCode
             });
 
-            await db.SaveChangesAsync();
+            db.SaveChanges();
         }
     }
 }

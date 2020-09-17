@@ -3,9 +3,9 @@ using Sprint33.Areas.Store.Models;
 using Sprint33.Extensions;
 using Sprint33.Models;
 using Sprint33.PharmacyEntities;
+using Sprint33.Services;
+using Sprint33.Services.Interfaces;
 using System;
-using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -14,6 +14,7 @@ namespace Sprint33.Areas.Store.Controllers
     public class CartController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private ICustomerOrderRepository customerOrderRepository = new CustomerOrderRepository();
 
         // GET: Store/Cart
         public ActionResult Summary(int id)
@@ -84,48 +85,15 @@ namespace Sprint33.Areas.Store.Controllers
             return "Success";
         }
 
-        public async Task<ActionResult> CreateOrder()
+        public ActionResult CreateOrder()
         {
             var patientId = Convert.ToInt32(Session["id"]);
-            var patient = db.Patients.Find(patientId);
 
-            var currentCart = db.CustomerCarts.GetCurrentCartItems(patientId);
-            var defaultStatus = db.OrderStatuses.Where(s => s.Name == "Pending Payment").FirstOrDefault();
+            customerOrderRepository.InitializeOrder(patientId, this);
 
-            var totalCost = currentCart.GetTotalPrice();
-            var tax = currentCart.GetTotalTax();
-
-            await db.Billings.CreateBilling(db, patient);
-
-            var lastBilling = db.Billings.GetLastBilling();
-
-            db.CustomerOrders.Add(new CustomerOrder
-            {
-                Customer = patient,
-                CustomerId = patientId,
-                OrderStatus = defaultStatus,
-                OrderStatusId = defaultStatus.Id,
-                OrderDate = DateTime.Today,
-                TotalCost = totalCost,
-                TotalTax = tax,
-                SubTotal = totalCost - tax,
-                Billing = lastBilling,
-                BillingId = lastBilling.Id
-            });
-
-            await db.SaveChangesAsync();
-
-            var lastOrder = db.CustomerOrders.GetLastOrder();
-
-            foreach (var item in currentCart)
-            {
-                item.CustomerOrderId = lastOrder.Id;
-                db.Entry(item).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-            }
-
-            return Redirect(string.Format("/store/checkout/index/{0}/{1}",
-                lastOrder.Id, lastOrder.CustomerId));
+            return Redirect(customerOrderRepository
+                .GetCheckoutUrl(customerOrderRepository
+                    .GetOrderId(this.HttpContext), patientId));
         }
     }
 }

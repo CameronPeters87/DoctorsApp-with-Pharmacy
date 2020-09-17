@@ -19,16 +19,6 @@ namespace Sprint33.Extensions
                 return true;
         }
 
-        public static bool IsCategoryIdEmpty(this CouponVM model)
-        {
-            if (model.CategoryId == null)
-            {
-                return true;
-            }
-            else
-                return false;
-        }
-
         public static Coupon GetLastCoupon(this IDbSet<Coupon> coupon)
         {
             return coupon.OrderByDescending(c => c.Id).FirstOrDefault();

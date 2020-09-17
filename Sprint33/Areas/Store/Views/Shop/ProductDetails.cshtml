@@ -28,13 +28,14 @@
 
                 @if (Model.IsOnSale)
                 {
-                    <p><del>R @Model.SellingPrice</del>  <strong class="text-primary h4">R @Model.DiscountedPrice</strong></p>
+                    <p><del>R@(string.Format("{0:0.00}", Model.SellingPrice))</del>  
+                       <strong class="text-primary h4">R@(string.Format("{0:0.00}", Model.DiscountedPrice))</strong></p>
                 }
                 else
                 {
                     <p>
                         <strong class="text-primary h4">
-                            R @Model.SellingPrice
+                            R@(string.Format("{0:0.00}", Model.SellingPrice))
                         </strong>
                     </p>
                 }

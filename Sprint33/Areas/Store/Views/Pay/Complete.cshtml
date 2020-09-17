@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Complete";
+    Layout = "~/Views/SharedTemp/_MySharedHome.cshtml";
+}
+
+@if (TempData["Status"] != null)
+{
+    if (TempData["Status"].ToString() == "Approved")
+    {
+        <div class="site-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div>
+                            <span class="icon-check_circle display-3 text-success fa fa-check-circle fa-5x">
+                            </span>
+                        </div>
+                        <h2 class="display-3 text-black">Thank you!</h2>
+                        <p class="lead">
+                            You order was successfuly completed.
+                            Your order number is #@(Session["OrderId"]) and can be
+                            viewed by typing it in the field above.
+                        </p>
+                        <p class="lead font-weight-bold mb-5">NB: You have to be signed in to view your order</p>
+                        <p>
+                            <a href="/orders/view-order?id=@(Session["OrderId"])"
+                               class="btn btn-md height-auto px-4 py-3 btn-primary">
+                                View Order
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p class="lead text-danger">
+            Payment Status: @TempData["Status"]
+        </p>
+    }
+}

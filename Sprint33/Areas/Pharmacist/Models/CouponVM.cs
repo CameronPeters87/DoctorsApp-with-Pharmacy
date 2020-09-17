@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
 namespace Sprint33.Areas.Pharmacist.Models
 {
@@ -17,8 +16,6 @@ namespace Sprint33.Areas.Pharmacist.Models
         public DateTime EndDate { get; set; }
         [Range(1, 100)]
         public int DiscountRate { get; set; }
-        public int? CategoryId { get; set; }
-        public IEnumerable<SelectListItem> CategoryDropdown { get; set; }
     }
 
     public class CouponItem
@@ -41,7 +38,5 @@ namespace Sprint33.Areas.Pharmacist.Models
         public string StartDateString { get; set; }
         public string EndDateString { get; set; }
         public int DiscountRate { get; set; }
-        public int CategoryId { get; set; }
-        public virtual Category Category { get; set; }
     }
 }
