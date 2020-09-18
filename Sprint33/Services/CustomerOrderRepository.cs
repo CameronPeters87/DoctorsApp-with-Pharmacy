@@ -102,6 +102,11 @@ namespace Sprint33.Services
             db.Entry(order).State = EntityState.Modified;
             db.SaveChanges();
 
+            EmailExtensions.SendMail(order.Customer.Email, "Your order is being Processed!",
+                "Your order has being successfully approved and is being processed.<br>" +
+                "<strong>NB: Upon delivery, please open this link to scan the QR code to confirm delivery." +
+                "<a href='#'>Here</a> </strong>");
+
             return "Approved";
         }
 

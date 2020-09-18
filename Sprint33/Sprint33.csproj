@@ -252,6 +252,7 @@
     <Compile Include="Extensions\Calculation.cs" />
     <Compile Include="Extensions\CouponExtensions.cs" />
     <Compile Include="Extensions\CustomerCartExtensions.cs" />
+    <Compile Include="Extensions\EmailExtensions.cs" />
     <Compile Include="Extensions\ICollectionExtensions.cs" />
     <Compile Include="Extensions\InStoreCartExtension.cs" />
     <Compile Include="Extensions\InStoreSaleExtension.cs" />
