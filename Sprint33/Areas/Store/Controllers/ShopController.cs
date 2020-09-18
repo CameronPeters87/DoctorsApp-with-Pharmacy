@@ -99,7 +99,7 @@ namespace Sprint33.Areas.Store.Controllers
 
             var model = new CartItemsVM
             {
-                LinkToSummary = "/store/cart/summary/" + patientId.ToString(),
+                LinkToSummary = "/store/cart/summary/",
                 NumberOfItemsInCart = currentCart.Count()
             };
 

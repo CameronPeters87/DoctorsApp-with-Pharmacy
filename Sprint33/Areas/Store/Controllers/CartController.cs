@@ -15,7 +15,7 @@ namespace Sprint33.Areas.Store.Controllers
         private ICustomerOrderRepository customerOrderRepository = new CustomerOrderRepository();
 
         // GET: Store/Cart
-        public ActionResult Summary(int id)
+        public ActionResult Summary()
         {
             var cart = new ShoppingCart(this.HttpContext, db);
 
@@ -36,7 +36,6 @@ namespace Sprint33.Areas.Store.Controllers
 
             model.TotalCost = cart.GetTotalPrice();
             model.VatTotal = cart.GetTotalTax();
-            model.SubTotal = model.TotalCost - model.VatTotal;
 
             return View("Index", model);
         }
@@ -58,6 +57,15 @@ namespace Sprint33.Areas.Store.Controllers
             cart.AddToCart(product, qty);
 
             return "Success";
+        }
+
+        public ActionResult RemoveItem(int id)
+        {
+            var cart = new ShoppingCart(HttpContext, db);
+
+            cart.RemoveCartItem(id);
+
+            return RedirectToAction("Summary");
         }
 
         public ActionResult CreateOrder()

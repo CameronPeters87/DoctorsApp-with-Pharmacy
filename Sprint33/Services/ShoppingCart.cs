@@ -27,14 +27,8 @@ namespace Sprint33.Services
         {
             var patient = db.Patients.Find(patientId);
 
-            float vat;
-
-            if (product.IsOnSale)
-            {
-                vat = Calculation.CalculateVatOnProduct(product.DiscountedPrice, quantity, 0.15f);
-            }
-            else
-                vat = Calculation.CalculateVatOnProduct(product.SellingPrice, quantity, 0.15f);
+            float vat = GetProductVat(product, quantity);
+            float price = GetProductPrice(product, quantity);
 
             try
             {
@@ -42,19 +36,51 @@ namespace Sprint33.Services
                 {
                     Product = product,
                     Quantity = quantity,
-                    Price = product.IsOnSale ? product.DiscountedPrice : product.SellingPrice,
+                    Price = price,
                     VatAmount = vat,
                     CustomerId = patient.UserID,
                     Patient = patient,
                     ProductId = product.Id
                 });
+
                 db.SaveChanges();
             }
             catch (Exception e)
             {
-
                 throw e;
             }
+        }
+        public CustomerCart GetCartItem(int id)
+        {
+            return currentCart.Where(cart => cart.Id == id).FirstOrDefault();
+        }
+        public int UpdateCartItem(int cartItemId, int quantity)
+        {
+            var cartItem = GetCartItem(cartItemId);
+
+            cartItem.Quantity = quantity;
+            cartItem.VatAmount = GetProductVat(cartItem.Product, quantity);
+            cartItem.Price = GetProductPrice(cartItem.Product, quantity);
+
+            db.Entry(cartItem).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+
+            return cartItem.Id;
+        }
+
+        public int RemoveCartItem(int cartItemId)
+        {
+            var cartItem = GetCartItem(cartItemId);
+
+            if (cartItem == null)
+            {
+                return 0;
+            }
+
+            db.CustomerCarts.Remove(cartItem);
+            db.SaveChanges();
+
+            return cartItemId;
         }
 
         public IEnumerable<CustomerCart> GetCartItems()
@@ -77,9 +103,26 @@ namespace Sprint33.Services
             return currentCart.Select(c => c.VatAmount).Sum();
         }
 
-        public void UpdateCart(Product product, int Quantity)
+
+
+        private float GetProductVat(Product product, int quantity)
         {
-            throw new System.NotImplementedException();
+            if (product.IsOnSale)
+            {
+                return Calculation.CalculateVatOnProduct(product.DiscountedPrice, quantity, 0.15f);
+            }
+            else
+                return Calculation.CalculateVatOnProduct(product.SellingPrice, quantity, 0.15f);
+
         }
+        private float GetProductPrice(Product product, int quantity)
+        {
+            if (product.IsOnSale)
+                return product.DiscountedPrice * quantity;
+            else
+                return product.SellingPrice * quantity;
+
+        }
+
     }
 }

@@ -11,7 +11,7 @@ namespace Sprint33.PharmacyEntities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public DateTime OrderDate { get; set; }
-        public float SubTotal { get; set; }
+        //public float SubTotal { get; set; }
         public float TotalTax { get; set; }
         public float TotalCost { get; set; }
         public string PaymentMethod { get; set; }

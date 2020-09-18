@@ -66,7 +66,6 @@ namespace Sprint33.Services
                 OrderDate = DateTime.Today,
                 TotalCost = totalCost,
                 TotalTax = tax,
-                SubTotal = totalCost - tax,
                 FirstName = patient.FirstName,
                 Surname = patient.Surname,
                 Address = string.Format("{0} {1}", patient.Address.Street_Number, patient.Address.Route),

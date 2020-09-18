@@ -23,15 +23,14 @@
                                     <td class="product-name">
                                         <h2 class="h5 text-black">@item.Name</h2>
                                     </td>
-                                    <td>R@(item.Price)</td>
+                                    <td>R@(string.Format("{0:0.00}", item.Price))</td>
                                     <td>
                                         <input type="number" class="form-control" readonly value="@item.Quantity" />
                                     </td>
-                                    <td>Total: R@(item.Price)</td>
+                                    <td>Total: R@(string.Format("{0:0.00}", item.Price))</td>
                                     <td><a href="#" class="btn btn-danger height-auto btn-sm">X</a></td>
                                 </tr>
                             }
-
                         </tbody>
                     </table>
                 </div>
@@ -45,20 +44,6 @@
                         <a href="/store/shop/products" class="btn btn-outline-primary btn-md btn-block">Continue Shopping</a>
                     </div>
                 </div>
-                <!--Coupon-->
-                <!--<div class="row">
-                    <div class="col-md-12">
-                        <label class="text-black h4" for="coupon">Coupon</label>
-                        <p>Enter your coupon code if you have one.</p>
-                    </div>
-                    <div class="col-md-8 mb-3 mb-md-0">
-                        <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
-                    </div>
-                    <div class="col-md-4">
-                        <button class="btn btn-primary btn-md px-4">Apply Coupon</button>
-                    </div>
-                </div>-->
-
             </div>
             
             <!--Order Summary-->
@@ -73,26 +58,10 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <span class="text-black">Subtotal</span>
-                                </div>
-                                <div class="col-md-6 text-right">
-                                    <strong class="text-black">R@(Model.SubTotal)</strong>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
                                     <span class="text-black">VAT</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">R@(Model.VatTotal)</strong>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <span class="text-black">Discount</span>
-                                </div>
-                                <div class="col-md-6 text-right">
-                                    <strong class="text-black">R@(Model.DiscountFromCouponTotal)</strong>
+                                    <strong class="text-black">R@(string.Format("{0:0.00}", Model.VatTotal))</strong>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -100,7 +69,7 @@
                                     <span class="text-black">Total</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">R@(Model.TotalCost)</strong>
+                                    <strong class="text-black">R@(string.Format("{0:0.00}", Model.TotalCost))</strong>
                                 </div>
                             </div>
 
@@ -118,9 +87,6 @@
                                         Proceed To
                                         Checkout
                                     </a>
-                                    @*<button class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout.html'">
-                                        
-                                    </button>*@
                                 </div>
                             </div>
                         </div>
@@ -130,32 +96,5 @@
 
             </div>        
         </div>
-
-        @*<div class="row">
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-6 mb-3 mb-md-0">
-                        <button class="btn btn-primary btn-md btn-block">Update Cart</button>
-                    </div>
-                    <div class="col-md-6">
-                        <button class="btn btn-outline-primary btn-md btn-block">Continue Shopping</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label class="text-black h4" for="coupon">Coupon</label>
-                        <p>Enter your coupon code if you have one.</p>
-                    </div>
-                    <div class="col-md-8 mb-3 mb-md-0">
-                        <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
-                    </div>
-                    <div class="col-md-4">
-                        <button class="btn btn-primary btn-md px-4">Apply Coupon</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 pl-5">
-            </div>
-        </div>*@
     </div>
 </div>
