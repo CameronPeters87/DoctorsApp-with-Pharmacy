@@ -1,4 +1,5 @@
-﻿using Sprint33.PharmacyEntities;
+﻿using Sprint33.Areas.Store.Models;
+using Sprint33.PharmacyEntities;
 using System.Web;
 using System.Web.Mvc;
 
@@ -13,7 +14,7 @@ namespace Sprint33.Services.Interfaces
         string GetCheckoutUrl(int orderId, int patientId);
         string PaymentApproved(HttpContextBase controller);
         string PaymentDeclined(HttpContextBase controller);
-        void UpdateOrder();
+        void UpdateBillingInfo(BillingForm model);
 
     }
 }

@@ -23,9 +23,9 @@ namespace Sprint33.Areas.Store.Models
         public float CouponDiscount { get; set; }
     }
 
-    public class Confirm
+    public class BillingForm
     {
-        public int BillingId { get; set; }
+        public int OrderId { get; set; }
 
         [Required]
         public string FirstName { get; set; }
@@ -34,6 +34,8 @@ namespace Sprint33.Areas.Store.Models
 
         [Required]
         public string Address { get; set; }
+        [Required]
+        public string City { get; set; }
         [Required]
         public string ZipCode { get; set; }
         [Required]
@@ -46,7 +48,5 @@ namespace Sprint33.Areas.Store.Models
 
         [Required]
         public string PaymentMethod { get; set; }
-
-        public int OrderId { get; set; }
     }
 }

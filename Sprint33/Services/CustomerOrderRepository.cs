@@ -1,4 +1,5 @@
-﻿using Sprint33.Extensions;
+﻿using Sprint33.Areas.Store.Models;
+using Sprint33.Extensions;
 using Sprint33.Models;
 using Sprint33.PharmacyEntities;
 using Sprint33.Services.Interfaces;
@@ -46,12 +47,15 @@ namespace Sprint33.Services
             var currentCart = db.CustomerCarts.GetCurrentCartItems(patientId);
             var defaultStatus = db.OrderStatuses.Where(s => s.Name == "Pending Payment").FirstOrDefault();
 
+            if (defaultStatus == null)
+            {
+                defaultStatus = OrderStatusExtensions.CreateOrderStatus(db, "Pending Payment",
+                    "You need to make payment for the order to be processed",
+                    "secondary", "fa fa-clock-o", false);
+            }
+
             var totalCost = currentCart.GetTotalPrice();
             var tax = currentCart.GetTotalTax();
-
-            db.Billings.CreateBilling(db, patient);
-
-            var lastBilling = db.Billings.GetLastBilling();
 
             db.CustomerOrders.Add(new CustomerOrder
             {
@@ -63,8 +67,14 @@ namespace Sprint33.Services
                 TotalCost = totalCost,
                 TotalTax = tax,
                 SubTotal = totalCost - tax,
-                Billing = lastBilling,
-                BillingId = lastBilling.Id
+                FirstName = patient.FirstName,
+                Surname = patient.Surname,
+                Address = string.Format("{0} {1}", patient.Address.Street_Number, patient.Address.Route),
+                City = patient.Address.City,
+                Country = patient.Address.Country,
+                ZipCode = patient.Address.ZipCode,
+                Email = patient.Email,
+                PhoneNumber = patient.ContactNumber
             });
 
             db.SaveChanges();
@@ -91,7 +101,7 @@ namespace Sprint33.Services
 
             if (orderStatus == null)
             {
-                orderStatus = OrderStatusExtensions.CreateOrderStatus(db, "Paid: Processing",
+                orderStatus = OrderStatusExtensions.CreateOrderStatus(db, "Processing",
                     "Order is being processed",
                     "info", "fa fa-cog", true);
             }
@@ -102,7 +112,7 @@ namespace Sprint33.Services
             db.Entry(order).State = EntityState.Modified;
             db.SaveChanges();
 
-            EmailExtensions.SendMail(order.Customer.Email, "Your order is being Processed!",
+            EmailExtensions.SendMail(order.Email, "Your order is being Processed!",
                 "Your order has being successfully approved and is being processed.<br>" +
                 "<strong>NB: Upon delivery, please open this link to scan the QR code to confirm delivery." +
                 "<a href='#'>Here</a> </strong>");
@@ -135,9 +145,23 @@ namespace Sprint33.Services
             return "Declined";
         }
 
-        public void UpdateOrder()
+        public void UpdateBillingInfo(BillingForm model)
         {
-            throw new NotImplementedException();
+            var order = db.CustomerOrders.Find(model.OrderId);
+
+            order.FirstName = model.FirstName;
+            order.Surname = model.Surname;
+            order.Email = model.Email;
+            order.City = model.City;
+            order.Country = model.City;
+            order.PhoneNumber = model.PhoneNumber;
+            order.Address = model.Address;
+            order.ZipCode = model.Address;
+            order.PaymentMethod = model.PaymentMethod;
+
+            db.Entry(order).State = EntityState.Modified;
+
+            db.SaveChanges();
         }
     }
 }

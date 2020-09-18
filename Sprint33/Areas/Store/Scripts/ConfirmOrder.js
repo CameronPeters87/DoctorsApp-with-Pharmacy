@@ -27,6 +27,7 @@
         var c_fname = $("#c_fname").val();
         var c_lname = $("#c_lname").val();
         var c_address = $("#c_address").val();
+        var c_city = $("#c_city").val();
         var c_state_country = $("#c_state_country").val();
         var c_postal_zip = $("#c_postal_zip").val();
         var c_email_address = $("#c_email_address").val();
@@ -35,7 +36,7 @@
         var billingId = $(this).attr("data-billingId");
 
         //var url = "/store/checkout/Confirm";
-        var url = ("/store/checkout/Confirm");
+        var url = ("/store/checkout/UpdateBillingInfo");
 
         if (selectedPaymentMethod == "") {
             $("span.payment-method-validation").html("Choose a Payment Method");
@@ -48,6 +49,7 @@
                 FirstName: c_fname,
                 Surname: c_lname,
                 Address: c_address,
+                City: c_city,
                 Country: c_state_country,
                 ZipCode: c_postal_zip,
                 Email: c_email_address,
@@ -62,44 +64,16 @@
                     $("span.loader").addClass("d-none");
                 }
                 else {
-                    if (selectedPaymentMethod == "Cash") {
-
+                    
+                    if (selectedPaymentMethod == "Cash") 
+                    {
+                        location.href = "/store/pay/complete?id=1";
                     }
-                    else {
-
-                        $.post(url,
-                        {
-                            BillingId: billingId,
-                            FirstName: c_fname,
-                            Surname: c_fname,
-                            Address: c_address,
-                            Country: c_state_country,
-                            ZipCode: c_postal_zip,
-                            Email: c_email_address,
-                            PhoneNumber: c_phone,
-                            OrderId: orderId,
-                            PaymentMethod: selectedPaymentMethod
-                        }, function(data) {
-                            var message = data;
-
-                            if(message == "Failed") {
-                                $("input.billing").css("border-color", "red");
-                                $("span.loader").addClass("d-none");
-                            }
-                            else {
-                                if (selectedPaymentMethod == "Cash") {
-                                    
-                                }
-                                else {
-                                    $.get("/store/pay/getrequest", { orderId: orderId })
-                                        .done(data => success(data))
-                                        .fail(err => error(err));
-
-                                }
-                            }
-                        }).fail(function(xhr, status, error) {
-                            alert(xhr + " " + status + " " + error);
-                        });
+                    else 
+                    {
+                        $.get("/store/pay/getrequest", { orderId: orderId })
+                            .done(data => success(data))
+                            .fail(err => error(err));
                     }
                 }
             }).fail(function(xhr, status, error) {

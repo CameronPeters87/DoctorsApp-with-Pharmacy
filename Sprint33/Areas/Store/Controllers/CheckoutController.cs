@@ -83,12 +83,14 @@ namespace Sprint33.Areas.Store.Controllers
         }
 
         [HttpPost]
-        public string Confirm(Confirm model)
+        public string UpdateBillingInfo(BillingForm model)
         {
             if (!ModelState.IsValid)
             {
                 return "Failed";
             }
+
+            orderRepository.UpdateBillingInfo(model);
 
             return "Success";
         }
