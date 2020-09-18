@@ -24,10 +24,10 @@ namespace Sprint33.Areas.Store.Controllers
             // Product list
             foreach (var item in cart.GetCartItems())
             {
-                model.ProductList.Add(new CartItemsSummary
+                model.CartItems.Add(new CartItemsSummary
                 {
                     Name = item.Product.Name,
-                    Id = item.Product.Id,
+                    Id = item.Id,
                     Price = item.Product.IsOnSale ? item.Product.DiscountedPrice : item.Product.SellingPrice,
                     ImageUrl = item.Product.ImageUrl,
                     Quantity = item.Quantity

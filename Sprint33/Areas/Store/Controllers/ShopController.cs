@@ -1,8 +1,8 @@
 ﻿using PagedList;
 using Sprint33.Areas.Pharmacist.HelperMethods;
 using Sprint33.Areas.Store.Models;
-using Sprint33.Extensions;
 using Sprint33.Models;
+using Sprint33.Services;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -92,18 +92,18 @@ namespace Sprint33.Areas.Store.Controllers
 
         public ActionResult CartItemsPartial()
         {
-            var patientId = Convert.ToInt32(Session["id"]);
-            var patient = db.Patients.Find(patientId);
+            var activeCart = new ShoppingCart(this.HttpContext, db);
 
-            var currentCart = db.CustomerCarts.GetCurrentCartItems(patientId);
+            //var model = new CartItemsVM
+            //{
+            //    LinkToSummary = "/store/cart/summary/",
+            //    NumberOfItemsInCart = activeCart.GetCount()
+            //};
 
-            var model = new CartItemsVM
-            {
-                LinkToSummary = "/store/cart/summary/",
-                NumberOfItemsInCart = currentCart.Count()
-            };
+            ViewBag.LinkToSummary = "/store/cart/summary/";
+            ViewBag.NumberOfItemsInCart = activeCart.GetCount();
 
-            return PartialView("_CartItemsPartial", model);
+            return PartialView("_CartItemsPartial");
         }
 
     }

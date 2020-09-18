@@ -6,9 +6,9 @@ namespace Sprint33.Areas.Store.Models
     {
         public CartSummaryVM()
         {
-            ProductList = new List<CartItemsSummary>();
+            CartItems = new List<CartItemsSummary>();
         }
-        public virtual ICollection<CartItemsSummary> ProductList { get; set; }
+        public virtual ICollection<CartItemsSummary> CartItems { get; set; }
 
         // Order Details
         public float SubTotal { get; set; }

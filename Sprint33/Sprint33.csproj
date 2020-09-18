@@ -221,7 +221,6 @@
     <Compile Include="Areas\Store\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Store\Controllers\PayController.cs" />
     <Compile Include="Areas\Store\Controllers\ShopController.cs" />
-    <Compile Include="Areas\Store\Models\CartItemsVM.cs" />
     <Compile Include="Areas\Store\Models\CartSummaryVM.cs" />
     <Compile Include="Areas\Store\Models\Checkout.cs" />
     <Compile Include="Areas\Store\Models\CustomerCartVM.cs" />
