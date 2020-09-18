@@ -1,6 +1,5 @@
 ﻿using Sprint33.Areas.Pharmacist.HelperMethods;
 using Sprint33.Areas.Store.Models;
-using Sprint33.Extensions;
 using Sprint33.Models;
 using Sprint33.Services;
 using Sprint33.Services.Interfaces;
@@ -14,17 +13,16 @@ namespace Sprint33.Areas.Store.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private ICustomerOrderRepository customerOrderRepository = new CustomerOrderRepository();
-        private IShoppingCart cart = new ShoppingCart();
 
         // GET: Store/Cart
         public ActionResult Summary(int id)
         {
-            var currentCart = db.CustomerCarts.GetCurrentCartItems(id);
+            var cart = new ShoppingCart(this.HttpContext, db);
 
             var model = new CartSummaryVM();
 
             // Product list
-            foreach (var item in currentCart)
+            foreach (var item in cart.GetCartItems())
             {
                 model.ProductList.Add(new CartItemsSummary
                 {
@@ -36,8 +34,8 @@ namespace Sprint33.Areas.Store.Controllers
                 });
             }
 
-            model.TotalCost = currentCart.GetTotalPrice();
-            model.VatTotal = currentCart.GetTotalTax();
+            model.TotalCost = cart.GetTotalPrice();
+            model.VatTotal = cart.GetTotalTax();
             model.SubTotal = model.TotalCost - model.VatTotal;
 
             return View("Index", model);
@@ -47,14 +45,8 @@ namespace Sprint33.Areas.Store.Controllers
         public async Task<string> AddItemToCart(int id, int qty)
         {
             var product = await db.Products.FindAsync(id);
-            var patientId = Convert.ToInt32(Session["id"]);
 
-            //var patient = await db.Patients.FindAsync(patientId);
-
-            // Check if item in cart
-            //var currentCart = db.CustomerCarts.GetCurrentCartItems(patientId);
-
-            cart = cart.GetCart(this.HttpContext);
+            var cart = new ShoppingCart(this.HttpContext, db);
 
             var isInCart = product.IsItemInCustomerCart(cart.GetCartItems());
 
@@ -63,21 +55,7 @@ namespace Sprint33.Areas.Store.Controllers
                 return "Item in Cart";
             }
 
-            cart.AddToCart(product, qty, patientId);
-
-            //db.CustomerCarts.Add(new CustomerCart
-            //{
-            //    CustomerId = patientId,
-            //    CustomerOrderId = null,
-            //    Patient = patient,
-            //    Price = product.IsOnSale ? product.DiscountedPrice : product.SellingPrice,
-            //    Quantity = qty,
-            //    Product = product,
-            //    ProductId = product.Id,
-            //    VatAmount = vat
-            //});
-
-            //await db.SaveChangesAsync();
+            cart.AddToCart(product, qty);
 
             return "Success";
         }

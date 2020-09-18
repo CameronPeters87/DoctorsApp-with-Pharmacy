@@ -305,7 +305,6 @@
     <Compile Include="PharmacyEntities\Supplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Interfaces\ICustomerOrderRepository.cs" />
-    <Compile Include="Services\Interfaces\IShoppingCart.cs" />
     <Compile Include="Services\IPayment.cs" />
     <Compile Include="Services\CustomerOrderRepository.cs" />
     <Compile Include="Services\Payment.cs" />

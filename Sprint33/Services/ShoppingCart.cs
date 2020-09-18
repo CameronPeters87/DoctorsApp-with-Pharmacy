@@ -1,7 +1,6 @@
 ﻿using Sprint33.Areas.Pharmacist.HelperMethods;
 using Sprint33.Models;
 using Sprint33.PharmacyEntities;
-using Sprint33.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +8,22 @@ using System.Web;
 
 namespace Sprint33.Services
 {
-    public class ShoppingCart : IShoppingCart
+    public class ShoppingCart
     {
         ApplicationDbContext db;
+        int patientId;
+        IQueryable<CustomerCart> currentCart;
 
-        List<CustomerCart> customerCart;
-        int count;
-
-        public ShoppingCart(ApplicationDbContext db)
+        public ShoppingCart(HttpContextBase httpContext, ApplicationDbContext db)
         {
             this.db = db;
+
+            patientId = Convert.ToInt32(httpContext.Session["id"]);
+            currentCart = db.CustomerCarts
+                .Where(c => c.CustomerOrderId == null && c.CustomerId == patientId);
         }
 
-
-        public void AddToCart(Product product, int quantity, int patientId)
+        public void AddToCart(Product product, int quantity)
         {
             var patient = db.Patients.Find(patientId);
 
@@ -47,46 +48,33 @@ namespace Sprint33.Services
                     Patient = patient,
                     ProductId = product.Id
                 });
+                db.SaveChanges();
             }
             catch (Exception e)
             {
 
                 throw e;
             }
-
-            db.SaveChanges();
-        }
-
-        public ShoppingCart GetCart(HttpContextBase httpContext)
-        {
-            var cart = new ShoppingCart();
-            int patientId = Convert.ToInt32(httpContext.Session["id"]);
-
-            cart.customerCart = db.CustomerCarts.Where(c => c.CustomerOrderId == null &&
-            c.CustomerId == patientId).ToList();
-            cart.count = cart.customerCart.Count;
-
-            return cart;
         }
 
         public IEnumerable<CustomerCart> GetCartItems()
         {
-            return customerCart;
+            return currentCart.ToList();
         }
 
         public int GetCount()
         {
-            throw new System.NotImplementedException();
+            return currentCart.ToList().Count;
         }
 
         public float GetTotalPrice()
         {
-            throw new System.NotImplementedException();
+            return currentCart.Select(c => c.Price).Sum();
         }
 
         public float GetTotalTax()
         {
-            throw new System.NotImplementedException();
+            return currentCart.Select(c => c.VatAmount).Sum();
         }
 
         public void UpdateCart(Product product, int Quantity)
