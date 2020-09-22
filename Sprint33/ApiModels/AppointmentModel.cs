@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Sprint33.ApiModels
 {
@@ -20,5 +17,6 @@ namespace Sprint33.ApiModels
         public DateTime Expire { get; set; }
         public bool isPaid { get; set; }
         public bool Complete { get; set; }
+        public PatientModel PatientModel { get; set; }
     }
 }

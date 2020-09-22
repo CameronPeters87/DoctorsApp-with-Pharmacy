@@ -1,4 +1,5 @@
-﻿using Sprint33.ApiModels;
+﻿using AutoMapper;
+using Sprint33.ApiModels;
 using Sprint33.Models;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -45,7 +46,12 @@ namespace Sprint33.Controllers.Api
                 return NotFound();
             }
 
-            return Ok(patient);
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Patient, PatientModel>());
+            var mapper = config.CreateMapper();
+
+            PatientModel model = mapper.Map<PatientModel>(patient);
+
+            return Ok(model);
         }
 
         // PUT: api/Patients/5
@@ -85,12 +91,26 @@ namespace Sprint33.Controllers.Api
 
         // POST: api/Patients
         [ResponseType(typeof(Patient))]
-        public async Task<IHttpActionResult> PostPatient(Patient patient)
+        public async Task<IHttpActionResult> PostPatient(PatientModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<PatientModel, Patient>());
+            var mapper = config.CreateMapper();
+
+            Patient patient = mapper.Map<Patient>(model);
+            patient.Address = new PharmacyEntities.Address
+            {
+                City = model.Address.City,
+                Country = model.Address.Country,
+                Province = model.Address.Province,
+                Route = model.Address.Route,
+                Street_Number = model.Address.Street_Number,
+                ZipCode = model.Address.ZipCode
+            };
 
             db.Patients.Add(patient);
             await db.SaveChangesAsync();

@@ -1,16 +1,15 @@
-﻿using System;
+﻿using AutoMapper;
+using Sprint33.ApiModels;
+using Sprint33.Models;
+using Sprint33.PharmacyEntities;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Sprint33.Models;
-using Sprint33.PharmacyEntities;
 
 namespace Sprint33.Controllers.Api
 {
@@ -19,9 +18,19 @@ namespace Sprint33.Controllers.Api
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Products
-        public IQueryable<Product> GetProducts()
+        public IEnumerable<ProductModel> GetProducts()
         {
-            return db.Products;
+            List<ProductModel> products = new List<ProductModel>();
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductModel>());
+            var mapper = config.CreateMapper();
+
+            foreach (var product in db.Products)
+            {
+                ProductModel model = mapper.Map<ProductModel>(product);
+                products.Add(model);
+            }
+
+            return products;
         }
 
         // GET: api/Products/5
@@ -34,7 +43,12 @@ namespace Sprint33.Controllers.Api
                 return NotFound();
             }
 
-            return Ok(product);
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductModel>());
+            var mapper = config.CreateMapper();
+
+            ProductModel model = mapper.Map<ProductModel>(product);
+
+            return Ok(model);
         }
 
         // PUT: api/Products/5

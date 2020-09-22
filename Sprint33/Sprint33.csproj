@@ -126,7 +126,7 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -201,8 +201,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiModels\AddressModel.cs" />
     <Compile Include="ApiModels\AppointmentModel.cs" />
-    <Compile Include="ApiModels\CategoryModel.cs" />
     <Compile Include="ApiModels\InStoreCart.cs" />
     <Compile Include="ApiModels\InStoreSaleModel.cs" />
     <Compile Include="ApiModels\MainModel.cs" />
@@ -250,7 +250,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Admins1Controller.cs" />
     <Compile Include="Controllers\AdminsController.cs" />
-    <Compile Include="Controllers\Api\MainController.cs" />
+    <Compile Include="Controllers\Api\AppointmentsController.cs" />
+    <Compile Include="Controllers\Api\InStoreCartsController.cs" />
+    <Compile Include="Controllers\Api\InStoreSalesController.cs" />
     <Compile Include="Controllers\Api\PatientsController.cs" />
     <Compile Include="Controllers\Api\ProductsController.cs" />
     <Compile Include="Controllers\Appointments1Controller.cs" />

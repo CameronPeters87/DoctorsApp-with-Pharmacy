@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using Sprint33.PharmacyEntities;
+﻿using Sprint33.PharmacyEntities;
 
 namespace Sprint33.ApiModels
 {
@@ -19,5 +14,6 @@ namespace Sprint33.ApiModels
         public bool isActive { get; set; }
         public bool isLoyal { get; set; }
         public int AddressId { get; set; }
+        public AddressModel Address { get; set; }
     }
 }
