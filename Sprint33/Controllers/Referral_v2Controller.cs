@@ -14,7 +14,7 @@ namespace Sprint33.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Referral_v2
-        public async Task<ActionResult> Index(string search)
+        public ActionResult Index(string search)
         {
             // return View(await db.Referral_V2s.ToListAsync());
             return View(db.Referral_V2s.Where(x => x.PatientName.StartsWith(search) || search == null).ToList());

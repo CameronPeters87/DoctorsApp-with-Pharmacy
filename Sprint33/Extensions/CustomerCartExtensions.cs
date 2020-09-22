@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Sprint33.Extensions
 {
@@ -34,9 +33,5 @@ namespace Sprint33.Extensions
             return result;
         }
 
-        public static async Task UpdateCurrentCart(this IDbSet<CustomerCart> dto,
-            int orderId, int patientId, IEnumerable<CustomerCart> currentCart)
-        {
-        }
     }
 }
