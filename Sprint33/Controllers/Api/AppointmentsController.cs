@@ -52,17 +52,12 @@ namespace Sprint33.Controllers.Api
 
         // PUT: api/Appointments/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutAppointment(int id, Appointment appointment)
+        public async Task<IHttpActionResult> PutAppointment(AppointmentModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<AppointmentModel, Appointment>());
+            var mapper = config.CreateMapper();
 
-            if (id != appointment.AppointmentID)
-            {
-                return BadRequest();
-            }
+            Appointment appointment = mapper.Map<Appointment>(model);
 
             db.Entry(appointment).State = EntityState.Modified;
 
@@ -70,16 +65,10 @@ namespace Sprint33.Controllers.Api
             {
                 await db.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException e)
             {
-                if (!AppointmentExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+
+                throw e;
             }
 
             return StatusCode(HttpStatusCode.NoContent);

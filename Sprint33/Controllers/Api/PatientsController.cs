@@ -101,8 +101,7 @@ namespace Sprint33.Controllers.Api
             var config = new MapperConfiguration(cfg => cfg.CreateMap<PatientModel, Patient>());
             var mapper = config.CreateMapper();
 
-            Patient patient = mapper.Map<Patient>(model);
-            patient.Address = new PharmacyEntities.Address
+            var address = new PharmacyEntities.Address
             {
                 City = model.Address.City,
                 Country = model.Address.Country,
@@ -111,6 +110,14 @@ namespace Sprint33.Controllers.Api
                 Street_Number = model.Address.Street_Number,
                 ZipCode = model.Address.ZipCode
             };
+
+            db.Addresses.Add(address);
+            db.SaveChanges();
+
+            var lastAddress = db.Addresses.OrderByDescending(a => a.Id).FirstOrDefault();
+
+            Patient patient = mapper.Map<Patient>(model);
+            patient.Address = lastAddress;
 
             db.Patients.Add(patient);
             await db.SaveChangesAsync();

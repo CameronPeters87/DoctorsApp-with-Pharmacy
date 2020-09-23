@@ -266,8 +266,12 @@ namespace Sprint33.Controllers
 
         public ActionResult ViewMyAppointment(int patientId)
         {
+            var patient = db.Patients.Find(patientId);
+            string fullname = string.Format("{0} {1}", patient.FirstName, patient.Surname);
+
             Appointment appointment = (from a in db.Appointments
-                                       where a.PatientID == patientId && a.Complete == false
+                                       where a.PatientName == fullname
+                                       && a.Complete == false
                                        select a).FirstOrDefault();
             if (appointment == null)
             {
