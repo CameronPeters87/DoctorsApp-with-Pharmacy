@@ -4,5 +4,245 @@
     Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+</div>
 
+<div class="row">
+    <!-- Total Purchases -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Stock Orders</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TotalPurchase</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Online Sales -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Online Sales</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TotalOnlineSales</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-shopping-basket fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Sales -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total In-Store Sales</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TotalInstoreSales</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-money-bill fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products for Sale -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Products For Sale</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.Products</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-medkit fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="row">
+    <!-- Total Expense -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-danger shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Total Expense <br /> (Stock Orders)</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">R@(ViewBag.TotalExpense.ToString("0.00"))</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-money-bill fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Income -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Income <br /> (In-Store/Online)</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">R@(ViewBag.TotalIncome.ToString("0.00"))</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-money-bill fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profit and Loss -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Profit/Loss</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">R@(ViewBag.ProfitLoss.ToString("0.00"))</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-chart-line fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Online Customers Card -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Online Customers</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TotalCustomers</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-user fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Suppliers Card -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Suppliers</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TotalSuppliers</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-users fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<!-- DataTales Example -->
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary">Low Stock Medicine List</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTable(0)">Name</th>
+                                <th onclick="sortTable(1)">Quantity</th>
+                                <th onclick="sortTable(2)">Selling Price</th>
+                                <th onclick="sortTable(3)">Buying Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.LowStockMedicines)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Quantity</td>
+                                    <td>R@(item.SellingPrice.ToString("0.00"))</td>
+                                    <td>R@(item.SupplierPrice.ToString("0.00"))</td>
+                                </tr>
+                            }
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+    </div>
+
+</div>
+
+
+<!-- Total Income Card -->
+@*<div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Income</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">R0</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-money fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<!-- Total Expense Card -->
+@*<div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-danger shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Total Expense</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">R @Model.TotalExpense</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-money fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@

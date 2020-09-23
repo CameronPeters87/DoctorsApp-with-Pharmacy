@@ -216,6 +216,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\CouponsController.cs" />
+    <Compile Include="Areas\Pharmacist\Controllers\CustomerOrdersController.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\CustomersController.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\DiscountController.cs" />
@@ -2978,7 +2979,7 @@
     <Content Include="Views\Patients1\PharmacyOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Pharmacist\Data\" />
+    <Folder Include="Areas\Pharmacist\Views\CustomerOrders\" />
     <Folder Include="Areas\Store\Data\" />
     <Folder Include="Areas\Store\Views\Login\" />
     <Folder Include="Areas\Store\Views\Orders\" />
