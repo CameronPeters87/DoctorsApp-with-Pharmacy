@@ -45,14 +45,7 @@ namespace Sprint33.Services
             var patient = db.Patients.Find(patientId);
 
             var currentCart = db.CustomerCarts.GetCurrentCartItems(patientId);
-            var defaultStatus = db.OrderStatuses.Where(s => s.Name == "Pending Payment").FirstOrDefault();
-
-            if (defaultStatus == null)
-            {
-                defaultStatus = OrderStatusExtensions.CreateOrderStatus(db, "Pending Payment",
-                    "You need to make payment for the order to be processed",
-                    "secondary", "fa fa-clock-o", false);
-            }
+            var defaultStatus = db.OrderStatuses.Where(s => s.Name == "Waiting").FirstOrDefault();
 
             var subTotal = currentCart.GetTotalPrice();
             var tax = currentCart.GetTotalTax();

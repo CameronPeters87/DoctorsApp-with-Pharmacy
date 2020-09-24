@@ -81,6 +81,18 @@ namespace Sprint33
                         Icon = "fa fa-truck",
                         isPaid = true
                     });
+
+                    statusList.Add(new OrderStatus
+                    {
+                        Name = "Waiting",
+                        Description = "",
+                        Color = "info",
+                        Icon = "fa fa-clock-o",
+                        isPaid = true
+                    });
+
+                    db.OrderStatuses.AddRange(statusList);
+                    db.SaveChanges();
                 }
             }
         }

@@ -44,8 +44,6 @@ namespace Sprint33.Extensions
             }
             catch (System.Exception e)
             {
-
-                throw e;
             }
 
         }
