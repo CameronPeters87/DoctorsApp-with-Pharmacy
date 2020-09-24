@@ -14,13 +14,13 @@
                     <div class="form-group row">
                         <div class="col-md-6">
                             <label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control"
+                            <input type="text" class="form-control billing"
                                    id="c_fname" value="@Model.CustomerOrder.FirstName"
                                    name="@Model.CustomerOrder.FirstName">
                         </div>
                         <div class="col-md-6">
                             <label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="c_lname" name="c_lname"
+                            <input type="text" class="form-control billing" id="c_lname" name="c_lname"
                                    value="@Model.CustomerOrder.Surname">
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                     <div class="form-group row">
                         <div class="col-md-12">
                             <label for="c_address" class="text-black">Street Address <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="c_address"
+                            <input type="text" class="form-control billing" id="c_address"
                                    name="c_address" placeholder="Street address"
                                    value="@Model.CustomerOrder.Address">
                         </div>
@@ -37,7 +37,7 @@
                     <div class="form-group row">
                         <div class="col-md-12">
                             <label for="c_city" class="text-black">City <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="c_city"
+                            <input type="text" class="form-control billing" id="c_city"
                                    name="c_city" placeholder="City"
                                    value="@Model.CustomerOrder.City">
                         </div>
@@ -46,13 +46,13 @@
                     <div class="form-group row">
                         <div class="col-md-6">
                             <label for="c_state_country" class="text-black">State / Country <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control"
+                            <input type="text" class="form-control billing"
                                    id="c_state_country" name="c_state_country"
                                    value="@Model.CustomerOrder.Country">
                         </div>
                         <div class="col-md-6">
                             <label for="c_postal_zip" class="text-black">Posta / Zip <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="c_postal_zip"
+                            <input type="text" class="form-control billing" id="c_postal_zip"
                                    name="c_postal_zip" value="@Model.CustomerOrder.ZipCode">
                         </div>
                     </div>
@@ -60,13 +60,13 @@
                     <div class="form-group row mb-5">
                         <div class="col-md-6">
                             <label for="c_email_address" class="text-black">Email Address <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control"
+                            <input type="text" class="form-control billing"
                                    id="c_email_address" name="c_email_address"
                                    value="@Model.CustomerOrder.Email">
                         </div>
                         <div class="col-md-6">
                             <label for="c_phone" class="text-black">Phone <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control"
+                            <input type="text" class="form-control billing"
                                    id="c_phone" name="c_phone" value="@Model.CustomerOrder.PhoneNumber"
                                    placeholder="Phone Number">
                         </div>

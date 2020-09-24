@@ -44,6 +44,10 @@ namespace Sprint33.Services
                 });
 
                 db.SaveChanges();
+
+                product.Quantity -= quantity;
+                db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
             }
             catch (Exception e)
             {
@@ -102,8 +106,6 @@ namespace Sprint33.Services
         {
             return currentCart.Select(c => c.VatAmount).Sum();
         }
-
-
 
         private float GetProductVat(Product product, int quantity)
         {

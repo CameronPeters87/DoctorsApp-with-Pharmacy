@@ -1,6 +1,6 @@
 ﻿$(function () {
 
-    $('input').blur(function()
+    $('input.billing').blur(function()
     {
           if( !this.value ) {
               $(this).css("border-color", "red");

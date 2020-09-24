@@ -54,8 +54,9 @@ namespace Sprint33.Services
                     "secondary", "fa fa-clock-o", false);
             }
 
-            var totalCost = currentCart.GetTotalPrice();
+            var subTotal = currentCart.GetTotalPrice();
             var tax = currentCart.GetTotalTax();
+            var totalCost = subTotal + tax;
 
             db.CustomerOrders.Add(new CustomerOrder
             {
@@ -64,6 +65,7 @@ namespace Sprint33.Services
                 OrderStatus = defaultStatus,
                 OrderStatusId = defaultStatus.Id,
                 OrderDate = DateTime.Today,
+                SubTotal = subTotal,
                 TotalCost = totalCost,
                 TotalTax = tax,
                 FirstName = patient.FirstName,
@@ -113,7 +115,7 @@ namespace Sprint33.Services
 
             EmailExtensions.SendMail(order.Email, "Your order is being Processed!",
                 "Your order has being successfully approved and is being processed.<br>" +
-                "<strong>NB: Upon delivery, please open this link to scan the QR code to confirm delivery." +
+                "<strong>NB: Upon delivery, Click here to confirm delivery or download our app from the play store?" +
                 "<a href='#'>Here</a> </strong>");
 
             return "Approved";

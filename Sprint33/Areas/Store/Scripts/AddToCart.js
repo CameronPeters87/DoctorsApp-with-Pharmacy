@@ -36,6 +36,9 @@
                 if(message == "Item in Cart") {
                     alert("Item is already in Cart");
                 }
+                else if(message == "No Stock") {
+                    alert("Not enough stock available");
+                }
                 else {
                     location.reload();
                 }

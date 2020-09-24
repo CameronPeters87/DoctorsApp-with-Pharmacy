@@ -21,15 +21,11 @@ namespace Sprint33.Areas.Store.Controllers
                         Session["Title"] = "Patient";
                         return "Success";
                     }
-                    else
-                    {
-                        return "Failed";
-                    }
                 }
 
             }
 
-            return "";
+            return "Failed";
         }
     }
 }

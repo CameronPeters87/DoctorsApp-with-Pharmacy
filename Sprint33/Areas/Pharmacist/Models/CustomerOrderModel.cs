@@ -1,17 +1,14 @@
 ﻿using Sprint33.Models;
+using Sprint33.PharmacyEntities;
 using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
-namespace Sprint33.PharmacyEntities
+namespace Sprint33.Areas.Pharmacist.Models
 {
-    public class CustomerOrder
+    public class CustomerOrderModel
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public DateTime OrderDate { get; set; }
-        public float SubTotal { get; set; }
         public float TotalTax { get; set; }
         public float TotalCost { get; set; }
         public string PaymentMethod { get; set; }
@@ -33,5 +30,7 @@ namespace Sprint33.PharmacyEntities
         public int OrderStatusId { get; set; }
         public virtual OrderStatus OrderStatus { get; set; }
         public virtual Patient Customer { get; set; }
+
+        public IEnumerable<CustomerCart> CartItems { get; set; }
     }
 }

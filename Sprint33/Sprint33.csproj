@@ -227,6 +227,7 @@
     <Compile Include="Areas\Pharmacist\Controllers\SuppliersController.cs" />
     <Compile Include="Areas\Pharmacist\Models\CategoryVM.cs" />
     <Compile Include="Areas\Pharmacist\Models\CouponVM.cs" />
+    <Compile Include="Areas\Pharmacist\Models\CustomerOrderModel.cs" />
     <Compile Include="Areas\Pharmacist\Models\CustomerVM.cs" />
     <Compile Include="Areas\Pharmacist\Models\DiscountVM.cs" />
     <Compile Include="Areas\Pharmacist\Models\InStoreSaleVM.cs" />
@@ -2461,6 +2462,7 @@
     <Content Include="Areas\Store\Views\Shared\_ProductsPartial.cshtml" />
     <Content Include="Areas\Store\Views\Pay\Complete.cshtml" />
     <Content Include="Areas\Pharmacist\Views\Customers\SendEmail.cshtml" />
+    <Content Include="Areas\Pharmacist\Views\CustomerOrders\Index.cshtml" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - Web Deploy.pubxml" />
@@ -2980,7 +2982,6 @@
     <Content Include="Views\Patients1\PharmacyOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Pharmacist\Views\CustomerOrders\" />
     <Folder Include="Areas\Store\Data\" />
     <Folder Include="Areas\Store\Views\Login\" />
     <Folder Include="Areas\Store\Views\Orders\" />

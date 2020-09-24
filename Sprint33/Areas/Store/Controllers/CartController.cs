@@ -34,8 +34,9 @@ namespace Sprint33.Areas.Store.Controllers
                 });
             }
 
-            model.TotalCost = cart.GetTotalPrice();
             model.VatTotal = cart.GetTotalTax();
+            model.SubTotal = cart.GetTotalPrice();
+            model.TotalCost = model.SubTotal = model.SubTotal;
 
             return View("Index", model);
         }
@@ -48,6 +49,11 @@ namespace Sprint33.Areas.Store.Controllers
             var cart = new ShoppingCart(this.HttpContext, db);
 
             var isInCart = product.IsItemInCustomerCart(cart.GetCartItems());
+
+            if (product.IsOutOfStock(qty))
+            {
+                return "No Stock";
+            }
 
             if (isInCart)
             {
