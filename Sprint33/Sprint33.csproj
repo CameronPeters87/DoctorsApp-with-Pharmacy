@@ -2460,6 +2460,7 @@
     <Content Include="Areas\Store\Views\Shared\_FilterSidebarPartial.cshtml" />
     <Content Include="Areas\Store\Views\Shared\_ProductsPartial.cshtml" />
     <Content Include="Areas\Store\Views\Pay\Complete.cshtml" />
+    <Content Include="Areas\Pharmacist\Views\Customers\SendEmail.cshtml" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - Web Deploy.pubxml" />
