@@ -91,14 +91,7 @@ namespace Sprint33.Services
 
             var order = GetOrder(orderId);
 
-            var orderStatus = db.OrderStatuses.Where(o => o.Name == "Processing").FirstOrDefault();
-
-            if (orderStatus == null)
-            {
-                orderStatus = OrderStatusExtensions.CreateOrderStatus(db, "Processing",
-                    "Order is being processed",
-                    "info", "fa fa-cog", true);
-            }
+            var orderStatus = db.OrderStatuses.Where(o => o.Name == "Waiting").FirstOrDefault();
 
             order.OrderStatus = orderStatus;
             order.OrderStatusId = orderStatus.Id;
@@ -120,19 +113,8 @@ namespace Sprint33.Services
 
             var order = GetOrder(orderId);
 
-            var orderStatus = db.OrderStatuses.Where(o => o.Name == "Payment Pending").FirstOrDefault();
+            db.CustomerOrders.Remove(order);
 
-            if (orderStatus == null)
-            {
-                orderStatus = OrderStatusExtensions.CreateOrderStatus(db, "Paid: Processing",
-                    "You need to make payment for the order to be processed",
-                    "secondary", "fa fa-clock-o", true);
-            }
-
-            order.OrderStatus = orderStatus;
-            order.OrderStatusId = order.Id;
-
-            db.Entry(order).State = EntityState.Modified;
             db.SaveChanges();
 
 

@@ -203,9 +203,11 @@
   <ItemGroup>
     <Compile Include="ApiModels\AddressModel.cs" />
     <Compile Include="ApiModels\AppointmentModel.cs" />
+    <Compile Include="ApiModels\CustomerCartModel.cs" />
+    <Compile Include="ApiModels\CustomerOrderModel.cs" />
     <Compile Include="ApiModels\InStoreCart.cs" />
     <Compile Include="ApiModels\InStoreSaleModel.cs" />
-    <Compile Include="ApiModels\MainModel.cs" />
+    <Compile Include="ApiModels\OrderStatusModel.cs" />
     <Compile Include="ApiModels\PatientModel.cs" />
     <Compile Include="ApiModels\ProductModel.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -253,8 +255,11 @@
     <Compile Include="Controllers\Admins1Controller.cs" />
     <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\Api\AppointmentsController.cs" />
+    <Compile Include="Controllers\Api\CustomerCartsController.cs" />
+    <Compile Include="Controllers\Api\CustomerOrdersController.cs" />
     <Compile Include="Controllers\Api\InStoreCartsController.cs" />
     <Compile Include="Controllers\Api\InStoreSalesController.cs" />
+    <Compile Include="Controllers\Api\OrderStatusController.cs" />
     <Compile Include="Controllers\Api\PatientsController.cs" />
     <Compile Include="Controllers\Api\ProductsController.cs" />
     <Compile Include="Controllers\Appointments1Controller.cs" />

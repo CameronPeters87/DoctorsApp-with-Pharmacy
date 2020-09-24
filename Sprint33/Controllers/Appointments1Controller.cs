@@ -271,7 +271,7 @@ namespace Sprint33.Controllers
 
             Appointment appointment = (from a in db.Appointments
                                        where a.PatientName == fullname
-                                       && a.Complete == false
+                                       && a.Complete == false && a.PatientID == patientId
                                        select a).FirstOrDefault();
             if (appointment == null)
             {
