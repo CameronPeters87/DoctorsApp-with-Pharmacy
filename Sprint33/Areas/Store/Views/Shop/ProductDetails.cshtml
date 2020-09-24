@@ -15,6 +15,9 @@
                         <span class="sale-item">
                             <img src="~/Content/Store/images/onsale.png" alt="Image" width="150" height="150">
                         </span>
+                        <span class="sale-item-percent-details font-weight-bold h2">
+                            @(Model.DiscountedRate)% Off
+                        </span>
                     }
                     <img src="@Model.ImageUrl" alt="Image" class="img-fluid p-5">
                 </div>
@@ -28,8 +31,10 @@
 
                 @if (Model.IsOnSale)
                 {
-                    <p><del>R@(string.Format("{0:0.00}", Model.SellingPrice))</del>  
-                       <strong class="text-primary h4">R@(string.Format("{0:0.00}", Model.DiscountedPrice))</strong></p>
+                    <p>
+                        <del>R@(string.Format("{0:0.00}", Model.SellingPrice))</del>
+                        <strong class="text-primary h4">R@(string.Format("{0:0.00}", Model.DiscountedPrice))</strong>
+                    </p>
                 }
                 else
                 {
@@ -40,19 +45,21 @@
                     </p>
                 }
 
-                <div class="mb-5">
-                    <div class="input-group mb-3" style="max-width: 220px;">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-                        </div>
-                        <input type="text" class="form-control text-center quantity" value="1" placeholder=""
-                               aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-                        </div>
+            <div class="mb-5">
+                <div class="input-group mb-3" style="max-width: 220px;">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
                     </div>
-
+                    <input type="text" class="form-control text-center quantity" value="1" placeholder=""
+                           aria-label="Example text with button addon" aria-describedby="button-addon1">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                    </div>
                 </div>
+
+                <h6 class="font-weight-bold">Stock Available: @Model.Quantity units</h6>
+
+            </div>
                 <p>
                     <a href="#" class="buy-now btn btn-sm height-auto px-4 py-3 btn-primary"
                        data-session="@Session["Title"]" data-id="@Model.Id">

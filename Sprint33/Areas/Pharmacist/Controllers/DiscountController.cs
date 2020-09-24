@@ -43,6 +43,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 discountByPercent = (float)Math.Round(discountByPercent, 2);
                 product.DiscountedPrice = product.SellingPrice - discountByPercent;
                 product.IsOnSale = true;
+                product.DiscountedRate = (int)discountValue;
             }
             else
             {

@@ -30,6 +30,7 @@ namespace Sprint33.Areas.Store.Controllers
                                              Price = p.SellingPrice,
                                              IsOnSale = p.IsOnSale,
                                              DiscountedPrice = p.DiscountedPrice,
+                                             DiscountedRate = p.IsOnSale ? p.DiscountedRate : 0,
                                              ProductLink = "/store/shop/product-details/" + p.Slug
                                          }).ToListAsync(),
                 Categories = db.Categories.ToList()
@@ -84,6 +85,7 @@ namespace Sprint33.Areas.Store.Controllers
                 IsOnSale = product.IsOnSale,
                 PackSize = product.PackSize,
                 Quantity = product.Quantity,
+                DiscountedRate = product.IsOnSale ? product.DiscountedRate : 0,
                 SellingPrice = product.SellingPrice
             };
 

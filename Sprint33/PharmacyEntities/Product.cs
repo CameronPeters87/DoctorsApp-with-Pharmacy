@@ -20,6 +20,7 @@ namespace Sprint33.PharmacyEntities
         public float SellingPrice { get; set; }
         public bool IsOnSale { get; set; }
         public float DiscountedPrice { get; set; }
+        public int DiscountedRate { get; set; }
         public int CategoryId { get; set; }
         public int SupplierId { get; set; }
         [ForeignKey("CategoryId")]

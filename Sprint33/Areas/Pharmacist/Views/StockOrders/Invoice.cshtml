@@ -67,9 +67,9 @@
                                         @item.Product.Name
                                     </h3>
                                 </td>
-                                <td class="unit">R @item.Product.SupplierPrice</td>
+                                <td class="unit">R@(item.Product.SupplierPrice.ToString("0.00"))</td>
                                 <td class="qty">@item.Quantity</td>
-                                <td class="total">R @item.Price</td>
+                                <td class="total">R@(item.Price.ToString("0.00"))</td>
                             </tr>
 
                         }
@@ -77,18 +77,18 @@
                     <tfoot>
                         <tr>
                             <td colspan="2"></td>
-                            <td colspan="2">SUBTOTAL</td>
-                            <td>R @Model.SubTotal</td>
+                            <td colspan="2">SubTotal</td>
+                            <td>R@(Model.SubTotal.ToString("0.00"))</td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">TAX 15%</td>
-                            <td>R @Model.TotalTax</td>
+                            <td>R@(Model.TotalTax.ToString("0.00"))</td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">GRAND TOTAL</td>
-                            <td>R @Model.TotalCost</td>
+                            <td>R@(Model.TotalCost.ToString("0.00"))</td>
                         </tr>
                     </tfoot>
                 </table>

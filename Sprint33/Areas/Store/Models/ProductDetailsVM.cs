@@ -15,6 +15,7 @@ namespace Sprint33.Areas.Store.Models
         public float SellingPrice { get; set; }
         public bool IsOnSale { get; set; }
         public float DiscountedPrice { get; set; }
+        public int? DiscountedRate { get; set; }
         public virtual Category Category { get; set; }
     }
 }

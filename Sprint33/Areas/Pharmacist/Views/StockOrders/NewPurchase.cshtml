@@ -159,7 +159,7 @@
                                         new[] { new SelectListItem { Text = "30 days", Value = "30" },
                                                 new SelectListItem { Text = "60 days", Value = "60"},
                                                 new SelectListItem { Text = "90 days", Value = "90"}}, "Select Payment Period",
-                                        new { htmlAttributes = new { @class = "form-control" } })
+                                        new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -229,11 +229,6 @@
                                 }
                             </tbody>
                             <tfoot style="font-weight:bold">
-                                <tr>
-                                    <td>SUBTOTAL</td>
-                                    <td>R @Model.SubTotal</td>
-                                    <td colspan="3"></td>
-                                </tr>
                                 <tr>
                                     <td>TAX(15%)</td>
                                     <td>R @Model.TaxTotal</td>

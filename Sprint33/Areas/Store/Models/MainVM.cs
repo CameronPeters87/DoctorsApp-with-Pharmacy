@@ -19,5 +19,6 @@ namespace Sprint33.Areas.Store.Models
         public bool IsOnSale { get; set; }
         public float DiscountedPrice { get; set; }
         public string ProductLink { get; set; }
+        public int? DiscountedRate { get; set; }
     }
 }

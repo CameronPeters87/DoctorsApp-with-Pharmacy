@@ -289,7 +289,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 foreach (var item in orderedItems)
                 {
                     var product = await db.Products.FindAsync(item.ProductId);
-                    product.Quantity = item.Quantity;
+                    product.Quantity += item.Quantity;
                     db.Entry(product).State = EntityState.Modified;
                     await db.SaveChangesAsync();
                 }
@@ -356,17 +356,17 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             switch (model.PaymentPeriod)
             {
                 case "30":
-                model.PaymentDue = model.StockOrderDate.AddMonths(1);
-                break;
+                    model.PaymentDue = model.StockOrderDate.AddMonths(1);
+                    break;
                 case "60":
-                model.PaymentDue = model.StockOrderDate.AddMonths(2);
-                break;
+                    model.PaymentDue = model.StockOrderDate.AddMonths(2);
+                    break;
                 case "90":
-                model.PaymentDue = model.StockOrderDate.AddMonths(3);
-                break;
+                    model.PaymentDue = model.StockOrderDate.AddMonths(3);
+                    break;
                 default:
-                model.PaymentDue = model.StockOrderDate;
-                break;
+                    model.PaymentDue = model.StockOrderDate;
+                    break;
             }
 
             model.StringPaymentDue = model.PaymentDue.ToLongDateString();
