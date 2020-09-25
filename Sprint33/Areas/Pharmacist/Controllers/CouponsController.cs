@@ -27,6 +27,8 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 .Select(c => new CouponItem(c))
                 .ToList();
 
+            ViewBag.Customers = db.Patients.ToList();
+
             return View(model);
         }
 

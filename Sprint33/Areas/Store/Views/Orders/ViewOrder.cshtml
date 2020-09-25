@@ -48,11 +48,11 @@
                         <img class="img-fluid" src="@item.Product.ImageUrl" width="75" />
                     </td>
                     <td>@item.Product.Name</td>
-                    <td>R@(item.Product.SellingPrice.ToString("0.00"))</td>
+                    <td>R@(item.Product.SellingPrice.ToString("n2"))</td>
                     <td class="text-center">
                         @item.Quantity
                     </td>
-                    <td class="text-center">R@(item.Price.ToString("0.00"))</td>
+                    <td class="text-center">R@(item.Price.ToString("n2"))</td>
                 </tr>
                 }
             </tbody>

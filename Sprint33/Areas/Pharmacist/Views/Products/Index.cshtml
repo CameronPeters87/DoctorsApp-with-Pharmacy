@@ -72,8 +72,8 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Supplier.Name)
                             </td>
-                            <td>R@(item.SupplierPrice.ToString("0.00")) </td>
-                            <td>R@(item.SellingPrice.ToString("0.00")) </td>
+                            <td>R@(item.SupplierPrice.ToString("n2")) </td>
+                            <td>R@(item.SellingPrice.ToString("n2")) </td>
                             <td>
                                 <a href="@Url.Action("DeleteProduct")?id=@item.Id">
                                     <span class="fa fa-trash-alt" style="color:red"></span>

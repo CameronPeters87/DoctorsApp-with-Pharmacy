@@ -135,10 +135,10 @@ namespace Sprint33.Services
             order.Surname = model.Surname;
             order.Email = model.Email;
             order.City = model.City;
-            order.Country = model.City;
+            order.Country = model.Country;
             order.PhoneNumber = model.PhoneNumber;
             order.Address = model.Address;
-            order.ZipCode = model.Address;
+            order.ZipCode = model.ZipCode;
             order.PaymentMethod = model.PaymentMethod;
 
             db.Entry(order).State = EntityState.Modified;

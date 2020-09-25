@@ -5,9 +5,10 @@
     Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Coupons</h2>
-
-<br />
+<button class="btn btn-success mt-1 mb-3" data-toggle="modal" data-target="#create-coupon">
+    <i class="fa fa-plus"></i>
+    Create Coupon
+</button>
 
 @if (TempData["Error"] != null)
 {
@@ -26,76 +27,8 @@
 
 <div class="row">
 
-    <!--Add Category-->
-    <div class="col-md-6">
-        <div class="card shadow h-100 py-2">
-            <div class="card-body">
-                @using (Html.BeginForm("AddCoupon", "Coupons", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-
-                    <div class="form-horizontal">
-                        <div class="card-header py-3">
-                            <h4 class="m-0 font-weight-bold text-primary">Create a Coupon</h4>
-                        </div>
-                        <br />
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", @placeholder = "Code" } })
-                                @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = "Description" })
-                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label " for="StartDate">Start Date</label>
-                            <div class="col-md-8">
-                                <input class="form-control text-box single-line"
-                                       data-val="true" data-val-date="The field StartDate must be a date."
-                                       data-val-required="The StartDate field is required."
-                                       id="StartDate" name="StartDate"
-                                       type="date">
-                                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label " for="EndDate">End Date</label>
-                            <div class="col-md-8">
-                                <input class="form-control text-box single-line" data-val="true"
-                                       data-val-date="The field EndDate must be a date."
-                                       data-val-required="The EndDate field is required."
-                                       id="EndDate" name="EndDate" type="date">
-                                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label " for="DiscountRate">Discount Rate</label>
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.DiscountRate, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.DiscountRate, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Add" class="btn btn-primary" />
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
-
-
-    <!--List Categories-->
-    <div class="col-md-6">
+    <!--List Coupons-->
+    <div class="col-md-12">
         <div class="card shadow h-100 py-2">
             <div class="card-body">
                 @if (!Model.Coupons.Any())
@@ -105,7 +38,7 @@
                 else
                 {
                     <div class="card-header py-3">
-                        <h4 class="m-0 font-weight-bold text-primary">Categories</h4>
+                        <h4 class="m-0 font-weight-bold text-primary">Coupons</h4>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
@@ -128,10 +61,13 @@
                                         <td>@item.StartDateString</td>
                                         <td>@item.EndDateString</td>
                                         <td>
-                                            <a onclick="" href="#" class="RemoveLink"
+                                            <a onclick="" href="#" class="RemoveLink btn btn-danger btn-sm"
                                                data-id="@item.Id">
-                                                <span class="fa fa-trash-alt" style="color:red"></span>
+                                                <span class="fa fa-trash-alt" style="color:white"></span>
                                             </a>
+                                            <button class="send-email btn btn-info btn-sm" data-toggle="modal" data-target="#send-coupon">
+                                                <i class="fa fa-paper-plane"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 }
@@ -142,9 +78,147 @@
             </div>
         </div>
     </div>
-
 </div>
 
+<!-- MODALS-->
+<!--Add Category-->
+<div class="modal fade" id="create-coupon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="card shadow h-100 py-2">
+                <div class="card-body">
+                    @using (Html.BeginForm("AddCoupon", "Coupons", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <div class="card-header py-3">
+                                <h4 class="m-0 font-weight-bold text-primary">Create a Coupon</h4>
+                            </div>
+                            <br />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", @placeholder = "Code" } })
+                                    @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = "Description" })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label " for="StartDate">Start Date</label>
+                                <div class="col-md-8">
+                                    <input class="form-control text-box single-line"
+                                           data-val="true" data-val-date="The field StartDate must be a date."
+                                           data-val-required="The StartDate field is required."
+                                           id="StartDate" name="StartDate"
+                                           type="date">
+                                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label " for="EndDate">End Date</label>
+                                <div class="col-md-8">
+                                    <input class="form-control text-box single-line" data-val="true"
+                                           data-val-date="The field EndDate must be a date."
+                                           data-val-required="The EndDate field is required."
+                                           id="EndDate" name="EndDate" type="date">
+                                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label " for="DiscountRate">Discount Rate</label>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.DiscountRate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DiscountRate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Add" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Send Coupon-->
+<div class="modal fade modal" id="send-coupon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <!--Display List of Customers-->
+            <div class="card shadow h-100 py-2">
+                <div class="card-body">
+
+                    <div class="card-header py-3">
+                        <h4 class="m-0 font-weight-bold text-primary" style="display:inline-block">
+                            Customer List
+                        </h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th onclick="sortTable(0)">Name</th>
+                                    <th onclick="sortTable(1)">Contact Number</th>
+                                    <th onclick="sortTable(2)">Email</th>
+                                    <th onclick="sortTable(3)" class="text-center">Loyalty</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.Customers)
+                                {
+                                    <tr id="id_@item.UserID" data-id="@item.UserID">
+                                        <td>
+                                            <input type="checkbox" />
+                                        </td>
+                                        <td>
+                                            @item.FirstName @item.Surname
+                                        </td>
+                                        <td>
+                                            @item.ContactNumber
+                                        </td>
+                                        <td>
+                                            @item.Email
+                                        </td>
+                                        <td class="text-center">
+                                            @if (item.isLoyal)
+                                            {
+                                                <i class="fa fa-check-circle text-success fa-2x"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-times-circle text-danger fa-2x"></i>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="card-footer text-right">
+                    <button class="btn btn-success send-confirm">
+                        Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @section scripts {
     <script>
 
