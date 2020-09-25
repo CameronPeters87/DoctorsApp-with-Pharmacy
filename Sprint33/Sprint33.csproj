@@ -250,6 +250,7 @@
     <Compile Include="Areas\Store\Models\CustomerCartVM.cs" />
     <Compile Include="Areas\Store\Models\MainVM.cs" />
     <Compile Include="Areas\Store\Models\ProductDetailsVM.cs" />
+    <Compile Include="Areas\Store\Models\ViewOrderModel.cs" />
     <Compile Include="Areas\Store\StoreAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Admins1Controller.cs" />
@@ -2036,6 +2037,9 @@
     <Content Include="Content\PharmacistTemp\vendor\jquery\jquery.min.js" />
     <Content Include="Content\PharmacistTemp\vendor\jquery\jquery.slim.js" />
     <Content Include="Content\PharmacistTemp\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Content\ProgressTracker\scripts\site.js" />
+    <Content Include="Content\ProgressTracker\styles\progress-tracker.css" />
+    <Content Include="Content\ProgressTracker\styles\site.css" />
     <Content Include="Content\Store\css\aos.css" />
     <Content Include="Content\Store\css\bootstrap.min.css" />
     <Content Include="Content\Store\css\bootstrap\bootstrap-grid.css" />
@@ -2468,6 +2472,9 @@
     <Content Include="Areas\Store\Views\Pay\Complete.cshtml" />
     <Content Include="Areas\Pharmacist\Views\Customers\SendEmail.cshtml" />
     <Content Include="Areas\Pharmacist\Views\CustomerOrders\Index.cshtml" />
+    <Content Include="Areas\Store\Views\Orders\ViewOrder.cshtml" />
+    <Content Include="libman.json" />
+    <Content Include="Areas\Store\Views\Shared\_ProgressTrackerPartial.cshtml" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - Web Deploy.pubxml" />
@@ -2989,7 +2996,6 @@
   <ItemGroup>
     <Folder Include="Areas\Store\Data\" />
     <Folder Include="Areas\Store\Views\Login\" />
-    <Folder Include="Areas\Store\Views\Orders\" />
     <Folder Include="Files\Barcodes\" />
     <Folder Include="Files\Coupons\" />
     <Folder Include="Files\Gallery\" />

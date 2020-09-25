@@ -1,5 +1,6 @@
 ﻿using Sprint33.Models;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -33,5 +34,6 @@ namespace Sprint33.PharmacyEntities
         public int OrderStatusId { get; set; }
         public virtual OrderStatus OrderStatus { get; set; }
         public virtual Patient Customer { get; set; }
+        public virtual ICollection<CustomerCart> CustomerCarItems { get; set; }
     }
 }

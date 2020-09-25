@@ -1,0 +1,142 @@
+﻿@model Sprint33.PharmacyEntities.OrderStatus
+
+<div class="fullwidth">
+    <div class="container separator">
+        <ul class="progress-tracker progress-tracker--text progress-tracker--center">
+            @if (Model.ProcessNumber > 1)
+            {
+                <li class="progress-step is-complete">
+                    <div class="progress-marker"></div>
+                    <div class="progress-text">
+                        <h4 class="progress-title">Pending Payment</h4>
+                    </div>
+                </li>
+            }
+            else if (Model.ProcessNumber == 1)
+            {
+                <li class="progress-step is-active">
+                    <div class="progress-marker"></div>
+                    <div class="progress-text">
+                        <h4 class="progress-title">Pending Payment</h4>
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li class="progress-step">
+                    <div class="progress-marker"></div>
+                    <div class="progress-text">
+                        <h4 class="progress-title">Pending Payment</h4>
+                    </div>
+                </li>
+            }
+
+
+            @if (Model.ProcessNumber > 2)
+            {
+                <li class="progress-step is-complete">
+                    <div class="progress-marker"></div>
+                    <div class="progress-text">
+                        <h4 class="progress-title">Waiting</h4>
+                    </div>
+                </li>
+            }
+            else if (Model.ProcessNumber == 2)
+            {
+                <li class="progress-step is-active" aria-current="step">
+                    <div class="progress-marker"></div>
+                    <div class="progress-text">
+                        <h4 class="progress-title">Waiting</h4>
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li class="progress-step">
+                    <div class="progress-marker"></div>
+                    <div class="progress-text">
+                        <h4 class="progress-title">Waiting</h4>
+                    </div>
+                </li>
+            }
+
+            @if (Model.ProcessNumber > 3)
+            {
+                <li class="progress-step is-complete">
+                    <div class="progress-marker"></div>
+                    <div class="progress-text">
+                        <h4 class="progress-title">Processing</h4>
+                    </div>
+                </li>
+            }
+            else if (Model.ProcessNumber == 3)
+            {
+                <li class="progress-step is-active" aria-current="step">
+                    <div class="progress-marker"></div>
+                    <div class="progress-text">
+                        <h4 class="progress-title">Processing</h4>
+
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li class="progress-step">
+                    <div class="progress-marker"></div>
+                    <div class="progress-text">
+                        <h4 class="progress-title">Processing</h4>
+
+                    </div>
+                </li>
+            }
+
+            @if (Model.ProcessNumber > 4)
+            {
+                <li class="progress-step is-complete">
+                    <div class="progress-marker"></div>
+                    <div class="progress-text">
+                        <h4 class="progress-title">On it's way!</h4>
+                    </div>
+                </li>
+
+            }
+            else if (Model.ProcessNumber == 4)
+            {
+                <li class="progress-step is-complete">
+                    <div class="progress-marker"></div>
+                    <div class="progress-text">
+                        <h4 class="progress-title">On it's way!</h4>
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li class="progress-step">
+                    <div class="progress-marker"></div>
+                    <div class="progress-text">
+                        <h4 class="progress-title">On it's way!</h4>
+                    </div>
+                </li>
+            }
+
+
+            @if (Model.ProcessNumber == 5)
+            {
+                <li class="progress-step is-complete">
+                    <div class="progress-marker"></div>
+                    <div class="progress-text">
+                        <h4 class="progress-title">Completed</h4>
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li class="progress-step">
+                    <div class="progress-marker"></div>
+                    <div class="progress-text">
+                        <h4 class="progress-title">Completed</h4>
+                    </div>
+                </li>
+            }
+    </div>
+</div>

@@ -43,7 +43,8 @@ namespace Sprint33
                         Description = "You need to make payment for the order to be processed",
                         Color = "secondary",
                         Icon = "fa fa-clock-o",
-                        isPaid = false
+                        isPaid = false,
+                        ProcessNumber = 1
                     });
 
                     statusList.Add(new OrderStatus
@@ -52,7 +53,8 @@ namespace Sprint33
                         Description = "Order is being processed",
                         Color = "info",
                         Icon = "fa fa-cog",
-                        isPaid = true
+                        isPaid = true,
+                        ProcessNumber = 3
                     });
 
                     statusList.Add(new OrderStatus
@@ -61,7 +63,8 @@ namespace Sprint33
                         Description = "Your order is put on hold",
                         Color = "warning",
                         Icon = "fa fa-pause",
-                        isPaid = true
+                        isPaid = true,
+                        ProcessNumber = 0
                     });
 
                     statusList.Add(new OrderStatus
@@ -70,7 +73,8 @@ namespace Sprint33
                         Description = "Order recieved",
                         Color = "success",
                         Icon = "fa fa-check",
-                        isPaid = true
+                        isPaid = true,
+                        ProcessNumber = 5
                     });
 
                     statusList.Add(new OrderStatus
@@ -79,7 +83,8 @@ namespace Sprint33
                         Description = "Your Order is being delivered",
                         Color = "warning",
                         Icon = "fa fa-truck",
-                        isPaid = true
+                        isPaid = true,
+                        ProcessNumber = 4
                     });
 
                     statusList.Add(new OrderStatus
@@ -88,7 +93,8 @@ namespace Sprint33
                         Description = "",
                         Color = "info",
                         Icon = "fa fa-clock-o",
-                        isPaid = true
+                        isPaid = true,
+                        ProcessNumber = 2
                     });
 
                     db.OrderStatuses.AddRange(statusList);

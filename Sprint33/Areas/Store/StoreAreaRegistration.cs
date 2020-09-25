@@ -21,6 +21,16 @@ namespace Sprint33.Areas.Store
             //    new[] { "Sprint33.Areas.Store.Controllers" }
             //);
 
+
+            //context.MapRoute("Orders",
+            //"Store/Orders/{action}/{name}/{id}",
+            //new
+            //{
+            //    controller = "Orders",
+            //    action = "view-order"
+            //});
+
+
             context.MapRoute("Checkout",
             "Store/Checkout/{action}/{orderId}/{customerId}",
             new

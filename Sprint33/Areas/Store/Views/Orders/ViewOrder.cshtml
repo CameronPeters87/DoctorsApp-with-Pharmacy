@@ -1,0 +1,78 @@
+﻿@model Sprint33.PharmacyEntities.CustomerOrder
+@{
+    ViewBag.Title = "ViewOrder";
+    Layout = "~/Areas/Store/Views/Shared/_LayoutStore.cshtml";
+}
+
+<h2 class="font-weight-bold m-5"> Order #@(Model.Id)</h2>
+
+@Html.Partial("_ProgressTrackerPartial", Model.OrderStatus)
+
+<div class="row px-5">
+    <div class="col-md-6">
+
+        <div class="ml-3">
+            <h4 class="font-weight-bold mb-3">Billing Details</h4>
+
+            <ul>
+                <li>Name: @Model.FirstName @Model.Surname</li>
+                <li>Order Date: @Model.OrderDate.ToLongDateString()</li>
+                <li>Email: @Model.Email</li>
+                <li>Phone: @Model.PhoneNumber</li>
+            </ul>
+            <address>
+                @Model.Address<br>
+                @Model.City<br>
+                @Model.Country<br />
+                @Model.ZipCode
+            </address>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h4 class="mb-3">Items Purchased</h4>
+        <table class="table">
+            <thead>
+                <tr class="table-info">
+                    <td></td>
+                    <td>Product</td>
+                    <td class="text-center">Unit Price</td>
+                    <td>Quantity</td>
+                    <td>Total</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CustomerCarItems)
+                {
+                <tr class="cart-item">
+                    <td>
+                        <img class="img-fluid" src="@item.Product.ImageUrl" width="75" />
+                    </td>
+                    <td>@item.Product.Name</td>
+                    <td>R@(item.Product.SellingPrice.ToString("0.00"))</td>
+                    <td class="text-center">
+                        @item.Quantity
+                    </td>
+                    <td class="text-center">R@(item.Price.ToString("0.00"))</td>
+                </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" class="text-right font-weight-bold h5">Sub-Total: </td>
+                    <td class="font-weight-bold text-center totalprice h5">R@(Model.SubTotal)</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="text-right font-weight-bold h5">Tax: </td>
+                    <td class="font-weight-bold h5 text-center totalprice">R@(Model.TotalTax)</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="text-right font-weight-bold h5">Total: </td>
+                    <td class="font-weight-bold text-center h5 totalprice">R@(Model.TotalCost)</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

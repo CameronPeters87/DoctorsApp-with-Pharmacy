@@ -13,5 +13,6 @@ namespace Sprint33.PharmacyEntities
         public string Color { get; set; }
         public string Icon { get; set; }
         public bool isPaid { get; set; }
+        public int ProcessNumber { get; set; }
     }
 }

@@ -82,6 +82,12 @@ namespace Sprint33.Services
                 db.SaveChanges();
             }
 
+            lastOrder.CustomerCarItems = db.CustomerCarts.Where(c => c.CustomerId == patientId
+                && c.CustomerOrderId == lastOrder.Id).ToList();
+
+            db.Entry(lastOrder).State = EntityState.Modified;
+            db.SaveChanges();
+
             controller.Session["CustomerOrderId"] = lastOrder.Id;
         }
 
