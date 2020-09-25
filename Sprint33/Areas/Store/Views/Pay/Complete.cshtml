@@ -19,11 +19,11 @@
                         <h2 class="display-3 text-black">Thank you!</h2>
                         <p class="lead">
                             You order was successfuly completed.
-                            Your order number is #@(Session["OrderId"])
+                            Your order number is #@Convert.ToInt32(Session["CustomerOrderId"])
                         </p>
                         <p class="lead font-weight-bold mb-5">NB: Upon delivery, you need confirm delivery by downloading our app from the play store</p>
                         <p>
-                            <a href="/orders/view-order/@(Session["OrderId"])"
+                            <a href="/store/orders/view-order/@Convert.ToInt32(Session["CustomerOrderId"])"
                                class="btn btn-md height-auto px-4 py-3 btn-primary">
                                 View Order
                             </a>

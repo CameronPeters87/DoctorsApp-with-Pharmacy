@@ -179,6 +179,10 @@ namespace Sprint33.Areas.Store.Controllers
 
         public ActionResult Complete(int? id)
         {
+            var orderId = Convert.ToInt32(Session["CustomerOrderId"]);
+            var orderId1 = customerOrderRepository.GetOrderId(this.HttpContext);
+            var patient = Convert.ToInt32(Session["id"]);
+
             string status = "Unknown";
             switch (id.ToString())
             {
