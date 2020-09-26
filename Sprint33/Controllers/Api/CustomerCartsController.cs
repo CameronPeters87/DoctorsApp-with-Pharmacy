@@ -1,16 +1,15 @@
-﻿using System;
+﻿using AutoMapper;
+using Sprint33.ApiModels;
+using Sprint33.Models;
+using Sprint33.PharmacyEntities;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Sprint33.Models;
-using Sprint33.PharmacyEntities;
 
 namespace Sprint33.Controllers.Api
 {
@@ -19,9 +18,19 @@ namespace Sprint33.Controllers.Api
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/CustomerCarts
-        public IQueryable<CustomerCart> GetCustomerCarts()
+        public IEnumerable<CustomerCartModel> GetCustomerCarts()
         {
-            return db.CustomerCarts;
+            List<CustomerCartModel> cartModels = new List<CustomerCartModel>();
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<CustomerCart, CustomerCartModel>());
+            var mapper = config.CreateMapper();
+
+            foreach (var cart in db.CustomerCarts)
+            {
+                CustomerCartModel model = mapper.Map<CustomerCartModel>(cart);
+                cartModels.Add(model);
+            }
+
+            return cartModels;
         }
 
         // GET: api/CustomerCarts/5

@@ -28,6 +28,7 @@
         var c_lname = $("#c_lname").val();
         var c_address = $("#c_address").val();
         var c_city = $("#c_city").val();
+        var c_province = $("#c_province").val();
         var c_state_country = $("#c_state_country").val();
         var c_postal_zip = $("#c_postal_zip").val();
         var c_email_address = $("#c_email_address").val();
@@ -50,6 +51,7 @@
                 Surname: c_lname,
                 Address: c_address,
                 City: c_city,
+                Province: c_province,
                 Country: c_state_country,
                 ZipCode: c_postal_zip,
                 Email: c_email_address,

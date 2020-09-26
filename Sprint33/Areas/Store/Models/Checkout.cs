@@ -37,6 +37,8 @@ namespace Sprint33.Areas.Store.Models
         [Required]
         public string City { get; set; }
         [Required]
+        public string Province { get; set; }
+        [Required]
         public string ZipCode { get; set; }
         [Required]
         public string Country { get; set; }

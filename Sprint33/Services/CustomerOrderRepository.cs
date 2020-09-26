@@ -65,6 +65,7 @@ namespace Sprint33.Services
                 Surname = patient.Surname,
                 Address = string.Format("{0} {1}", patient.Address.Street_Number, patient.Address.Route),
                 City = patient.Address.City,
+                Province = patient.Address.Province,
                 Country = patient.Address.Country,
                 ZipCode = patient.Address.ZipCode,
                 Email = patient.Email,
@@ -135,6 +136,7 @@ namespace Sprint33.Services
             order.Surname = model.Surname;
             order.Email = model.Email;
             order.City = model.City;
+            order.Province = model.Province;
             order.Country = model.Country;
             order.PhoneNumber = model.PhoneNumber;
             order.Address = model.Address;
