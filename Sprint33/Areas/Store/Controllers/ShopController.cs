@@ -36,7 +36,7 @@ namespace Sprint33.Areas.Store.Controllers
                 Categories = db.Categories.ToList()
             };
 
-            var onePageOfProducts = model.ProductContents.ToPagedList(pageNumber, 5);
+            var onePageOfProducts = model.ProductContents.ToPagedList(pageNumber, 20);
             ViewBag.OnePageOfProducts = onePageOfProducts;
 
             return View(model);
