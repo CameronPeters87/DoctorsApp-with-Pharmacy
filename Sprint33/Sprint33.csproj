@@ -326,6 +326,7 @@
     <Compile Include="PharmacyEntities\Coupon.cs" />
     <Compile Include="PharmacyEntities\CustomerCart.cs" />
     <Compile Include="PharmacyEntities\CustomerOrder.cs" />
+    <Compile Include="PharmacyEntities\DeliveryConfirmation.cs" />
     <Compile Include="PharmacyEntities\InStoreCart.cs" />
     <Compile Include="PharmacyEntities\InStoreSale.cs" />
     <Compile Include="PharmacyEntities\Product.cs" />

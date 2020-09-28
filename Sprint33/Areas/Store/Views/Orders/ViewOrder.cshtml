@@ -57,19 +57,19 @@
                 }
             </tbody>
             <tfoot>
-                <tr>
+                @*<tr>
                     <td colspan="4" class="text-right font-weight-bold h5">Sub-Total: </td>
                     <td class="font-weight-bold text-center totalprice h5">R@(Model.SubTotal)</td>
                     <td></td>
-                </tr>
+                </tr>*@
                 <tr>
-                    <td colspan="4" class="text-right font-weight-bold h5">Tax: </td>
-                    <td class="font-weight-bold h5 text-center totalprice">R@(Model.TotalTax)</td>
+                    <td colspan="4" class="text-right font-weight-bold h6">Tax: </td>
+                    <td class="font-weight-bold h6 text-center totalprice">R@(Model.TotalTax)</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="text-right font-weight-bold h5">Total: </td>
-                    <td class="font-weight-bold text-center h5 totalprice">R@(Model.TotalCost)</td>
+                    <td colspan="4" class="text-right font-weight-bold h6">Total: </td>
+                    <td class="font-weight-bold text-center h6 totalprice">R@(Model.TotalCost)</td>
                     <td></td>
                 </tr>
             </tfoot>

@@ -61,9 +61,10 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             model.StockCart = await db.StockCarts.Where(c => c.StockOrderId.Equals(null) &&
                 c.SupplierId.Equals(supplierId)).ToListAsync();
 
-            model.SubTotal = model.StockCart.Select(c => c.Price).Sum();
             model.TaxTotal = model.StockCart.Select(c => c.VatAmount).Sum();
-            model.TotalPrice = model.SubTotal + model.TaxTotal;
+            model.TotalPrice = model.StockCart.Select(c => c.Price).Sum();
+            model.SubTotal = model.TotalPrice - model.TaxTotal;
+
 
             ViewBag.SupplierId = supplierId;
 
@@ -181,58 +182,6 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                     TempData["Error"] = "There is no items in the cart to place order.";
                     return Redirect("/Pharmacist/StockOrders/NewPurchase?supplierId=" + model.SupplierId);
                 }
-
-                #region Creating Order Statuses
-                // If no defaultOS, create all the OrderStatuses because
-                // I doubt there will be any
-                if (defaultOrderStatus == null)
-                {
-                    db.OrderStatuses.Add(new OrderStatus
-                    {
-                        Name = "Pending Payment",
-                        isPaid = false,
-                        Description = "You need to make payment for the order to " +
-                        "be processed",
-                        Color = "secondary",
-                        Icon = "fa fa-clock-o"
-                    });
-
-                    // Processing
-                    db.OrderStatuses.Add(new OrderStatus
-                    {
-                        Name = "Processing",
-                        isPaid = true,
-                        Description = "Order is being processed",
-                        Color = "info",
-                        Icon = "fa fa-cog"
-                    });
-
-                    // On Hold
-                    db.OrderStatuses.Add(new OrderStatus
-                    {
-                        Name = "On Hold",
-                        isPaid = true,
-                        Description = "The supplier put your order on hold",
-                        Color = "warning",
-                        Icon = "fa fa-pause"
-                    });
-
-                    // Complete
-                    db.OrderStatuses.Add(new OrderStatus
-                    {
-                        Name = "Completed",
-                        isPaid = true,
-                        Description = "Order recieved. Stock will be adjusted accordingly",
-                        Color = "success",
-                        Icon = "fa fa-check"
-                    });
-
-                    await db.SaveChangesAsync();
-
-                    defaultOrderStatus = await db.OrderStatuses.Where(os => os.Name.Equals("Pending Payment"))
-                                                        .FirstOrDefaultAsync();
-                }
-                #endregion
 
                 db.StockOrders.Add(new StockOrder
                 {

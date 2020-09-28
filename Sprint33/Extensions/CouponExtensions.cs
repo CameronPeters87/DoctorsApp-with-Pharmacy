@@ -39,7 +39,7 @@ namespace Sprint33.Extensions
             string actual = code.ToUpper();
 
             var model = coupon.Where(c => c.Code == actual &&
-                c.EndDate <= DateTime.Today).FirstOrDefault();
+                DateTime.Today >= c.EndDate).FirstOrDefault();
 
             if (model == null)
             {

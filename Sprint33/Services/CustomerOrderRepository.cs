@@ -47,9 +47,10 @@ namespace Sprint33.Services
             var currentCart = db.CustomerCarts.GetCurrentCartItems(patientId);
             var defaultStatus = db.OrderStatuses.Where(s => s.Name == "Waiting").FirstOrDefault();
 
-            var subTotal = currentCart.GetTotalPrice();
+
             var tax = currentCart.GetTotalTax();
-            var totalCost = subTotal + tax;
+            var totalCost = currentCart.GetTotalPrice();
+            var subTotal = totalCost - tax;
 
             db.CustomerOrders.Add(new CustomerOrder
             {
