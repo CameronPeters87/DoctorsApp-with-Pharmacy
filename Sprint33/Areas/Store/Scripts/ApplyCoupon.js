@@ -26,6 +26,9 @@
                 else if(message == "CouponInUse") {
                     $(".coupon span.validation").html("You already applied a coupon to your order");
                 }
+                else if(message == "CouponAlreadyUsed"){
+                    $(".coupon span.validation").html("You've already used this coupon in a previous order");
+                }
                 else {
                     location.reload();
                 }

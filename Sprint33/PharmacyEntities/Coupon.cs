@@ -15,5 +15,6 @@ namespace Sprint33.PharmacyEntities
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int DiscountRate { get; set; }
+        public float MinimumOrderAmount { get; set; }
     }
 }

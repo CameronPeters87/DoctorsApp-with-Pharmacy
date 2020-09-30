@@ -147,6 +147,8 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                     .CreateBarcode(sku,
                     BarcodeWriterEncoding.Code128);
 
+                MyBarCode.SetMargins(50);
+
                 MyBarCode.SaveAsPng(_barcodePath);
 
                 string _barcodeUrl = "/Files/Barcodes/" + sku + ".png";

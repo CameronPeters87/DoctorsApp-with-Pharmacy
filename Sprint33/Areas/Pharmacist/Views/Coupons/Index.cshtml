@@ -45,6 +45,7 @@
                             <thead>
                                 <tr>
                                     <th onclick="sortTable(0)">Name</th>
+                                    <th>Minimum Order Total</th>
                                     <th>Discount</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
@@ -57,6 +58,7 @@
                                 {
                                     <tr id="row-@item.Id">
                                         <td>@Html.DisplayFor(modelItem => item.Code) </td>
+                                        <td>R@(item.MinimumOrderAmount.ToString("n2"))</td>
                                         <td>@(item.DiscountRate)<span>&#37;</span></td>
                                         <td>@item.StartDateString</td>
                                         <td>@item.EndDateString</td>

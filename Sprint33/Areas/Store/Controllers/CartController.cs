@@ -1,9 +1,13 @@
-﻿using Sprint33.Areas.Pharmacist.HelperMethods;
+﻿using IronBarCode;
+using Sprint33.Areas.Pharmacist.HelperMethods;
 using Sprint33.Areas.Store.Models;
+using Sprint33.Extensions;
 using Sprint33.Models;
 using Sprint33.Services;
 using Sprint33.Services.Interfaces;
 using System;
+using System.Drawing;
+using System.IO;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -79,6 +83,41 @@ namespace Sprint33.Areas.Store.Controllers
             var patientId = Convert.ToInt32(Session["id"]);
 
             customerOrderRepository.InitializeOrder(patientId, this);
+
+            var lastOrder = db.CustomerOrders.GetLastOrder();
+
+            #region Generating QR
+            string _path = Path.Combine(Server.MapPath("~/Files/ConfirmationQRs"), lastOrder.Id + ".png");
+            string _pathDelivery = Path.Combine(Server.MapPath("~/Files/DelivererConfirmationQR"), lastOrder.Id + "_delivery.png");
+            try
+            {
+                //using IronBarCode;
+                //using System.Drawing;
+                // Styling a QR code and adding annotation text
+                var MyBarCode = IronBarCode.BarcodeWriter.CreateBarcode(lastOrder.Id.ToString(), BarcodeWriterEncoding.QRCode);
+                MyBarCode.AddBarcodeValueTextBelowBarcode();
+                MyBarCode.SetMargins(100);
+                MyBarCode.ChangeBarCodeColor(Color.Purple);
+                // Save as HTML
+                MyBarCode.SaveAsPng(_path);
+
+                var MyDeliveryBarCode = IronBarCode.BarcodeWriter.CreateBarcode("delivery" + lastOrder.Id.ToString(), BarcodeWriterEncoding.QRCode);
+                MyDeliveryBarCode.AddBarcodeValueTextBelowBarcode();
+                MyDeliveryBarCode.SetMargins(100);
+                MyDeliveryBarCode.ChangeBarCodeColor(Color.Green);
+                // Save as HTML
+                MyDeliveryBarCode.SaveAsPng(_pathDelivery);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
+            lastOrder.ConfirmationQR_Url = "/Files/ConfirmationQRs/" + lastOrder.Id.ToString() + ".png";
+            lastOrder.DelivererConfirmationQR_Url = "/Files/DelivererConfirmationQR/" + lastOrder.Id.ToString() + "_delivery.png";
+            db.Entry(lastOrder).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            #endregion
 
             return Redirect(customerOrderRepository
                 .GetCheckoutUrl(customerOrderRepository

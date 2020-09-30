@@ -24,6 +24,11 @@ namespace Sprint33.ApiModels
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
 
+        // What the customer will scan on the delivery drivers phone
+        public string ConfirmationQR_Url { get; set; }
+        // What the delivery person will scan on the customer order or email
+        public string DelivererConfirmationQR_Url { get; set; }
+
         public int? CouponId { get; set; }
         public int CustomerId { get; set; }
         public int OrderStatusId { get; set; }

@@ -2998,7 +2998,9 @@
     <Folder Include="Areas\Store\Data\" />
     <Folder Include="Areas\Store\Views\Login\" />
     <Folder Include="Files\Barcodes\" />
+    <Folder Include="Files\ConfirmationQRs\" />
     <Folder Include="Files\Coupons\" />
+    <Folder Include="Files\DelivererConfirmationQR\" />
     <Folder Include="Files\Gallery\" />
     <Folder Include="Files\Invoices\" />
   </ItemGroup>

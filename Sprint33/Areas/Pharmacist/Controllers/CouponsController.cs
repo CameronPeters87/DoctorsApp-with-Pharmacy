@@ -87,6 +87,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 EndDate = model.EndDate,
                 DiscountRate = model.DiscountRate,
                 QRcodeURL = "/Files/Coupons/" + code_upper + ".png",
+                MinimumOrderAmount = model.MinimumOrderAmount
             });
 
             await db.SaveChangesAsync();

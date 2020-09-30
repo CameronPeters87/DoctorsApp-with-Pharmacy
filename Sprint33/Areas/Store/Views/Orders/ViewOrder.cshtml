@@ -4,8 +4,13 @@
     Layout = "~/Areas/Store/Views/Shared/_LayoutStore.cshtml";
 }
 
-<h2 class="font-weight-bold m-5"> Order #@(Model.Id)</h2>
-
+<div>
+    <h2 class="font-weight-bold m-5 d-inline-block"> Order #@(Model.Id)</h2>
+    
+    <span class="d-inline-block pull-right">
+        <img src="@Model.ConfirmationQR_Url" width="200" height="200"/>
+    </span>
+</div>
 @Html.Partial("_ProgressTrackerPartial", Model.OrderStatus)
 
 <div class="row px-5">
@@ -19,13 +24,23 @@
                 <li>Order Date: @Model.OrderDate.ToLongDateString()</li>
                 <li>Email: @Model.Email</li>
                 <li>Phone: @Model.PhoneNumber</li>
+
             </ul>
-            <address>
-                @Model.Address<br>
-                @Model.City<br>
-                @Model.Province, @Model.ZipCode<br>
-                @Model.Country<br />
-            </address>
+
+            <ul class="list-unstyled">
+                <li>
+                    <span class="h4 font-weight-bold mb-1">Address:</span>
+                </li>
+                <li>
+                    <address>
+                        @Model.Address<br>
+                        @Model.City<br>
+                        @Model.Province, @Model.ZipCode<br>
+                        @Model.Country<br />
+                    </address>
+                </li>
+            </ul>
+            
         </div>
     </div>
     <div class="col-md-6">
@@ -47,8 +62,24 @@
                     <td>
                         <img class="img-fluid" src="@item.Product.ImageUrl" width="75" />
                     </td>
-                    <td>@item.Product.Name</td>
-                    <td>R@(item.Product.SellingPrice.ToString("n2"))</td>
+                    <td>
+                        @item.Product.Name
+                        @if (item.Product.IsOnSale)
+                        {
+                            <span>(On Sale)</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Product.IsOnSale)
+                        {
+                            <span>R</span>@(item.Product.DiscountedPrice.ToString("n2"))
+                        }
+                        else
+                        {
+                            <span>R</span>@(item.Product.SellingPrice.ToString("n2"))
+                        }
+
+                    </td>
                     <td class="text-center">
                         @item.Quantity
                     </td>
@@ -58,18 +89,14 @@
             </tbody>
             <tfoot>
                 @*<tr>
-                    <td colspan="4" class="text-right font-weight-bold h5">Sub-Total: </td>
-                    <td class="font-weight-bold text-center totalprice h5">R@(Model.SubTotal)</td>
-                    <td></td>
-                </tr>*@
-                <tr>
-                    <td colspan="4" class="text-right font-weight-bold h6">Tax: </td>
-                    <td class="font-weight-bold h6 text-center totalprice">R@(Model.TotalTax)</td>
-                    <td></td>
-                </tr>
+            <td colspan="4" class="text-right font-weight-bold h5">Sub-Total: </td>
+            <td class="font-weight-bold text-center totalprice h5">R@(Model.SubTotal)</td>
+            <td></td>
+        </tr>*@
+
                 <tr>
                     <td colspan="4" class="text-right font-weight-bold h6">Total: </td>
-                    <td class="font-weight-bold text-center h6 totalprice">R@(Model.TotalCost)</td>
+                    <td class="font-weight-bold text-center h6 totalprice">R@(Model.TotalCost.ToString("n2"))</td>
                     <td></td>
                 </tr>
             </tfoot>

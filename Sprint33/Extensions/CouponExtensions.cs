@@ -34,12 +34,13 @@ namespace Sprint33.Extensions
         }
 
         public static bool IsCouponCodeEnteredValid(this IDbSet<Coupon> coupon,
-            string code)
+            string code, float OrderTotal)
         {
             string actual = code.ToUpper();
 
             var model = coupon.Where(c => c.Code == actual &&
-                DateTime.Today >= c.EndDate).FirstOrDefault();
+                DateTime.Today >= c.EndDate &&
+                c.MinimumOrderAmount <= OrderTotal).FirstOrDefault();
 
             if (model == null)
             {

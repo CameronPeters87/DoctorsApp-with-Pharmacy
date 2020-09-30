@@ -4,6 +4,7 @@ using Sprint33.Models;
 using Sprint33.PharmacyEntities;
 using Sprint33.Services;
 using Sprint33.Services.Interfaces;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -60,9 +61,9 @@ namespace Sprint33.Areas.Store.Controllers
             {
                 return "CodeNull";
             }
-
-            var valid = db.Coupons.IsCouponCodeEnteredValid(code);
             var order = await db.CustomerOrders.FindAsync(orderId);
+            var valid = db.Coupons.IsCouponCodeEnteredValid(code, order.TotalCost);
+
             if (order.CouponId != null)
             {
                 return "CouponInUse";
@@ -74,9 +75,18 @@ namespace Sprint33.Areas.Store.Controllers
             {
                 coupon = db.Coupons.GetCouponByCode(code);
 
-                orderRepository.ApplyCoupon(coupon, order);
+                var customerOrders = db.CustomerOrders.GetCustomerOrders(Convert.ToInt32(Session["id"]));
 
-                return "Success";
+                if (customerOrders.Any(o => o.CouponId == coupon.Id))
+                {
+                    return "CouponAlreadyUsed";
+                }
+                else
+                {
+                    orderRepository.ApplyCoupon(coupon, order);
+
+                    return "Success";
+                }
             }
 
             return "Failed";

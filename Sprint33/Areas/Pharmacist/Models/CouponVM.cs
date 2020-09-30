@@ -16,6 +16,8 @@ namespace Sprint33.Areas.Pharmacist.Models
         public DateTime EndDate { get; set; }
         [Range(1, 100)]
         public int DiscountRate { get; set; }
+        [Range(0, int.MaxValue)]
+        public float MinimumOrderAmount { get; set; }
     }
 
     public class CouponItem
@@ -29,6 +31,7 @@ namespace Sprint33.Areas.Pharmacist.Models
             StartDateString = dto.StartDate.ToLongDateString();
             EndDateString = dto.EndDate.ToLongDateString();
             DiscountRate = dto.DiscountRate;
+            MinimumOrderAmount = dto.MinimumOrderAmount;
         }
 
         public int Id { get; set; }
@@ -38,5 +41,6 @@ namespace Sprint33.Areas.Pharmacist.Models
         public string StartDateString { get; set; }
         public string EndDateString { get; set; }
         public int DiscountRate { get; set; }
+        public float MinimumOrderAmount { get; set; }
     }
 }
