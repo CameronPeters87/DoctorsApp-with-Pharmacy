@@ -103,7 +103,7 @@ namespace Sprint33.Areas.Store.Controllers
 
                 var MyDeliveryBarCode = IronBarCode.BarcodeWriter.CreateBarcode("delivery" + lastOrder.Id.ToString(), BarcodeWriterEncoding.QRCode);
                 MyDeliveryBarCode.AddBarcodeValueTextBelowBarcode();
-                MyDeliveryBarCode.SetMargins(100);
+                MyDeliveryBarCode.SetMargins(50);
                 MyDeliveryBarCode.ChangeBarCodeColor(Color.Green);
                 // Save as HTML
                 MyDeliveryBarCode.SaveAsPng(_pathDelivery);

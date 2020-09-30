@@ -13,7 +13,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
         public ActionResult Index()
         {
             var model = (from o in db.CustomerOrders
-                         orderby o.OrderDate descending
+                         orderby o.Id descending
                          select new CustomerOrderModel
                          {
                              FirstName = o.FirstName,

@@ -116,16 +116,16 @@
                                         <td class="text-black">R@(Model.CustomerOrder.SubTotal)</td>
                                     </tr>*@
                                     <tr>
-                                        <td class="text-black font-weight-bold"><strong>Order Tax</strong></td>
-                                        <td class="text-black font-weight-bold"><strong>R@(Model.CustomerOrder.TotalTax)</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-black font-weight-bold"><strong>Coupon</strong></td>
-                                        <td class="text-black font-weight-bold"><strong>@Model.CouponCode</strong></td>
+                                        <td class="text-black font-weight-bold"><strong>Coupon: @Model.CouponCode</strong></td>
+                                        <td class="text-black font-weight-bold">@(Model.CouponDiscount)%</td>
                                     </tr>
                                     <tr>
                                         <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
-                                        <td class="text-black font-weight-bold"><strong>R@(Model.CustomerOrder.TotalCost)</strong></td>
+                                        <td class="text-black font-weight-bold">R@(Model.CustomerOrder.TotalCost.ToString("n2"))</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-black font-weight-bold"><strong>Order Tax</strong></td>
+                                        <td class="text-black font-weight-bold">R@(Model.CustomerOrder.TotalTax.ToString("n2"))</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -161,7 +161,7 @@
             </div>
         </div>
 
-        <div class="hidden">
+        <div class="hidden d-none">
             <form action="https://secure.paygate.co.za/payweb3/process.trans" method="POST">
                 <input id="PAY_REQUEST_ID" name="PAY_REQUEST_ID" type="hidden" />
                 <input id="CHECKSUM" name="CHECKSUM" type="hidden" />

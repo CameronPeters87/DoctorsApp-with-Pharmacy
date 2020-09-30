@@ -17,8 +17,9 @@ namespace Sprint33.Services
 
         public void ApplyCoupon(Coupon coupon, CustomerOrder order)
         {
+            float discounted = order.TotalCost * ((float)coupon.DiscountRate / 100);
+            order.TotalCost = order.TotalCost - discounted;
             order.CouponId = coupon.Id;
-            order.TotalCost -= (order.TotalCost * coupon.DiscountRate);
 
             db.Entry(order).State = EntityState.Modified;
             db.SaveChanges();

@@ -5,12 +5,14 @@
 }
 
 <div>
-    <h2 class="font-weight-bold m-5 d-inline-block"> Order #@(Model.Id)</h2>
-    
-    <span class="d-inline-block pull-right">
-        <img src="@Model.ConfirmationQR_Url" width="200" height="200"/>
-    </span>
+    <h2 class="font-weight-bold m-5"> Order #@(Model.Id)</h2>
 </div>
+
+<span class="pull-right">
+    <i class="fa fa-download"></i>
+    Invoice
+</span>
+
 @Html.Partial("_ProgressTrackerPartial", Model.OrderStatus)
 
 <div class="row px-5">
@@ -102,4 +104,8 @@
             </tfoot>
         </table>
     </div>
+</div>
+
+<div class="text-center">
+    <img src="@Model.DelivererConfirmationQR_Url" width="300" height="300"/>
 </div>

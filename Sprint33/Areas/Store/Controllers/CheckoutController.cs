@@ -83,7 +83,14 @@ namespace Sprint33.Areas.Store.Controllers
                 }
                 else
                 {
-                    orderRepository.ApplyCoupon(coupon, order);
+                    //orderRepository.ApplyCoupon(coupon, order);
+
+                    float discounted = order.TotalCost * ((float)coupon.DiscountRate / 100);
+                    order.TotalCost = order.TotalCost - discounted;
+                    order.CouponId = coupon.Id;
+
+                    db.Entry(order).State = EntityState.Modified;
+                    db.SaveChanges();
 
                     return "Success";
                 }
