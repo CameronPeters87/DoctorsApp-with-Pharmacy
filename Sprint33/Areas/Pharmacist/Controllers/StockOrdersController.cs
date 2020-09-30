@@ -252,6 +252,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                     BackgroundColorIcon = "bg-success"
                 });
             }
+
             else if (newOrderStatus.Name == "On Hold")
             {
                 db.Notifications.Add(new Notification

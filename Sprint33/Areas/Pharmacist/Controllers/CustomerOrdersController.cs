@@ -1,4 +1,5 @@
 ﻿using Sprint33.Areas.Pharmacist.Models;
+using Sprint33.Extensions;
 using Sprint33.Models;
 using System.Linq;
 using System.Web.Mvc;
@@ -42,6 +43,27 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             ViewBag.OrderStatus = db.OrderStatuses.ToList();
 
             return View(model);
+        }
+
+        public ActionResult ChangeOrderStatus(int orderId, int statusId)
+        {
+            var order = db.CustomerOrders.Find(orderId);
+            var status = db.OrderStatuses.Find(statusId);
+
+            order.OrderStatusId = statusId;
+            order.OrderStatus = status;
+
+            db.Entry(order).State = System.Data.Entity.EntityState.Modified;
+
+            db.Notifications.PushNotificaiton(string.Format("You changed Customer Order #{0} status", status.Name));
+
+
+            db.SaveChanges();
+
+            EmailExtensions.SendMail(order.Email, "Doctor J Govender: Order #" + order.Id,
+                "Order Status changed to " + status.Name);
+
+            return RedirectToAction("Index");
         }
     }
 }
