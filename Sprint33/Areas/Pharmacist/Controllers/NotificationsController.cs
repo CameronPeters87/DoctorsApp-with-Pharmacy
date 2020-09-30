@@ -69,5 +69,15 @@ namespace Sprint33.Areas.Pharmacist.Controllers
 
             return notificationId;
         }
+
+        public ActionResult Clear()
+        {
+            var notifications = db.Notifications.ToList();
+
+            db.Notifications.RemoveRange(notifications);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }

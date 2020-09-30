@@ -51,7 +51,7 @@ namespace Sprint33
                     {
                         Name = "Processing",
                         Description = "Order is being processed",
-                        Color = "info",
+                        Color = "primary",
                         Icon = "fa fa-cog",
                         isPaid = true,
                         ProcessNumber = 3

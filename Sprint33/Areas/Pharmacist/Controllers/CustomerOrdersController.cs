@@ -55,7 +55,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
 
             db.Entry(order).State = System.Data.Entity.EntityState.Modified;
 
-            db.Notifications.PushNotificaiton(string.Format("You changed Customer Order #{0} status", status.Name));
+            db.Notifications.PushNotificaiton(string.Format("You changed Customer Order #{0} status", orderId));
 
 
             db.SaveChanges();
