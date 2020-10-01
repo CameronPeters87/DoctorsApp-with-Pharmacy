@@ -35,6 +35,19 @@ namespace Sprint33
                     db.SaveChanges();
                 }
 
+                if (!db.Admins.Any())
+                {
+                    db.Admins.Add(new Admin
+                    {
+                        FirstName = "Cameron",
+                        Surname = "Peters",
+                        Password = "1234",
+                        Email = "admin@gmail.com"
+                    });
+
+                    db.SaveChanges();
+                }
+
                 if (!db.OrderStatuses.Any())
                 {
                     statusList.Add(new OrderStatus

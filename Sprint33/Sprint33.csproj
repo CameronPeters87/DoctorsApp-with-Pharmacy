@@ -242,7 +242,7 @@
     <Compile Include="Areas\Store\Controllers\CartController.cs" />
     <Compile Include="Areas\Store\Controllers\CheckoutController.cs" />
     <Compile Include="Areas\Store\Controllers\LoginController.cs" />
-    <Compile Include="Areas\Store\Controllers\OrdersController.cs" />
+    <Compile Include="Areas\Store\Controllers\OrderController.cs" />
     <Compile Include="Areas\Store\Controllers\PayController.cs" />
     <Compile Include="Areas\Store\Controllers\ShopController.cs" />
     <Compile Include="Areas\Store\Models\CartSummaryVM.cs" />
@@ -311,6 +311,8 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\Prescription.cs" />
+    <Compile Include="Models\PrescriptionDetail.cs" />
+    <Compile Include="Models\PrescriptionPharmacyItem.cs" />
     <Compile Include="Models\Referral.cs" />
     <Compile Include="Models\Referral_v2.cs" />
     <Compile Include="Models\Transaction.cs" />
@@ -2474,7 +2476,7 @@
     <Content Include="Areas\Store\Views\Pay\Complete.cshtml" />
     <Content Include="Areas\Pharmacist\Views\Customers\SendEmail.cshtml" />
     <Content Include="Areas\Pharmacist\Views\CustomerOrders\Index.cshtml" />
-    <Content Include="Areas\Store\Views\Orders\ViewOrder.cshtml" />
+    <Content Include="Areas\Store\Views\Order\ViewOrder.cshtml" />
     <Content Include="libman.json" />
     <Content Include="Areas\Store\Views\Shared\_ProgressTrackerPartial.cshtml" />
     <None Include="packages.config" />
@@ -2994,6 +2996,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_CartItemsPartial.cshtml" />
     <Content Include="Views\Patients1\PharmacyOrders.cshtml" />
+    <Content Include="Views\Shared\_PrescriptionLayout.cshtml" />
+    <Content Include="Views\Prescriptions\TestPrescriptionLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Store\Data\" />

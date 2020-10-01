@@ -9829,11 +9829,11 @@ textarea.form-control {
     margin-bottom: 2px;
 }
 
-th:hover {
+/*th:hover {
     background-color: #f8f9fc;
     cursor: pointer;
 }
-
+*/
 .btn-custom {
     color: #fff;
     background-color: #01d28e;

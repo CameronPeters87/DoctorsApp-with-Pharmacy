@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace Sprint33.Areas.Store.Controllers
 {
-    public class OrdersController : Controller
+    public class OrderController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: Store/Orders

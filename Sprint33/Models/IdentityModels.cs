@@ -38,6 +38,8 @@ namespace Sprint33.Models
         public DbSet<Referral> referrals { get; set; }
         public DbSet<Referral_v2> Referral_V2s { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
+        public DbSet<PrescriptionDetail> PrescriptionDetails { get; set; }
+        public DbSet<PrescriptionPharmacyItem> PrescriptionPharmacyItems { get; set; }
         public DbSet<Loyalty> Loyalties { get; set; }
 
         // Pharmacy Entities

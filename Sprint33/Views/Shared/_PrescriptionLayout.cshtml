@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @*<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link href="~/Content/PharmacistTemp/css/invoice.css" rel="stylesheet">*@
+
+    <link rel="stylesheet" href=@Url.Content("/Content/ThemeTemp/css/style.css")>
+</head>
+<body style="border-top:50px solid green; border-bottom:50px solid green">
+
+    <div class="container p-4">
+        @RenderBody()
+    </div>
+</body>
+</html>
