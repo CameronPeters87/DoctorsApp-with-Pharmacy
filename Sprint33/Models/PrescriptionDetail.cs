@@ -13,5 +13,7 @@ namespace Sprint33.Models
         public string PackSize { get; set; }
         public string Instructions { get; set; }
         public int? PrescriptionId { get; set; }
+        public int PatientId { get; set; }
+        public virtual Patient Patient { get; set; }
     }
 }

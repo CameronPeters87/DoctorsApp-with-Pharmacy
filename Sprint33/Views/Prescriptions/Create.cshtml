@@ -1,79 +1,115 @@
-﻿@model Sprint33.Models.Prescription
+﻿@model Sprint33.Models.CreatePrescriptionModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Created";
+    Layout = "~/Views/SharedTemp/_MySharedHome.cshtml";
 }
 
-<h2>New Prescription</h2>
+<div class="container my-5">
+    <div class="row">
 
-@using (Html.BeginForm())
-{
-@Html.AntiForgeryToken()
+        <div class="col-md-6">
+            <h4 class="font-weight-bold text-center">Prescription Medicine List</h4>
 
-<div class="form-horizontal">
+            <h4 class="my-4">R<sub>x</sub></h4>
+            <table class="text-center table" width="100%">
+                <thead class="table-success">
+                    <tr>
+                        <th>Name</th>
+                        <th>Instructions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.PrescriptionDetails)
+                    {
+                        <tr>
+                            <td>@item.MedicineName, @item.PackSize</td>
+                            <td>@item.Instructions</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
 
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.PatientName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.PatientName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.PatientName, "", new { @class = "text-danger" })
+        <div class="col-md-6">
+
+            <h4 class="font-weight-bold text-center">Add Medicine to Presicription</h4>
+
+            @using (Html.BeginForm("AddDetail", "Prescriptions", FormMethod.Post, new { @class = "m-5" }))
+            {
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MedicineName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Medicine Name" } })
+                        @Html.ValidationMessageFor(model => model.MedicineName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.PackSize, new { htmlAttributes = new { @class = "form-control", @placeholder = "Pack Size" } })
+                        @Html.ValidationMessageFor(model => model.PackSize, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Instructions, new { htmlAttributes = new { @class = "form-control", @placeholder = "Instructions" } })
+                        @Html.ValidationMessageFor(model => model.PackSize, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-info">
+                            <i class="fa fa-list"></i>
+                            Add To List
+                        </button>
+                    </div>
+                </div>
+            }
+
         </div>
     </div>
+    
+    <div class="row mt-5">
+        
+        <div class="col-md-12">
 
+            <div class="form-group">
+                <label class="control-label" for="Image">Doctor Signature: </label>
+                @Html.TextBoxFor(x => x.Signature, "", new
+                {
+                    type = "file",
+                    accept = "image/gif,image/jpeg,image/png"
+                })
+                @Html.ValidationMessageFor(model => model.Signature, "", new { @class = "text-danger" })
+                <br />
+            </div>
+            <div class="signature img-fluid m-2 d-none">
+                <img id="imgpreview" src="~/Files/Images/noproduct.png"
+                     width="150" height="150" alt="Doctor Signature" />
+            </div>
 
+            <div class="form-group">
+                @Html.LabelFor(model => model.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    <input class="form-control text-box single-line" data-val="true"
+                           data-val-date="The field ExpiryDate must be a date."
+                           data-val-required="The ExpiryDate field is required."
+                           id="ExpiryDate" name="ExpiryDate" placeholder="Instructions" type="date">
+                    @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Patient.Age, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Patient.Age, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Patient.Age, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-check"></i>
+                        Submit
+                    </button>
+                </div>
+            </div>
         </div>
+
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.PrescriptionDetails, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.PrescriptionDetails, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.PrescriptionDetails, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.PrescriptionValid, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.PrescriptionValid, new { htmlAttributes = new { @class = "form-control datepicker" } })
-            @Html.ValidationMessageFor(model => model.PrescriptionValid, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-
-            <input type="submit" value="Save" class="btn btn-primary" />
-        </div>
-    </div>
-</div>
-
-}
-
-@*<div class="form-group">
-            @Html.HiddenFor(model => model.DoctorName)
-        </div>
-
-        <div class="form-group">
-            @Html.HiddenFor(model => model.PatientName)
-        </div>
-
-    <div class="form-group">
-        @Html.HiddenFor(model => model.DateIssued)
-    </div>*@
-
-
-<div>
-    <a href="@Url.Action("Index")" class="btn btn-primary">Back To List</a>
 </div>

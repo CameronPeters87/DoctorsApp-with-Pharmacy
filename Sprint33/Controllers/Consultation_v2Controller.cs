@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Sprint33.Models;
+using Sprint33.Models.ViewModel;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using Sprint33.Models;
-using System.Security.Cryptography;
-using Sprint33.Models.ViewModel;
 
 namespace Sprint33.Controllers
 {
@@ -49,7 +45,7 @@ namespace Sprint33.Controllers
         {
             var model = (from a in db.Appointments
                          where a.AppointmentID.Equals(appointmentId)
-                         select new ConsultationListVM
+                         select new CreateCosulationModel
                          {
                              AppointmentID = appointmentId,
                              AppointmentDate = a.AppointmentTime,
@@ -64,7 +60,7 @@ namespace Sprint33.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(ConsultationListVM model)
+        public async Task<ActionResult> Create(CreateCosulationModel model)
         {
             if (ModelState.IsValid)
             {
@@ -94,6 +90,41 @@ namespace Sprint33.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<string> CreateConsultation(CreateCosulationModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Consultation_v2 dto = new Consultation_v2
+                {
+                    PatientName = model.PatientName,
+                    Notes = model.Notes,
+                    Symptoms = model.Symptoms,
+                    Diagnosis = model.Diagnosis,
+                    AppointmentDate = model.AppointmentDate,
+                    AppointmentID = model.AppointmentID,
+                    PatientId = model.PatientId
+                };
+
+                db.Consultation_V2s.Add(dto);
+
+                Appointment appointment = db.Appointments.Where(a =>
+                    a.AppointmentID.Equals(model.AppointmentID)).FirstOrDefault();
+
+                appointment.Complete = true;
+
+                db.Entry(appointment).State = EntityState.Modified;
+
+                await db.SaveChangesAsync();
+
+                return "Success";
+            }
+
+            TempData["Error"] = "An error has occured. Try again";
+
+            return "Error";
         }
 
         // GET: Consultation_v2/Edit/5
@@ -171,7 +202,7 @@ namespace Sprint33.Controllers
         // GET: Consultation_v2/Delete/5
         public async Task<ActionResult> PreviewConsultation(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

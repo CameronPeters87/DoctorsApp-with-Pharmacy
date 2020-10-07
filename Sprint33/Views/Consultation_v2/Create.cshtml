@@ -1,76 +1,157 @@
-﻿@model Sprint33.Models.ViewModel.ConsultationListVM
+﻿@model Sprint33.Models.ViewModel.CreateCosulationModel
 
 @{
     ViewBag.Title = "Create";
 }
-    <div class="container">
-        <h2>
-            Consultation <i class="fa fa-handshake-o"></i>
-        </h2>
-        <dl class="dl-horizontal">
+<div class="container">
+    <h2>
+        Consultation <i class="fa fa-handshake-o"></i>
+    </h2>
+    <a href="/Appointments1/DoctorIndex" class="btn btn-info pull-right">
+        <i class="fa fa-arrow-left"></i>
+        Back to List
+    </a>
+    <dl class="dl-horizontal">
 
-            <dt>
-                @Html.DisplayNameFor(model => model.PatientName)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.PatientName)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.PatientName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.PatientName)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.AppointmentDate)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.AppointmentDate)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.AppointmentDate)
-            </dd>
-        </dl>
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.AppointmentID)
-            @Html.HiddenFor(model => model.PatientId)
-            @Html.HiddenFor(model => model.PatientName)
-            @Html.HiddenFor(model => model.AppointmentDate)
+        <dd>
+            @Model.AppointmentDate.ToString("dddd, dd MMMM yyyy")
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.AppointmentID)
+        @Html.HiddenFor(model => model.PatientId)
+        @Html.HiddenFor(model => model.PatientName)
+        @Html.HiddenFor(model => model.AppointmentDate)
 
 
-            <div class="form-horizontal">
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Symptoms, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Symptoms, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Symptoms, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Diagnosis, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Diagnosis, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Diagnosis, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.Notes, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
-                    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Symptoms, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Symptoms, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Symptoms, "", new { @class = "text-danger" })
                 </div>
             </div>
-        }
 
-        <div>
-            @Html.ActionLink("Back to List", "Index")
+            <div class="form-group">
+                @Html.LabelFor(model => model.Diagnosis, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Diagnosis, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Diagnosis, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Notes, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="button" class="btn btn-info create-consultation"
+                            data-toggle="modal" data-target="#prescription">
+                        Create
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+<!-- Login Modal -->
+<div class="modal fade" id="prescription" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Prescription</h5>
+            </div>
+            
+            <div class="modal-body">
+                <p>Do you want to create a Prescription for @Model.PatientName?</p>
+            </div>
+            
+            <div class="modal-footer">
+                
+                <div class="text-right">
+                    <button class="btn btn-primary modal-button modal-button-proceed" data-name="proceed">
+                        Proceed
+                    </button>
+                    <button class="btn btn-info modal-button modal-button-skip" data-name="skip">
+                        Skip
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+
+
+@section scripts {
+
+    <script>
+
+        $(function () {
+
+            $("button.modal-button").click(function () {
+                
+                var app_id = $('#AppointmentID').val();
+                var patientId = $('#PatientId').val();
+                var patientName = $('#PatientName').val();
+                var date = $('#AppointmentDate').val();
+                var diagnosis = $('#Diagnosis').val();
+                var symptoms = $('#Symptoms').val();
+                var notes = $('#Notes').val();
+
+                var url = "/Consultation_v2/CreateConsultation";
+
+                $.post(url,
+                    {
+                        PatientName: patientName,
+                        AppointmentDate: date,
+                        Symptoms: symptoms,
+                        Diagnosis: diagnosis,
+                        Notes: notes,
+                        PatientId: patientId,
+                        AppointmentID: app_id
+                    }, function(data){
+                        if (data == "Error") {
+                            location.reload();
+                        }
+                        else {
+                            if ($(this).attr('data-name') == "skip") {
+                                location.href = "/Consultation_v2/Index";
+                            }
+                            else {
+                                location.href = "/Prescriptions/Create?patientId=" + patientId;
+                            }
+                        }
+                    });
+            });
+
+        })
+
+    </script>
+
+}

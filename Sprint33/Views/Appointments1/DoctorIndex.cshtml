@@ -12,7 +12,7 @@
             Create Appointments Slots
         </a>
     </p>
-    <table class="table table-striped">
+    <table class="table table-striped text-center">
         <tr class="table-success">
             <th>
                 @Html.DisplayNameFor(model => model.PatientName)
@@ -41,25 +41,32 @@
         @Html.DisplayFor(modelItem => item.DoctorName)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.AppointmentTime)
+        @item.AppointmentTime.ToString("dddd, dd MMMM yyyy")
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.isPaid)
+    <td class="text-center">
+        @if (item.isPaid)
+        {
+            <i class="fa fa-check-circle text-success fa-2x"></i>
+        }
+        else
+        {
+            <i class="fa fa-times-circle text-danger fa-2x"></i>
+        }
     </td>
     <td>
         <a href="@Url.Action("Create", "Consultation_v2",
-                        new { appointmentId = item.AppointmentID})">
+                                        new { appointmentId = item.AppointmentID})"
+           class="btn btn-info">
             Create Consultation
-        </a> |
-        @Html.ActionLink("Edit", "DoctorEdit", new { id = item.AppointmentID }) |
-        @Html.ActionLink("Details", "DoctorDetails", new { id = item.AppointmentID }) |
-        @Html.ActionLink("Cancel", "DoctorCancel", new { id = item.AppointmentID })
-        @*@Html.ActionLink("Remove Slot", "DoctorDelete", new { id = item.AppointmentID })*@
+        </a>
+        @*@Html.ActionLink("Edit", "DoctorEdit", new { id = item.AppointmentID }) |
+            @Html.ActionLink("Details", "DoctorDetails", new { id = item.AppointmentID }) |
+            @Html.ActionLink("Cancel", "DoctorCancel", new { id = item.AppointmentID })
+        @Html.ActionLink("Remove Slot", "DoctorDelete", new { id = item.AppointmentID })*@
 
     </td>
-</tr>
-}
-}
+</tr>}
+            }
 
     </table>
     <a type="button" class="btn btn-secondary" style="margin-top:15px"

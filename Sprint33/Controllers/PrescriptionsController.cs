@@ -1,4 +1,5 @@
 ﻿using Sprint33.Models;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Sprint33.Controllers
@@ -7,7 +8,21 @@ namespace Sprint33.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult Create(int patientId)
+        {
+            var patient = db.Patients.Find(patientId);
 
+            var model = new CreatePrescriptionModel
+            {
+                PatientID = patientId,
+                Patient = patient,
+                PrescriptionDetails = db.PrescriptionDetails.Where(d => d.PatientId == patientId &&
+                    d.PrescriptionId == null),
+                ProductsDropdown = new SelectList(db.Products.ToList(), "Id", "Name")
+            };
+
+            return View(model);
+        }
 
 
 

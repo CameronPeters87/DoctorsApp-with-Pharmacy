@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace Sprint33.Areas.Store.Controllers
 {
-    public class PayController : Controller
+    public class PurchaseController : Controller
     {
         private IPayment _payment = new Payment();
         private ICustomerOrderRepository customerOrderRepository = new CustomerOrderRepository();
@@ -44,7 +44,7 @@ namespace Sprint33.Areas.Store.Controllers
             request.Add("REFERENCE", orderDb.Id.ToString()); // Payment ref e.g ORDER NUMBER
             request.Add("AMOUNT", paymentAmount);
             request.Add("CURRENCY", "ZAR"); // South Africa
-            request.Add("RETURN_URL", $"{Request.Url.Scheme}://{Request.Url.Authority}/store/pay/completepayment");
+            request.Add("RETURN_URL", $"{Request.Url.Scheme}://{Request.Url.Authority}/store/purchase/completepayment");
             request.Add("TRANSACTION_DATE", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             request.Add("LOCALE", "en-za");
             request.Add("COUNTRY", "ZAF");

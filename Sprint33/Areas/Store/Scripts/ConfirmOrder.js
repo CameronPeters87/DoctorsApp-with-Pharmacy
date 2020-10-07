@@ -69,11 +69,11 @@
                     
                     if (selectedPaymentMethod == "Cash") 
                     {
-                        location.href = "/store/pay/complete?id=1";
+                        location.href = "/store/purchase/complete?id=1";
                     }
                     else 
                     {
-                        $.get("/store/pay/getrequest", { orderId: orderId })
+                        $.get("/store/purchase/getrequest", { orderId: orderId })
                             .done(data => success(data))
                             .fail(err => error(err));
                     }

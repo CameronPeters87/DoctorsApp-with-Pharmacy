@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Sprint33.Models
 {
@@ -84,6 +85,26 @@ namespace Sprint33.Models
                     Inventories.First(i => i.ItemID.Equals(InventoryId)).itemName;
             }
         }
+    }
+
+    public class CreatePrescriptionModel
+    {
+        // Prescription
+        public HttpPostedFileBase Signature { get; set; }
+        public DateTime ExpiryDate { get; set; }
+        public int PatientID { get; set; }
+        public virtual Patient Patient { get; set; }
+
+        //Prescription Details
+        public string MedicineName { get; set; }
+        public string PackSize { get; set; }
+        public string Instructions { get; set; }
+        public IEnumerable<PrescriptionDetail> PrescriptionDetails { get; set; }
+
+        // Pharmacy Items
+        public IEnumerable<SelectListItem> ProductsDropdown { get; set; }
+        public int ProductId { get; set; }
+        public int Quantity { get; set; }
     }
 
     public class CurrentDateAttribute : ValidationAttribute
