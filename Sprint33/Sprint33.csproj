@@ -265,7 +265,6 @@
     <Compile Include="Controllers\Api\ProductsController.cs" />
     <Compile Include="Controllers\Appointments1Controller.cs" />
     <Compile Include="Controllers\AppointmentsController.cs" />
-    <Compile Include="Controllers\ConsultationsController.cs" />
     <Compile Include="Controllers\Consultation_v2Controller.cs" />
     <Compile Include="Controllers\Doctors1Controller.cs" />
     <Compile Include="Controllers\DoctorsController.cs" />

@@ -8,11 +8,6 @@
     <h2 class="font-weight-bold m-5"> Order #@(Model.Id)</h2>
 </div>
 
-<span class="pull-right">
-    <i class="fa fa-download"></i>
-    Invoice
-</span>
-
 @Html.Partial("_ProgressTrackerPartial", Model.OrderStatus)
 
 <div class="row px-5">

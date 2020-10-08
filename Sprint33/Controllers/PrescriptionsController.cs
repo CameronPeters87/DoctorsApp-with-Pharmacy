@@ -1,5 +1,6 @@
 ﻿using Sprint33.Models;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Sprint33.Controllers
@@ -24,8 +25,41 @@ namespace Sprint33.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> AddDetail(CreatePrescriptionModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.PatientID = model.PatientID;
+                model.Patient = db.Patients.Where(p => p.UserID == model.PatientID).FirstOrDefault();
+                model.PrescriptionDetails = db.PrescriptionDetails.Where(d => d.PatientId == model.PatientID &&
+                    d.PrescriptionId == null);
+                model.ProductsDropdown = new SelectList(db.Products.ToList(), "Id", "Name");
+
+                return View("Create", model);
+            }
+
+            db.PrescriptionDetails.Add(new PrescriptionDetail
+            {
+                Instructions = model.Instructions,
+                MedicineName = model.MedicineName,
+                PackSize = model.PackSize,
+                Patient = db.Patients.Where(p => p.UserID == model.PatientID).FirstOrDefault(),
+                PatientId = model.PatientID
+            });
+
+            await db.SaveChangesAsync();
 
 
+            model.PatientID = model.PatientID;
+            model.Patient = db.Patients.Where(p => p.UserID == model.PatientID).FirstOrDefault();
+            model.PrescriptionDetails = db.PrescriptionDetails.Where(d => d.PatientId == model.PatientID &&
+                d.PrescriptionId == null);
+            model.ProductsDropdown = new SelectList(db.Products.ToList(), "Id", "Name");
+
+
+            return View("Create", model);
+        }
 
 
         //// GET: Prescriptions

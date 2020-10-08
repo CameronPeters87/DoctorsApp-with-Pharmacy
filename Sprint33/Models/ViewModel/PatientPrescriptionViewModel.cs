@@ -96,8 +96,11 @@ namespace Sprint33.Models
         public virtual Patient Patient { get; set; }
 
         //Prescription Details
+        [Required]
         public string MedicineName { get; set; }
+        [Required]
         public string PackSize { get; set; }
+        [Required]
         public string Instructions { get; set; }
         public IEnumerable<PrescriptionDetail> PrescriptionDetails { get; set; }
 

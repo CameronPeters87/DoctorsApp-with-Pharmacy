@@ -7,37 +7,15 @@
 
 <div class="container my-5">
     <div class="row">
-
-        <div class="col-md-6">
-            <h4 class="font-weight-bold text-center">Prescription Medicine List</h4>
-
-            <h4 class="my-4">R<sub>x</sub></h4>
-            <table class="text-center table" width="100%">
-                <thead class="table-success">
-                    <tr>
-                        <th>Name</th>
-                        <th>Instructions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.PrescriptionDetails)
-                    {
-                        <tr>
-                            <td>@item.MedicineName, @item.PackSize</td>
-                            <td>@item.Instructions</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-
-
         <div class="col-md-6">
 
-            <h4 class="font-weight-bold text-center">Add Medicine to Presicription</h4>
+            <h2 class="mb-3">Prescription for @Model.Patient.FirstName</h2>
 
-            @using (Html.BeginForm("AddDetail", "Prescriptions", FormMethod.Post, new { @class = "m-5" }))
+            @*<h4 class="font-weight-bold text-center">Add Medicine to Presicription</h4>*@
+
+            @using (Html.BeginForm("AddDetail", "Prescriptions", FormMethod.Post, new { @class = "mx-5" }))
             {
+                @Html.HiddenFor(model => model.PatientID)
                 <div class="form-group">
                     <div class="col-md-8">
                         @Html.EditorFor(model => model.MedicineName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Medicine Name" } })
@@ -46,7 +24,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.PackSize, new { htmlAttributes = new { @class = "form-control", @placeholder = "Pack Size" } })
+                        @Html.EditorFor(model => model.PackSize, new { htmlAttributes = new { @class = "form-control", @placeholder = "Pack Size (eg. 100g)" } })
                         @Html.ValidationMessageFor(model => model.PackSize, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -68,48 +46,120 @@
             }
 
         </div>
+
+        <div class="col-md-6">
+            <h4 class="my-4">R<sub>x</sub></h4>
+            <hr />
+            <table class="text-center table" width="100%">
+                <thead class="table-success">
+                    <tr>
+                        <th>Detail</th>
+                        <th>Instructions</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.PrescriptionDetails)
+                    {
+                        <tr class="bg-white">
+                            <td>@item.MedicineName, @item.PackSize</td>
+                            <td>@item.Instructions</td>
+                            <td>
+                                <button class="remove-detail btn btn-danger btn-sm">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
     </div>
     
     <div class="row mt-5">
         
         <div class="col-md-12">
 
-            <div class="form-group">
-                <label class="control-label" for="Image">Doctor Signature: </label>
-                @Html.TextBoxFor(x => x.Signature, "", new
-                {
-                    type = "file",
-                    accept = "image/gif,image/jpeg,image/png"
-                })
-                @Html.ValidationMessageFor(model => model.Signature, "", new { @class = "text-danger" })
-                <br />
-            </div>
-            <div class="signature img-fluid m-2 d-none">
-                <img id="imgpreview" src="~/Files/Images/noproduct.png"
-                     width="150" height="150" alt="Doctor Signature" />
-            </div>
+            @using (Html.BeginForm("AddDetail", "Prescriptions", FormMethod.Post, new { @class = "mx-5" }))
+            {
+                @Html.HiddenFor(model => model.PatientID)
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
-                    <input class="form-control text-box single-line" data-val="true"
-                           data-val-date="The field ExpiryDate must be a date."
-                           data-val-required="The ExpiryDate field is required."
-                           id="ExpiryDate" name="ExpiryDate" placeholder="Instructions" type="date">
-                    @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label class="control-label" for="Image">Doctor Signature: </label>
+                    @Html.TextBoxFor(x => x.Signature, "", new
+                    {
+                        type = "file",
+                        accept = "image/gif,image/jpeg,image/png"
+                    })
+                    @Html.ValidationMessageFor(model => model.Signature, "", new { @class = "text-danger" })
+                    <br />
                 </div>
-            </div>
+                <img id="imgpreview" class="signature img-fluid m-2 d-none" src="~/Files/Images/noproduct.png"
+                         width="150" height="150" alt="Doctor Signature" />
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <button type="submit" class="btn btn-success">
-                        <i class="fa fa-check"></i>
-                        Submit
-                    </button>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        <input class="form-control text-box single-line" data-val="true"
+                               data-val-date="The field ExpiryDate must be a date."
+                               data-val-required="The ExpiryDate field is required."
+                               id="ExpiryDate" name="ExpiryDate" placeholder="Instructions" type="date">
+                        @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-check"></i>
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            }
         </div>
 
     </div>
 
 </div>
+
+@section scripts {
+    
+    <script>
+
+        $(function(){
+
+            /*
+             * Preview Selected Image
+             */
+
+            function readUrl(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    //$("div.signature").removeClass("d-none");
+
+                    reader.onload = function (e) {
+                        $("img#imgpreview")
+                            .attr("src", e.target.result)
+                            .width(150)
+                            .height(150)
+                            .removeClass("d-none");
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#Signature").change(function () {
+                readUrl(this);
+            });
+
+            ///////////////////////////////////////////////
+
+        });
+
+    </script>
+
+}

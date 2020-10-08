@@ -31,7 +31,7 @@ namespace Sprint33.Models
         public DbSet<Inventory> Inventorys { get; set; }
         public object Items { get; internal set; }
         public DbSet<Patient> Patients { get; set; }
-        public DbSet<Consultation> Consultations { get; set; }
+        //public DbSet<Consultation> Consultations { get; set; }
         public DbSet<Consultation_v2> Consultation_V2s { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public System.Data.Entity.DbSet<Sprint33.Models.Order> Orders { get; set; }
