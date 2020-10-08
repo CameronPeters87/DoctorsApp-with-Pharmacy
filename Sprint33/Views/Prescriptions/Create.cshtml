@@ -81,12 +81,12 @@
         
         <div class="col-md-12">
 
-            @using (Html.BeginForm("AddDetail", "Prescriptions", FormMethod.Post, new { @class = "mx-5" }))
+            @using (Html.BeginForm("Complete", "Prescriptions", FormMethod.Post, new { @class = "mx-5" }))
             {
                 @Html.HiddenFor(model => model.PatientID)
 
                 <div class="form-group">
-                    <label class="control-label" for="Image">Doctor Signature: </label>
+                    <label class="control-label" for="Signature">Doctor Signature: </label>
                     @Html.TextBoxFor(x => x.Signature, "", new
                     {
                         type = "file",

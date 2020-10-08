@@ -2997,6 +2997,7 @@
     <Content Include="Views\Shared\_PrescriptionLayout.cshtml" />
     <Content Include="Views\Prescriptions\TestPrescriptionLayout.cshtml" />
     <Content Include="Views\Prescriptions\Create.cshtml" />
+    <Content Include="Views\Prescriptions\Prescription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Store\Data\" />

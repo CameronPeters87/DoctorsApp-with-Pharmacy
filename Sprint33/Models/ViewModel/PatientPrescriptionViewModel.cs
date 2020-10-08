@@ -110,6 +110,11 @@ namespace Sprint33.Models
         public int Quantity { get; set; }
     }
 
+    public class PrescriptionPdfModel
+    {
+
+    }
+
     public class CurrentDateAttribute : ValidationAttribute
     {
         public CurrentDateAttribute()

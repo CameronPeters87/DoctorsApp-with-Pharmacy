@@ -1,0 +1,98 @@
+﻿@model Sprint33.Models.Prescription
+
+@{
+    ViewBag.Title = "Prescription";
+    Layout = "~/Views/Shared/_PrescriptionLayout.cshtml";
+}
+
+<img src="@Model.BarcodeUrl" width="250" height="100" />
+
+<table width="100%">
+    <thead>
+        <tr class="text-center">
+            <th class="h3">
+                Dr J Govender / Logo
+            </th>
+            <th class="h3">Doctor Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td class="text-center">
+                Doctor James Governer
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="text-center">
+                Reg no. 537
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="text-center">
+                Contact: 031-555-0710
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="text-center">
+                Email: doctorjgov@gmail.com
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="mt-3" width="100%">
+    <thead>
+        <tr class="text-center">
+            <th class="h3">Patient Details</th>
+            <th class="h3">Date</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        <tr>
+            <td>
+                @Model.Patient.FirstName @Model.Patient.Surname
+            </td>
+            <td class="text-center">
+                @Model.DateIssued.ToLongDateString()
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Model.Patient.Age
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h4 class="my-4">R<sub>x</sub></h4>
+
+<table class="text-center table" width="100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Instructions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PrescriptionDetails)
+        {
+            <tr>
+                <td>@item.MedicineName, @item.PackSize</td>
+                <td>@item.Instructions</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <img src="@Model.SignatureUrl" width="150" height="150" />
+</div>
+
+<h3 class="font-weight-bold pull-right my-5 d-inline-block"
+    style="border-top:2px solid black">
+    Doctor's Signature
+</h3>
