@@ -8,6 +8,8 @@ namespace Sprint33.Models
     {
         [Key]
         public int Id { get; set; }
+
+        public string Barcode { get; set; }
         public string BarcodeUrl { get; set; }
         public string SignatureUrl { get; set; }
         public DateTime DateIssued { get; set; }

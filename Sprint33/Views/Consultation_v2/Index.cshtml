@@ -56,7 +56,7 @@
                             @Html.DisplayFor(modelItem => item.Notes)
                         </td>
                         <td>
-                            <a href="@Url.Action("AddPrescription", "Prescriptions",
+                            <a href="@Url.Action("Create", "Prescriptions",
                                         new { patientId = item.PatientId})">
                                 Create Prescription
                             </a> |

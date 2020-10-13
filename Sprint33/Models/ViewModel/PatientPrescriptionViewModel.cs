@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Sprint33.Models
@@ -90,7 +89,8 @@ namespace Sprint33.Models
     public class CreatePrescriptionModel
     {
         // Prescription
-        public HttpPostedFileBase Signature { get; set; }
+        [UIHint("SignaturePad")]
+        public byte[] Signature { get; set; }
         public DateTime ExpiryDate { get; set; }
         public int PatientID { get; set; }
         public virtual Patient Patient { get; set; }

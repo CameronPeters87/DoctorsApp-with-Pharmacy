@@ -1,77 +1,105 @@
-﻿@model Sprint33.Models.PrescriptionListViewModel
+﻿@model Sprint33.Models.Prescription
 
 @{
-    ViewBag.Title = "ViewPrescription";
+    ViewBag.Title = "View";
+    Layout = "~/Views/SharedTemp/_MySharedHome.cshtml";
 }
 
-    
+<img src="@Model.BarcodeUrl" width="250" height="100" />
 
-        <div class="container">
+<a href="/prescriptions/document-preview?id=@Model.Id" target="_blank" class="pull-right m-4">
+    <i class="fa fa-download fa-5x text-dark"></i>
 
-            @if (Session["Title"] == "Doctor")
+</a>
+<div class="container text-black">
+    <table width="100%">
+        <thead>
+            <tr class="text-center">
+                <th class="h3">
+                    Dr J Govender / Logo
+                </th>
+                <th class="h3">Doctor Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td class="text-center">
+                    Doctor James Govender
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="text-center">
+                    Reg no. 537
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="text-center">
+                    Contact: 031-555-0710
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="text-center">
+                    Email: doctorjgov@gmail.com
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="mt-3" width="100%">
+        <thead>
+            <tr class="text-center">
+                <th class="h3">Patient Details</th>
+                <th class="h3">Date</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr>
+                <td>
+                    @Model.Patient.FirstName @Model.Patient.Surname
+                </td>
+                <td class="text-center">
+                    @Model.DateIssued.ToLongDateString()
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Model.Patient.Age
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4 class="my-4">R<sub>x</sub></h4>
+
+    <table class="text-center table" width="100%">
+        <thead class="table-success">
+            <tr>
+                <th>Name</th>
+                <th>Instructions</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white">
+            @foreach (var item in Model.PrescriptionDetails)
             {
-                <a type="button" class="btn btn-primary"
-                   href="javascript:window.print()">
-                    <i class="fa fa-print"></i>
-                    Click to Print This Page
-                </a>
+                <tr>
+                    <td>@item.MedicineName, @item.PackSize</td>
+                    <td>@item.Instructions</td>
+                </tr>
             }
+        </tbody>
+    </table>
 
-            <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <div class="card h-100" style="margin-top:20px">
-                        <h4 class="card-header">Prescription Details <i class="fa fa-medkit"></i></h4>
-                        <div class="card-body">
-                            <p class="card-text">
-                                <dl>
-                                    <dt>Patient Name</dt>
-                                    <dd>- @Model.PatientName</dd>
-                                    <dt>Date Issued</dt>
-                                    <dd>- @Model.DateIssued</dd>
-                                    <dt>Medication</dt>
-                                    <dd>- @Model.InventoryName</dd>
-                                    <dt>Quantity</dt>
-                                    <dd>- @Model.itemQuantity</dd>
-                                    <dt>Expiry Date</dt>
-                                    <dd>- @Model.PrescriptionValid</dd>
-                                    <dt>Notes</dt>
-                                    <dd>@Model.PrescriptionDetails</dd>
-                                </dl>
-                            </p>
-                        </div>
+    <div class="d-inline-block" style="border-bottom:1px solid black;">
+        <img src="@Model.SignatureUrl" />
+    </div>
 
-                        <div class="card-footer">
-                            @if (Session["Title"] == "Doctor")
-                            {
-                                <a href="@Url.Action("Index2")" class="btn btn-info">
-                                    <span class="fa fa-list"></span>
-                                    Back to list
-                                </a>
-                            }
-                            else
-                            {
-                                <a href="@Url.Action("PrescriptionHistory")" class="btn btn-info">
-                                    <span class="fa fa-list"></span>
-                                    Back to list
-                                </a>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            @if (Session["Title"] == "Doctor")
-            {
-                <br />
-                <h4>Yours Faithfully</h4>
-                <h4>Dr. James Govender</h4>
-
-
-                <br><br /><br />
-
-
-                <br>
-                @Html.TextBox("Date", DateTime.Now, new { @readonly = "readonly" })
-            }
-
-        </div>
+    <div>
+        <h3 class="font-weight-bold">
+            Doctor's Signature
+        </h3>
+    </div>
+</div>

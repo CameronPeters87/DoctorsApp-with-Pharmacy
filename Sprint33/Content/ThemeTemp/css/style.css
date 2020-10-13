@@ -9858,3 +9858,10 @@ button.btn.btn-primary.btn-lg.btn-block.btn-order.cust-disabled {
         cursor: default;
         color:white;
     }
+
+/*div.signature-pad > canvas {
+    display: block;
+    width: 300px;
+    height: 150px;
+    margin-bottom: 5px;
+}*/

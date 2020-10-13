@@ -76,27 +76,28 @@
         </div>
 
     </div>
-    
-    <div class="row mt-5">
-        
+
+    <div class="row mt-3">
+
         <div class="col-md-12">
 
             @using (Html.BeginForm("Complete", "Prescriptions", FormMethod.Post, new { @class = "mx-5" }))
             {
-                @Html.HiddenFor(model => model.PatientID)
 
-                <div class="form-group">
+                <div class="form-group mb-5">
                     <label class="control-label" for="Signature">Doctor Signature: </label>
-                    @Html.TextBoxFor(x => x.Signature, "", new
-                    {
-                        type = "file",
-                        accept = "image/gif,image/jpeg,image/png"
-                    })
-                    @Html.ValidationMessageFor(model => model.Signature, "", new { @class = "text-danger" })
-                    <br />
+                    <div class="signature-pad"
+                         style="display:block;
+                                width: 300px;
+                                height: 150px;
+                                margin-bottom: 5px;
+                                border: 1px solid black;">
+                        <canvas class="panel panel-default"></canvas>
+                        <br />
+                        <button type="button" class="btn btn-danger btn-sm btn-clear-canvas">Clear</button>
+                        @Html.HiddenFor(model => model.Signature, ViewData["htmlAttributes"])
+                    </div>
                 </div>
-                <img id="imgpreview" class="signature img-fluid m-2 d-none" src="~/Files/Images/noproduct.png"
-                         width="150" height="150" alt="Doctor Signature" />
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -111,7 +112,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <button type="submit" class="btn btn-success">
+                        <button type="button" class="btn btn-success submit" data-patientId="@Model.PatientID">
                             <i class="fa fa-check"></i>
                             Submit
                         </button>
@@ -125,41 +126,75 @@
 </div>
 
 @section scripts {
-    
     <script>
 
-        $(function(){
+        var signaturePadWrappers = document.querySelectorAll('.signature-pad');
 
-            /*
-             * Preview Selected Image
-             */
+        Array.prototype.forEach.call(signaturePadWrappers, function (wrapper) {
+            var canvas = wrapper.querySelector('canvas');
+            var clearButton = wrapper.querySelector('.btn-clear-canvas');
+            var hiddenInput = wrapper.querySelector('input[type="hidden"]');
 
-            function readUrl(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
+            var signaturePad = new SignaturePad(canvas);
 
-                    //$("div.signature").removeClass("d-none");
+            // Read base64 string from hidden input
+            var base64str = hiddenInput.value;
 
-                    reader.onload = function (e) {
-                        $("img#imgpreview")
-                            .attr("src", e.target.result)
-                            .width(150)
-                            .height(150)
-                            .removeClass("d-none");
-                    }
-
-                    reader.readAsDataURL(input.files[0]);
-                }
+            if (base64str) {
+                // Draws signature image from data URL
+                signaturePad.fromDataURL('data:image/png;base64,' + base64str);
             }
 
-            $("#Signature").change(function () {
-                readUrl(this);
-            });
+            if (hiddenInput.disabled) {
+                signaturePad.off();
+            } else {
+                signaturePad.onEnd = function () {
+                    // Returns signature image as data URL and set it to hidden input
+                    base64str = signaturePad.toDataURL().split(',')[1];
+                    hiddenInput.value = base64str;
+                };
 
-            ///////////////////////////////////////////////
+                clearButton.addEventListener('click', function () {
+                    // Clear the canvas and hidden input
+                    signaturePad.clear();
+                    hiddenInput.value = '';
+                });
+            }
+        });
+
+        $(function () {
+
+            $('button.submit').click(function () {
+
+                var patientId = $(this).attr("data-patientId");
+                var signature = $('#Signature').val();
+                var expiryDate = $('#ExpiryDate').val();
+                var url = "/Prescriptions/Complete";
+
+                $.post(url,
+                    {
+                        PatientID: patientId,
+                        ExpiryDate: expiryDate,
+                        Signature: signature,
+                        MedicineName: 's',
+                        PackSize: 's',
+                        Instructions: 's',
+                        ProductId: 1,
+                        Quantity: 1
+                    }, function (data) {
+                        if (data == "Failes") {
+                            location.reload();
+                        }
+                        else {
+                            location.href = "/Prescriptions/ViewPrescription?id=" + data;
+                        }
+                    });
+
+            });
 
         });
 
     </script>
+
 
 }

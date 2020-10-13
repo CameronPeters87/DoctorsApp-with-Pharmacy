@@ -2864,6 +2864,8 @@
     <Content Include="Scripts\notificaiton.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\signature_pad.js" />
+    <Content Include="Scripts\signature_pad.min.js" />
     <Content Include="Scripts\table.js" />
     <Content Include="Scripts\test.js" />
     <Content Include="Scripts\_references.js" />
@@ -2990,7 +2992,6 @@
     <Content Include="Views\Consultation_v2\PatientHistory.cshtml" />
     <Content Include="Views\Prescriptions\Index2.cshtml" />
     <Content Include="Views\Orders\RefundsIndex.cshtml" />
-    <Content Include="Views\Prescriptions\ViewPrescription.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_CartItemsPartial.cshtml" />
     <Content Include="Views\Patients1\PharmacyOrders.cshtml" />
@@ -2998,16 +2999,18 @@
     <Content Include="Views\Prescriptions\TestPrescriptionLayout.cshtml" />
     <Content Include="Views\Prescriptions\Create.cshtml" />
     <Content Include="Views\Prescriptions\Prescription.cshtml" />
+    <Content Include="Views\Prescriptions\ViewPrescription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Store\Data\" />
     <Folder Include="Areas\Store\Views\Login\" />
-    <Folder Include="Files\Barcodes\" />
+    <Folder Include="Files\Barcodes\Prescriptions\" />
     <Folder Include="Files\ConfirmationQRs\" />
     <Folder Include="Files\Coupons\" />
     <Folder Include="Files\DelivererConfirmationQR\" />
     <Folder Include="Files\Gallery\" />
     <Folder Include="Files\Invoices\" />
+    <Folder Include="Files\Signatures\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Project_Readme.html" />
