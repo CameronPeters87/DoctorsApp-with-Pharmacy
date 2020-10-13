@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Sprint33.PharmacyEntities.CustomerOrder>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+}
+
+@*List Orders*@
+<div class="card shadow h-100 py-2">
+    <div class="card-body">
+        @if (!Model.Any())
+        {
+            <h2 class="text-center">You have no orders being delivered</h2>
+        }
+        else
+        {
+            <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary" style="display:inline-block">
+                    Deliveries
+                </h4>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)">#</th>
+                            <th onclick="sortTable(1)">Customer</th>
+                            <th onclick="sortTable(2)">Order Date</th>
+                            <th>Address</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.FirstName @item.Surname </td>
+                                <td>@item.OrderDate.ToLongDateString()</td>
+                                <td>
+                                    @item.Address
+                                </td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("Directions")" target="_blank" class="btn btn-info btn-sm">
+                                        <i class="fa fa-truck-moving"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
+
