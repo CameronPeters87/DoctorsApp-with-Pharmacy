@@ -23,7 +23,6 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             var orders = db.CustomerOrders.Where(o => o.OrderStatus.ProcessNumber == 4).OrderByDescending(o => o.Id).ToList();
 
             string pharmacyAddress = "37 Magaliesberg St Durban South South Africa 4079";
-            //string pharmacyAddress = "108 Allenby Road Durban North KZN South Africa";
             var _latitude = LocationExtensions.GetLatFromPlaceName(pharmacyAddress, geocoder);
             var _longitude = LocationExtensions.GetLongFromPlaceName(pharmacyAddress, geocoder);
             double destination_Lat;
@@ -51,7 +50,6 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                     geocoder);
                 item.Distance = LocationExtensions.GetDistance(_latitude, _longitude,
                     destination_Lat, destination_Long, 'K');
-
             }
 
             return View(model);
@@ -66,7 +64,12 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 order = new CustomerOrder();
             }
 
-            return View(order);
+            var model = new DirectionsModel
+            {
+                CustomerOrder = order
+            };
+
+            return View(model);
         }
     }
 }

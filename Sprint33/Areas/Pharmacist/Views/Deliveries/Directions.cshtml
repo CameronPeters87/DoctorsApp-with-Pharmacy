@@ -1,4 +1,4 @@
-﻿@model Sprint33.PharmacyEntities.CustomerOrder
+﻿@model Sprint33.Areas.Pharmacist.Models.DirectionsModel
 @{
     ViewBag.Title = "Directions";
     Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
@@ -11,67 +11,63 @@
         width: 480px;
     }
 
-/* Optional: Makes the sample page fill the window. */
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-#floating-panel {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  padding: 5px;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: "Roboto", "sans-serif";
-  line-height: 30px;
-  padding-left: 10px;
-}
-
-#right-panel {
-  font-family: "Roboto", "sans-serif";
-  line-height: 30px;
-  padding-left: 10px;
-}
-
-#right-panel select,
-#right-panel input {
-  font-size: 15px;
-}
-
-#right-panel select {
-  width: 100%;
-}
-
-#right-panel i {
-  font-size: 12px;
-}
-
-#right-panel {
-  height: 100%;
-  float: right;
-  width: 390px;
-  overflow: auto;
-}
+    /* Optional: Makes the sample page fill the window. */
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
 
     #floating-panel {
-  background: #fff;
-  padding: 5px;
-  font-size: 14px;
-  font-family: Arial;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
-  display: none;
-}
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: "Roboto", "sans-serif";
+        line-height: 30px;
+        padding-left: 10px;
+    }
 
+    #right-panel {
+        font-family: "Roboto", "sans-serif";
+        line-height: 30px;
+        padding-left: 10px;
+    }
 
+        #right-panel select,
+        #right-panel input {
+            font-size: 15px;
+        }
 
+        #right-panel select {
+            width: 100%;
+        }
+
+        #right-panel i {
+            font-size: 12px;
+        }
+
+    #floating-panel {
+        background: #fff;
+        padding: 5px;
+        font-size: 14px;
+        font-family: Arial;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+        display: none;
+    }
 </style>
+
+
+<h2 class="text-center">Directions For Order #@(Model.CustomerOrder.Id)</h2>
+
+@* Dont remove any code below VERY IMPORTANT *@
+<p id="destination" class="d-none">@Model.CustomerOrder.Address @Model.CustomerOrder.City @Model.CustomerOrder.Country @Model.CustomerOrder.ZipCode</p>
 
 <div id="floating-panel" class="d-none">
     <strong>Start:</strong>
@@ -106,13 +102,131 @@ body {
         <option value="los angeles, ca">Los Angeles</option>
     </select>
 </div>
-<div id="right-panel"></div>
-<div id="map"></div>
+
+<div class="row">
+
+    <div class="col-md-6 text-center">
+
+        <h4 class="font-weight-bold text-center">Details</h4>
+
+        <dl class="dl-horizontal text-center">
+            <dt>
+                Order Date
+            </dt>
+
+            <dd>
+                @Model.CustomerOrder.OrderDate.ToLongDateString()
+            </dd>
+
+            <dt>
+                Items
+            </dt>
+            @foreach (var items in Model.CustomerOrder.CustomerCarItems)
+            {
+                <dd>
+                    @items.Product.Name : @items.Quantity
+                </dd>
+            }
+        </dl>
+
+        <button class="btn btn-success my-3" data-toggle="modal" data-target="#qr">
+            <i class="fa fa-qrcode"></i>
+            QR Confirmation
+        </button>
+        <button class="btn btn-info my-3" data-toggle="modal" data-target="#sign">
+            <i class="fa fa-pen"></i>
+            Signature Confirmation
+        </button>
+
+        <div id="map"></div>
+
+    </div>
+    <div class="col-md-6">
+        <div id="right-panel"></div>
+    </div>
+
+</div>
+
+<div class="modal fade modal" id="qr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!--Display List of Customers-->
+            <div class="card shadow h-100 py-2">
+                <div class="card-body">
+
+                    <div class="card-header py-3">
+                        <h4 class="m-0 font-weight-bold text-primary" style="display:inline-block">
+                            QR Confirmation
+                        </h4>
+                    </div>
+
+                    <div class="text-center">
+                        <img src="@Model.CustomerOrder.DelivererConfirmationQR_Url" />
+                    </div>
+
+                </div>
+
+                @*<div class="card-footer text-right">
+                        <button class="btn btn-success send-confirm">
+                            Send
+                        </button>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal" id="sign" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!--Display List of Customers-->
+            <div class="card shadow h-100 py-2">
+                <div class="card-body">
+
+                    <div class="card-header py-3">
+                        <h4 class="m-0 font-weight-bold text-primary" style="display:inline-block">
+                            Signature Confirmation
+                        </h4>
+                    </div>
+
+                    <div class="">
+
+                        <div class="form-group my-5">
+                            <div class="signature-pad"
+                                 style="display:block;
+                                width: 300px;
+                                height: 150px;
+                                margin-bottom: 5px;
+                                border: 1px solid black;">
+                                <canvas class="panel panel-default"></canvas>
+                                <br />
+                                <button type="button" class="btn btn-danger btn-sm btn-clear-canvas">Clear</button>
+                                @Html.HiddenFor(model => model.Signature, ViewData["htmlAttributes"])
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer text-right">
+                    <button class="btn btn-success send-confirm">
+                        Confirm
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 @section scripts{
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPWzQ0h1vedStiQWFQ5Ez1Jf2f1rj209Q&callback=initMap&libraries=&v=weekly"
             defer></script>
+    <script src="~/Scripts/signature_pad.min.js"></script>
 
     <script>
 
@@ -134,7 +248,7 @@ body {
             //const onChangeHandler = function () {
             //    calculateAndDisplayRoute(directionsService, directionsRenderer);
             //};
-            //// Dropdowns 
+            //// Dropdowns
             //document.getElementById("start").addEventListener("change", onChangeHandler);
             //document.getElementById("end").addEventListener("change", onChangeHandler);
         }
@@ -143,10 +257,13 @@ body {
             // Dropdown Values
             const start = document.getElementById("start").value;
             const end = document.getElementById("end").value;
+
+            var destinationRoute = document.getElementById("destination").innerHTML;
+
             directionsService.route(
                 {
                     origin: "37 Magaliesberg St Durban South South Africa 4079",
-                    destination: "108 Allenby Road Durban South Africa 4051",
+                    destination: destinationRoute,
                     travelMode: google.maps.TravelMode.DRIVING,
                 },
                 (response, status) => {
@@ -161,4 +278,75 @@ body {
 
 
     </script>
+
+    <script>
+
+        var signaturePadWrappers = document.querySelectorAll('.signature-pad');
+
+        Array.prototype.forEach.call(signaturePadWrappers, function (wrapper) {
+            var canvas = wrapper.querySelector('canvas');
+            var clearButton = wrapper.querySelector('.btn-clear-canvas');
+            var hiddenInput = wrapper.querySelector('input[type="hidden"]');
+
+            var signaturePad = new SignaturePad(canvas);
+
+            // Read base64 string from hidden input
+            var base64str = hiddenInput.value;
+
+            if (base64str) {
+                // Draws signature image from data URL
+                signaturePad.fromDataURL('data:image/png;base64,' + base64str);
+            }
+
+            if (hiddenInput.disabled) {
+                signaturePad.off();
+            } else {
+                signaturePad.onEnd = function () {
+                    // Returns signature image as data URL and set it to hidden input
+                    base64str = signaturePad.toDataURL().split(',')[1];
+                    hiddenInput.value = base64str;
+                };
+
+                clearButton.addEventListener('click', function () {
+                    // Clear the canvas and hidden input
+                    signaturePad.clear();
+                    hiddenInput.value = '';
+                });
+            }
+        });
+
+        $(function () {
+
+            $('button.submit').click(function () {
+
+                var patientId = $(this).attr("data-patientId");
+                var signature = $('#Signature').val();
+                var expiryDate = $('#ExpiryDate').val();
+                var url = "/Prescriptions/Complete";
+
+                $.post(url,
+                    {
+                        PatientID: patientId,
+                        ExpiryDate: expiryDate,
+                        Signature: signature,
+                        MedicineName: 's',
+                        PackSize: 's',
+                        Instructions: 's',
+                        ProductId: 1,
+                        Quantity: 1
+                    }, function (data) {
+                        if (data == "Failes") {
+                            location.reload();
+                        }
+                        else {
+                            location.href = "/Prescriptions/ViewPrescription?id=" + data;
+                        }
+                    });
+
+            });
+
+        });
+
+    </script>
+
 }
