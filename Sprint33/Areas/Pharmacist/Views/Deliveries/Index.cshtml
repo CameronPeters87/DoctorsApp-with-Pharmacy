@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Sprint33.PharmacyEntities.CustomerOrder>
+﻿@model IEnumerable<Sprint33.Areas.Pharmacist.Models.DeliveriesModel>
 
 @{
     ViewBag.Title = "Index";
@@ -27,6 +27,7 @@
                             <th onclick="sortTable(1)">Customer</th>
                             <th onclick="sortTable(2)">Order Date</th>
                             <th>Address</th>
+                            <th>Distance(km) <i class="fa fa-route"></i></th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -35,11 +36,14 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>@item.Id</td>
-                                <td>@item.FirstName @item.Surname </td>
-                                <td>@item.OrderDate.ToLongDateString()</td>
+                                <td>@item.CustomerOrder.Id</td>
+                                <td>@item.CustomerOrder.FirstName @item.CustomerOrder.Surname </td>
+                                <td>@item.CustomerOrder.OrderDate.ToLongDateString()</td>
                                 <td>
-                                    @item.Address
+                                    @item.CustomerOrder.Address
+                                </td>
+                                <td>
+                                    @(item.Distance.ToString("0.00"))km
                                 </td>
                                 <td class="text-center">
                                     <a href="@Url.Action("Directions")" target="_blank" class="btn btn-info btn-sm">
