@@ -3,6 +3,7 @@ using Geocoding.Google;
 using Sprint33.Areas.Pharmacist.Models;
 using Sprint33.Extensions;
 using Sprint33.Models;
+using Sprint33.PharmacyEntities;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
         {
             var orders = db.CustomerOrders.Where(o => o.OrderStatus.ProcessNumber == 4).OrderByDescending(o => o.Id).ToList();
 
-            string pharmacyAddress = "108 Allenby Road Durban South Africa 4051";
+            string pharmacyAddress = "37 Magaliesberg St Durban South South Africa 4079";
             //string pharmacyAddress = "108 Allenby Road Durban North KZN South Africa";
             var _latitude = LocationExtensions.GetLatFromPlaceName(pharmacyAddress, geocoder);
             var _longitude = LocationExtensions.GetLongFromPlaceName(pharmacyAddress, geocoder);
@@ -56,9 +57,16 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             return View(model);
         }
 
-        public ActionResult Directions()
+        public ActionResult Directions(int? orderId)
         {
-            return View();
+            var order = db.CustomerOrders.Find(orderId);
+
+            if (order == null)
+            {
+                order = new CustomerOrder();
+            }
+
+            return View(order);
         }
     }
 }

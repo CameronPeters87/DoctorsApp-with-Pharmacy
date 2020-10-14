@@ -1,4 +1,4 @@
-﻿
+﻿@model Sprint33.PharmacyEntities.CustomerOrder
 @{
     ViewBag.Title = "Directions";
     Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
@@ -73,7 +73,7 @@ body {
 
 </style>
 
-<div id="floating-panel">
+<div id="floating-panel" class="d-none">
     <strong>Start:</strong>
     <select id="start">
         <option value="chicago, il">Chicago</option>
@@ -121,7 +121,7 @@ body {
             const directionsService = new google.maps.DirectionsService();
             const map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 7,
-                center: { lat: 41.85, lng: -87.65 },
+                center: { lat: -29.7801266, lng: 31.0188765 },
             });
             directionsRenderer.setMap(map);
             directionsRenderer.setPanel(document.getElementById("right-panel"));
@@ -129,20 +129,24 @@ body {
             control.style.display = "block";
             map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
 
-            const onChangeHandler = function () {
-                calculateAndDisplayRoute(directionsService, directionsRenderer);
-            };
-            document.getElementById("start").addEventListener("change", onChangeHandler);
-            document.getElementById("end").addEventListener("change", onChangeHandler);
+            calculateAndDisplayRoute(directionsService, directionsRenderer);
+
+            //const onChangeHandler = function () {
+            //    calculateAndDisplayRoute(directionsService, directionsRenderer);
+            //};
+            //// Dropdowns 
+            //document.getElementById("start").addEventListener("change", onChangeHandler);
+            //document.getElementById("end").addEventListener("change", onChangeHandler);
         }
 
         function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+            // Dropdown Values
             const start = document.getElementById("start").value;
             const end = document.getElementById("end").value;
             directionsService.route(
                 {
-                    origin: start,
-                    destination: end,
+                    origin: "37 Magaliesberg St Durban South South Africa 4079",
+                    destination: "108 Allenby Road Durban South Africa 4051",
                     travelMode: google.maps.TravelMode.DRIVING,
                 },
                 (response, status) => {

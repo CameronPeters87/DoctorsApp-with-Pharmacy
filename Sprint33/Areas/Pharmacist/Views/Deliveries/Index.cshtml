@@ -46,7 +46,7 @@
                                     @(item.Distance.ToString("0.00"))km
                                 </td>
                                 <td class="text-center">
-                                    <a href="@Url.Action("Directions")" target="_blank" class="btn btn-info btn-sm">
+                                    <a href="@Url.Action("Directions")?orderId=@item.CustomerOrder.Id" target="_blank" class="btn btn-info btn-sm">
                                         <i class="fa fa-truck-moving"></i>
                                     </a>
                                 </td>
