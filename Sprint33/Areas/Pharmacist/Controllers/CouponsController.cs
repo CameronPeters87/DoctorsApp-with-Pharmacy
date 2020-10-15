@@ -24,6 +24,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             model.Coupons = db.Coupons
                 .ToArray()
                 .OrderByDescending(c => c.StartDate)
+                .Where(c => c.isLoyaltyCoupon == false)
                 .Select(c => new CouponItem(c))
                 .ToList();
 
@@ -87,7 +88,8 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 EndDate = model.EndDate,
                 DiscountRate = model.DiscountRate,
                 QRcodeURL = "/Files/Coupons/" + code_upper + ".png",
-                MinimumOrderAmount = model.MinimumOrderAmount
+                MinimumOrderAmount = model.MinimumOrderAmount,
+                isLoyaltyCoupon = false
             });
 
             await db.SaveChangesAsync();

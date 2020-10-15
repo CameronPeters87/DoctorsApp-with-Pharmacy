@@ -60,6 +60,9 @@ namespace Sprint33.Controllers
                 d.PrescriptionId == null);
             model.ProductsDropdown = new SelectList(db.Products.ToList(), "Id", "Name");
 
+            model.Instructions = "";
+            model.MedicineName = "";
+            model.PackSize = "";
 
             return View("Create", model);
         }

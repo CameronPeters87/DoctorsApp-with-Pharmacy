@@ -31,8 +31,6 @@ namespace Sprint33
                         Email = "doctor@gmail.com",
                         ContactNumber = 815600000
                     });
-
-                    db.SaveChanges();
                 }
 
                 if (!db.Admins.Any())
@@ -44,8 +42,6 @@ namespace Sprint33
                         Password = "1234",
                         Email = "admin@gmail.com"
                     });
-
-                    db.SaveChanges();
                 }
 
                 if (!db.OrderStatuses.Any())
@@ -111,8 +107,22 @@ namespace Sprint33
                     });
 
                     db.OrderStatuses.AddRange(statusList);
-                    db.SaveChanges();
                 }
+
+                if (!db.LoyaltyPreferences.Any())
+                {
+                    db.LoyaltyPreferences.Add(new LoyaltyPreference
+                    {
+                        CouponCode = "LTY",
+                        CouponDiscountRate = 15,
+                        MonthsToExpiry = 1,
+                        Subject = "Dr J Governder Pharmacy: Loyalty Coupon Gift!",
+                        Body = "You recieved a loyalty coupon. Thank you for being a member",
+                        PointsLimit = 100
+                    });
+                }
+
+                db.SaveChanges();
             }
         }
     }

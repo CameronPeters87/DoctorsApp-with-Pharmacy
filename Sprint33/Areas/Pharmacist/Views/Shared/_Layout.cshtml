@@ -106,41 +106,57 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-paper-plane"></i>
-                    <span>Sales</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Option:</h6>
-                        <a class="collapse-item" href="@Url.Action("NewInStoreSale", "InStoreSales")">
-                            In-store Sale (POS)
-                        </a>
-                        <a class="collapse-item" href="@Url.Action("SalesReport", "InStoreSales")">In-Store Sales Report</a>
-                    </div>
+            @*<li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-paper-plane"></i>
+                <span>Sales</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Option:</h6>
+                    <a class="collapse-item" href="@Url.Action("NewInStoreSale", "InStoreSales")">
+                        In-store Sale (POS)
+                    </a>
+                    <a class="collapse-item" href="@Url.Action("SalesReport", "InStoreSales")">In-Store Sales Report</a>
                 </div>
-            </li>
+            </div>
+        </li>*@
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDiscount" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-gift"></i>
-                    <span>Discount</span>
-                </a>
-                <div id="collapseDiscount" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Option:</h6>
-                        <a class="collapse-item"
-                           href="/pharmacist/coupons">
-                            Coupons
-                        </a>
-                        <a class="collapse-item" href="@Url.Action("Index", "Discount")">
-                            On-Sale Products
-                        </a>
-                        <a class="collapse-item" href="#">Loyalty</a>
-                    </div>
+            @*<li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDiscount" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-gift"></i>
+                <span>Discount</span>
+            </a>
+            <div id="collapseDiscount" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Option:</h6>
+                    <a class="collapse-item"
+                       href="/pharmacist/coupons">
+                        Coupons
+                    </a>
+                    <a class="collapse-item" href="@Url.Action("Index", "Discount")">
+                        On-Sale Products
+                    </a>
+                    <a class="collapse-item" href="#">Loyalty</a>
                 </div>
+            </div>
+        </li>*@
+
+            <!-- Nav Item - Coupons -->
+            <li class="nav-item">
+                <a class="nav-link" href="/pharmacist/coupons">
+                    <i class="fas fa-fw fa-gift"></i>
+                    <span>Coupons</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Coupons -->
+            <li class="nav-item">
+                <a class="nav-link" href="/pharmacist/loyalty">
+                    <i class="fas fa-fw fa-trophy"></i>
+                    <span>Loyalty Preferences</span>
+                </a>
             </li>
 
             <!-- Nav Item - Customer Orders -->
@@ -151,13 +167,14 @@
                 </a>
             </li>
 
+
             <!-- Nav Item - Deliveries -->
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index", "Deliveries")">
-                    <i class="fas fa-fw fa-truck"></i>
-                    <span>Deliveries</span>
-                </a>
-            </li>
+            @*<li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Index", "Deliveries")">
+                <i class="fas fa-fw fa-truck"></i>
+                <span>Deliveries</span>
+            </a>
+        </li>*@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
