@@ -182,9 +182,10 @@ namespace Sprint33.Areas.Store.Controllers
         {
             var orderId = Convert.ToInt32(Session["CustomerOrderId"]);
             var orderId1 = customerOrderRepository.GetOrderId(this.HttpContext);
-            var patient = Convert.ToInt32(Session["id"]);
+            var patientId = Convert.ToInt32(Session["id"]);
 
             var order = db.CustomerOrders.Find(orderId1);
+            var patient = db.Patients.Find(patientId);
 
             string status = "Unknown";
             switch (id.ToString())
@@ -222,12 +223,43 @@ namespace Sprint33.Areas.Store.Controllers
             if (status == "Approved")
             {
                 var callbackUrl = Url.Action("view-order", "order", new { area = "store", id = order.Id }, protocol: Request.Url.Scheme);
+                var loyaltyLink = Url.Action("Subscribe", "Loyalties", new { patientId = order.Customer.UserID });
 
-                EmailExtensions.SendMail(order.Email, "Your order is being Processed!",
+                EmailExtensions.SendMail(order.Email, "Doctor J Govender Pharmacy: Thank you for you Purchase!",
+                    string.Format("<h1><strong>Hello {0}</strong></h1> <br><br>" +
+                                  "Thank you for your recent transaction on our Pharmacy." +
+                                  "If you are new to Steam and not a loyalty member, you can sign up for free <a href={1}>here</a> for rewards.<br><br>" +
                     "Your order has being successfully approved and is being processed.<br>" +
-                    "<a href=\"" + callbackUrl + "\">View Order Here</a></strong>");
+                    "<a href=\"" + callbackUrl + "\">View Order Here</a></strong>", order.Customer.FirstName, loyaltyLink));
 
                 db.Notifications.PushNotificaiton(string.Format("A Customer placed an order: #{0}", order.Id));
+
+                if (patient.isLoyal)
+                {
+                    var loyalty = db.Loyalties.Where(l => l.PatientId == patientId).FirstOrDefault();
+                    var prefs = db.LoyaltyPreferences.FirstOrDefault();
+
+                    loyalty.Loyalty_Points += 25;
+
+                    if (loyalty.Loyalty_Points >= prefs.PointsLimit)
+                    {
+                        db.Coupons.Add(new PharmacyEntities.Coupon
+                        {
+                            isLoyaltyCoupon = true,
+                            Code = string.Format("{0}-{1}-{2}", prefs.CouponCode, patient.UserID, order.Id),
+                            Description = "Loyalty Coupon",
+                            EndDate = DateTime.Now.AddMonths(prefs.MonthsToExpiry),
+                            StartDate = DateTime.Now,
+                            DiscountRate = prefs.CouponDiscountRate
+                        });
+
+                        EmailExtensions.SendMail(patient.Email, prefs.Subject,
+                            string.Format("<h1 class='text-center'>Code: {0}-{1}-{2}</h1> <br><br>" +
+                                          "{3}", prefs.CouponCode, patient.UserID, order.Id, prefs.Body));
+                    }
+                }
+
+                db.SaveChanges();
             }
 
             return View();

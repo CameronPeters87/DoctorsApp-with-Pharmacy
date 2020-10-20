@@ -3309,6 +3309,7 @@
     <Content Include="Views\Prescriptions\Create.cshtml" />
     <Content Include="Views\Prescriptions\Prescription.cshtml" />
     <Content Include="Views\Prescriptions\ViewPrescription.cshtml" />
+    <Content Include="Views\Prescriptions\All.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Store\Data\" />

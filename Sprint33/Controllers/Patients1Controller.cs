@@ -1,4 +1,5 @@
-﻿using Sprint33.Models;
+﻿using PagedList;
+using Sprint33.Models;
 using Sprint33.Models.ViewModel;
 using Sprint33.PharmacyEntities;
 using System.Data;
@@ -254,10 +255,16 @@ namespace Sprint33.Controllers
         }
         //End of Admin side//
 
-        public async Task<ActionResult> PharmacyOrders(int patientId)
+        public async Task<ActionResult> PharmacyOrders(int patientId, int? page)
         {
+            var pageNumber = page ?? 1;
+
             var model = await db.CustomerOrders.Where(o => o.CustomerId == patientId)
+                .OrderByDescending(o => o.Id)
                 .ToListAsync();
+
+            var onePageOfProducts = model.ToPagedList(pageNumber, 10);
+            ViewBag.OnePageOfProducts = onePageOfProducts;
 
             return View(model);
         }

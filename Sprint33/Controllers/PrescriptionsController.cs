@@ -164,6 +164,24 @@ namespace Sprint33.Controllers
             return result;
         }
 
+        public ActionResult PrescriptionHistory()
+        {
+            var patientId = Convert.ToInt32(Session["id"]);
+            var prescriptions = db.Prescriptions.Where(p => p.PatientID == patientId)
+                .OrderByDescending(p => p.Id)
+                .ToList();
+
+            return View(prescriptions);
+        }
+
+        public ActionResult All()
+        {
+            var prescriptions = db.Prescriptions
+                .OrderByDescending(p => p.Id)
+                .ToList();
+
+            return View(prescriptions);
+        }
 
         //// GET: Prescriptions
         //public ActionResult Index(string search)

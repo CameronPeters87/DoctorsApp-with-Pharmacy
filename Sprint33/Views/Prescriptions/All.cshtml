@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Sprint33.Models.Prescription>
+
+@{
+    ViewBag.Title = "All";
+    Layout = "~/Views/SharedTemp/_MySharedHome.cshtml";
+}
+
+<div class="container">
+    <h2>Prescription Records</h2>
+
+    @if (!Model.Any())
+    {
+        <h2 class="text-center">You don't have any records</h2>
+    }
+    else
+    {
+        <table class="table table-striped text-center">
+            <tr class="table-success">
+                <th>
+                    #
+                </th>
+                <th>
+                    Patient
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateIssued)
+                </th>
+                <th>
+                    Expiry Date
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr class="bg-white">
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>
+                        @item.Patient.FirstName @item.Patient.Surname
+                    </td>
+                    <td>
+                        @item.DateIssued.ToLongDateString()
+                    </td>
+                    <td>
+                        @item.PrescriptionValid.ToLongDateString()
+                    </td>
+                    <td>
+                        <a target="_blank" class="btn btn-info" href="@Url.Action("document-preview")?id=@item.Id">
+                            <span class="fa fa-file"></span>
+                        </a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    }
+    <a type="button" class="btn btn-secondary"
+       href="@Url.Action("Homepage", "Doctors1")">
+        <span class="fa fa-home"></span>
+    </a>
+</div>

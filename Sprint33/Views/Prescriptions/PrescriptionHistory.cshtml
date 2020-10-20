@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Sprint33.Models.PrescriptionListViewModel>
+﻿@model IEnumerable<Sprint33.Models.Prescription>
 
 @{
     ViewBag.Title = "Patient Prescription";
@@ -13,42 +13,35 @@
     }
     else
     {
-        <table class="table table-striped">
-    <tr class="table-success">
-        <th>
-            @Html.DisplayNameFor(model => model.DateIssued)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrescriptionValid)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InventoryName)
-        </th>
-        <th>
-            Item Quatity
-        </th>
-        <th></th>
-    </tr>
+        <table class="table table-striped text-center">
+        <tr class="table-success">
+            <th>
+                #
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateIssued)
+            </th>
+            <th>
+                Expiry Date
+            </th>
+            <th></th>
+        </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="bg-white">
             <td>
-                @Html.DisplayFor(modelItem => item.DateIssued)
+                @item.Id
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PrescriptionValid)
+                @item.DateIssued.ToLongDateString()
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InventoryName)
+                @item.PrescriptionValid.ToLongDateString()
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.itemQuantity)
-            </td>
-            <td>
-                <a class="btn btn-primary" href="@Url.Action("ViewPrescription")?id=@item.Id">
-                    <span class="fa fa-eye"></span>
-                    View
+                <a target="_blank" class="btn btn-info" href="@Url.Action("document-preview")?id=@item.Id">
+                    <span class="fa fa-file"></span>
                 </a>
             </td>
         </tr>
