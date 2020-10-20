@@ -1,4 +1,5 @@
-﻿using Sprint33.Models;
+﻿using Sprint33.Extensions;
+using Sprint33.Models;
 using Sprint33.Services;
 using Sprint33.Services.Interfaces;
 using System;
@@ -183,6 +184,8 @@ namespace Sprint33.Areas.Store.Controllers
             var orderId1 = customerOrderRepository.GetOrderId(this.HttpContext);
             var patient = Convert.ToInt32(Session["id"]);
 
+            var order = db.CustomerOrders.Find(orderId1);
+
             string status = "Unknown";
             switch (id.ToString())
             {
@@ -215,6 +218,17 @@ namespace Sprint33.Areas.Store.Controllers
                     break;
             }
             TempData["Status"] = status;
+
+            if (status == "Approved")
+            {
+                var callbackUrl = Url.Action("view-order", "order", new { area = "store", id = order.Id }, protocol: Request.Url.Scheme);
+
+                EmailExtensions.SendMail(order.Email, "Your order is being Processed!",
+                    "Your order has being successfully approved and is being processed.<br>" +
+                    "<a href=\"" + callbackUrl + "\">View Order Here</a></strong>");
+
+                db.Notifications.PushNotificaiton(string.Format("A Customer placed an order: #{0}", order.Id));
+            }
 
             return View();
         }
