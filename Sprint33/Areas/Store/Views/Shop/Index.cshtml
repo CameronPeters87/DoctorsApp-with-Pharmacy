@@ -7,7 +7,20 @@
 @using PagedList;
 @using PagedList.Mvc;
 
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<div class="site-blocks-cover">
+    <div class="container" style="margin-top:0px;">
+        <div class="row">
+            <div class="col-lg-7 mx-auto order-lg-2 align-self-center">
+                <div class="site-block-cover-content text-center">
+                    <h2 class="sub-title text-white">Effective Medicine, New Medicine Everyday</h2>
+                    <h1 class="text-white font-weight-bold">Welcome To Pharma</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -32,7 +45,7 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
-</div>
+</div>*@
 
 <div class="site-section">
 
@@ -52,14 +65,14 @@
 
         <div class="row">
             <!--Sidebar-->
-            <div class="col-lg-3">
+            @*<div class="col-lg-3">
                 
                 @Html.Partial("_FilterSidebarPartial")
 
-            </div>
+            </div>*@
 
             <!--Product List-->
-            <div class="col-lg-9">
+            <div class="col-lg-12">
                 <div class="row" style="padding:20px;">
 
                     @foreach (var item in ViewBag.OnePageOfProducts)

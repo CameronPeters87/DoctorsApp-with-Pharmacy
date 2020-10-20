@@ -26,3 +26,29 @@
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     z-index: 3;
 }
+
+.site-blocks-cover {
+    background-image: url('/Content/Store/images/hero_1.jpg');
+/*    background-size: cover;
+*/    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+}
+
+    .site-blocks-cover, .site-blocks-cover > .container > .row {
+        min-height: 400px;
+        height: auto;
+    }
+
+        .site-blocks-cover.inner-page, .site-blocks-cover.inner-page .row {
+            min-height: 400px;
+            height: auto;
+        }
+
+        .site-blocks-cover h2 {
+            font-size: 14px;
+            font-weight: normal;
+            color: #000;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }

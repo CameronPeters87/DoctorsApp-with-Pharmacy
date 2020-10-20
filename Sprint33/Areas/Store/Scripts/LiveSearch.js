@@ -1,10 +1,10 @@
 ﻿$(function () {
 
     $('input#searchtext').keyup(onSearchClick);
-    $('input#searchtext').blur(function () {
-        $('input#searchtext').val("");
-        $("ul#livesearchul").empty();
-    });
+    //$('input#searchtext').blur(function () {
+    //    $('input#searchtext').val("");
+    //    $("ul#livesearchul").empty();
+    //});
 
     function onSearchClick() {
 

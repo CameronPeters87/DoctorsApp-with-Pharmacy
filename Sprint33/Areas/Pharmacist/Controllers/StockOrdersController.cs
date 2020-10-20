@@ -1,4 +1,5 @@
 ﻿using Sprint33.Areas.Pharmacist.Models;
+using Sprint33.Extensions;
 using Sprint33.Models;
 using Sprint33.PharmacyEntities;
 using System;
@@ -215,6 +216,15 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 });
 
                 await db.SaveChangesAsync();
+
+                var callbackUrl = Url.Action("InvoiceToPdf", "StockOrders", new { area = "pharmacist", id = latestOrder.Id }, protocol: Request.Url.Scheme);
+
+                EmailExtensions.SendMail(supplier.Email, "Request For A Stock Order",
+                    string.Format("Good day. <br><br>I would like to request a stock order of R{0}.<br><br>" +
+                    "<a href=\"" + callbackUrl + "\">Review Order Details Here</a><br><br>" +
+                    "<strong>Order Notes: <strong><br>" +
+                    "{2}", latestOrder.TotalCost, latestOrder.Id, latestOrder.Notes));
+
                 return RedirectToAction("Index");
             }
             return View(model);

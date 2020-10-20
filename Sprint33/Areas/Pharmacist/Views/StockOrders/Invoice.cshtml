@@ -34,8 +34,8 @@
                     <div class="col invoice-to">
                         <div class="text-gray-light">INVOICE TO:</div>
                         <h2 class="to">Dr J Govender Pharmacy</h2>
-                        <div class="address">796 Silver Harbour, TX 79273, US</div>
-                        <div class="email"><a href="mailto:john@example.com">john@example.com</a></div>
+                        <div class="address">37 Magaliesberg St<br />Shallcross<br />Durban South 4079<br />South Africa</div>
+                        <div class="email"><a href="mailto:john@example.com">drjgov@gmail.com</a></div>
                     </div>
                     <div class="col invoice-details">
                         <h1 class="invoice-id">INVOICE @Model.StockOrderId</h1>
@@ -75,21 +75,22 @@
                         }
 
                     <tfoot>
-                        <tr>
+                        @*<tr>
                             <td colspan="2"></td>
                             <td colspan="2">SubTotal</td>
                             <td>R@(Model.SubTotal.ToString("n2"))</td>
+                        </tr>*@
+                        <tr>
+                            <td colspan="2"></td>
+                            <td colspan="2">GRAND TOTAL</td>
+                            <td>R@(Model.TotalCost.ToString("n2"))</td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">TAX 15%</td>
                             <td>R@(Model.TotalTax.ToString("n2"))</td>
                         </tr>
-                        <tr>
-                            <td colspan="2"></td>
-                            <td colspan="2">GRAND TOTAL</td>
-                            <td>R@(Model.TotalCost.ToString("n2"))</td>
-                        </tr>
+
                     </tfoot>
                 </table>
                 <div class="thanks">
