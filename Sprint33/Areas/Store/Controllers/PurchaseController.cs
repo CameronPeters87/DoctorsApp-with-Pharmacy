@@ -228,9 +228,9 @@ namespace Sprint33.Areas.Store.Controllers
                 EmailExtensions.SendMail(order.Email, "Doctor J Govender Pharmacy: Thank you for you Purchase!",
                     string.Format("<h1><strong>Hello {0}</strong></h1> <br><br>" +
                                   "Thank you for your recent transaction on our Pharmacy." +
-                                  "If you are new to Steam and not a loyalty member, you can sign up for free <a href={1}>here</a> for rewards.<br><br>" +
+                                  "If you are new to Steam and not a loyalty member, you can sign up for free <a href=\"" + loyaltyLink + "\">here</a> for rewards.<br><br>" +
                     "Your order has being successfully approved and is being processed.<br>" +
-                    "<a href=\"" + callbackUrl + "\">View Order Here</a></strong>", order.Customer.FirstName, loyaltyLink));
+                    "<a href=\"" + callbackUrl + "\">View Order Here</a></strong>", order.Customer.FirstName));
 
                 db.Notifications.PushNotificaiton(string.Format("A Customer placed an order: #{0}", order.Id));
 
@@ -253,10 +253,17 @@ namespace Sprint33.Areas.Store.Controllers
                             DiscountRate = prefs.CouponDiscountRate
                         });
 
+                        db.SaveChanges();
+                        var coup = db.Coupons.OrderByDescending(c => c.Id).FirstOrDefault();
+
                         EmailExtensions.SendMail(patient.Email, prefs.Subject,
                             string.Format("<h1 class='text-center'>Code: {0}-{1}-{2}</h1> <br><br>" +
-                                          "{3}", prefs.CouponCode, patient.UserID, order.Id, prefs.Body));
+                                          "Valid until {3}<br>" +
+                                          "Discount Rate: {4}%" +
+                                          "{5}", prefs.CouponCode, patient.UserID, order.Id, coup.EndDate.ToLongDateString(), coup.DiscountRate, prefs.Body));
+                        loyalty.Loyalty_Points = 0;
                     }
+                    db.Entry(loyalty).State = System.Data.Entity.EntityState.Modified;
                 }
 
                 db.SaveChanges();

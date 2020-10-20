@@ -123,5 +123,11 @@ namespace Sprint33.Areas.Store.Controllers
                 .GetCheckoutUrl(customerOrderRepository
                     .GetOrderId(this.HttpContext), patientId));
         }
+
+        [HttpPost]
+        public async Task<string> UpdateQuantity(int newQty, int id)
+        {
+            return "success";
+        }
     }
 }
