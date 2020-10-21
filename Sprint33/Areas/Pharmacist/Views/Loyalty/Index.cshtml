@@ -26,7 +26,7 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.Id)
             <div class="form-group">
-                @Html.LabelFor(model => model.PointsLimit, htmlAttributes: new { @class = "control-label col-md-12" })
+                <label class="control-label col-md-12" for="PointsLimit">Loyalty Points needed to receive a coupon</label>
                 <div class="col-md-4">
                     @Html.EditorFor(model => model.PointsLimit, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.PointsLimit, "", new { @class = "text-danger" })
@@ -34,19 +34,19 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.CouponCode, htmlAttributes: new { @class = "control-label col-md-12" })
+                <label class="control-label col-md-12" for="PointsLimit">Code for the coupon</label>
                 <div class="d-inline-block ml-3">
                     @Html.EditorFor(model => model.CouponCode, new { htmlAttributes = new { @placeholder = "slug(optional)" } })
                     <label class="control-label" for="Slug"
                            style="text-align: right; clear: both; float: right; margin-right: 7px; margin-top: 4px;">
-                        -[CustomerId]-[DateValid]
+                        -[CustomerId]-[OrderId]
                     </label>
                     @Html.ValidationMessageFor(model => model.CouponCode, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.CouponDiscountRate, htmlAttributes: new { @class = "control-label col-md-12" })
+                <label class="control-label col-md-12" for="PointsLimit">Discount Rate of coupon (0-100%)</label>
                 <div class="col-md-4">
                     @Html.EditorFor(model => model.CouponDiscountRate, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.CouponDiscountRate, "", new { @class = "text-danger" })
@@ -54,7 +54,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.MonthsToExpiry, htmlAttributes: new { @class = "control-label col-md-12" })
+                <label class="control-label col-md-12" for="PointsLimit">Months for coupon to expire</label>
                 <div class="col-md-4">
                     @Html.EditorFor(model => model.MonthsToExpiry, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.MonthsToExpiry, "", new { @class = "text-danger" })
