@@ -254,6 +254,7 @@ namespace Sprint33.Areas.Store.Controllers
                         });
 
                         db.SaveChanges();
+
                         var coup = db.Coupons.OrderByDescending(c => c.Id).FirstOrDefault();
 
                         EmailExtensions.SendMail(patient.Email, prefs.Subject,

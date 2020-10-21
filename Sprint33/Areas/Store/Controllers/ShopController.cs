@@ -22,6 +22,7 @@ namespace Sprint33.Areas.Store.Controllers
             var model = new MainVM
             {
                 ProductContents = await (from p in db.Products
+                                         orderby p.Id descending
                                          select new ProductContentVM
                                          {
                                              Id = p.Id,
