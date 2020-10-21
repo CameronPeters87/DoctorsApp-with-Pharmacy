@@ -48,7 +48,8 @@ namespace Sprint33.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login([Bind(Include = "UserID,FirstName,Surname,ContactNumber,Email,Password")] Doctor doctors, [Bind(Include = "UserID,FirstName,Surname,Age,ContactNumber,Email,Password")] Patient patients, [Bind(Include = "UserID,FirstName,Surname,Email,Password")] Admin admins)
+        public ActionResult Login([Bind(Include = "UserID,FirstName,Surname,ContactNumber,Email,Password")] Doctor doctors, [Bind(Include = "UserID,FirstName,Surname,Age,ContactNumber,Email,Password")] Patient patients, [Bind(Include = "UserID,FirstName,Surname,Email,Password")] Admin admins,
+            [Bind(Include = "UserID,FirstName,Surname,Email,Password")] Pharmacist pharmacist)
         {
 
 
@@ -67,6 +68,23 @@ namespace Sprint33.Controllers
                         Session["UserName"] = item.FirstName + " " + item.Surname;
                         Session["Title"] = "Doctor";
                         return RedirectToAction("Homepage", "Doctors1");
+                    }
+                }
+            }
+            foreach (var item in db.Pharmacists.ToList())
+            {
+                if (pharmacist.Email == null || pharmacist.Password == null)
+                {
+                    return View(doctors);
+                }
+                else
+                {
+                    if (pharmacist.Email.Equals(item.Email) && pharmacist.Password.Equals(item.Password))
+                    {
+                        Session["id"] = item.UserID;
+                        Session["UserName"] = item.FirstName + " " + item.Surname;
+                        Session["Title"] = "Pharmacist";
+                        return RedirectToAction("Index", "Dashboard", new { area = "pharmacist" });
                     }
                 }
             }

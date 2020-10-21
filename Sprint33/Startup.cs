@@ -33,6 +33,18 @@ namespace Sprint33
                     });
                 }
 
+                if (!db.Pharmacists.Any())
+                {
+                    db.Pharmacists.Add(new Pharmacist
+                    {
+                        FirstName = "Jane",
+                        Surname = "Govender",
+                        Password = "1234",
+                        Email = "pharmacist@gmail.com",
+                        ContactNumber = "0815600000"
+                    });
+                }
+
                 if (!db.Admins.Any())
                 {
                     db.Admins.Add(new Admin

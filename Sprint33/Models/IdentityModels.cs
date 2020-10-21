@@ -43,6 +43,7 @@ namespace Sprint33.Models
         public DbSet<Loyalty> Loyalties { get; set; }
 
         // Pharmacy Entities
+        public DbSet<Pharmacist> Pharmacists { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }

@@ -317,6 +317,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Patient.cs" />
+    <Compile Include="Models\Pharmacist.cs" />
     <Compile Include="Models\Prescription.cs" />
     <Compile Include="Models\PrescriptionDetail.cs" />
     <Compile Include="Models\PrescriptionPharmacyItem.cs" />
