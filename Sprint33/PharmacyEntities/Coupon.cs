@@ -17,5 +17,7 @@ namespace Sprint33.PharmacyEntities
         public int DiscountRate { get; set; }
         public float MinimumOrderAmount { get; set; }
         public bool isLoyaltyCoupon { get; set; }
+        public bool Active { get; set; }
+        public bool Display { get; set; }
     }
 }

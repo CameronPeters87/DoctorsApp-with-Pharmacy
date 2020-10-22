@@ -38,10 +38,13 @@ namespace Sprint33.Extensions
         {
             string actual = code.ToUpper();
 
+            var testCouponCode = coupon.Where(c => c.Code == actual).FirstOrDefault();
+
             var model = coupon.Where(c => c.Code == actual &&
                 DateTime.Today <= c.EndDate &&
                 DateTime.Today >= c.StartDate &&
-                c.MinimumOrderAmount <= OrderTotal).FirstOrDefault();
+                c.MinimumOrderAmount <= OrderTotal &&
+                c.Active == true).FirstOrDefault();
 
             if (model == null)
             {

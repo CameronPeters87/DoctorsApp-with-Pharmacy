@@ -24,7 +24,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             model.Coupons = db.Coupons
                 .ToArray()
                 .OrderByDescending(c => c.StartDate)
-                .Where(c => c.isLoyaltyCoupon == false)
+                .Where(c => c.isLoyaltyCoupon == false && c.Active == true)
                 .Select(c => new CouponItem(c))
                 .ToList();
 
@@ -89,13 +89,26 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 DiscountRate = model.DiscountRate,
                 QRcodeURL = "/Files/Coupons/" + code_upper + ".png",
                 MinimumOrderAmount = model.MinimumOrderAmount,
-                isLoyaltyCoupon = false
+                isLoyaltyCoupon = false,
+                Active = true,
+                Display = false
             });
 
             await db.SaveChangesAsync();
 
             TempData["Success"] = "Coupon was successfully created";
             return RedirectToAction("index");
+        }
+        public async Task<ActionResult> Delete(int id)
+        {
+            var coupon = db.Coupons.Find(id);
+
+            coupon.Active = false;
+            coupon.Display = false;
+            db.Entry(coupon).State = System.Data.Entity.EntityState.Modified;
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
     }
 }

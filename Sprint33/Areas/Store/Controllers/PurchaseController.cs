@@ -228,7 +228,7 @@ namespace Sprint33.Areas.Store.Controllers
                 EmailExtensions.SendMail(order.Email, "Doctor J Govender Pharmacy: Thank you for you Purchase!",
                     string.Format("<h1><strong>Hello {0}</strong></h1> <br><br>" +
                                   "Thank you for your recent transaction on our Pharmacy." +
-                                  "If you are new to Steam and not a loyalty member, you can sign up for free <a href=\"" + loyaltyLink + "\">here</a> for rewards.<br><br>" +
+                                  "If you are new to our store and not a loyalty member, you can sign up for free for rewards.<br><br>" +
                     "Your order has being successfully approved and is being processed.<br>" +
                     "<a href=\"" + callbackUrl + "\">View Order Here</a></strong>", order.Customer.FirstName));
 
@@ -249,8 +249,10 @@ namespace Sprint33.Areas.Store.Controllers
                             Code = string.Format("{0}-{1}-{2}", prefs.CouponCode, patient.UserID, order.Id),
                             Description = "Loyalty Coupon",
                             EndDate = DateTime.Now.AddMonths(prefs.MonthsToExpiry),
-                            StartDate = DateTime.Now,
-                            DiscountRate = prefs.CouponDiscountRate
+                            StartDate = DateTime.Today,
+                            DiscountRate = prefs.CouponDiscountRate,
+                            Active = true,
+                            Display = false
                         });
 
                         db.SaveChanges();

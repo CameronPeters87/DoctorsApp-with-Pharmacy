@@ -63,7 +63,7 @@
                                         <td>@item.StartDateString</td>
                                         <td>@item.EndDateString</td>
                                         <td>
-                                            <a onclick="" href="#" class="RemoveLink btn btn-danger btn-sm"
+                                            <a onclick="" href="@Url.Action("Delete", "Coupons", new { area = "pharmacist", id = item.Id })" class="RemoveLink btn btn-danger btn-sm"
                                                data-id="@item.Id">
                                                 <span class="fa fa-trash-alt" style="color:white"></span>
                                             </a>
