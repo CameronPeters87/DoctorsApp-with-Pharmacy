@@ -10133,7 +10133,7 @@ a:focus {
 .sidebar .nav-item .nav-link .badge-counter,
 .topbar .nav-item .nav-link .badge-counter {
   position: absolute;
-  transform: scale(0.7);
+  transform: scale(0.9);
   transform-origin: top right;
   right: .25rem;
   margin-top: -.25rem;

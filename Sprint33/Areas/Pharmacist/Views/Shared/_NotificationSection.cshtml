@@ -1,16 +1,31 @@
 ﻿@model Sprint33.Areas.Pharmacist.Models.NotificationVM
 
-<!-- Nav Item - Alerts -->
+<!-- Nav Item - Prescription -->
 <li class="nav-item dropdown no-arrow mx-1">
-    <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-bell fa-fw"></i>
-        <!-- Counter - Alerts -->
-        @if (Model.NumberOfUnreadNotifications == 0)
+    <a class="nav-link dropdown-toggle" href="@ViewBag.PresLink" target="_blank" role="button">
+        <i class="fas fa-file-alt fa-fw fa-2x"></i>
+        @if (Model.NumberOfUnreadNotifications > 0 && Model.SingleNotification.Any(n => n.IsPrescriptionNotification == true))
         {
+            <span class="badge badge-danger badge-counter">!</span>
         }
         else
         {
+
+        }
+    </a>
+</li>
+
+<!-- Nav Item - Alerts -->
+<li class="nav-item dropdown no-arrow mx-1">
+    <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-bell fa-fw fa-2x"></i>
+        <!-- Counter - Alerts -->
+        @if (Model.NumberOfUnreadNotifications > 0 && Model.SingleNotification.Any(n => n.IsPrescriptionNotification == false))
+        {
             <span class="badge badge-danger badge-counter">@Model.NumberOfUnreadNotifications +</span>
+        }
+        else
+        {
         }
     </a>
     <!-- Dropdown - Alerts -->
@@ -31,7 +46,7 @@
             foreach (var item in Model.SingleNotification)
             {
                 <a id="@item.Id" href="#" class="dropdown-item d-flex align-items-center MarkRead"
-                    data-id="@item.Id">
+                   data-id="@item.Id">
                     <div class="mr-3">
                         <div class="icon-circle @item.BackgroundColorIcon">
                             <i class="fas @item.Icon text-white"></i>
@@ -44,7 +59,7 @@
                 </a>
             }
         }
-        <a class="dropdown-item text-center small text-gray-500" 
+        <a class="dropdown-item text-center small text-gray-500"
            href="@Url.Action("Index", "Notifications")">
             Show All Alerts
         </a>

@@ -14,7 +14,22 @@ namespace Sprint33.Extensions
                 Message = message,
                 isRead = false,
                 Icon = "fa-file-alt",
-                BackgroundColorIcon = "bg-info"
+                BackgroundColorIcon = "bg-info",
+                IsPrescriptionNotification = false
+            });
+        }
+
+        public static void PushPrescriptionNotificaiton(this IDbSet<Notification> model, string link)
+        {
+            model.Add(new Notification
+            {
+                CreatedDate = DateTime.Now,
+                Message = "",
+                isRead = false,
+                Icon = "fa-file-alt",
+                BackgroundColorIcon = "bg-info",
+                IsPrescriptionNotification = true,
+                PrescriptionLink = link
             });
         }
     }

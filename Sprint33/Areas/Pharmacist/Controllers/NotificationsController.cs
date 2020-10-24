@@ -44,6 +44,8 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                                         select new SingleNotificationVM
                                         {
                                             Id = n.Id,
+                                            IsPrescriptionNotification = n.IsPrescriptionNotification,
+                                            PrescriptionLink = n.PrescriptionLink,
                                             Message = n.Message,
                                             CreatedDate = n.CreatedDate,
                                             isRead = n.isRead,
@@ -53,6 +55,19 @@ namespace Sprint33.Areas.Pharmacist.Controllers
 
             model.NumberOfUnreadNotifications = db.Notifications
                 .Where(n => n.isRead == false).Count();
+
+            ViewBag.PresLink = "#";
+
+            if (model.SingleNotification.Any(n => n.IsPrescriptionNotification == true))
+            {
+                foreach (var item in model.SingleNotification)
+                {
+                    if (item.IsPrescriptionNotification == true)
+                    {
+                        ViewBag.PresLink = item.PrescriptionLink;
+                    }
+                }
+            }
 
             return PartialView(model);
         }

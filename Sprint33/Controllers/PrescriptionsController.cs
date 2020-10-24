@@ -1,4 +1,5 @@
 ﻿using IronBarCode;
+using Sprint33.Extensions;
 using Sprint33.Models;
 using System;
 using System.Drawing;
@@ -23,7 +24,10 @@ namespace Sprint33.Controllers
                 Patient = patient,
                 PrescriptionDetails = db.PrescriptionDetails.Where(d => d.PatientId == patientId &&
                     d.PrescriptionId == null),
-                ProductsDropdown = new SelectList(db.Products.ToList(), "Id", "Name")
+                ProductsDropdown = new SelectList(db.Products.ToList(), "Id", "Name"),
+                MedicineName = "",
+                Instructions = "",
+                PackSize = ""
             };
 
             return View(model);
@@ -183,13 +187,16 @@ namespace Sprint33.Controllers
             return View(prescriptions);
         }
 
-        //// GET: Prescriptions
-        //public ActionResult Index(string search)
-        //{
+        public ActionResult Send(string id)
+        {
+            var prescription = db.Prescriptions.Where(p => p.Barcode == id).FirstOrDefault();
+            string link = "/prescriptions/document-preview?id=" + prescription.Id.ToString();
+            db.Notifications.PushPrescriptionNotificaiton(link);
 
-        //    return View(db.Prescriptions.Where(x => x.PatientName.StartsWith(search) || search == null).ToList());
-        //}
-        // GET: Prescriptions
+            db.SaveChanges();
+
+            return RedirectToAction("ViewPrescription", new { id = prescription.Barcode });
+        }
 
         public ActionResult TestPrescriptionLayout()
         {

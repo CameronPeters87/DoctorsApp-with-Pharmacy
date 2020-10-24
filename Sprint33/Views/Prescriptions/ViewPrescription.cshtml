@@ -7,10 +7,15 @@
 
 <img src="@Model.BarcodeUrl" width="250" height="100" />
 
-<a href="/prescriptions/document-preview?id=@Model.Id" target="_blank" class="pull-right m-4">
-    <i class="fa fa-download fa-5x text-dark"></i>
+<div class="pull-right m-4">
+    <button class="btn btn-success" data-toggle="modal" data-target="#send">
+        <i class="fa fa-share fa-3x"></i>
+    </button>
+    <a class="btn btn-info" href="/prescriptions/document-preview?id=@Model.Id" target="_blank">
+        <i class="fa fa-download fa-3x"></i>
+    </a>
+</div>
 
-</a>
 <div class="container text-black">
     <table width="100%">
         <thead>
@@ -101,5 +106,26 @@
         <h3 class="font-weight-bold">
             Doctor's Signature
         </h3>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="send" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Send Prescription</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to send this prescription to your local pharmacy and to start packing the medicince for patient to collect and purchase?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="/Prescriptions/Send?id=@Model.Barcode" type="button" class="btn btn-primary">Send</a>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Sprint33.PharmacyEntities
 {
@@ -17,5 +14,7 @@ namespace Sprint33.PharmacyEntities
         public bool isRead { get; set; }
         public string Icon { get; set; }
         public string BackgroundColorIcon { get; set; }
+        public bool IsPrescriptionNotification { get; set; }
+        public string PrescriptionLink { get; set; }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Sprint33.Areas.Pharmacist.Models
 {
@@ -19,5 +17,8 @@ namespace Sprint33.Areas.Pharmacist.Models
         public bool isRead { get; set; }
         public string Icon { get; set; }
         public string BackgroundColorIcon { get; set; }
+        public bool IsPrescriptionNotification { get; set; }
+        public string PrescriptionLink { get; set; }
+
     }
 }
