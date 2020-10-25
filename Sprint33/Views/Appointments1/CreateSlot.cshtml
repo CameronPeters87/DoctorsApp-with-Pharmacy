@@ -2,68 +2,69 @@
 
 @{ ViewBag.Title = "Create Slot"; }
 
-<h2>Create New Apointment Slots</h2>
+<div class="container">
+    <h2>Create New Apointment Slots</h2>
 
-@if(TempData["SM"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["SM"]
-    </div>
-}
+    @if (TempData["SM"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SM"]
+        </div>
+    }
 
-@using (Html.BeginForm())
-{
-@Html.AntiForgeryToken()
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.AppointmentTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                <input class="form-control text-box single-line" data-val="true" data-val-date="The field Day and Time of Appointment must be a date." data-val-required="The Day and Time of Appointment field is required." id="AppointmentTime" name="AppointmentTime" type="datetime-local" value="">                
-                @Html.ValidationMessageFor(model => model.AppointmentTime, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.AppointmentTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    <input class="form-control text-box single-line" data-val="true" data-val-date="The field Day and Time of Appointment must be a date." data-val-required="The Day and Time of Appointment field is required." id="AppointmentTime" name="AppointmentTime" type="datetime-local" value="">
+                    @Html.ValidationMessageFor(model => model.AppointmentTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.AppointmentID)
+            </div>
+
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.PatientName)
             </div>
         </div>
 
-        <div class="col-md-10">
-            @Html.HiddenFor(model => model.AppointmentID)
+        <div class="form-group">
+
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.DoctorName)
+            </div>
         </div>
 
-        <div class="col-md-10">
-            @Html.HiddenFor(model => model.PatientName)
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.Confirmed)
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-
-        <div class="col-md-10">
-            @Html.HiddenFor(model => model.DoctorName)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
         </div>
-    </div>
+    }
 
 
-    <div class="form-group">
+    <a type="button" class="btn btn-secondary" style="margin-top:15px"
+       href="@Url.Action("Homepage", "Doctors1")">
+        <span class="fa fa-home"></span>
+    </a>
 
-        <div class="col-md-10">
-            @Html.HiddenFor(model => model.Confirmed)
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
-}
-
-
-<a type="button" class="btn btn-secondary" style="margin-top:15px"
-   href="@Url.Action("Homepage", "Doctors1")">
-    <span class="fa fa-home"></span>
-</a>
-
-
-
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</div>

@@ -24,7 +24,7 @@ namespace Sprint33.Extensions
             model.Add(new Notification
             {
                 CreatedDate = DateTime.Now,
-                Message = "",
+                Message = "Prescription",
                 isRead = false,
                 Icon = "fa-file-alt",
                 BackgroundColorIcon = "bg-info",

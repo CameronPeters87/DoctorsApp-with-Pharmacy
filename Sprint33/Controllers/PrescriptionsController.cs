@@ -195,6 +195,8 @@ namespace Sprint33.Controllers
 
             db.SaveChanges();
 
+            TempData["Sent"] = "You successfully sent the prescription to the pharmacist.";
+
             return RedirectToAction("ViewPrescription", new { id = prescription.Barcode });
         }
 

@@ -22,6 +22,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
 
             var model = await (from n in db.Notifications
                                orderby n.CreatedDate descending
+                               where n.IsPrescriptionNotification == false
                                select new SingleNotificationVM
                                {
                                    Id = n.Id,
