@@ -5,6 +5,9 @@
     Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
 }
 
+@using PagedList;
+@using PagedList.Mvc;
+
 @*Dropdown - New Purchase*@
 <div class="dropdown no-arrow mb-4">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -53,12 +56,12 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var item in Model.StockOrderListVM)
+                        @foreach (var item in ViewBag.onePageOfOrders)
                         {
                             <tr>
-                                <td>@Html.DisplayFor(modelItem => item.StockOrderId)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Supplier) </td>
-                                <td>@Html.DisplayFor(modelItem => item.LongOrderDate) </td>
+                                <td>@item.StockOrderId</td>
+                                <td>@item.Supplier </td>
+                                <td>@item.LongOrderDate </td>
                                 <td>
                                     @if (item.PaymentPeriod == null)
                                     {
@@ -66,10 +69,10 @@
                                     }
                                     else
                                     {
-                                        <p>@Html.DisplayFor(modelItem => item.PaymentPeriod) days</p>
+                                        <p>@item.PaymentPeriod days</p>
                                     }
                                 </td>
-                                <td>R @Html.DisplayFor(modelItem => item.TotalCost) </td>
+                                <td>R@(item.TotalCost) </td>
                                 <td title="@item.OrderStatus.Description" class="table-@item.OrderStatus.Color">
                                     <span>
                                         <i class="@item.OrderStatus.Icon"></i>
@@ -150,5 +153,13 @@
                 </table>
             </div>
         }
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="site-block-27" style="display:inline-block">
+                    @Html.PagedListPager((IPagedList)ViewBag.onePageOfOrders, page => Url.Action("index", new { page }))
+                </div>
+            </div>
+        </div>
     </div>
 </div>

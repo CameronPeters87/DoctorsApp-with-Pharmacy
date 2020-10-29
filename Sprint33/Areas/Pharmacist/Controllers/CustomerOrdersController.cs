@@ -1,4 +1,5 @@
-﻿using Sprint33.Areas.Pharmacist.Models;
+﻿using PagedList;
+using Sprint33.Areas.Pharmacist.Models;
 using Sprint33.Extensions;
 using Sprint33.Models;
 using System.Linq;
@@ -11,8 +12,10 @@ namespace Sprint33.Areas.Pharmacist.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Pharmacist/CustomerOrders
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+            var pageNumber = page ?? 1;
+
             var model = (from o in db.CustomerOrders
                          orderby o.Id descending
                          select new CustomerOrderModel
@@ -41,6 +44,9 @@ namespace Sprint33.Areas.Pharmacist.Controllers
 
 
             ViewBag.OrderStatus = db.OrderStatuses.ToList();
+
+            var onePageOfOrders = model.ToPagedList(pageNumber, 10);
+            ViewBag.onePageOfOrders = onePageOfOrders;
 
             return View(model);
         }

@@ -110,7 +110,7 @@ namespace Sprint33
 
                     statusList.Add(new OrderStatus
                     {
-                        Name = "Waiting",
+                        Name = "Waiting For Response",
                         Description = "",
                         Color = "info",
                         Icon = "fa fa-clock-o",

@@ -1,4 +1,5 @@
-﻿using Sprint33.Areas.Pharmacist.Models;
+﻿using PagedList;
+using Sprint33.Areas.Pharmacist.Models;
 using Sprint33.Extensions;
 using Sprint33.Models;
 using Sprint33.PharmacyEntities;
@@ -17,8 +18,10 @@ namespace Sprint33.Areas.Pharmacist.Controllers
         private float TAX_const = 0.15f;
 
         // GET: Pharmacist/StockOrder
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? page)
         {
+            var pageNumber = page ?? 1;
+
             StockOrderVM model = new StockOrderVM();
             model.StockOrderListVM = await (from o in db.StockOrders
                                             join s in db.Suppliers on o.SupplierId equals s.Id
@@ -41,6 +44,9 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             {
                 item.LongOrderDate = item.OrderDate.ToLongDateString();
             }
+
+            var onePageOfOrders = model.StockOrderListVM.ToPagedList(pageNumber, 10);
+            ViewBag.onePageOfOrders = onePageOfOrders;
 
             return View(model);
         }
@@ -174,7 +180,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 Supplier supplier = db.Suppliers.Find(model.SupplierId);
 
                 // Change order status
-                OrderStatus defaultOrderStatus = await db.OrderStatuses.Where(os => os.Name.Equals("Pending Payment"))
+                OrderStatus defaultOrderStatus = await db.OrderStatuses.Where(os => os.ProcessNumber.Equals("2"))
                                                         .FirstOrDefaultAsync();
 
                 // Cant buy stock if theres no items in the cart

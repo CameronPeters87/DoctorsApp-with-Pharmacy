@@ -54,7 +54,7 @@
                         <button class="btn btn-primary btn-md btn-block update-cart">Update Cart</button>
                     </div>*@
                     <div class="col-md-12">
-                        <a href="/store/shop/products" class="btn btn-outline-primary btn-md btn-block">Continue Shopping</a>
+                        <a href="/store/shop/" class="btn btn-outline-primary btn-md btn-block">Continue Shopping</a>
                     </div>
                 </div>
             </div>
@@ -149,11 +149,14 @@
                     var response = data.trim();
 
                     if (response == "InvalidQuantity") {
+                        alert("Invalid Quantity Entered");
                         $this.val(originalTextBoxValue);
-                        alert(response);
-                        location.reload();
-                    } else {
-                        alert(response);
+                    }
+                    else if (response == "NoStock") {
+                        alert("Not Enough stock available");
+                        $this.val(originalTextBoxValue);
+                    }
+                    else {
                         location.reload();
                     }
 

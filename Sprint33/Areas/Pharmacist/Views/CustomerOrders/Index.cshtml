@@ -4,6 +4,9 @@
     Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
 }
 
+@using PagedList;
+@using PagedList.Mvc;
+
 @*List Orders*@
 <div class="card shadow h-100 py-2">
     <div class="card-body">
@@ -33,14 +36,14 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var item in Model)
+                        @foreach (var item in ViewBag.onePageOfOrders)
                         {
                             <tr>
                                 <td>@item.Id</td>
                                 <td>@item.FirstName @item.Surname </td>
                                 <td>@item.OrderDate.ToLongDateString()</td>
                                 <td>
-                                    @if (item.PaymentMethod ==  "Card")
+                                    @if (item.PaymentMethod == "Card")
                                     {
                                         <p>Online</p>
                                     }
@@ -93,9 +96,9 @@
                                                 }
                                                 <hr />
                                                 @*<a class="dropdown-item" target="_blank" href=""#>
-                                                <span class="fa fa-file-pdf"></span>
-                                                    Invoice
-                                                </a>*@
+                                                    <span class="fa fa-file-pdf"></span>
+                                                        Invoice
+                                                    </a>*@
                                             </div>
                                         </div>
                                         @*Dropdown - View Items*@
@@ -123,5 +126,14 @@
                 </table>
             </div>
         }
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="site-block-27" style="display:inline-block">
+                    @Html.PagedListPager((IPagedList)ViewBag.onePageOfOrders, page => Url.Action("index", new { page }))
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

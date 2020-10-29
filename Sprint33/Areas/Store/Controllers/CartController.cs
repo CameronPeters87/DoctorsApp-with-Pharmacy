@@ -75,6 +75,11 @@ namespace Sprint33.Areas.Store.Controllers
 
             cart.RemoveCartItem(id);
 
+            if (cart.GetCount() == 0)
+            {
+                return RedirectToAction("Index", "Shop", new { area = "store" });
+            }
+
             return RedirectToAction("Summary");
         }
 
@@ -127,6 +132,23 @@ namespace Sprint33.Areas.Store.Controllers
         [HttpPost]
         public async Task<string> UpdateQuantity(int newQty, int id)
         {
+            var cartItem = db.CustomerCarts.Find(id);
+
+            var product = await db.Products.FindAsync(cartItem.ProductId);
+
+            if (product.IsOutOfStock(newQty))
+            {
+                return "NoStock";
+            }
+            if (newQty < 1)
+            {
+                return "InvalidQuantity";
+            }
+
+            cartItem.Quantity = newQty;
+            db.Entry(cartItem).State = System.Data.Entity.EntityState.Modified;
+            await db.SaveChangesAsync();
+
             return "success";
         }
     }
