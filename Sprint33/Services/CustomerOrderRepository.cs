@@ -46,7 +46,7 @@ namespace Sprint33.Services
             var patient = db.Patients.Find(patientId);
 
             var currentCart = db.CustomerCarts.GetCurrentCartItems(patientId);
-            var defaultStatus = db.OrderStatuses.Where(s => s.Name == "Waiting").FirstOrDefault();
+            var defaultStatus = db.OrderStatuses.Where(s => s.ProcessNumber == 2).FirstOrDefault();
 
 
             var tax = currentCart.GetTotalTax();
@@ -100,7 +100,7 @@ namespace Sprint33.Services
 
             var order = GetOrder(orderId);
 
-            var orderStatus = db.OrderStatuses.Where(o => o.Name == "Waiting").FirstOrDefault();
+            var orderStatus = db.OrderStatuses.Where(o => o.ProcessNumber == 2).FirstOrDefault();
 
             order.OrderStatus = orderStatus;
             order.OrderStatusId = orderStatus.Id;

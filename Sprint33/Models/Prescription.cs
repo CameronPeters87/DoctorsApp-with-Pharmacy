@@ -16,6 +16,8 @@ namespace Sprint33.Models
 
         public DateTime PrescriptionValid { get; set; }
 
+        public byte[] Signature { get; set; }
+
         public int PatientID { get; set; }
         public virtual Patient Patient { get; set; }
 

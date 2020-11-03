@@ -9,14 +9,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Doctor J Govender</title>
+    <title>Doctor J Govender - Pharmacist Admin</title>
     <link rel="shortcut icon" href="~/Content/title.jpg" />
 
     <!-- Custom fonts for this template-->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/Content/PharmacistTemp/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    
+
     <!-- Custom styles for this template-->
     <link href="~/Content/PharmacistTemp/css/sb-admin-2.css" rel="stylesheet">
     <link rel="stylesheet" href=@Url.Content("/Content/ThemeTemp/css/style.css")>
@@ -107,21 +107,39 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            @*<li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-paper-plane"></i>
-                <span>Sales</span>
-            </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Option:</h6>
-                    <a class="collapse-item" href="@Url.Action("NewInStoreSale", "InStoreSales")">
-                        In-store Sale (POS)
-                    </a>
-                    <a class="collapse-item" href="@Url.Action("SalesReport", "InStoreSales")">In-Store Sales Report</a>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-paper-plane"></i>
+                    <span>Sales</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Option:</h6>
+                        <a class="collapse-item" href="@Url.Action("NewInStoreSale", "InStoreSales")">
+                            In-store Sale (POS)
+                        </a>
+                        <a class="collapse-item" href="@Url.Action("SalesReport", "InStoreSales")">In-Store Sales Report</a>
+                    </div>
                 </div>
-            </div>
-        </li>*@
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <i class="fas fa-fw fa-shopping-basket"></i>
+                    <span>Customer Orders</span>
+                </a>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Option:</h6>
+                        <a class="collapse-item" href="@Url.Action("Index", "CustomerOrders")">
+                            Customer Orders
+                        </a>
+                        <a class="collapse-item" href="@Url.Action("Index", "Deliveries")">
+                            Customer Deliveries
+                        </a>
+                    </div>
+                </div>
+            </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
             @*<li class="nav-item">
@@ -144,6 +162,14 @@
             </div>
         </li>*@
 
+            <!-- Nav Item - Discounts -->
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index", "Discount")">
+                    <i class="fas fa-fw fa-dollar-sign"></i>
+                    <span>Discounts</span>
+                </a>
+            </li>
+
             <!-- Nav Item - Coupons -->
             <li class="nav-item">
                 <a class="nav-link" href="/pharmacist/coupons">
@@ -152,7 +178,7 @@
                 </a>
             </li>
 
-            <!-- Nav Item - Coupons -->
+            <!-- Nav Item - Loyalty -->
             <li class="nav-item">
                 <a class="nav-link" href="/pharmacist/loyalty/prefs">
                     <i class="fas fa-fw fa-trophy"></i>
@@ -161,21 +187,21 @@
             </li>
 
             <!-- Nav Item - Customer Orders -->
-            <li class="nav-item">
+            @*<li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Index", "CustomerOrders")">
                     <i class="fas fa-fw fa-shopping-basket"></i>
                     <span>Customer Orders</span>
                 </a>
-            </li>
+            </li>*@
 
 
             <!-- Nav Item - Deliveries -->
             @*<li class="nav-item">
-            <a class="nav-link" href="@Url.Action("Index", "Deliveries")">
-                <i class="fas fa-fw fa-truck"></i>
-                <span>Deliveries</span>
-            </a>
-        </li>*@
+                <a class="nav-link" href="@Url.Action("Index", "Deliveries")">
+                    <i class="fas fa-fw fa-truck"></i>
+                    <span>Deliveries</span>
+                </a>
+            </li>*@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -251,7 +277,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 large">Pharmacist</span>
-                                <img class="img-profile rounded-circle" src="/Files/Images/my-profile.jpg">
+                                <img class="img-profile rounded-circle" src="~/Content/ThemeTemp/images/staff-6.jpg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

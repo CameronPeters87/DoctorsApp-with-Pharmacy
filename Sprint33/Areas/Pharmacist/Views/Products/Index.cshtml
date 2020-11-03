@@ -58,7 +58,8 @@
                         {
                         <tr>
                             <td style="text-align: center;">
-                                <img src="@item.BarcodeUrl" width="50" height="20" />
+                                @*<img src="@item.BarcodeUrl" width="50" height="20" />*@
+                                @item.Id
                             </td>
                             <td>
                                 <a href="@Url.Action("EditProduct")?id=@item.Id">

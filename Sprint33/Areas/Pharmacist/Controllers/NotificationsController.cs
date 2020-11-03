@@ -52,10 +52,12 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                                             isRead = n.isRead,
                                             Icon = n.Icon,
                                             BackgroundColorIcon = n.BackgroundColorIcon
-                                        }).ToList();
+                                        }).ToList().Take(5);
 
-            model.NumberOfUnreadNotifications = db.Notifications
-                .Where(n => n.isRead == false).Count();
+            //model.NumberOfUnreadNotifications = db.Notifications
+            //    .Where(n => n.isRead == false).Count();
+
+            model.NumberOfUnreadNotifications = model.SingleNotification.Count();
 
             ViewBag.PresLink = "#";
 

@@ -5,13 +5,18 @@
     Layout = "~/Views/Shared/_PrescriptionLayout.cshtml";
 }
 
-<img src="@Model.BarcodeUrl" width="250" height="100" />
+@*<img src="@Model.BarcodeUrl" width="250" height="100" />*@
+
+<a type="button" class="btn btn-primary"
+   href="javascript:window.print()">
+    <i class="fa fa-print fa-2x"></i>
+</a>
 
 <table width="100%">
     <thead>
         <tr class="text-center">
             <th class="h3">
-                Dr J Govender / Logo
+                Dr J Govender
             </th>
             <th class="h3">Doctor Details</th>
         </tr>
@@ -89,7 +94,14 @@
 </table>
 
 <div class="d-inline-block" style="border-bottom:1px solid black;">
-    <img src="@Model.SignatureUrl" />
+
+    @{
+        var base64 = Convert.ToBase64String(Model.Signature);
+        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+    }
+
+    <img src="@imgSrc" />
+
 </div>
 
 <div>

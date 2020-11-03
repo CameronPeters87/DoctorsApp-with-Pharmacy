@@ -225,12 +225,28 @@ namespace Sprint33.Areas.Store.Controllers
                 var callbackUrl = Url.Action("view-order", "order", new { area = "store", id = order.Id }, protocol: Request.Url.Scheme);
                 var loyaltyLink = Url.Action("Subscribe", "Loyalties", new { patientId = order.Customer.UserID });
 
-                EmailExtensions.SendMail(order.Email, "Doctor J Govender Pharmacy: Thank you for you Purchase!",
-                    string.Format("<h1><strong>Hello {0}</strong></h1> <br><br>" +
-                                  "Thank you for your recent transaction on our Pharmacy." +
-                                  "If you are new to our store and not a loyalty member, you can sign up for free for rewards.<br><br>" +
-                    "Your order has being successfully approved and is being processed.<br>" +
-                    "<a href=\"" + callbackUrl + "\">View Order Here</a></strong>", order.Customer.FirstName));
+                //EmailExtensions.SendMail(order.Email, "Doctor J Govender Pharmacy: Thank you for you Purchase!",
+                //    string.Format("<h1><strong>Hello {0}</strong></h1> <br><br>" +
+                //                  "Thank you for your recent transaction on our Pharmacy." +
+                //                  "If you are new to our store and not a loyalty member, you can sign up for free for rewards.<br><br>" +
+                //    "Your order has being successfully approved and is being processed.<br>" +
+                //    "<a href=\"" + callbackUrl + "\">View Order Here</a></strong>", order.Customer.FirstName));
+
+                //EmailExtensions.SendSms(order.Email, "Doctor J Govender Pharmacy: Thank you for you Purchase! Your order has being successfully approved and is being processed." + callbackUrl);
+                EmailExtensions.SendSms(order.PhoneNumber, "Doctor J Govender Pharmacy: Thank you for your purchase! Total R" + order.TotalCost);
+
+                //var client = new Client(creds: new Nexmo.Api.Request.Credentials
+                //{
+                //    ApiKey = "0f48d10b",
+                //    ApiSecret = "R0hfbIdGjgNcG9Aa"
+                //});
+
+                //var results = client.SMS.Send(request: new SMS.SMSRequest
+                //{
+                //    from = "Dr J Govender",
+                //    to = order.PhoneNumber,
+                //    text = "Doctor J Govender Pharmacy: Thank you for you Purchase!"
+                //});
 
                 db.Notifications.PushNotificaiton(string.Format("A Customer placed an order: #{0}", order.Id));
 
@@ -259,11 +275,14 @@ namespace Sprint33.Areas.Store.Controllers
 
                         var coup = db.Coupons.OrderByDescending(c => c.Id).FirstOrDefault();
 
-                        EmailExtensions.SendMail(patient.Email, prefs.Subject,
-                            string.Format("<h1 class='text-center'>Code: {0}-{1}-{2}</h1> <br><br>" +
-                                          "Valid until {3}<br>" +
-                                          "Discount Rate: {4}%" +
-                                          "{5}", prefs.CouponCode, patient.UserID, order.Id, coup.EndDate.ToLongDateString(), coup.DiscountRate, prefs.Body));
+                        //EmailExtensions.SendMail(patient.Email, prefs.Subject,
+                        //    string.Format("<h1 class='text-center'>Code: {0}-{1}-{2}</h1> <br><br>" +
+                        //                  "Valid until {3}<br>" +
+                        //                  "Discount Rate: {4}%" +
+                        //                  "{5}", prefs.CouponCode, patient.UserID, order.Id, coup.EndDate.ToLongDateString(), coup.DiscountRate, prefs.Body));
+
+
+                        EmailExtensions.SendSms(patient.ContactNumber, string.Format(prefs.Subject + "Code: {0}-{1}-{2} . Valid until {3}. Discount Rate: {4}%", prefs.CouponCode, patient.UserID, order.Id, coup.EndDate.ToLongDateString(), coup.DiscountRate));
                         loyalty.Loyalty_Points = 0;
                     }
                     db.Entry(loyalty).State = System.Data.Entity.EntityState.Modified;

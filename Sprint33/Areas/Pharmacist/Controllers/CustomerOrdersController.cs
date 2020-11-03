@@ -66,8 +66,10 @@ namespace Sprint33.Areas.Pharmacist.Controllers
 
             db.SaveChanges();
 
-            EmailExtensions.SendMail(order.Email, "Doctor J Govender: Order #" + order.Id,
-                "Order Status changed to " + status.Name);
+            //EmailExtensions.SendMail(order.Email, "Doctor J Govender: Order #" + order.Id,
+            //    "Order Status changed to " + status.Name);
+
+            EmailExtensions.SendSms(order.PhoneNumber, "Doctor J Govender: Order #" + order.Id + "Order Status changed to " + status.Name);
 
             return RedirectToAction("Index");
         }

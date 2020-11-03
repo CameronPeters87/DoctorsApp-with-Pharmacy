@@ -1,5 +1,4 @@
-﻿using IronBarCode;
-using Sprint33.Extensions;
+﻿using Sprint33.Extensions;
 using Sprint33.Models;
 using System;
 using System.Drawing;
@@ -91,31 +90,33 @@ namespace Sprint33.Controllers
             string barcode = barcodeGuid.ToString();
 
             // Saving the signature as image
-            string signaturePath;
-            MemoryStream ms = new MemoryStream(model.Signature);
-            Image returnImage = Image.FromStream(ms);
-            returnImage.Save(Server.MapPath("~/Files/Signatures/" + barcode + ".png"), System.Drawing.Imaging.ImageFormat.Png);
-            signaturePath = "/Files/Signatures/" + barcode + ".png";
+            //string signaturePath;
+            //MemoryStream ms = new MemoryStream(model.Signature);
+            //Image returnImage = Image.FromStream(ms);
+            //returnImage.Save(Server.MapPath("~/Files/Signatures/" + barcode + ".png"), System.Drawing.Imaging.ImageFormat.Png);
+            //signaturePath = "/Files/Signatures/" + barcode + ".png";
 
             /* 
              * Generate Barcode
              */
 
             // Save Barcode to that path
-            string _barcodePath = Path.Combine(Server
-                .MapPath("~/Files/Barcodes/Prescriptions"), barcode + ".png");
+            //string _barcodePath = Path.Combine(Server
+            //    .MapPath("~/Files/Barcodes/Prescriptions"), barcode + ".png");
 
-            // Generate a Simple BarCode image and save as PNG
-            //using IronBarCode;
-            GeneratedBarcode MyBarCode = BarcodeWriter
-                .CreateBarcode(barcode,
-                BarcodeWriterEncoding.Code128);
+            //// Generate a Simple BarCode image and save as PNG
+            ////using IronBarCode;
+            //GeneratedBarcode MyBarCode = BarcodeWriter
+            //    .CreateBarcode(barcode,
+            //    BarcodeWriterEncoding.Code128);
 
-            MyBarCode.SetMargins(25);
+            //MyBarCode.SetMargins(25);
 
-            MyBarCode.SaveAsPng(_barcodePath);
+            //MyBarCode.SaveAsPng(_barcodePath);
 
-            string _barcodeUrl = "/Files/Barcodes/Prescriptions/" + barcode + ".png";
+            //string _barcodeUrl = "/Files/Barcodes/Prescriptions/" + barcode + ".png";
+            string _barcodeUrl = "/";
+
 
             // Get list of prescription details
             var details = db.PrescriptionDetails.Where(d => d.PatientId == model.PatientID &&
@@ -133,7 +134,8 @@ namespace Sprint33.Controllers
                 PatientID = model.PatientID,
                 PrescriptionDetails = details,
                 PrescriptionValid = model.ExpiryDate,
-                SignatureUrl = signaturePath
+                SignatureUrl = "/",
+                Signature = model.Signature
             });
 
             await db.SaveChangesAsync();
@@ -150,6 +152,9 @@ namespace Sprint33.Controllers
         {
 
             var model = await db.Prescriptions.FindAsync(id);
+
+            MemoryStream ms = new MemoryStream(model.Signature);
+            Image returnImage = Image.FromStream(ms);
 
             return View(model);
         }
@@ -190,7 +195,7 @@ namespace Sprint33.Controllers
         public ActionResult Send(string id)
         {
             var prescription = db.Prescriptions.Where(p => p.Barcode == id).FirstOrDefault();
-            string link = "/prescriptions/document-preview?id=" + prescription.Id.ToString();
+            string link = "/prescriptions/Prescription?id=" + prescription.Id.ToString();
             db.Notifications.PushPrescriptionNotificaiton(link);
 
             db.SaveChanges();

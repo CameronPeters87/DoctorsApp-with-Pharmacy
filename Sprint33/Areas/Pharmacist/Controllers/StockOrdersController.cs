@@ -34,7 +34,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                                                 PaymentPeriod = o.PaymentPeriod,
                                                 TotalCost = o.TotalCost,
                                                 CartItems = db.StockCarts.Where(c => c.StockOrderId == o.Id).ToList(),
-                                                InvoiceLink = "StockOrders/InvoiceToPdf/" + o.Id,
+                                                InvoiceLink = "StockOrders/Invoice/" + o.Id,
                                                 OrderStatus = o.OrderStatus,
                                                 OrderStatusId = o.OrderStatusId
                                             }).ToListAsync();
@@ -180,7 +180,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 Supplier supplier = db.Suppliers.Find(model.SupplierId);
 
                 // Change order status
-                OrderStatus defaultOrderStatus = await db.OrderStatuses.Where(os => os.ProcessNumber.Equals("2"))
+                OrderStatus defaultOrderStatus = await db.OrderStatuses.Where(os => os.ProcessNumber == 2)
                                                         .FirstOrDefaultAsync();
 
                 // Cant buy stock if theres no items in the cart
@@ -225,11 +225,15 @@ namespace Sprint33.Areas.Pharmacist.Controllers
 
                 var callbackUrl = Url.Action("InvoiceToPdf", "StockOrders", new { area = "pharmacist", id = latestOrder.Id }, protocol: Request.Url.Scheme);
 
-                EmailExtensions.SendMail(supplier.Email, "Request For A Stock Order",
-                    string.Format("Good day. <br><br>I would like to request a stock order of R{0}.<br><br>" +
-                    "<a href=\"" + callbackUrl + "\">Review Order Details Here</a><br><br>" +
-                    "<strong>Order Notes: <strong><br>" +
-                    "{2}", latestOrder.TotalCost, latestOrder.Id, latestOrder.Notes));
+                //EmailExtensions.SendMail(supplier.Email, "Request For A Stock Order",
+                //    string.Format("Good day. <br><br>I would like to request a stock order of R{0}.<br><br>" +
+                //    "<a href=\"" + callbackUrl + "\">Review Order Details Here</a><br><br>" +
+                //    "<strong>Order Notes: <strong><br>" +
+                //    "{2}", latestOrder.TotalCost, latestOrder.Id, latestOrder.Notes));
+
+                EmailExtensions.SendSms(supplier.ContactNumber,
+                    string.Format("From Dr J Govender Practice: Good day. I would like to request a stock order of R{0}. " +
+                                  "Order Notes: {1}", latestOrder.TotalCost, latestOrder.Notes));
 
                 return RedirectToAction("Index");
             }

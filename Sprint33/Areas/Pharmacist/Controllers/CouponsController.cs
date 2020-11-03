@@ -1,11 +1,7 @@
-﻿using IronBarCode;
-using Sprint33.Areas.Pharmacist.Models;
+﻿using Sprint33.Areas.Pharmacist.Models;
 using Sprint33.Extensions;
 using Sprint33.Models;
 using Sprint33.PharmacyEntities;
-using System;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -58,25 +54,25 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             }
 
             #region Generating QR
-            string _path = Path.Combine(Server
-                            .MapPath("~/Files/Coupons"), code_upper + ".png");
-            try
-            {
-                //using IronBarCode;
-                //using System.Drawing;
-                // Styling a QR code and adding annotation text
-                var MyBarCode = IronBarCode.BarcodeWriter.CreateBarcode(code_upper, BarcodeWriterEncoding.QRCode);
-                MyBarCode.AddAnnotationTextAboveBarcode("Coupon");
-                MyBarCode.AddBarcodeValueTextBelowBarcode();
-                MyBarCode.SetMargins(100);
-                MyBarCode.ChangeBarCodeColor(Color.Purple);
-                // Save as HTML
-                MyBarCode.SaveAsPng(_path);
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            //string _path = Path.Combine(Server
+            //                .MapPath("~/Files/Coupons"), code_upper + ".png");
+            //try
+            //{
+            //    //using IronBarCode;
+            //    //using System.Drawing;
+            //    // Styling a QR code and adding annotation text
+            //    var MyBarCode = IronBarCode.BarcodeWriter.CreateBarcode(code_upper, BarcodeWriterEncoding.QRCode);
+            //    MyBarCode.AddAnnotationTextAboveBarcode("Coupon");
+            //    MyBarCode.AddBarcodeValueTextBelowBarcode();
+            //    MyBarCode.SetMargins(100);
+            //    MyBarCode.ChangeBarCodeColor(Color.Purple);
+            //    // Save as HTML
+            //    MyBarCode.SaveAsPng(_path);
+            //}
+            //catch (Exception e)
+            //{
+            //    throw;
+            //}
 
             #endregion
 
@@ -87,7 +83,8 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 StartDate = model.StartDate,
                 EndDate = model.EndDate,
                 DiscountRate = model.DiscountRate,
-                QRcodeURL = "/Files/Coupons/" + code_upper + ".png",
+                //QRcodeURL = "/Files/Coupons/" + code_upper + ".png",
+                QRcodeURL = "/",
                 MinimumOrderAmount = model.MinimumOrderAmount,
                 isLoyaltyCoupon = false,
                 Active = true,

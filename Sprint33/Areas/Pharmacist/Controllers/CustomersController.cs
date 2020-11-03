@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
+
 namespace Sprint33.Areas.Pharmacist.Controllers
 {
     public class CustomersController : Controller
@@ -40,7 +41,8 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             var model = new CustomerEmailModel
             {
                 Patient = customer,
-                Email = customer.Email
+                Email = customer.Email,
+                //Subject = "test"
             };
 
             return View(model);
@@ -54,7 +56,11 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 return View(model);
             }
 
-            EmailExtensions.SendMail(model.Email, model.Subject, model.Body);
+            var customer = db.Patients.Where(o => o.Email == model.Email).FirstOrDefault();
+
+            //EmailExtensions.SendMail(model.Email, model.Subject, model.Body);
+
+            EmailExtensions.SendSms(customer.ContactNumber, model.Body);
 
             return RedirectToAction("Index");
         }
