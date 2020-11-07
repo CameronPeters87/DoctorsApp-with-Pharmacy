@@ -1,4 +1,5 @@
-﻿using Sprint33.Areas.Pharmacist.Models;
+﻿using IronBarCode;
+using Sprint33.Areas.Pharmacist.Models;
 using Sprint33.Models;
 using Sprint33.PharmacyEntities;
 using System;
@@ -137,21 +138,21 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 }
 
                 // Save Barcode to that path
-                //string _barcodePath = Path.Combine(Server
-                //    .MapPath("~/Files/Barcodes"), sku + ".png");
+                string _barcodePath = Path.Combine(Server
+                    .MapPath("~/Files/Barcodes"), sku + ".png");
 
-                //// Generate a Simple BarCode image and save as PNG
-                ////using IronBarCode;
-                //GeneratedBarcode MyBarCode = BarcodeWriter
-                //    .CreateBarcode(sku,
-                //    BarcodeWriterEncoding.Code128);
+                // Generate a Simple BarCode image and save as PNG
+                //using IronBarCode;
+                GeneratedBarcode MyBarCode = BarcodeWriter
+                    .CreateBarcode(sku,
+                    BarcodeWriterEncoding.Code128);
 
-                //MyBarCode.SetMargins(50);
+                MyBarCode.SetMargins(50);
 
-                //MyBarCode.SaveAsPng(_barcodePath);
+                MyBarCode.SaveAsPng(_barcodePath);
 
-                //string _barcodeUrl = "/Files/Barcodes/" + sku + ".png";
-                string _barcodeUrl = "/";
+                string _barcodeUrl = "/Files/Barcodes/" + sku + ".png";
+                //string _barcodeUrl = "/";
                 #endregion
 
                 // Add Product

@@ -34,7 +34,8 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                                                 PaymentPeriod = o.PaymentPeriod,
                                                 TotalCost = o.TotalCost,
                                                 CartItems = db.StockCarts.Where(c => c.StockOrderId == o.Id).ToList(),
-                                                InvoiceLink = "StockOrders/Invoice/" + o.Id,
+                                                //InvoiceLink = "StockOrders/Invoice/" + o.Id,
+                                                InvoiceLink = "StockOrders/InvoiceToPdf/" + o.Id,
                                                 OrderStatus = o.OrderStatus,
                                                 OrderStatusId = o.OrderStatusId
                                             }).ToListAsync();

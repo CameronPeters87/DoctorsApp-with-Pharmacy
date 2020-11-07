@@ -30,7 +30,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                                           SaleDate = s.SaleDate,
                                           TotalCost = s.TotalCost,
                                           CartItems = db.InStoreCarts.Where(c => c.InStoreSaleId == s.Id).ToList(),
-                                          ReceiptLink = "/Pharmacist/InStoreSales/ReceiptToPdf/" + s.Id
+                                          ReceiptLink = "/Pharmacist/InStoreSales/Receipt/" + s.Id
                                       }).ToListAsync()
             };
 
@@ -62,7 +62,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 model.Change = lastInStoreSale.Change;
             }
             if (lastInStoreSale != null)
-                ViewBag.ReceiptLink = "InStoreSales/ReceiptToPdf/" + lastInStoreSale.Id;
+                ViewBag.ReceiptLink = "InStoreSales/Receipt/" + lastInStoreSale.Id;
 
             return View(model);
         }
@@ -93,7 +93,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 return RedirectToAction("NewInStoreSale");
             }
 
-            if(product.IsItemInCart(currentCart))
+            if (product.IsItemInCart(currentCart))
             {
                 TempData["Error"] = "That product is already in cart";
                 return RedirectToAction("NewInStoreSale");

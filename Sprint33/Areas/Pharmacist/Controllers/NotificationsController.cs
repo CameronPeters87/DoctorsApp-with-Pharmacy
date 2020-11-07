@@ -74,6 +74,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
 
             return PartialView(model);
         }
+
         [HttpPost]
         public async Task<int> MarkRead(int notificationId)
         {

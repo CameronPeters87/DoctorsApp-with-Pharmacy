@@ -3326,6 +3326,7 @@
     <Content Include="Scripts\custom\bootstrap.js" />
     <Content Include="Scripts\custom\bootstrap.min.js" />
     <Content Include="Scripts\ckeditor\ckeditor.pack" />
+    <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
     <None Include="Scripts\custom\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\custom\jquery-3.3.1.js" />
     <Content Include="Scripts\custom\jquery-3.3.1.min.js" />

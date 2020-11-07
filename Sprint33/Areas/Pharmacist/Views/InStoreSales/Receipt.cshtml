@@ -12,8 +12,12 @@
             <header>
                 <div class="row">
                     <div class="col">
-                        <a target="_blank" href="https://lobianijs.com">
-                            @*<img src="http://lobianijs.com/lobiadmin/version/1.0/ajax/img/logo/lobiadmin-logo-text-64.png" data-holder-rendered="true" />*@
+                        @*<a target="_blank" href="https://lobianijs.com">
+                            <img src="http://lobianijs.com/lobiadmin/version/1.0/ajax/img/logo/lobiadmin-logo-text-64.png" data-holder-rendered="true" />
+                        </a>*@
+                        <a type="button" class="btn btn-primary"
+                           href="javascript:window.print()">
+                            <i class="fa fa-print fa-2x"></i>
                         </a>
                     </div>
 
@@ -72,11 +76,6 @@
                     <tfoot>
                         <tr>
                             <td colspan="2"></td>
-                            <td colspan="2">TAX 15%</td>
-                            <td>R @Model.TotalTax.ToString("n2")</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"></td>
                             <td colspan="2">GRAND TOTAL</td>
                             <td>R @Model.TotalCost.ToString("n2")</td>
                         </tr>
@@ -93,6 +92,11 @@
                                 <td>R @Model.Change.ToString("n2")</td>
                             </tr>
                         }
+                        <tr>
+                            <td colspan="2"></td>
+                            <td colspan="2">TAX 15%</td>
+                            <td>R @Model.TotalTax.ToString("n2")</td>
+                        </tr>
                     </tfoot>
                 </table>
                 <div class="thanks">
