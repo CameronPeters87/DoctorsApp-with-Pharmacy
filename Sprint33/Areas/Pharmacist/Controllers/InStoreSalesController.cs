@@ -43,6 +43,13 @@ namespace Sprint33.Areas.Pharmacist.Controllers
 
         public async Task<ActionResult> NewInStoreSale()
         {
+            var cashRegister = db.CashRegisters.Where(c => c.CurrentDate == DateTime.Today).FirstOrDefault();
+
+            if (cashRegister == null)
+            {
+                return RedirectToAction("CashRegister");
+            }
+
             NewInStoreSaleVM newInStoreSaleVM = new NewInStoreSaleVM();
             var model = newInStoreSaleVM;
             var lastInStoreSale = db.InStoreSales.GetLastInStoreSale();
@@ -61,8 +68,11 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             {
                 model.Change = lastInStoreSale.Change;
             }
+
             if (lastInStoreSale != null)
                 ViewBag.ReceiptLink = "InStoreSales/Receipt/" + lastInStoreSale.Id;
+
+            ViewBag.CashFloat = cashRegister.CashFloat.ToString("n2");
 
             return View(model);
         }
@@ -192,6 +202,19 @@ namespace Sprint33.Areas.Pharmacist.Controllers
                 return RedirectToAction("NewInStoreSale");
             }
 
+            var cashRegister = db.CashRegisters.Where(c => c.CurrentDate == DateTime.Today).FirstOrDefault();
+
+            cashRegister.CashFloat += model.CashTendered;
+
+            if (change > cashRegister.CashFloat)
+            {
+                TempData["Error"] = "There's not enough money in the Cash Register: R" + cashRegister.CashFloat.ToString("n2");
+                return RedirectToAction("NewInStoreSale");
+            }
+
+            cashRegister.CashFloat -= change;
+            db.Entry(cashRegister).State = EntityState.Modified;
+
             db.InStoreSales.Add(new InStoreSale
             {
                 SaleDate = DateTime.Now,
@@ -214,7 +237,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
 
             TempData["SM"] = "You completed a POS!";
 
-            return lastInStoreSale != null ? RedirectToAction("ReceiptToPdf", new { id = lastInStoreSale.Id }) :
+            return lastInStoreSale != null ? RedirectToAction("Receipt", new { id = lastInStoreSale.Id }) :
                 RedirectToAction("NewInStoreSale");
         }
 
@@ -281,6 +304,25 @@ namespace Sprint33.Areas.Pharmacist.Controllers
         {
             var result = new Rotativa.ActionAsPdf("Receipt", new { id = id });
             return result;
+        }
+
+        public ActionResult CashRegister()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CashRegister(double Cash)
+        {
+            db.CashRegisters.Add(new PharmacyEntities.CashRegister
+            {
+                CashFloat = Cash,
+                CurrentDate = DateTime.Today
+            });
+
+            db.SaveChangesAsync();
+
+            return RedirectToAction("NewInStoreSale");
         }
     }
 }

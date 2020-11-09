@@ -507,11 +507,13 @@
     <Compile Include="Models\ViewModel\PatientPrescriptionViewModel.cs" />
     <Compile Include="Models\ViewModel\ReferralViewModel.cs" />
     <Compile Include="PharmacyEntities\Address.cs" />
+    <Compile Include="PharmacyEntities\CashRegister.cs" />
     <Compile Include="PharmacyEntities\Category.cs" />
     <Compile Include="PharmacyEntities\Coupon.cs" />
     <Compile Include="PharmacyEntities\CustomerCart.cs" />
     <Compile Include="PharmacyEntities\CustomerOrder.cs" />
     <Compile Include="PharmacyEntities\DeliveryConfirmation.cs" />
+    <Compile Include="PharmacyEntities\Driver.cs" />
     <Compile Include="PharmacyEntities\InStoreCart.cs" />
     <Compile Include="PharmacyEntities\InStoreSale.cs" />
     <Compile Include="PharmacyEntities\LoyaltyPreference.cs" />
@@ -2963,6 +2965,7 @@
     <Content Include="fileman\lang\sk.json" />
     <Content Include="fileman\lang\tr.json" />
     <Content Include="fileman\web.config" />
+    <Content Include="Areas\Pharmacist\Views\InStoreSales\CashRegister.cshtml" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - Web Deploy.pubxml" />

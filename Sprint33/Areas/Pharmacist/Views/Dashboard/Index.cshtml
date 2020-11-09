@@ -10,9 +10,9 @@
 </div>
 
 <div class="my-4">
-    <button class="btn btn-info">
+    <button class="btn btn-info" data-toggle="modal" data-target="#gen-report">
         <i class="fa fa-pie-chart"></i>
-        Generate Overview Report
+        Generate Sales Report
     </button>
 </div>
 
@@ -142,20 +142,20 @@
 
     <!-- Profit and Loss -->
     @*<div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Profit/Loss</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">R@(ViewBag.ProfitLoss.ToString("n2"))</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-chart-line fa-2x text-gray-300"></i>
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Profit/Loss</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">R@(ViewBag.ProfitLoss.ToString("n2"))</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-chart-line fa-2x text-gray-300"></i>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
 
     <!-- Total Online Customers Card -->
     <div class="col-xl-3 col-md-6 mb-4">
@@ -219,36 +219,52 @@
 </div>
 
 
-<!-- Total Income Card -->
-@*<div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Income</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">R0</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-money fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
+<!-- MODALS-->
+<!--Add Category-->
+<div class="modal fade" id="gen-report" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="card shadow h-100 py-2">
+                <div class="card-body">
+                    @using (Html.BeginForm("#ActionMethod", "#Controller", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
 
-<!-- Total Expense Card -->
-@*<div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-danger shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Total Expense</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">R @Model.TotalExpense</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-money fa-2x text-gray-300"></i>
-                    </div>
+                        <div class="form-horizontal">
+                            <div class="card-header py-3">
+                                <h4 class="m-0 font-weight-bold text-primary">Generate Report</h4>
+                            </div>
+                            <br />
+                            
+                            <!--Form Fields go Here-->
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <select class="form-control"
+                                            data-val="true" data-val-number="The field Category must be a number."
+                                            data-val-required="The Category field is required."
+                                            htmlattributes="{ class = form-control }"
+                                            id="CategoryId"
+                                            name="CategoryId">
+                                        <option value="">Select Period</option>
+                                        <option value="1">Last 30 days</option>
+                                        <option value="2">Last 60 days</option>
+                                        <option value="3">Last 90 days</option>
+                                        <option value="4">Last Year</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Generate" class="btn btn-success" />
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
-    </div>*@
+    </div>
+</div>

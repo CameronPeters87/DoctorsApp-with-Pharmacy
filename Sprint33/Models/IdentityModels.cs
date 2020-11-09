@@ -59,6 +59,7 @@ namespace Sprint33.Models
         public DbSet<CustomerOrder> CustomerOrders { get; set; }
         public DbSet<Coupon> Coupons { get; set; }
         public DbSet<LoyaltyPreference> LoyaltyPreferences { get; set; }
+        public DbSet<CashRegister> CashRegisters { get; set; }
 
         public static ApplicationDbContext Create()
         {

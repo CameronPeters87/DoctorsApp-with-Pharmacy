@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "CashRegister";
+    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+
+    <!--Add Category-->
+    <div class="col-md-6">
+        <div class="card shadow h-100 py-2">
+            <div class="card-body">
+                @using (Html.BeginForm("CashRegister", "InStoreSales", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <div class="card-header py-3">
+                            <h4 class="m-0 font-weight-bold text-primary">Initialise Cash Register For Today</h4>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label class="control-label" for="Cash">Cash Float (R0,00)</label>
+                            <div class="col-md-8">
+                                <input class="form-control text-box single-line"
+                                       id="Cash" name="Cash" 
+                                       type="text" value="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Proceed" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
