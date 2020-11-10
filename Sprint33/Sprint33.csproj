@@ -400,6 +400,7 @@
     <Compile Include="Areas\Pharmacist\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\DeliveriesController.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\DiscountController.cs" />
+    <Compile Include="Areas\Pharmacist\Controllers\DriversController.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\InStoreSalesController.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\LoyaltyController.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\NotificationsController.cs" />
@@ -512,6 +513,7 @@
     <Compile Include="PharmacyEntities\Coupon.cs" />
     <Compile Include="PharmacyEntities\CustomerCart.cs" />
     <Compile Include="PharmacyEntities\CustomerOrder.cs" />
+    <Compile Include="PharmacyEntities\Delivery.cs" />
     <Compile Include="PharmacyEntities\DeliveryConfirmation.cs" />
     <Compile Include="PharmacyEntities\Driver.cs" />
     <Compile Include="PharmacyEntities\InStoreCart.cs" />
@@ -3492,6 +3494,7 @@
     <Content Include="Views\Prescriptions\All.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Pharmacist\Views\Drivers\" />
     <Folder Include="Areas\Store\Data\" />
     <Folder Include="Areas\Store\Views\Login\" />
     <Folder Include="fileman\aspnet_client\system_web\2_0_50727\" />

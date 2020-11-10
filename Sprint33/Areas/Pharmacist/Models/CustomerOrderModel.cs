@@ -32,5 +32,8 @@ namespace Sprint33.Areas.Pharmacist.Models
         public virtual Patient Customer { get; set; }
 
         public IEnumerable<CustomerCart> CartItems { get; set; }
+
+        // Delivery Form
+
     }
 }

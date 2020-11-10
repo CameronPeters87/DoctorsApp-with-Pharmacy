@@ -86,10 +86,22 @@
                                                             }
                                                             else
                                                             {
-                                                                <a class="dropdown-item" title="@statusItem.Description"
-                                                                   href="/Pharmacist/CustomerOrders/ChangeOrderStatus?orderId=@item.Id&statusId=@statusItem.Id">
-                                                                    @statusItem.Name
-                                                                </a>
+                                                                if (statusItem.Name == "On it's way!")
+                                                                {
+                                                                    <button class="dropdown-item"
+                                                                            data-toggle="modal" data-target="#delivery"
+                                                                            title="@statusItem.Description">
+                                                                        Set Delivery
+                                                                    </button>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a class="dropdown-item" title="@statusItem.Description"
+                                                                       href="/Pharmacist/CustomerOrders/ChangeOrderStatus?orderId=@item.Id&statusId=@statusItem.Id">
+                                                                        @statusItem.Name
+                                                                    </a>
+                                                                }
+
                                                             }
                                                         }
                                                     }
@@ -126,7 +138,7 @@
                 </table>
             </div>
         }
-        
+
         <div class="row">
             <div class="col-md-12 text-center">
                 <div class="site-block-27" style="display:inline-block">
@@ -135,5 +147,43 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+<!-- MODALS-->
+<!--Add Category-->
+<div class="modal fade" id="delivery" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="card shadow h-100 py-2">
+                <div class="card-body">
+                    @using (Html.BeginForm("#ActionMethod", "#Controller", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <div class="card-header py-3">
+                                <h4 class="m-0 font-weight-bold text-primary">Set Delivery</h4>
+                            </div>
+                            <br />
+
+                            <!--Form Fields go Here-->
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <div class="col-md-12">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Assign" class="btn btn-success" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
     </div>
 </div>

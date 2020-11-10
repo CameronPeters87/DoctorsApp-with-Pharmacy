@@ -15,4 +15,16 @@ namespace Sprint33.Areas.Pharmacist.Models
         [UIHint("SignaturePad")]
         public byte[] Signature { get; set; }
     }
+
+    public class DriverModel
+    {
+        public int Id { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        public string ContactNumber { get; set; }
+        //public TYPE Type { get; set; }
+    }
 }
