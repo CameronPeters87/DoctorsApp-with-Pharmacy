@@ -11,5 +11,6 @@ namespace Sprint33.PharmacyEntities
         public string Name { get; set; }
         public string Email { get; set; }
         public string ContactNumber { get; set; }
+        public string Status { get; set; }
     }
 }

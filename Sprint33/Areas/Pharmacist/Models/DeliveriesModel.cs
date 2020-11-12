@@ -1,4 +1,5 @@
 ﻿using Sprint33.PharmacyEntities;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Sprint33.Areas.Pharmacist.Models
@@ -18,13 +19,14 @@ namespace Sprint33.Areas.Pharmacist.Models
 
     public class DriverModel
     {
-        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+        [Required]
         public string ContactNumber { get; set; }
-        //public TYPE Type { get; set; }
+
+        public IEnumerable<Driver> Drivers { get; set; }
     }
 }

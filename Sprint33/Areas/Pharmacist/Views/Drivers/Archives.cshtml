@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Sprint33.PharmacyEntities.Driver>
+
+@{
+    ViewBag.Title = "Archives";
+    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Archived Drivers</h1>
+</div>
+
+<!--Display List of Customers-->
+<div class="card shadow h-100 py-2">
+    <div class="card-body">
+        @if (!Model.Any())
+        {
+            <h2 class="text-center">You don't have any drivers archived</h2>
+        }
+        else
+        {
+            <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary" style="display:inline-block">
+                    Driver List
+                </h4>
+
+                <span class="pull-right">
+                    <input type="text" id="myInput" class="form-control-custom"
+                           onkeyup="myFunction()" placeholder="Search for names.."
+                           title="Type in a customer" />
+                </span>
+            </div>
+
+            <div class="card-body">
+
+                <table class="table table-bordered text-center mt-3" id="myTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Contact Number</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Id
+                                </td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ContactNumber)
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.Email) </td>
+
+                                <td>
+                                    @if (item.Status == "Active")
+                                    {
+                                        <i class="fa fa-check-circle text-success fa-2x"></i>
+                                    }
+                                    else if (item.Status == "In Delivery")
+                                    {
+                                        <i class="fa fa-truck-moving text-warning fa-2x"></i>
+                                    }
+                                    @item.Status
+                                </td>
+                                <td>
+                                    <a class="btn btn-danger"
+                                       href="@Url.Action("Delete", "Drivers",
+                                            new { id = item.Id })">
+                                        Delete From System
+                                    </a>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
