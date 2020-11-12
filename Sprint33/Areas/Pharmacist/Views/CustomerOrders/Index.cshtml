@@ -88,11 +88,16 @@
                                                             {
                                                                 if (statusItem.Name == "On it's way!")
                                                                 {
-                                                                    <button class="dropdown-item"
+                                                                    @*<button class="dropdown-item"
                                                                             data-toggle="modal" data-target="#delivery"
                                                                             title="@statusItem.Description">
                                                                         Set Delivery
-                                                                    </button>
+                                                                    </button>*@
+                                                                    <a class="dropdown-item"
+                                                                            href="@Url.Action("SetDelivery")?id=@item.Id"
+                                                                            title="@statusItem.Description">
+                                                                        Set Delivery
+                                                                    </a>
                                                                 }
                                                                 else
                                                                 {

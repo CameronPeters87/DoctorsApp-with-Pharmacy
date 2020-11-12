@@ -71,5 +71,12 @@ namespace Sprint33.Areas.Pharmacist.Controllers
 
             return View(model);
         }
+
+        public ActionResult SetDelivery(int id)
+        {
+            var order = db.CustomerOrders.Find(id);
+
+            return View();
+        }
     }
 }
