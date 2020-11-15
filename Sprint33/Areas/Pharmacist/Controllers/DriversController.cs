@@ -74,5 +74,17 @@ namespace Sprint33.Areas.Pharmacist.Controllers
 
             return RedirectToAction("Archives");
         }
+
+        public async Task<ActionResult> Recover(int id)
+        {
+            var driver = db.Drivers.Find(id);
+
+            driver.Status = "Active";
+            db.Entry(driver).State = System.Data.Entity.EntityState.Modified;
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Archives");
+        }
+
     }
 }

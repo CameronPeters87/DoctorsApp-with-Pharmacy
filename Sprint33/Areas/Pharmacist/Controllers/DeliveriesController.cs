@@ -4,11 +4,16 @@ using Sprint33.Areas.Pharmacist.Models;
 using Sprint33.Extensions;
 using Sprint33.Models;
 using Sprint33.PharmacyEntities;
+using System;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using ZXing;
 
 namespace Sprint33.Areas.Pharmacist.Controllers
 {
@@ -28,25 +33,25 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             double destination_Lat;
             double destination_Long;
 
-            var model = await (from o in db.CustomerOrders
-                               where o.OrderStatus.ProcessNumber == 4
+            var model = await (from o in db.Deliveries
+                               where o.Status == "In Transit"
                                orderby o.Id descending
                                select new DeliveriesModel
                                {
-                                   CustomerOrder = o
+                                   Delivery = o
                                }).ToListAsync();
 
             foreach (var item in model)
             {
-                destination_Lat = LocationExtensions.GetLatFromPlaceName(item.CustomerOrder.Address +
-                    item.CustomerOrder.City +
-                    item.CustomerOrder.Country +
-                    item.CustomerOrder.ZipCode,
+                destination_Lat = LocationExtensions.GetLatFromPlaceName(item.Delivery.CustomerOrder.Address +
+                    item.Delivery.CustomerOrder.City +
+                    item.Delivery.CustomerOrder.Country +
+                    item.Delivery.CustomerOrder.ZipCode,
                     geocoder);
-                destination_Long = LocationExtensions.GetLongFromPlaceName(item.CustomerOrder.Address +
-                    item.CustomerOrder.City +
-                    item.CustomerOrder.Country +
-                    item.CustomerOrder.ZipCode,
+                destination_Long = LocationExtensions.GetLongFromPlaceName(item.Delivery.CustomerOrder.Address +
+                    item.Delivery.CustomerOrder.City +
+                    item.Delivery.CustomerOrder.Country +
+                    item.Delivery.CustomerOrder.ZipCode,
                     geocoder);
                 item.Distance = LocationExtensions.GetDistance(_latitude, _longitude,
                     destination_Lat, destination_Long, 'K');
@@ -55,18 +60,18 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             return View(model);
         }
 
-        public ActionResult Directions(int? orderId)
+        public ActionResult Directions(int? deliveryId)
         {
-            var order = db.CustomerOrders.Find(orderId);
+            var delivery = db.Deliveries.Find(deliveryId);
 
-            if (order == null)
+            if (delivery == null)
             {
-                order = new CustomerOrder();
+                delivery = new Delivery();
             }
 
             var model = new DirectionsModel
             {
-                CustomerOrder = order
+                Delivery = delivery
             };
 
             return View(model);
@@ -76,7 +81,86 @@ namespace Sprint33.Areas.Pharmacist.Controllers
         {
             var order = db.CustomerOrders.Find(id);
 
-            return View();
+            var model = new SetDeliveryModel
+            {
+                CustomerOrder = order,
+                OrderId = order.Id,
+                Drivers = new SelectList(db.Drivers.Where(d => d.Status == "Active").ToList(), "Id", "Name")
+            };
+
+            return View(model);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> SetDelivery(SetDeliveryModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.CustomerOrder = db.CustomerOrders.Find(model.OrderId);
+                model.OrderId = model.OrderId;
+                model.Drivers = new SelectList(db.Drivers.Where(d => d.Status == "Active").ToList(), "Id", "Name");
+                return View(model);
+            }
+
+            var driver = db.Drivers.Find(model.DriverId);
+            driver.Status = "In Transit";
+            db.Entry(driver).State = EntityState.Modified;
+
+            var order = await db.CustomerOrders.FindAsync(model.OrderId);
+            var orderStatus = await db.OrderStatuses.Where(o => o.ProcessNumber == 4).FirstOrDefaultAsync();
+            order.OrderStatus = orderStatus;
+            order.OrderStatusId = orderStatus.Id;
+            db.Entry(order).State = EntityState.Modified;
+
+            var qr_code_text = Guid.NewGuid();
+
+            db.Deliveries.Add(new Delivery
+            {
+                CustomerOrder = db.CustomerOrders.Find(model.OrderId),
+                OrderId = model.OrderId,
+                DepartureTime = DateTime.Now,
+                DriverId = model.DriverId,
+                Driver = db.Drivers.Find(model.DriverId),
+                Status = "In Transit",
+                QRCodeImagePathConfirmation = GenerateQRCode(qr_code_text.ToString()),
+                QRCodeTextConfirmation = qr_code_text.ToString()
+            });
+
+            db.Notifications.PushNotificaiton(string.Format("You changed Customer Order #{0} status", order.Id));
+
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+        private string GenerateQRCode(string qrcodeText)
+        {
+            string folderPath = "~/Images/";
+            string imagePath = "~/Images/QrCode.jpg";
+            // If the directory doesn't exist then create it.
+            if (!Directory.Exists(Server.MapPath(folderPath)))
+            {
+                Directory.CreateDirectory(Server.MapPath(folderPath));
+            }
+
+            var barcodeWriter = new BarcodeWriter();
+            barcodeWriter.Format = BarcodeFormat.QR_CODE;
+            var result = barcodeWriter.Write(qrcodeText);
+
+            string barcodePath = Server.MapPath(imagePath);
+            var barcodeBitmap = new Bitmap(result);
+            using (MemoryStream memory = new MemoryStream())
+            {
+                using (FileStream fs = new FileStream(barcodePath, FileMode.Create, FileAccess.ReadWrite))
+                {
+                    barcodeBitmap.Save(memory, ImageFormat.Jpeg);
+                    byte[] bytes = memory.ToArray();
+                    fs.Write(bytes, 0, bytes.Length);
+                }
+            }
+
+            return imagePath;
+        }
+
     }
 }

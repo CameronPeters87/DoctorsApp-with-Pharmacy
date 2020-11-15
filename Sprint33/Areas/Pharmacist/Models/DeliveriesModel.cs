@@ -1,18 +1,29 @@
 ﻿using Sprint33.PharmacyEntities;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Sprint33.Areas.Pharmacist.Models
 {
     public class DeliveriesModel
     {
-        public virtual CustomerOrder CustomerOrder { get; set; }
+        public virtual Delivery Delivery { get; set; }
         public double Distance { get; set; }
+    }
+
+    public class SetDeliveryModel
+    {
+        public virtual CustomerOrder CustomerOrder { get; set; }
+
+        public IEnumerable<SelectListItem> Drivers { get; set; }
+        public int OrderId { get; set; }
+        [Required]
+        public int DriverId { get; set; }
     }
 
     public class DirectionsModel
     {
-        public virtual CustomerOrder CustomerOrder { get; set; }
+        public virtual Delivery Delivery { get; set; }
         [UIHint("SignaturePad")]
         public byte[] Signature { get; set; }
     }

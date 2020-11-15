@@ -69,7 +69,11 @@
                                             new { id = item.Id })">
                                         Delete From System
                                     </a>
-
+                                    <a class="btn btn-success"
+                                       href="@Url.Action("Recover", "Drivers",
+                                            new { id = item.Id })">
+                                        Recover
+                                    </a>
                                 </td>
                             </tr>
                         }

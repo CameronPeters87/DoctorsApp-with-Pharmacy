@@ -1,0 +1,140 @@
+﻿@model Sprint33.Areas.Pharmacist.Models.SetDeliveryModel
+
+@{
+    ViewBag.Title = "SetDelivery";
+    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Set Delivery For Order #@(Model.CustomerOrder.Id)</h2>
+
+<div class="row">
+
+    <div class="col-md-6">
+
+        <div class="card shadow h-100 py-2">
+            <div class="card-body">
+
+                @*<h4 class="font-weight-bold text-center">Details</h4>*@
+
+                <div class="card-header py-3">
+                    <h4 class="m-0 font-weight-bold text-primary">Details</h4>
+                </div>
+                <br />
+
+                <table class="table">
+                    <thead>
+                        <tr class="table-info">
+                            <td></td>
+                            <td>Product</td>
+                            <td class="text-center">Unit Price</td>
+                            <td>Quantity</td>
+                            <td>Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CustomerOrder.CustomerCarItems)
+                        {
+                            <tr class="cart-item">
+                                <td>
+                                    <img class="img-fluid" src="@item.Product.ImageUrl" width="75" />
+                                </td>
+                                <td>
+                                    @item.Product.Name
+                                    @if (item.Product.IsOnSale)
+                                    {
+                                        <span>(On Sale)</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Product.IsOnSale)
+                                    {
+                                        <span>R</span>@(item.Product.DiscountedPrice.ToString("n2"))
+                                    }
+                                    else
+                                    {
+                                        <span>R</span>@(item.Product.SellingPrice.ToString("n2"))
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    @item.Quantity
+                                </td>
+                                <td class="text-center">R@(item.Price.ToString("n2"))</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <span class="h4 font-weight-bold mb-1">Address:</span>
+                    </li>
+                    <li>
+                        <address>
+                            @Model.CustomerOrder.Address<br>
+                            @Model.CustomerOrder.City<br>
+                            @Model.CustomerOrder.Province, @Model.CustomerOrder.ZipCode<br>
+                            @Model.CustomerOrder.Country<br />
+                        </address>
+                    </li>
+                </ul>
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        Order Date
+                    </dt>
+
+                    <dd>
+                        @Model.CustomerOrder.OrderDate.ToLongDateString()
+                    </dd>
+
+                    <dt>
+                        Payment Method
+                    </dt>
+
+                    <dd>
+                        @Model.CustomerOrder.PaymentMethod
+                    </dd>
+                </dl>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-6" style="display: inline-table;">
+
+        <div class="card shadow h-100 py-2">
+            <div class="card-body">
+                @using (Html.BeginForm("SetDelivery", "Deliveries", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <div class="card-header py-3">
+                            <h4 class="m-0 font-weight-bold text-primary">Choose Driver</h4>
+                        </div>
+                        <br />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.OrderId)
+                        <div class="form-group">
+                            <label class="control-label " for="DriverId">Available Drivers</label>
+                            <div class="col-md-12">
+                                @Html.DropDownListFor(model => model.DriverId,
+                                    Model.Drivers, "Select Driver", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DriverId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Set" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+
+</div>

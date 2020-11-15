@@ -376,6 +376,12 @@
     <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
     </Reference>
+    <Reference Include="zxing, Version=0.16.6.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.6\lib\net47\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.6.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.6\lib\net47\zxing.presentation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiModels\AddressModel.cs" />
@@ -2970,6 +2976,7 @@
     <Content Include="Areas\Pharmacist\Views\InStoreSales\CashRegister.cshtml" />
     <Content Include="Areas\Pharmacist\Views\Drivers\Index.cshtml" />
     <Content Include="Areas\Pharmacist\Views\Drivers\Archives.cshtml" />
+    <Content Include="Areas\Pharmacist\Views\Deliveries\SetDelivery.cshtml" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - Web Deploy.pubxml" />

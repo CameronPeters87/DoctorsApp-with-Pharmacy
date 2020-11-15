@@ -64,10 +64,10 @@
 </style>
 
 
-<h2 class="text-center">Directions For Order #@(Model.CustomerOrder.Id)</h2>
+<h2 class="text-center">Directions For Order #@(Model.Delivery.CustomerOrder.Id)</h2>
 
 @* Dont remove any code below VERY IMPORTANT *@
-<p id="destination" class="d-none">@Model.CustomerOrder.Address @Model.CustomerOrder.City @Model.CustomerOrder.Country @Model.CustomerOrder.ZipCode</p>
+<p id="destination" class="d-none">@Model.Delivery.CustomerOrder.Address @Model.Delivery.CustomerOrder.City @Model.Delivery.CustomerOrder.Country @Model.Delivery.CustomerOrder.ZipCode</p>
 
 <div id="floating-panel" class="d-none">
     <strong>Start:</strong>
@@ -107,7 +107,86 @@
 
     <div class="col-md-6 text-center">
 
-        <h4 class="font-weight-bold text-center">Details</h4>
+        <div class="card shadow h-100 py-2">
+            <div class="card-body">
+
+                @*<h4 class="font-weight-bold text-center">Details</h4>*@
+
+                <div class="card-header py-3">
+                    <h4 class="m-0 font-weight-bold text-primary">Details</h4>
+                </div>
+                <br />
+
+                <table class="table">
+                    <thead>
+                        <tr class="table-info">
+                            <td></td>
+                            <td>Product</td>
+                            <td class="text-center">Unit Price</td>
+                            <td>Quantity</td>
+                            <td>Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Delivery.CustomerOrder.CustomerCarItems)
+                        {
+                            <tr class="cart-item">
+                                <td>
+                                    <img class="img-fluid" src="@item.Product.ImageUrl" width="75" />
+                                </td>
+                                <td>
+                                    @item.Product.Name
+                                    @if (item.Product.IsOnSale)
+                                    {
+                                        <span>(On Sale)</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Product.IsOnSale)
+                                    {
+                                        <span>R</span>@(item.Product.DiscountedPrice.ToString("n2"))
+                                    }
+                                    else
+                                    {
+                                        <span>R</span>@(item.Product.SellingPrice.ToString("n2"))
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    @item.Quantity
+                                </td>
+                                <td class="text-center">R@(item.Price.ToString("n2"))</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        Payment Method
+                    </dt>
+
+                    <dd>
+                        @Model.Delivery.CustomerOrder.PaymentMethod
+                    </dd>
+                </dl>
+
+
+                <button class="btn btn-success my-3" data-toggle="modal" data-target="#qr">
+                    <i class="fa fa-qrcode"></i>
+                    QR Confirmation
+                </button>
+                <button class="btn btn-info my-3" data-toggle="modal" data-target="#sign">
+                    <i class="fa fa-pen"></i>
+                    Signature Confirmation
+                </button>
+
+                <div id="map"></div>
+
+            </div>
+        </div>
+
+
+        @*<h4 class="font-weight-bold text-center">Details</h4>
 
         <dl class="dl-horizontal text-center">
             <dt>
@@ -115,13 +194,13 @@
             </dt>
 
             <dd>
-                @Model.CustomerOrder.OrderDate.ToLongDateString()
+                @Model.Delivery.CustomerOrder.OrderDate.ToLongDateString()
             </dd>
 
             <dt>
                 Items
             </dt>
-            @foreach (var items in Model.CustomerOrder.CustomerCarItems)
+            @foreach (var items in Model.Delivery.CustomerOrder.CustomerCarItems)
             {
                 <dd>
                     @items.Product.Name : @items.Quantity
@@ -133,11 +212,11 @@
             </dt>
 
             <dd>
-                @Model.CustomerOrder.PaymentMethod
+                @Model.Delivery.CustomerOrder.PaymentMethod
             </dd>
-        </dl>
+        </dl>*@
 
-        <button class="btn btn-success my-3" data-toggle="modal" data-target="#qr">
+        @*<button class="btn btn-success my-3" data-toggle="modal" data-target="#qr">
             <i class="fa fa-qrcode"></i>
             QR Confirmation
         </button>
@@ -146,7 +225,7 @@
             Signature Confirmation
         </button>
 
-        <div id="map"></div>
+        <div id="map"></div>*@
 
     </div>
     <div class="col-md-6">
@@ -170,16 +249,12 @@
                     </div>
 
                     <div class="text-center">
-                        <img src="@Model.CustomerOrder.DelivererConfirmationQR_Url" />
+                        @*<img src="@Model.Delivery.CustomerOrder.DelivererConfirmationQR_Url" />*@
+                        <img src="@Url.Content(Model.Delivery.QRCodeImagePathConfirmation)" alt="Image" />
                     </div>
 
                 </div>
 
-                @*<div class="card-footer text-right">
-                        <button class="btn btn-success send-confirm">
-                            Send
-                        </button>
-                    </div>*@
             </div>
         </div>
     </div>
@@ -211,7 +286,7 @@
                                 <canvas class="panel panel-default"></canvas>
                                 <br />
                                 <button type="button" class="btn btn-danger btn-sm btn-clear-canvas">Clear</button>
-                                @Html.HiddenFor(model => model.Signature, ViewData["htmlAttributes"])
+                                @*@Html.HiddenFor(Model => Model.Signature, ViewData["htmlAttributes"])*@
                             </div>
                         </div>
                     </div>
