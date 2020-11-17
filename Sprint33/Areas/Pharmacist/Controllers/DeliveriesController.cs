@@ -136,7 +136,7 @@ namespace Sprint33.Areas.Pharmacist.Controllers
         private string GenerateQRCode(string qrcodeText)
         {
             string folderPath = "~/Images/";
-            string imagePath = "~/Images/QrCode.jpg";
+            string imagePath = "~/Images/" + qrcodeText + ".jpg";
             // If the directory doesn't exist then create it.
             if (!Directory.Exists(Server.MapPath(folderPath)))
             {
