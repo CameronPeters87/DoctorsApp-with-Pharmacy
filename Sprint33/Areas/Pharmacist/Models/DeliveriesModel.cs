@@ -24,6 +24,7 @@ namespace Sprint33.Areas.Pharmacist.Models
     public class DirectionsModel
     {
         public virtual Delivery Delivery { get; set; }
+        public int DeliveryId { get; set; }
         [UIHint("SignaturePad")]
         public byte[] Signature { get; set; }
     }

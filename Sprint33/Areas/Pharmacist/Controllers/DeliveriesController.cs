@@ -71,10 +71,41 @@ namespace Sprint33.Areas.Pharmacist.Controllers
 
             var model = new DirectionsModel
             {
-                Delivery = delivery
+                Delivery = delivery,
+                DeliveryId = delivery.Id
             };
 
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult SignConfirmation(DirectionsModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Directions", new { deliveryId = model.DeliveryId });
+            }
+
+            var delivery = db.Deliveries.Find(model.DeliveryId);
+            var order = db.CustomerOrders.Find(delivery.CustomerOrder.Id);
+            var driver = db.Drivers.Find(delivery.Driver.Id);
+
+            delivery.Status = "Completed";
+            delivery.Signature = model.Signature;
+
+            var orderStatus = db.OrderStatuses.Where(os => os.ProcessNumber == 5).FirstOrDefault();
+            order.OrderStatus = orderStatus;
+            order.OrderStatusId = orderStatus.Id;
+
+            driver.Status = "Active";
+
+            db.Entry(delivery).State = EntityState.Modified;
+            db.Entry(order).State = EntityState.Modified;
+            db.Entry(delivery).State = EntityState.Modified;
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult SetDelivery(int id)

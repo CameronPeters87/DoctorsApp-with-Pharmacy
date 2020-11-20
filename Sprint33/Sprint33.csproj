@@ -388,6 +388,8 @@
     <Compile Include="ApiModels\AppointmentModel.cs" />
     <Compile Include="ApiModels\CustomerCartModel.cs" />
     <Compile Include="ApiModels\CustomerOrderModel.cs" />
+    <Compile Include="ApiModels\DeliveryApiModel.cs" />
+    <Compile Include="ApiModels\DriverApiModel.cs" />
     <Compile Include="ApiModels\InStoreCart.cs" />
     <Compile Include="ApiModels\InStoreSaleModel.cs" />
     <Compile Include="ApiModels\OrderStatusModel.cs" />

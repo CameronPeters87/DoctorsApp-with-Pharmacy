@@ -188,44 +188,44 @@
 
         @*<h4 class="font-weight-bold text-center">Details</h4>
 
-        <dl class="dl-horizontal text-center">
-            <dt>
-                Order Date
-            </dt>
+            <dl class="dl-horizontal text-center">
+                <dt>
+                    Order Date
+                </dt>
 
-            <dd>
-                @Model.Delivery.CustomerOrder.OrderDate.ToLongDateString()
-            </dd>
-
-            <dt>
-                Items
-            </dt>
-            @foreach (var items in Model.Delivery.CustomerOrder.CustomerCarItems)
-            {
                 <dd>
-                    @items.Product.Name : @items.Quantity
+                    @Model.Delivery.CustomerOrder.OrderDate.ToLongDateString()
                 </dd>
-            }
 
-            <dt>
-                Payment Method
-            </dt>
+                <dt>
+                    Items
+                </dt>
+                @foreach (var items in Model.Delivery.CustomerOrder.CustomerCarItems)
+                {
+                    <dd>
+                        @items.Product.Name : @items.Quantity
+                    </dd>
+                }
 
-            <dd>
-                @Model.Delivery.CustomerOrder.PaymentMethod
-            </dd>
-        </dl>*@
+                <dt>
+                    Payment Method
+                </dt>
+
+                <dd>
+                    @Model.Delivery.CustomerOrder.PaymentMethod
+                </dd>
+            </dl>*@
 
         @*<button class="btn btn-success my-3" data-toggle="modal" data-target="#qr">
-            <i class="fa fa-qrcode"></i>
-            QR Confirmation
-        </button>
-        <button class="btn btn-info my-3" data-toggle="modal" data-target="#sign">
-            <i class="fa fa-pen"></i>
-            Signature Confirmation
-        </button>
+                <i class="fa fa-qrcode"></i>
+                QR Confirmation
+            </button>
+            <button class="btn btn-info my-3" data-toggle="modal" data-target="#sign">
+                <i class="fa fa-pen"></i>
+                Signature Confirmation
+            </button>
 
-        <div id="map"></div>*@
+            <div id="map"></div>*@
 
     </div>
     <div class="col-md-6">
@@ -260,6 +260,7 @@
     </div>
 </div>
 
+<!-- Signature Confirmation-->
 <div class="modal fade modal" id="sign" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -274,30 +275,36 @@
                         </h4>
                     </div>
 
-                    <div class="">
+                    @using (Html.BeginForm("SignConfirmation", "Deliveries", FormMethod.Post, new { @class = "mx-5" }))
+                    {
+                        @Html.HiddenFor(model => model.DeliveryId)
 
-                        <div class="form-group my-5">
+                        <div class="form-group mb-5 mt-3">
+                            <label class="control-label" for="Signature">Doctor Signature: </label>
                             <div class="signature-pad"
                                  style="display:block;
-                                width: 300px;
-                                height: 150px;
-                                margin-bottom: 5px;
-                                border: 1px solid black;">
+                                        width: 300px;
+                                        height: 150px;
+                                        margin-bottom: 5px;
+                                        border: 1px solid black;">
                                 <canvas class="panel panel-default"></canvas>
                                 <br />
                                 <button type="button" class="btn btn-danger btn-sm btn-clear-canvas">Clear</button>
-                                @*@Html.HiddenFor(Model => Model.Signature, ViewData["htmlAttributes"])*@
+                                @Html.HiddenFor(model => model.Signature, ViewData["htmlAttributes"])
                             </div>
                         </div>
-                    </div>
 
+                        <button type="submit" class="btn btn-success send-confirm pull-right mt-3">
+                            Confirm
+                        </button>
+                    }
                 </div>
 
-                <div class="card-footer text-right">
-                    <button class="btn btn-success send-confirm">
+                @*<div class="card-footer text-right">
+                    <button type="submit" class="btn btn-success send-confirm">
                         Confirm
                     </button>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>

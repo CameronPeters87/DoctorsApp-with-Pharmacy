@@ -1,13 +1,9 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Sprint33.PharmacyEntities
+namespace Sprint33.ApiModels
 {
-    public class Delivery
+    public class DeliveryApiModel
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public DateTime DepartureTime { get; set; }
         public DateTime TimeDelivered { get; set; }
@@ -17,7 +13,5 @@ namespace Sprint33.PharmacyEntities
         public string QRCodeImagePathConfirmation { get; set; }
         public int OrderId { get; set; }
         public int DriverId { get; set; }
-        public virtual Driver Driver { get; set; }
-        public virtual CustomerOrder CustomerOrder { get; set; }
     }
 }
