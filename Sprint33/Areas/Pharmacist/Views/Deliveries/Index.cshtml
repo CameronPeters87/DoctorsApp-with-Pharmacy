@@ -43,13 +43,12 @@
                                     Departured:
                                     @item.Delivery.DepartureTime.ToShortDateString()
                                     @item.Delivery.DepartureTime.ToShortTimeString()
-                                    @if (item.Delivery.TimeDelivered.ToShortDateString() != "1900/01/01")
+                                    @if (item.Delivery.TimeDelivered != null)
                                     {
                                         <br />
                                         <i>
                                             <strong>
-                                                Delivered: @item.Delivery.TimeDelivered.ToShortDateString()
-                                                @item.Delivery.TimeDelivered.ToShortTimeString()
+                                                Delivered: @item.Delivery.TimeDelivered.Value.ToString("yyyy/MM/dd HH:mm")
                                             </strong>
                                         </i>
                                     }

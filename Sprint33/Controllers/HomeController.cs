@@ -44,7 +44,7 @@ namespace Sprint33.Controllers
             Session["id"] = "";
             Session["Title"] = "";
             ViewBag.Message = "";
-            return View();
+            return View(new Doctor());
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

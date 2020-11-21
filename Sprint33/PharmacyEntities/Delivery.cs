@@ -10,7 +10,7 @@ namespace Sprint33.PharmacyEntities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public DateTime DepartureTime { get; set; }
-        public DateTime TimeDelivered { get; set; }
+        public DateTime? TimeDelivered { get; set; }
         public string Status { get; set; }
         public byte[] Signature { get; set; }
         public string QRCodeTextConfirmation { get; set; }
