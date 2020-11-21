@@ -448,6 +448,8 @@
     <Compile Include="Controllers\Api\AppointmentsController.cs" />
     <Compile Include="Controllers\Api\CustomerCartsController.cs" />
     <Compile Include="Controllers\Api\CustomerOrdersController.cs" />
+    <Compile Include="Controllers\Api\DeliveriesController.cs" />
+    <Compile Include="Controllers\Api\DriversController.cs" />
     <Compile Include="Controllers\Api\InStoreCartsController.cs" />
     <Compile Include="Controllers\Api\InStoreSalesController.cs" />
     <Compile Include="Controllers\Api\OrderStatusController.cs" />
