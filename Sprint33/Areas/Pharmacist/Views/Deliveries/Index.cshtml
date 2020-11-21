@@ -25,7 +25,7 @@
                     <thead>
                         <tr>
                             <th>Order #</th>
-                            <th>Depature</th>
+                            <th>Times</th>
                             <th>Driver</th>
                             <th>Status</th>
                             <th>Address</th>
@@ -39,12 +39,30 @@
                         {
                             <tr>
                                 <td>@item.Delivery.CustomerOrder.Id</td>
-                                <td>@item.Delivery.DepartureTime.ToLongDateString()</td>
+                                <td>
+                                    Departured:
+                                    @item.Delivery.DepartureTime.ToShortDateString()
+                                    @item.Delivery.DepartureTime.ToShortTimeString()
+                                    @if (item.Delivery.TimeDelivered.ToShortDateString() != "1900/01/01")
+                                    {
+                                        <br />
+                                        <i>
+                                            <strong>
+                                                Delivered: @item.Delivery.TimeDelivered.ToShortDateString()
+                                                @item.Delivery.TimeDelivered.ToShortTimeString()
+                                            </strong>
+                                        </i>
+                                    }
+                                </td>
                                 <td>@item.Delivery.Driver.Name</td>
                                 <td>
                                     @if (item.Delivery.Status == "In Transit")
                                     {
                                         <i class="fa fa-truck-moving text-warning"></i>
+                                    }
+                                    @if (item.Delivery.Status == "Completed")
+                                    {
+                                        <i class="fa fa-check-circle text-success"></i>
                                     }
                                     @item.Delivery.Status
                                 </td>
@@ -55,9 +73,18 @@
                                     @(item.Distance.ToString("0.00"))km
                                 </td>
                                 <td class="text-center">
-                                    <a href="@Url.Action("Directions")?deliveryId=@item.Delivery.Id" class="btn btn-info btn-sm">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
+                                    @if (item.Delivery.Status == "Completed")
+                                    {
+                                        <a href="@Url.Action("Details")?deliveryId=@item.Delivery.Id" class="btn btn-info btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("Directions")?deliveryId=@item.Delivery.Id" class="btn btn-info btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    }
                                 </td>
                             </tr>
                         }

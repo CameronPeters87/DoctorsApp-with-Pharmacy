@@ -2979,6 +2979,7 @@
     <Content Include="Areas\Pharmacist\Views\Drivers\Index.cshtml" />
     <Content Include="Areas\Pharmacist\Views\Drivers\Archives.cshtml" />
     <Content Include="Areas\Pharmacist\Views\Deliveries\SetDelivery.cshtml" />
+    <Content Include="Areas\Pharmacist\Views\Deliveries\Details.cshtml" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\DoctorAppFinal - Web Deploy.pubxml" />

@@ -34,7 +34,6 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             double destination_Long;
 
             var model = await (from o in db.Deliveries
-                               where o.Status == "In Transit"
                                orderby o.Id descending
                                select new DeliveriesModel
                                {
@@ -78,6 +77,25 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             return View(model);
         }
 
+        public ActionResult Details(int? deliveryId)
+        {
+            var delivery = db.Deliveries.Find(deliveryId);
+
+            if (delivery == null)
+            {
+                delivery = new Delivery();
+            }
+
+            var model = new DirectionsModel
+            {
+                Delivery = delivery,
+                DeliveryId = delivery.Id
+            };
+
+            return View(model);
+        }
+
+
         [HttpPost]
         public ActionResult SignConfirmation(DirectionsModel model)
         {
@@ -92,6 +110,8 @@ namespace Sprint33.Areas.Pharmacist.Controllers
 
             delivery.Status = "Completed";
             delivery.Signature = model.Signature;
+            delivery.ConfirmationType = "Signature";
+            delivery.TimeDelivered = DateTime.Now;
 
             var orderStatus = db.OrderStatuses.Where(os => os.ProcessNumber == 5).FirstOrDefault();
             order.OrderStatus = orderStatus;
