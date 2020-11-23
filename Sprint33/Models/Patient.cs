@@ -1,4 +1,5 @@
 ﻿using Sprint33.PharmacyEntities;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Sprint33.Models
@@ -34,6 +35,7 @@ namespace Sprint33.Models
         [Display(Name = "Patient`s Active Status")]
         public bool isActive { get; set; }
         public bool isLoyal { get; set; }
+        public DateTime DateRegistered { get; set; }
         public int AddressId { get; set; }
         public virtual Address Address { get; set; }
     }

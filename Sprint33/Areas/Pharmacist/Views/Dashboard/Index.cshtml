@@ -226,7 +226,7 @@
         <div class="modal-content">
             <div class="card shadow h-100 py-2">
                 <div class="card-body">
-                    @using (Html.BeginForm("#ActionMethod", "#Controller", FormMethod.Post))
+                    @using (Html.BeginForm("GenerateOverview", "Dashboard", FormMethod.Post))
                     {
                         @Html.AntiForgeryToken()
 
@@ -242,16 +242,25 @@
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <select class="form-control"
-                                            data-val="true" data-val-number="The field Category must be a number."
-                                            data-val-required="The Category field is required."
                                             htmlattributes="{ class = form-control }"
-                                            id="CategoryId"
-                                            name="CategoryId">
+                                            id="Period"
+                                            name="Period">
                                         <option value="">Select Period</option>
-                                        <option value="1">Last 30 days</option>
-                                        <option value="2">Last 60 days</option>
-                                        <option value="3">Last 90 days</option>
-                                        <option value="4">Last Year</option>
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                        <option value="13">Last 60 days</option>
+                                        <option value="14">Last 90 days</option>
+                                        <option value="15">Last Year</option>
                                     </select>
                                 </div>
                             </div>

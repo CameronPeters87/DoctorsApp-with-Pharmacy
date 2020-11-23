@@ -1,6 +1,7 @@
 ﻿using Sprint33.Models;
 using Sprint33.Models.ViewModel;
 using Sprint33.PharmacyEntities;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -201,7 +202,8 @@ namespace Sprint33.Controllers
                 Email = model.Email,
                 Password = model.Password,
                 isActive = true,
-                isLoyal = false
+                isLoyal = false,
+                DateRegistered = DateTime.Today
             });
 
             await db.SaveChangesAsync();

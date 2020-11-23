@@ -28,6 +28,25 @@ namespace Sprint33.Areas.Pharmacist.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult GenerateOverview(int Period)
+        {
+            return RedirectToAction("GeneratedSalesOverview", new { period = Period });
+        }
+
+        public ActionResult GeneratedSalesOverview(int period)
+        {
+            /*
+             * Total Number of Customers
+             * Number of Customers Registered during the period
+             * Number of Sales during the period
+             * Avg Order Per Customer
+             * Revenue Earned
+             */
+
+            return View();
+        }
+
         private float? SumTotalOnlineSales(ApplicationDbContext db)
         {
             return db.CustomerOrders.Sum(c => (float?)c.TotalCost) ?? 0f;
