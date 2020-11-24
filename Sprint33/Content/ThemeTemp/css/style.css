@@ -9865,3 +9865,54 @@ button.btn.btn-primary.btn-lg.btn-block.btn-order.cust-disabled {
     height: 150px;
     margin-bottom: 5px;
 }*/
+
+.date {
+    position: fixed !important;
+    color: black;
+    padding: 10px;
+    box-shadow: 0 .15rem 1.75rem 0 rgba(0, 0, 0, 0.25) !important;
+    background: #f39724;
+    bottom: 100px;
+    transition: ease-in-out 0.5s;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+    .date:hover {
+        background: #f28822;
+        padding-left: 40px;
+        box-shadow: 0 .15rem 1.75rem 0 rgba(0, 0, 0, 0.5) !important;
+        transform: scale(1.05);
+        transition: ease-in-out 0.5s;
+    }
+
+    .date > .img-thumbnail {
+        padding: 7px;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+        max-width: 100%;
+        height: auto;
+        border-top-right-radius: 50px;
+        border-bottom-right-radius: 50px;
+    }
+
+.sa-card {
+    height: fit-content;
+}
+
+#map {
+    height: 380px;
+    width: auto;
+}
+
+    #map div {
+        cursor: default !important;
+    }
+
+.card {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    color: black;
+    border-radius: unset;
+}

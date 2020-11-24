@@ -1,0 +1,159 @@
+﻿@model Sprint33.Models.CovidModels.TrackerViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/SharedTemp/_MySharedHome.cshtml";
+}
+
+<!-- South Africa Covid Card -->
+<div class="container">
+    
+    <span class="d-inline-block">
+        <img src="~/Content/coronavirus-logo.jpg" height="75" />
+    </span>
+
+    <div class="row">
+
+        <div class="col-xl-6 col-md-6 mb-4 mt-4 sa-card">
+            <div class="card border-left-orange shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                <span class="d-inline-block">
+                                    <img src="https://img.icons8.com/color/48/000000/south-africa.png" />
+                                </span>
+                                @Model.Country_SouthAfrica.Country
+                            </div>
+                            <div class="mb-0 text-gray-800">
+                                <table class=" table table-borderless text-center">
+                                    <thead>
+                                        <tr class="font-weight-bold">
+                                            <td class="table-warning">Confirmed</td>
+                                            <td class="table-success">Recovered</td>
+                                            <td class="table-danger">Dead</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>@Model.RSA_TotalConfirmed</td>
+                                            <td>@Model.RSA_TotalRecovered</td>
+                                            <td>@Model.RSA_TotalDeaths</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            @*<i class="fa fa-calendar fa-2x text-gray-300"></i>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mb-4 mt-4">
+            <div class="card shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                <span class="d-inline-block">
+                                    <img src="https://img.icons8.com/color/48/000000/earth-planet.png" />
+                                </span>
+                                Global Stats
+                            </div>
+                            <div class="content">
+
+                                <div class="mb-0 text-gray-800">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <i class="list-group-item list-group-item-warning fas fa-syringe d-inline-block"></i>
+                                            <span class="font-weight-bold">
+                                                Confirmed: @Model.Global_TotalConfirmed
+                                            </span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="list-group-item list-group-item-success fa fa-check d-inline-block"></span>
+                                            <span class="font-weight-bold">
+                                                Recovered: @Model.Global_TotalRecovered
+                                            </span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="list-group-item list-group-item-danger fas fa-skull d-inline-block"></i>
+                                            <span class="font-weight-bold">
+                                                Dead: @Model.Global_TotalDeaths
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            @*<i class="fa fa-calendar fa-2x text-gray-300"></i>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <h2 class="font-weight-bold text-dark">Health News</h2>
+
+    @foreach (var item in Model.NewsViewModel.Articles)
+    {
+        <div class="card">
+            <div class="card-body">
+                <div class="row product-item">
+                    <div class="col-sm-3 col-3" style="place-self: center">
+                        <img src="@item.UrlToImage" width="250" style="max-height:-webkit-fill-available" />
+                    </div>
+                    <div class="col-sm-9 col-9 text-color line-bottom min-height">
+
+                        <p class="font-weight-bold">@item.Source.Name</p>
+
+                        <h3>
+                            <a class="card-link" href="@item.Url" target="_blank">
+                                @item.Title
+                            </a>
+                        </h3>
+                        <p>@item.Description</p>
+                        <p class="card-text">@item.PublishedAt</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <br />
+
+    @*<div id="map"></div>*@
+</div>
+
+<div class="date">
+    <div class="img-thumbnail">
+        <span class="d-inline-block pull-left mr-1">
+            <img src="~/Content/coronavirus-live-stats-logo.png" width="50" height="50" />
+        </span>
+        <h6 id="date" class="ml-1 mr-4"></h6>
+    </div>
+</div>
+
+@section scripts {
+    
+    <script>
+
+        document.getElementById('date').innerText = formatAMPM();
+
+        function formatAMPM() {
+            var d = new Date(),
+                minutes = d.getMinutes().toString().length == 1 ? '0' + d.getMinutes() : d.getMinutes(),
+                hours = d.getHours().toString().length == 1 ? '0' + d.getHours() : d.getHours(),
+                ampm = d.getHours() >= 12 ? 'pm' : 'am',
+                months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            return days[d.getDay()] + ' ' + months[d.getMonth()] + ' ' + d.getDate() + ' ' + d.getFullYear() + ' ' + hours + ':' + minutes + ampm;
+        }
+
+    </script>
+
+}

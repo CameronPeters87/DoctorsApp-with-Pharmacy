@@ -458,6 +458,7 @@
     <Compile Include="Controllers\Appointments1Controller.cs" />
     <Compile Include="Controllers\AppointmentsController.cs" />
     <Compile Include="Controllers\Consultation_v2Controller.cs" />
+    <Compile Include="Controllers\CovidController.cs" />
     <Compile Include="Controllers\Doctors1Controller.cs" />
     <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -476,6 +477,7 @@
     <Compile Include="Extensions\CouponExtensions.cs" />
     <Compile Include="Extensions\CustomerCartExtensions.cs" />
     <Compile Include="Extensions\EmailExtensions.cs" />
+    <Compile Include="Extensions\Helper.cs" />
     <Compile Include="Extensions\ICollectionExtensions.cs" />
     <Compile Include="Extensions\InStoreCartExtension.cs" />
     <Compile Include="Extensions\InStoreSaleExtension.cs" />
@@ -485,6 +487,7 @@
     <Compile Include="Extensions\OrderStatusExtensions.cs" />
     <Compile Include="Extensions\ProductExtension.cs" />
     <Compile Include="Extensions\ReflectionExtensions.cs" />
+    <Compile Include="Extensions\TrackerExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -494,6 +497,16 @@
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Consultation.cs" />
     <Compile Include="Models\Consultation_v2.cs" />
+    <Compile Include="Models\CovidModels\Article.cs" />
+    <Compile Include="Models\CovidModels\CountryViewModel.cs" />
+    <Compile Include="Models\CovidModels\GlobalViewModel.cs" />
+    <Compile Include="Models\CovidModels\LatLongDTO.cs" />
+    <Compile Include="Models\CovidModels\ManageViewModels.cs" />
+    <Compile Include="Models\CovidModels\NewsAPI.cs" />
+    <Compile Include="Models\CovidModels\NewsViewModel.cs" />
+    <Compile Include="Models\CovidModels\Source.cs" />
+    <Compile Include="Models\CovidModels\SummaryViewModel.cs" />
+    <Compile Include="Models\CovidModels\TrackerViewModel.cs" />
     <Compile Include="Models\DataPoint.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -561,11 +574,14 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\carrots.jpg" />
     <Content Include="Content\close-up-doctor-front-bright-background_53419-4416.jpg" />
+    <Content Include="Content\coronavirus-live-stats-logo.png" />
+    <Content Include="Content\coronavirus-logo.jpg" />
     <Content Include="Content\depositphotos_146926385-stock-photo-stethoscope-on-rx-prescription.jpg" />
     <Content Include="Content\doctor-holding-stethoscope-white-background_41471-6399.jpg" />
     <Content Include="Content\doctor-holding-stethoscope_23-2147822716.jpg" />
     <Content Include="Content\female-doctor-holding-stethoscope-medical-equipment-tool-white-isolated-background_10307-452.jpg" />
     <Content Include="Content\istockphoto-866772230-612x612.jpg" />
+    <Content Include="Content\live.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\PharmacistTemp\css\carret.css" />
     <Content Include="Content\pink-pills-with-white-tablets-blue-background_23-2147827545.jpg" />
@@ -3507,6 +3523,7 @@
     <Content Include="Views\Prescriptions\Prescription.cshtml" />
     <Content Include="Views\Prescriptions\ViewPrescription.cshtml" />
     <Content Include="Views\Prescriptions\All.cshtml" />
+    <Content Include="Views\Covid\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Store\Data\" />
