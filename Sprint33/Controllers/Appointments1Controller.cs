@@ -437,7 +437,7 @@ namespace Sprint33.Controllers
         }
         public ActionResult CreateSlot()
         {
-            return View();
+            return View(new Appointment());
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
