@@ -69,13 +69,10 @@ project-root/
 * **Patients** → Book appointments and order medicines online.
 * **Admins** → Manage system users and settings.
 
----
+* <img width="1573" height="830" alt="image" src="https://github.com/user-attachments/assets/12270f99-a45a-43e1-a3c4-b3fa79834f79" />
 
-## 📖 Future Improvements
+* <img width="1576" height="837" alt="image" src="https://github.com/user-attachments/assets/286ca7cd-52e3-4bd6-acf7-e6cfe651e31f" />
 
-* Integrate online payment gateways
-* Add support for telemedicine consultations
-* Implement reporting and analytics dashboards
 
 ---
 
