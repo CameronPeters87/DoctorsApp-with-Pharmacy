@@ -10,6 +10,8 @@ This project was developed as part of a major university assignment. It is a **m
 
 The application was built using the **.NET Framework (MVC pattern)** with **Entity Framework** for database management in **Visual Studio**.
 
+* <img width="1573" height="830" alt="image" src="https://github.com/user-attachments/assets/12270f99-a45a-43e1-a3c4-b3fa79834f79" />
+
 ---
 
 ## 🚀 Features
@@ -68,8 +70,6 @@ project-root/
 * **Pharmacists** → Manage prescriptions and inventory.
 * **Patients** → Book appointments and order medicines online.
 * **Admins** → Manage system users and settings.
-
-* <img width="1573" height="830" alt="image" src="https://github.com/user-attachments/assets/12270f99-a45a-43e1-a3c4-b3fa79834f79" />
 
 * <img width="1576" height="837" alt="image" src="https://github.com/user-attachments/assets/286ca7cd-52e3-4bd6-acf7-e6cfe651e31f" />
 
